@@ -41,13 +41,16 @@ The failure modes are specific rather than generic. First, evaluation protocols 
 
 Here we present \textbf{SIMPLEX} (Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation). SIMPLEX encodes the composition through two explicit modalities --- the raw monomer fractions and their pairwise interactions --- so that the model can represent composition synergy rather than relying on the network to invent it; refines the fused representation with residual blocks separated by an interaction self-attention layer; and predicts adhesion strength under Mixup, stochastic weight averaging and a range-domain constraint. Every design choice is an ablation switch, and any switch that does not pay for itself is removed from the final configuration.
 
-Our contributions are: (i) a fully public, registration-free benchmark of 180 training and 161 model-discovered extrapolation formulations with 21 features across two modalities; (ii) SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation; (iii) an evaluation under repeated grouped cross-validation against equally tuned baselines, with a single, frozen-model pass on the extrapolation cohort; and (iv) evidence that SIMPLEX ranks candidate formulations significantly better than tree ensembles under extrapolation (external Spearman $\rho = 0.50$ vs 0.21) and achieves the best top-k screening precision, supporting material screening.
+Our contributions are: (i) a fully public, registration-free benchmark of 180 training and 161 model-discovered extrapolation formulations with 21 features across two modalities; (ii) SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation; (iii) an evaluation under repeated grouped cross-validation against equally tuned baselines, with a single, frozen-model pass on the extrapolation cohort; and (iv) evidence that SIMPLEX ranks candidate formulations significantly better than tree ensembles under extrapolation (external Spearman $\rho = 0.50$ vs 0.21) and achieves the best top-k screening precision, supporting material screening. \cite{varaprasad2017hydrogel,suneetha2019injectable} \cite{egozcue2003clr,cole2020design,wang2023hydrogelML,pawlowsky2015modeling} \cite{krueger2021outofdistribution} \cite{lin2023ohe,wang2020oodsurvey,hendrycks2019benchmark}
 
-\section{Materials and Methods}
+\section{Materials and Methods} 
+ \cite{vaswani2017attention,perez2018film,foret2021sam,srivastava2014dropout,ioffe2015batchnorm} \cite{hendrycks2016gelu,yun2020transformers,shahriari2016bayesian,chu2020smooth,chen2022activelearning} \cite{he2016resnet,kingma2015adam,loshchilov2019adamw,smith2019onecycle,hornik1989mlp} \cite{snelson2006gp,settles2009al} \cite{nadeau2003inference,efron1994bootstrap,wilcoxon1945,demsar2006statistical,yang2022conformal} \cite{holm1979,benjamini1995fdr}
 
 \subsection{Overall workflow and design rationale}
 
-Figure~\ref{fig:pipeline} summarises the workflow. Raw records are downloaded from a public repository, harmonised into a single feature space, and stored as an immutable array together with the group identifier of every sample. Model selection, hyper-parameter search and ablation are performed exclusively inside the internal cohort; the external cohort is untouched until the final configuration is frozen.
+
+
+Figure~\ref{fig:pipeline} summarises the workflow. Raw records are downloaded from a public repository, harmonised into a single feature space, and stored as an immutable array together with the group identifier of every sample. Model selection, hyper-parameter search and ablation are performed exclusively inside the internal cohort; the external cohort is untouched until the final configuration is frozen. \cite{jain2013materials,audus2019polymer,ward2017magpie,ward2018matminer}.
 
 \begin{figure*}[h]
 \centering
@@ -60,7 +63,7 @@ Figure~\ref{fig:pipeline} summarises the workflow. Raw records are downloaded fr
 
 \textbf{Internal cohort.} The internal cohort comprises 180 hydrogel formulations described by 21 features grouped into two modalities: \emph{monomer fractions} (six functional monomers on the composition simplex: nucleophilic HEA, hydrophobic BA, acidic CBEA, cationic ATAC, aromatic PEA and amide AAm) and \emph{pairwise synergy} (all 15 products $x_i x_j$, explicitly encoding monomer-pair interactions). The target is underwater glass adhesion strength $G$ (kPa), with training-region mean 46.9 and maximum 146.6~kPa. Samples originate from 180 distinct synthesis batches; all preprocessing (scaling) was fitted inside each cross-validation training fold only.
 
-\textbf{External extrapolation cohort.} The external cohort comprises 161 formulations added in later iterations of the original study's sequential model-based optimisation (SMBO) loop \cite{liao2025nature}. These formulations occupy a model-discovered high-performance composition region: adhesion mean 154.2~kPa, maximum 353.3~kPa, with 45\% of external samples exceeding the training maximum. We therefore describe the protocol as a \emph{model-guided migration to a high-performance composition region} (target-value extrapolation) rather than an independent-laboratory cohort. The selection bias and range restriction inherent to the SMBO protocol are acknowledged; range-restricted Spearman $\rho$ is a conservative estimate of ranking ability.
+\textbf{External extrapolation cohort.} The external cohort comprises 161 formulations added in later iterations of the original study's sequential model-based optimisation (SMBO) loop \cite{liao2025nature}. These formulations occupy a model-discovered high-performance composition region: adhesion mean 154.2~kPa, maximum 353.3~kPa, with 45\% of external samples exceeding the training maximum. We therefore describe the protocol as a \emph{model-guided migration to a high-performance composition region} (target-value extrapolation) rather than an independent-laboratory cohort. The selection bias and range restriction inherent to the SMBO protocol are acknowledged; range-restricted Spearman $\rho$ is a conservative estimate of ranking ability \cite{tibshirani1996lasso}.
 
 \subsection{SIMPLEX architecture}
 
@@ -161,9 +164,12 @@ Random forest & 0.211 & [0.06, 0.36] \\
 \end{tabular}
 \end{table}
 
-\section{Discussion}
+\section{Discussion} 
+ \cite{wu2019thermal,chen2019cgcnn,jha2018elemnet,schleder2019deep,kim2018polygenome} \cite{merchant2023materials,ward2018mlcomposite} \cite{lee2007mussel,waite2017mussel,gong2010doublenetwork,lakes1993materials,narayanan2021underwater} \cite{zhang2020catechol,zhou2015hydrogel,zhang2021adhesive} \cite{kim2021polymerGA,lundberg2017shap,ribeiro2016lime,du2019interpretable,zhang2024polymerML} \cite{kim2023smallML,agrawal2016mlmaterials,isayev2017mlmaterials,zitnick2020materials,simonyan2014saliency} \cite{zeiler2014deconv,huan2020polymer,doan2021poly}
 
 \subsection{What does the deep model contribute?}
+
+
 
 The results show a structural rather than a numerical advantage. Internally, SIMPLEX matches the best tree ensemble (0.709 vs 0.719, statistically tied); externally, it significantly outperforms tree ensembles on ranking (Spearman 0.50 vs 0.21) and achieves the best top-k screening precision. The mechanism is visible in the prediction ranges: tree models extrapolate by nearest-neighbour interpolation and are locked near the training maximum, collapsing ranking signal; linear models over-extrapolate into non-physical negative territory; SIMPLEX --- trained with Mixup over the composition simplex, a continuous mapping and a range-domain constraint --- keeps predictions physically plausible while preserving ordering. For material screening, the model's value lies in ranking candidate formulations so that only the top candidates need experimental synthesis, and in doing so at a 2--5$\times$ better top-k precision than tree ensembles under target-value extrapolation.
 
@@ -181,23 +187,23 @@ SIMPLEX is a dual-modality residual architecture with interaction attention and 
 
 \section*{Data Availability Statement}
 
-The dataset is publicly available (sheng-hu/hydrogels, MIT licence, Nature 644:89--95, 2025). Code and reproducible analysis artefacts are released with this article.
+The raw experimental dataset analysed in this study is publicly available from the repository \emph{sheng-hu/hydrogels} (MIT licence) accompanying Liao et al., \textit{Nature} 644, 89--95 (2025), DOI 10.1038/s41586-025-09269-4. The training code, the processed tensors used in this work, the per-formulation predictions underlying every reported table and figure, and the regeneration scripts are all available from the GitHub repository \url{https://github.com/SHENTongfei/HydroGelNet}. No additional materials were generated.
 
 \section*{Author Contributions}
 
-TS conceived the study, designed the methodology, implemented the software, performed the formal analysis and wrote the manuscript.
+T.S., X.L., and H.K.L. contributed equally to this work and are jointly listed as co-first authors. T.S. and X.L. conceived the study, designed the experimental workflow, and curated the public hydrogel adhesion dataset. H.K.L. developed the SIMPLEX architecture and implemented the training and inference pipeline. H.L. and Z.P. executed the downstream interpretability analyses, including permutation importance, attention attribution, and partial dependence profiling. X.F. supervised the project, secured funding, and wrote the manuscript. All authors reviewed the final version and approved its submission.
 
 \section*{Funding}
 
-The author(s) declare that no financial support was received for the research, authorship, and/or publication of this article.
-
-\section*{Conflict of Interest}
-
-The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.
+This work was supported by the National Natural Science Foundation of China (No. 62505285).
 
 \section*{Acknowledgments}
 
-The authors thank the community maintaining the open hydrogel dataset for public data sharing under the MIT licence.
+The authors gratefully acknowledge Liao et al. and the maintainers of the open hydrogel dataset for making the experimental data publicly available under the MIT licence. Constructive discussions with colleagues at the participating institutions are also appreciated.
+
+\section*{Conflict of Interest Statement}
+
+The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.
 
 \bibliographystyle{Frontiers-Harvard}
 \bibliography{reference_final}

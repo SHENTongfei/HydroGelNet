@@ -57,3 +57,4 @@ interpret → figures → tables → paper. PERF-GATE must pass before writing.
 Python 3.11 (conda env `HydroGelNet`, cloned from `py311`), PyTorch 2.14.0
 + cu130, NVIDIA RTX 5080 16 GB. Fixed seeds [42, 2024, 7, 1337, 20260731];
 all preprocessing fitted inside training folds only.
+

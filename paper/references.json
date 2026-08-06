@@ -1032,5 +1032,352 @@
     "pages": "13157-13178",
     "doi": "10.1109/TPAMI.2023.3271446",
     "url": ""
+  },
+  {
+    "key": "he2016resnet",
+    "slot": "methods_model",
+    "authors": [
+      "He, K.",
+      "Zhang, X.",
+      "Ren, S.",
+      "Sun, J."
+    ],
+    "year": 2016,
+    "title": "Deep residual learning for image recognition",
+    "journal": "IEEE Conference on Computer Vision and Pattern Recognition",
+    "volume": "",
+    "pages": "770-778",
+    "doi": "10.1109/CVPR.2016.90",
+    "url": ""
+  },
+  {
+    "key": "kingma2015adam",
+    "slot": "methods_model",
+    "authors": [
+      "Kingma, D. P.",
+      "Ba, J."
+    ],
+    "year": 2015,
+    "title": "Adam: A method for stochastic optimization",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": "arXiv:1412.6980"
+  },
+  {
+    "key": "loshchilov2019adamw",
+    "slot": "methods_model",
+    "authors": [
+      "Loshchilov, I.",
+      "Hutter, F."
+    ],
+    "year": 2019,
+    "title": "Decoupled weight decay regularization",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": "arXiv:1711.05101"
+  },
+  {
+    "key": "smith2019onecycle",
+    "slot": "methods_model",
+    "authors": [
+      "Smith, L. N."
+    ],
+    "year": 2019,
+    "title": "Super-convergence: Very fast training of neural networks using large learning rates",
+    "journal": "Artificial Intelligence and Machine Learning for Multi-Domain Operations Applications",
+    "volume": "11006",
+    "pages": "1100612",
+    "doi": "10.1117/12.2521189",
+    "url": ""
+  },
+  {
+    "key": "hornik1989mlp",
+    "slot": "methods_model",
+    "authors": [
+      "Hornik, K.",
+      "Stinchcombe, M.",
+      "White, H."
+    ],
+    "year": 1989,
+    "title": "Multilayer feedforward networks are universal approximators",
+    "journal": "Neural Networks",
+    "volume": "2",
+    "pages": "359-366",
+    "doi": "10.1016/0893-6080(89)90020-8",
+    "url": ""
+  },
+  {
+    "key": "agrawal2016mlmaterials",
+    "slot": "discussion_domain",
+    "authors": [
+      "Agrawal, A.",
+      "Choudhary, A."
+    ],
+    "year": 2016,
+    "title": "Perspective: Materials informatics and big data: Realization of the 'fourth paradigm' of science in materials science",
+    "journal": "APL Materials",
+    "volume": "4",
+    "pages": "053208",
+    "doi": "10.1063/1.4946894",
+    "url": ""
+  },
+  {
+    "key": "isayev2017mlmaterials",
+    "slot": "discussion_domain",
+    "authors": [
+      "Isayev, O.",
+      "Oses, C.",
+      "Toher, C.",
+      "Gossett, E.",
+      "Curtarolo, S."
+    ],
+    "year": 2017,
+    "title": "Universal fragment descriptors for predicting properties of inorganic crystals",
+    "journal": "Nature Communications",
+    "volume": "8",
+    "pages": "15679",
+    "doi": "10.1038/ncomms15679",
+    "url": ""
+  },
+  {
+    "key": "zitnick2020materials",
+    "slot": "discussion_domain",
+    "authors": [
+      "Zitnick, C. L.",
+      "Chanussot, L.",
+      "Das, A."
+    ],
+    "year": 2020,
+    "title": "An introduction to electrocatalyst design using machine learning for renewable energy storage",
+    "journal": "arXiv preprint arXiv:2010.09435",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "wang2020oodsurvey",
+    "slot": "intro_gap",
+    "authors": [
+      "Wang, J.",
+      "Lan, C.",
+      "Liu, C."
+    ],
+    "year": 2022,
+    "title": "Generalizing to unseen domains: A survey on domain generalization",
+    "journal": "IEEE Transactions on Knowledge and Data Engineering",
+    "volume": "35",
+    "pages": "8052-8072",
+    "doi": "10.1109/TKDE.2022.3178128",
+    "url": ""
+  },
+  {
+    "key": "hendrycks2019benchmark",
+    "slot": "intro_gap",
+    "authors": [
+      "Hendrycks, D.",
+      "Dietterich, T."
+    ],
+    "year": 2019,
+    "title": "Benchmarking neural network robustness to common corruptions and perturbations",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": "arXiv:1903.12261"
+  },
+  {
+    "key": "pawlowsky2015modeling",
+    "slot": "intro_methods",
+    "authors": [
+      "Pawlowsky-Glahn, V.",
+      "Egozcue, J. J.",
+      "Tolosana-Delgado, R."
+    ],
+    "year": 2015,
+    "title": "Modeling and Analysis of Compositional Data",
+    "journal": "Wiley",
+    "volume": "",
+    "pages": "",
+    "doi": "10.1002/9781119003144",
+    "url": ""
+  },
+  {
+    "key": "holm1979",
+    "slot": "methods_stats",
+    "authors": [
+      "Holm, S."
+    ],
+    "year": 1979,
+    "title": "A simple sequentially rejective multiple test procedure",
+    "journal": "Scandinavian Journal of Statistics",
+    "volume": "6",
+    "pages": "65-70",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "benjamini1995fdr",
+    "slot": "methods_stats",
+    "authors": [
+      "Benjamini, Y.",
+      "Hochberg, Y."
+    ],
+    "year": 1995,
+    "title": "Controlling the false discovery rate: A practical and powerful approach to multiple testing",
+    "journal": "Journal of the Royal Statistical Society: Series B",
+    "volume": "57",
+    "pages": "289-300",
+    "doi": "10.1111/j.2517-6161.1995.tb02031.x",
+    "url": ""
+  },
+  {
+    "key": "zhou2015hydrogel",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Zhou, Y.",
+      "Zhang, H.",
+      "Liang, Y."
+    ],
+    "year": 2015,
+    "title": "Adhesion of hydrogels: A review",
+    "journal": "Polymer Chemistry",
+    "volume": "6",
+    "pages": "2352-2364",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "zhang2021adhesive",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Zhang, Y.",
+      "Jing, X.",
+      "Chen, Y."
+    ],
+    "year": 2021,
+    "title": "Underwater adhesives: From natural organisms to synthetic materials",
+    "journal": "ACS Applied Materials & Interfaces",
+    "volume": "13",
+    "pages": "34003-34026",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "snelson2006gp",
+    "slot": "methods_model",
+    "authors": [
+      "Snelson, E.",
+      "Ghahramani, Z."
+    ],
+    "year": 2006,
+    "title": "Sparse Gaussian processes using pseudo-inputs",
+    "journal": "Advances in Neural Information Processing Systems",
+    "volume": "18",
+    "pages": "1257-1264",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "settles2009al",
+    "slot": "methods_model",
+    "authors": [
+      "Settles, B."
+    ],
+    "year": 2009,
+    "title": "Active learning literature survey",
+    "journal": "University of Wisconsin-Madison Technical Report",
+    "volume": "1648",
+    "pages": "",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "simonyan2014saliency",
+    "slot": "discussion_domain",
+    "authors": [
+      "Simonyan, K.",
+      "Vedaldi, A.",
+      "Zisserman, A."
+    ],
+    "year": 2014,
+    "title": "Deep inside convolutional networks: Visualising image classification models and saliency maps",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": "arXiv:1312.6034"
+  },
+  {
+    "key": "zeiler2014deconv",
+    "slot": "discussion_domain",
+    "authors": [
+      "Zeiler, M. D.",
+      "Fergus, R."
+    ],
+    "year": 2014,
+    "title": "Visualizing and understanding convolutional networks",
+    "journal": "European Conference on Computer Vision",
+    "volume": "8689",
+    "pages": "818-833",
+    "doi": "10.1007/978-3-319-10590-1_53",
+    "url": ""
+  },
+  {
+    "key": "huan2020polymer",
+    "slot": "discussion_domain",
+    "authors": [
+      "Huan, T. D.",
+      "Batra, R.",
+      "Chapman, J.",
+      "Kim, C.",
+      "Ramprasad, R."
+    ],
+    "year": 2020,
+    "title": "A polymer dataset for accelerated property prediction and design",
+    "journal": "Scientific Data",
+    "volume": "3",
+    "pages": "160012",
+    "doi": "10.1038/sdata.2016.12",
+    "url": ""
+  },
+  {
+    "key": "doan2021poly",
+    "slot": "discussion_domain",
+    "authors": [
+      "Doan Tran, H.",
+      "Kim, C.",
+      "Chen, L.",
+      "Chandrasekaran, A.",
+      "Ramprasad, R."
+    ],
+    "year": 2021,
+    "title": "Machine-learning predictions of polymer properties with Polymer Genome",
+    "journal": "Journal of Applied Physics",
+    "volume": "128",
+    "pages": "171104",
+    "doi": "10.1063/5.0023759",
+    "url": ""
+  },
+  {
+    "key": "ward2018mlcomposite",
+    "slot": "discussion_compare",
+    "authors": [
+      "Ward, L.",
+      "Agrawal, A.",
+      "Choudhary, A.",
+      "Wolverton, C."
+    ],
+    "year": 2016,
+    "title": "A general-purpose machine learning framework for predicting properties of inorganic materials",
+    "journal": "npj Computational Materials",
+    "volume": "2",
+    "pages": "16028",
+    "doi": "10.1038/npjcompumats.2016.28",
+    "url": ""
   }
 ]
