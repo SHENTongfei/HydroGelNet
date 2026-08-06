@@ -2,7 +2,7 @@
 
 Generated 2026-08-06
 
-- words (total): 7017
+- words (total): 6989
 - words (abstract): 455
 - figures cited: 8, present: 8
 - tables cited: 9, present: 9

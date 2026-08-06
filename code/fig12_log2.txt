@@ -1,0 +1,6 @@
+Drawing SIMPLEX pipeline (Figure 1, polished) ...
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\figures.py", line 319, in <module>
+    fig_pipeline(outdir)
+    ^^^^^^^^^^^^
+NameError: name 'fig_pipeline' is not defined

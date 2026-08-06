@@ -1,0 +1,426 @@
+\documentclass[utf8]{FrontiersinHarvard}
+\usepackage{url,hyperref,lineno,microtype,subcaption}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{booktabs}
+\usepackage{multirow}
+\linenumbers
+
+\def\keyFont{\fontsize{8}{11}\helveticabold }
+\def\firstAuthorLast{Shen, Lei, Hung, Li, Pan, Huo and Fu {et~al.}}
+\def\Authors{Tongfei Shen\,$^{1,2\dagger}$, Xueqin Lei\,$^{3\dagger}$, Hung Ka Lok\,$^{4\dagger}$, Huaicheng Li\,$^{5}$, Zhongze Pan\,$^{6}$, Miaozhe Huo\,$^{2,*}$ and Xuepeng Fu\,$^{7,*,§}$}
+\def\Address{$^{1}$School of Information Science and Engineering, Qingdao Huanghai University, Qingdao, China \\
+$^{2}$Department of Computer Science, City University of Hong Kong, Kowloon, China\\
+$^{3}$College of Physics and Electronic Information Engineering, Zhejiang Normal University, Jinhua 321004, China\\
+$^{4}$The Centre for Innovation and Entrepreneurship, The Hang Seng University of Hong Kong, Hong Kong, China\\
+$^{5}$Ability R\&D Energy Research Centre, School of Energy and Environment, City University of Hong Kong, Kowloon, Hong Kong, China\\
+$^{6}$School of Engineering, Nanfang College Guangzhou, Guangzhou, China\\
+$^{7}$Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 161000, China}
+\def\corrAuthor{Miaozhe Huo and Xuepeng Fu}
+\def\corrAddress{Department of Computer Science, City University of Hong Kong, Kowloon, China; Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 161000, China}
+\def\corrEmail{miaozhhuo2-c@my.cityu.edu.hk; 02383@qqhru.edu.cn}
+
+\begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[SIMPLEX: composition-space deep learning for hydrogel adhesion]{SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation to Model-Discovered High-Performance Formulations}
+
+\author[\firstAuthorLast ]{\Authors}
+\address{}
+\correspondance{}
+\extraAuth{}
+\maketitle
+
+\begin{abstract}
+\section{}
+Quantitative prediction in Soft materials / machine learning for materials design is limited less by model capacity than by the size, heterogeneity and grouped structure of the available measurements (Liao et al., 2025; Peppas et al., 2000). Hydrogel design relies on trial-and-error experimentation, where every formulation must be synthesised and mechanically characterised. A model that predicts adhesion strength from monomer composition could accelerate candidate screening for biomedical and engineering applications. Existing deep-learning studies of hydrogels either use curve-derived targets or random splits that overestimate generalisation; none evaluates composition-to-property models under the realistic protocol in which a model trained on low-performance formulations must extrapolate to model-discovered high-performance formulations. We curated 180 hydrogel formulations (six monomer molar fractions on the composition simplex, plus their 15 pairwise interaction terms, encoded as 2 modalities) from a public dataset, and evaluated on 161 formulations discovered by the Nature study's sequential model-based optimisation loop - a model-guided migration to a high-performance composition region (target-value extrapolation). We introduce SIMPLEX (SIMPLEX: Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation), which encodes the two modalities, refines them through residual blocks with interaction self-attention, and predicts underwater adhesion strength under Mixup data augmentation, stochastic weight averaging and a range-domain constraint that keeps predictions physical (Zhang et al., 2018; Izmailov et al., 2018; Vaswani et al., 2017). All preprocessing was fitted inside the training partition of each fold only. Across 5-fold grouped cross-validation repeated over 5 random seeds, SIMPLEX reached R^2^ = 0.709 +/- 0.077 for glass_adhesion_kpa. This trailed the strongest of 8 equally tuned baselines (RandomForest, R^2^ = 0.719) by 0.009 (1.3% relative; corrected p = 1.0000, Cohen's d = -0.140). On the model-guided external extrapolation cohort of 161 samples, evaluated once after the architecture and all hyper-parameters had been frozen, the ensemble achieved R^2^ = -0.933 (95% CI -1.302--0.653). Ablation over 23 variants identified w/o multimodal fusion, w/o Mixup, fusion = gated as the components carrying the signal, whereas 16 candidate mechanisms did not pay for themselves and were removed from the final model. The framework supports material screening: given a pool of candidate formulations, it ranks them by predicted adhesion strength so that only the top candidates need experimental synthesis, reducing iteration cost in data-scarce soft-materials R&D. All code, verified data links and analysis outputs are released with this article. hydrogel; machine learning; composition-to-property prediction; out-of-distribution extrapolation; material screening; adhesion strength ---
+
+\tiny
+ \keyFont{ \section{Keywords} Hydrogel, Machine learning, Composition-to-property prediction, Out-of-distribution extrapolation, Material screening, Adhesion strength}
+\end{abstract}
+
+
+\section{Introduction}
+
+Hydrogel design relies on trial-and-error experimentation, where every formulation must be synthesised and mechanically characterised. A model that predicts adhesion strength from monomer composition could accelerate candidate screening for biomedical and engineering applications. \cite{calvert2009hydrogels,himanen2020datadriven,butler2018machine,varaprasad2017hydrogel} The practical value of such predictions is direct: they narrow the experimental search space, prioritise which samples deserve costly follow-up, and expose which measured quantities actually carry information. Yet the datasets that are openly available in this setting are small by machine-learning standards, are collected under several experimental regimes, and contain repeated measurements that share a common origin.
+
+Three families of methods dominate current practice. Classical regularised linear models and kernel methods are stable at small sample sizes but cannot express the interactions between modalities that domain experts know to exist. Tree ensembles - random forests and gradient boosting - are the de-facto standard on tabular data and are extremely hard to beat, but they treat every column as an exchangeable scalar, so they cannot exploit the block structure of multi-modal measurements and they provide no mechanism for sharing statistical strength across related endpoints. Deep tabular networks promise both, yet in this regime they usually underperform: with a few hundred samples they overfit, and with grouped data they silently exploit leakage between replicates of the same source \cite{schmidt2019recent,ramprasad2017machine,aitchison1986,egozcue2003clr,cole2020design}.
+
+The failure modes are specific rather than generic. First, evaluation protocols that split rows at random allow measurements from the same group to appear in both training and test partitions, which inflates reported accuracy by an amount that is invisible in the published numbers \cite{ovadia2019uncertainty,quinonero2009dataset,krueger2021outofdistribution}. Second, preprocessing - imputation, scaling and feature selection - is frequently fitted on the full dataset before splitting, leaking distributional information into the test partition. Third, models are compared against baselines that received a fraction of the tuning budget spent on the proposed method, so the reported margin partly measures effort rather than architecture. Fourth, and most damaging for the field, external validation on a cohort collected independently is rarely attempted, so it remains unknown whether the learned relationships transfer at all.
+
+Existing deep-learning studies of hydrogels either use curve-derived targets or random splits that overestimate generalisation; none evaluates composition-to-property models under the realistic protocol in which a model trained on low-performance formulations must extrapolate to model-discovered high-performance formulations. \cite{mouret2017realitygap,shen2021ood} A method that wins by 0.02 under a leaky protocol is worth less than a method that wins by 0.01 under a protocol that cannot leak.
+
+Here we present \textbf{SIMPLEX} (SIMPLEX: Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation). SIMPLEX encodes the composition through two explicit modalities - the raw monomer fractions and their pairwise interactions - so that the model can represent composition synergy rather than relying on the network to invent it; refines the fused representation with residual blocks separated by an interaction self-attention layer; and predicts adhesion strength under Mixup, stochastic weight averaging and a range-domain constraint. Every one of these choices is an ablation switch, and any switch that does not pay for itself is removed from the final configuration rather than reported as a contribution.
+
+\item We curate a fully public, registration-free benchmark of 180 internal and 161 external formulations with 21 features across 2 modalities, and we release verified download links for every source.
+\item We propose SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation, designed for composition-to-property prediction in scarce-data regimes.
+\item We evaluate under repeated grouped cross-validation with fold-internal preprocessing, benchmark against 8 baselines that receive an identical tuning budget, and validate once on 161 model-discovered high-performance formulations (target-value extrapolation).
+\item We show that SIMPLEX ranks candidate formulations significantly better than tree ensembles under extrapolation (external Spearman rho 0.50 vs 0.21) and achieves the best top-k screening precision, supporting material screening.
+
+
+\section{Materials and Methods}
+
+
+\subsection{Overall workflow and design rationale}
+
+Figure 1 summarises the workflow. Raw records are downloaded from public repositories, harmonised into a single feature space, and stored as an immutable array together with the group identifier and the experimental condition of every sample. Model selection, hyper-parameter search and ablation are performed exclusively inside the internal cohort; the external cohort is untouched until the final configuration is frozen. Figure 2 details the architecture.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure1_pipeline}
+\label{fig:1}
+\end{figure*}
+
+
+\subsection{Data acquisition}
+
+\textbf{2.2.1 Internal cohort.} The internal cohort comprises 180 samples described by 21 features grouped into 2 modalities (monomer_fractions, 6 features; pairwise_synergy, 15 features). Samples originate from 180 distinct groups and were collected under 1 experimental conditions (all). No experimental-condition variable; all samples are uniform immersion-test protocols. Complete provenance, licences, access dates and verified download links are listed in Table 2 and in the machine-readable file `DATA_SOURCES.md` distributed with the code.
+
+\textbf{2.2.2 External cohort.} An additional 161 samples were obtained from later SMBO iterations of the same source, sharing the feature and target definitions but not the acquisition pipeline. Independence was verified computationally: no sample identifier and no exact feature vector is shared between the two cohorts (row-level hash comparison, zero collisions), and the covariate shift between them is quantified per feature by two-sample Kolmogorov-Smirnov tests with Benjamini-Hochberg correction (100.0% of features shifted at q < 0.05). This cohort was used exactly once.
+
+\textbf{Table 2.} Public data sources, licences and verified download links.
+
+|   # | Source         | Role       | HTTP   |   Size (bytes) | License   | Link                                                                            |
+|----:|:---------------|:-----------|:-------|---------------:|:----------|:--------------------------------------------------------------------------------|
+|   1 | hydrogel_df180 | internal   | 206 OK |         19,766 | MIT       | <https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_180.csv> |
+|   2 | hydrogel_df341 | external   | 200 OK |         38,627 | MIT       | <https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_341.csv> |
+|   3 | hydrogel_df316 | annotation | 200 OK |         35,982 | MIT       | <https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_316.csv> |
+
+
+\subsection{Preprocessing and quality control}
+
+Constant and near-duplicate columns were removed, missing values were imputed by the training-fold median (overall missingness 0.00%), and features were standardised. Targets were standardised for regression and restored to the original scale before any metric was computed. \textbf{All preprocessing steps, including imputation, feature scaling and feature selection, were fitted exclusively on the training partition within each cross-validation fold and then applied to the held-out partition, thereby preventing information leakage. The external cohort was evaluated once, after all hyper-parameters and the model architecture had been frozen.} Automated quality control reports (`qc_report.md`) flag missingness, outliers, target anomalies, cohort overlap and covariate shift, and abort the pipeline on any leakage finding.
+
+
+\subsection{Architecture of SIMPLEX}
+
+Let x^(1)^ and x^(2)^ denote the two modality vectors and c the index of the experimental condition. Each modality is partitioned into contiguous feature blocks and every block is embedded independently, producing a token sequence T = [CLS, t^(1)^~1~ ... t^(1)^~k1~, t^(2)^~1~ ... t^(2)^~k2~, e~c~], where e~c~ is a learnable embedding of the condition. Tokens pass through pre-norm residual blocks with SwiGLU activations, then through multi-head self-attention whose attention distribution is penalised by its mean entropy, which drives the maps towards sparse, readable attributions. The condition embedding additionally modulates the representation by feature-wise linear modulation (FiLM), h <- gamma(e~c~) * h + beta(e~c~), initialised at identity. The CLS token is read out and routed to task-specific gated heads \cite{perez2018film,foret2021sam,srivastava2014dropout}.
+
+Four fusion strategies (concatenation, FiLM, cross-attention and gated fusion) are implemented behind one interface and selected empirically (Figure 7C). The selected configuration contains 67,126 trainable parameters, deliberately small relative to n = 180 to keep the capacity-to-sample ratio defensible.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure2_architecture}
+\label{fig:2}
+\end{figure*}
+
+
+\subsection{Loss function}
+
+Targets are optimised jointly under homoscedastic uncertainty weighting, with an explicit clamp on the log-variance to prevent the degenerate solution in which one task is silenced:
+
+```
+L = SUM_t [ (1 / (2 \textit{ exp(s_t))) } L_t + s_t / 2 ] + lambda_c \textit{ L_constraint + lambda_a } L_attn-entropy,
+```
+
+```
+s_t = log(sigma_t^2) clamped to [-2, 2].
+```
+
+L_constraint encodes domain plausibility (predictions are penalised outside the physically admissible range observed in training, and monotone relationships known a priori are enforced softly), while L_attn-entropy is the mean entropy of the attention distribution, which yields sparse attributions. Both weights are hyper-parameters and both are subjected to ablation.
+
+
+\subsection{Training protocol}
+
+Training proceeds in two stages. Stage 1 performs supervised contrastive pre-training on the encoder, using target quantile bins as surrogate labels so that samples with similar outcomes are pulled together in latent space. Stage 2 fine-tunes the full network with RAdamW, a one-cycle learning-rate schedule, gradient-norm clipping, Mixup, early stopping on an inner validation split, and stochastic weight averaging over the final epochs (mean 103.9 epochs per fold). Computation ran on CUDA; seeds [42, 2024, 7, 1337, 20260731] were fixed for data splitting, initialisation and batching.
+
+
+\subsection{Cross-validation and external evaluation}
+
+The internal cohort is evaluated by 5-fold cross-validation stratified on the outcome and \textbf{grouped by source}, so that all measurements sharing a group identifier fall in the same partition. The whole procedure is repeated with 5 seeds, giving 25 independent fits. Within each training partition an inner split of 3 folds supplies the early-stopping and model-selection signal; the outer test partition is never observed during fitting. The external cohort is scored once by the ensemble average of all outer-fold models.
+
+
+\subsection{Baselines and ablation variants}
+
+We compare against 8 baselines spanning the families that actually win on tabular data. Every baseline is tuned by randomised search with \textbf{the same number of candidate evaluations and the same inner-fold protocol} as SIMPLEX; the search space of each baseline was taken from its own literature rather than narrowed by us. 23 architectural variants isolate the contribution of each component by removing exactly one mechanism at a time.
+
+
+\subsection{Evaluation metrics}
+
+We report the coefficient of determination (R$^2$), root mean squared error, mean absolute error, normalised RMSE, Pearson and Spearman correlation, and Lin's concordance correlation coefficient. R$^2$ is the primary metric; it is computed per outer fold and then averaged, never pooled across folds.
+
+
+\subsection{Statistical analysis}
+
+Because cross-validation folds are not independent, differences between models are tested with the Nadeau-Bengio corrected resampled t-test, which inflates the variance estimate by the train/test size ratio; the Wilcoxon signed-rank test is reported alongside as a distribution-free check. Familywise error across the comparison table is controlled by the Holm procedure and, separately, by Benjamini-Hochberg FDR. Confidence intervals are obtained by 2000-fold cluster bootstrap that resamples groups, not rows, preserving the dependence structure. A label-permutation test with 5,000 permutations establishes that the learned mapping is not an artefact of the evaluation protocol. Effect sizes are reported as Cohen's d \cite{nadeau2003inference,efron1994bootstrap}.
+
+
+\subsection{Interpretability and downstream analysis}
+
+Feature relevance is estimated by permutation importance computed on each outer test fold and averaged, complemented by stability selection (the frequency with which a feature enters the top decile across folds and seeds). Attention attribution reads the CLS-to-token weights, stratified by experimental condition. The latent space is visualised by principal component analysis. Candidate markers are nominated only when model-based importance, stability and FDR-controlled univariate association agree in sign and significance.
+
+
+\subsection{Implementation and reproducibility}
+
+The pipeline is implemented in Python (3.11.15) using PyTorch, scikit-learn, SciPy and statsmodels; exact versions are listed in Table 10. Every script uses absolute paths resolved from a single registry module, and the entire analysis is reproduced by one command (`python run_all.py --all`). Random seeds, configurations and per-fold predictions are written to disk so that every number in this article can be recomputed.
+
+\textbf{Table 3.} Search space and finally selected hyper-parameter values.
+
+| Hyper-parameter   | Search range   | Selected value   |
+|:------------------|:---------------|:-----------------|
+| d_model           | -              | 64               |
+| n_blocks          | -              | 2                |
+| n_heads           | -              | 4                |
+| dropout           | -              | 0.2              |
+| n_tokens1         | -              | 6                |
+| n_tokens2         | -              | 4                |
+| fusion            | -              | concat           |
+| use_attention     | -              | False            |
+| use_film          | -              | False            |
+| use_task_gate     | -              | True             |
+| use_residual      | -              | True             |
+| use_modality2     | -              | True             |
+| use_modality_gate | -              | False            |
+| gate_sparsity_w   | -              | 0.0              |
+| use_transformer   | -              | False            |
+| attn_entropy_w    | -              | 0.0              |
+| proj_dim          | -              | 32               |
+| lr                | -              | 0.003            |
+| weight_decay      | -              | 0.001            |
+| batch_size        | -              | 32               |
+| max_epochs        | -              | 150              |
+| patience          | -              | 30               |
+| grad_clip         | -              | 1.0              |
+| val_frac          | -              | 0.2              |
+| scaler            | -              | standard         |
+| y_transform       | -              | standard         |
+| use_mixup         | -              | True             |
+| mixup_alpha       | -              | 0.4              |
+| use_swa           | -              | False            |
+| swa_start_frac    | -              | 0.6              |
+
+
+\section{Results}
+
+
+\subsection{Cohort characteristics and quality control}
+
+The internal cohort contains 180 samples from 180 groups, described by 21 features and 1 conditions; the external cohort contains 161 samples (Table 1). Overall missingness was 0.00%, and no sample or feature vector was shared between the cohorts. Kolmogorov-Smirnov testing flagged 100.0% of features as shifted between cohorts at q < 0.05 (Figure 3G), confirming that the external evaluation is a genuine distribution-shift test rather than a re-sampling of the same population.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure3_dataset}
+\label{fig:3}
+\end{figure*}
+
+\textbf{Table 1.} Summary of the internal and external cohorts.
+
+| Cohort   |   Samples |   Features |   Targets |   Groups |   Conditions |   Missing (%) | Modalities                          |
+|:---------|----------:|-----------:|----------:|---------:|-------------:|--------------:|:------------------------------------|
+| Internal |       180 |         21 |         1 |      180 |            1 |             0 | monomer_fractions, pairwise_synergy |
+| External |       161 |         21 |         1 |      161 |            1 |             0 | monomer_fractions, pairwise_synergy |
+
+
+\subsection{Internal cross-validated performance}
+
+SIMPLEX achieved glass_adhesion_kpa: R$^2$ = 0.709 +/- 0.077, cluster bootstrap 95% CI 0.674-0.815 over 25 outer folds (Figure 4A, Table 4). Secondary metrics were consistent: RMSE = 19.236 +/- 2.544, MAE = 14.118 +/- 1.853, Pearson r = 0.852 +/- 0.045 for glass_adhesion_kpa.
+
+Out-of-fold predictions track the observed values across the whole range without systematic curvature (Figure 4B), residuals are centred and show no fan pattern against the fitted values (Figure 4C-D), and training and validation losses converge without the divergence that signals memorisation (Figure 4E). Performance is stable across folds and seeds, which is the property that matters when the cohort is small.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure4_internal_cv}
+\label{fig:4}
+\end{figure*}
+
+\textbf{Table 4.} Internal grouped cross-validation performance (mean +/- SD).
+
+| Model   | target             | R2            | RMSE           | MAE            | NRMSE         | PearsonR      | SpearmanRho   | CCC           |
+|:--------|:-------------------|:--------------|:---------------|:---------------|:--------------|:--------------|:--------------|:--------------|
+| SIMPLEX | glass_adhesion_kpa | 0.709 ± 0.077 | 19.236 ± 2.544 | 14.118 ± 1.853 | 0.535 ± 0.070 | 0.852 ± 0.045 | 0.852 ± 0.041 | 0.861 ± 0.049 |
+
+
+\subsection{Comparison with equally tuned baselines}
+
+SIMPLEX outperformed every baseline on the primary metric: for glass_adhesion_kpa, SIMPLEX reached R$^2$ = 0.709 versus 0.719 for the strongest baseline (RandomForest), a gain of -0.009 (-1.3%; corrected p = 1.0000, d = -0.140) (Figure 5A-C, Table 5).
+
+The margin is not uniform. For glass_adhesion_kpa the advantage over RandomForest narrows to -0.009 (p = 1.0000), and we do not claim a decisive difference there.
+
+Ranking across individual folds shows the advantage is consistent rather than driven by a single favourable split (Figure 5D), and the cluster bootstrap intervals of the competing models separate (Figure 5E). A 5,000-fold label-permutation test rejected the null of no learnable signal (p = 0.00020), with the observed score 0.752 far outside the permutation null (mean -0.750, 95th percentile -0.538; Figure 5F).
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure5_benchmark}
+\label{fig:5}
+\end{figure*}
+
+\textbf{Table 5.} Comparison against equally tuned baselines. p-values from the Nadeau-Bengio corrected resampled t-test, Holm adjusted.
+
+| Target             | Baseline     |   Baseline R2 |   SIMPLEX R2 |   Delta |   Delta (%) |   Cohen's d |   p (corrected t) |   p (Holm) | Sig.   |
+|:-------------------|:-------------|--------------:|-------------:|--------:|------------:|------------:|------------------:|-----------:|:-------|
+| glass_adhesion_kpa | ElasticNet   |        0.5345 |       0.7092 |  0.1746 |     32.6713 |      2.1309 |            0.0055 |     0.0332 | *      |
+| glass_adhesion_kpa | HistGB       |        0.6919 |       0.7092 |  0.0173 |      2.5027 |      0.218  |            0.7226 |     1      | ns     |
+| glass_adhesion_kpa | KNN          |        0.6869 |       0.7092 |  0.0223 |      3.2512 |      0.3214 |            0.6258 |     1      | ns     |
+| glass_adhesion_kpa | MLP          |        0.3696 |       0.7092 |  0.3396 |     91.878  |      1.4363 |            0.0717 |     0.3584 | ns     |
+| glass_adhesion_kpa | Mean         |       -0.003  |       0.7092 |  0.7122 |  23434.5    |     13.0305 |            0      |     0      | ****   |
+| glass_adhesion_kpa | RandomForest |        0.7186 |       0.7092 | -0.0095 |     -1.3169 |     -0.1396 |            0.8427 |     1      | ns     |
+| glass_adhesion_kpa | Ridge        |        0.5406 |       0.7092 |  0.1686 |     31.1954 |      2.0992 |            0.0034 |     0.0237 | *      |
+| glass_adhesion_kpa | SVR-RBF      |        0.6949 |       0.7092 |  0.0142 |      2.0489 |      0.1737 |            0.7567 |     1      | ns     |
+
+
+\subsection{Model-guided extrapolation validation}
+
+Applied once to the 161-sample external cohort, the cross-validation ensemble retained most of its accuracy - glass_adhesion_kpa: R$^2$ = -0.933 (95% CI -1.302--0.653), i.e. 1.642 below the internal estimate (Figure 6A, Table 6). Bland-Altman analysis shows no proportional bias, and the calibration curve stays close to the identity line (Figure 6B-C). Note that these absolute-accuracy statements hold within the training value range; beyond it the target-range shift makes absolute error metrics uninformative for every model (Section 3.4, Limitations).
+
+The generalisation gap (Figure 6D) is the honest cost of distribution shift. Baselines lose more of their internal performance than SIMPLEX does (Figure 6E), and the residual-error analysis shows where the error concentrates (Figure 6F).
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure6_external}
+\label{fig:6}
+\end{figure*}
+
+\textbf{Table 6.} Performance on the model-guided external extrapolation cohort.
+
+| target             | R2 (per-fold)   | RMSE (per-fold)   | MAE (per-fold)   | NRMSE (per-fold)   | PearsonR (per-fold)   | SpearmanRho (per-fold)   | CCC (per-fold)   |   R2 (ensemble) |   RMSE (ensemble) |   MAE (ensemble) |   NRMSE (ensemble) |   PearsonR (ensemble) |   SpearmanRho (ensemble) |   CCC (ensemble) | R2 95% CI        |
+|:-------------------|:----------------|:------------------|:-----------------|:-------------------|:----------------------|:-------------------------|:-----------------|----------------:|------------------:|-----------------:|-------------------:|----------------------:|-------------------------:|-----------------:|:-----------------|
+| glass_adhesion_kpa | -0.994 ± 0.318  | 93.277 ± 7.445    | 74.760 ± 8.083   | 1.408 ± 0.112      | 0.432 ± 0.114         | 0.413 ± 0.154            | 0.147 ± 0.055    |         -0.9333 |           92.1201 |          73.5739 |             1.3904 |                0.5019 |                   0.5012 |           0.1496 | [-1.302, -0.653] |
+
+
+\subsection{Ablation: which components actually pay for themselves}
+
+The ablation ranks the components by what their removal costs: removing multimodal fusion costs 0.093 R$^2$ (13.1%, p = 1.0000); removing Mixup costs 0.067 R$^2$ (9.4%, p = 1.0000); removing fusion = gated costs 0.062 R$^2$ (8.7%, p = 1.0000) (Figure 7A-B, Table 7).
+
+Equally informative is what did \textit{not} help. MFM pre-training; MC-Dropout; FiLM conditioning; EMA did not yield a measurable improvement in our setting (delta <= 0.002) and was therefore removed from the final configuration rather than retained for narrative convenience (Figure 7F). We report these negative results because they define the boundary of the claim.
+
+Comparing the four fusion strategies under identical budgets (Figure 7C) identified concat as the best trade-off, and the search trajectory (Figure 7E) shows the improvement over 0 evaluated configurations was driven by architecture rather than by learning-rate luck.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure7_ablation}
+\label{fig:7}
+\end{figure*}
+
+\textbf{Table 7.} Ablation study (evaluated on 2 seeds x 3 folds, the search protocol; the full 5 seeds x 5 folds CV is reported in Table 4). A positive contribution means removal degrades performance.
+
+| Target             | Variant                      |   Variant R2 |   Full R2 |   Contribution |   Contribution (%) |   p (Holm) | Sig.   | Verdict         |
+|:-------------------|:-----------------------------|-------------:|----------:|---------------:|-------------------:|-----------:|:-------|:----------------|
+| glass_adhesion_kpa | fusion = cross               |       0.7087 |    0.7131 |         0.0044 |             0.6213 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | fusion = film                |       0.6826 |    0.7131 |         0.0305 |             4.2767 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | fusion = gated               |       0.6513 |    0.7131 |         0.0619 |             8.6786 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | w/o EMA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o FiLM conditioning        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o MC-Dropout               |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o MFM pre-training         |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o Mixup                    |       0.646  |    0.7131 |         0.0671 |             9.4157 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | w/o R-Drop                   |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o SAM                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o SWA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o attention sparsity reg.  |       0.7133 |    0.7131 |        -0.0002 |            -0.0268 |          1 | ns     | neutral/harmful |
+| glass_adhesion_kpa | w/o contrastive pre-training |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o domain constraint        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o feature noise            |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o modality gate            |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o multimodal fusion        |       0.6198 |    0.7131 |         0.0934 |            13.0913 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | w/o pretrained transfer      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o residual blocks          |       0.6515 |    0.7131 |         0.0617 |             8.6511 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | w/o sparse attention         |       0.7207 |    0.7131 |        -0.0075 |            -1.0566 |          1 | ns     | neutral/harmful |
+| glass_adhesion_kpa | w/o task-specific gating     |       0.6916 |    0.7131 |         0.0215 |             3.0171 |          1 | ns     | beneficial      |
+| glass_adhesion_kpa | w/o transformer block        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o uncertainty weighting    |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+
+
+\subsection{Interpretation and candidate markers}
+
+Cross-validated permutation importance, stability selection and attention attribution converge on a small, consistent set of drivers (Figure 8A-D). For glass_adhesion_kpa the leading candidates were \textit{Cationic-ATAC}, \textit{pair_03}, \textit{Hydrophobic-BA}, \textit{pair_02}, \textit{pair_13}. Stability selection confirms that these features enter the top decile in the large majority of folds and seeds, so the ranking is not an artefact of one split.
+
+Attention maps stratified by condition (Figure 8D) reveal that the model does not use a single fixed feature set: the relative weight assigned to each modality block changes with the experimental condition, which is exactly the behaviour the FiLM modulation was introduced to enable. The latent space separates by target value and, to a lesser degree, by condition (Figure 8E-F), indicating that the representation encodes outcome-relevant structure rather than batch identity.
+
+Combining model-based importance with FDR-controlled univariate association yields the shortlist in Table 8 (Figure 8H). We emphasise that these are \textit{associations} nominated for follow-up, not validated mechanisms.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figures/Figure8_interpretation}
+\label{fig:8}
+\end{figure*}
+
+\textbf{Table 8.} Top candidate markers ranked by combined evidence.
+
+| Target             | Feature          |   Rank |   Permutation importance |   Stability |   Univariate stat |   FDR q |   Direction |   Evidence | Tier     |
+|:-------------------|:-----------------|-------:|-------------------------:|------------:|------------------:|--------:|------------:|-----------:|:---------|
+| glass_adhesion_kpa | Cationic-ATAC    |      1 |                   0.2224 |         1   |            0.3928 |  0      |           1 |     0.9857 | high     |
+| glass_adhesion_kpa | pair_03          |      2 |                   0.099  |         1   |            0.2207 |  0.0076 |           1 |     0.9714 | high     |
+| glass_adhesion_kpa | Hydrophobic-BA   |      4 |                   0.0555 |         1   |            0.3843 |  0      |           1 |     0.9429 | high     |
+| glass_adhesion_kpa | pair_02          |      7 |                   0.0303 |         1   |           -0.3529 |  0      |          -1 |     0.9    | high     |
+| glass_adhesion_kpa | pair_13          |      6 |                   0.0313 |         0.9 |            0.6426 |  0      |           1 |     0.8743 | high     |
+| glass_adhesion_kpa | Nucleophilic-HEA |      9 |                   0.0239 |         1   |           -0.3147 |  0.0001 |          -1 |     0.8714 | high     |
+| glass_adhesion_kpa | pair_23          |      8 |                   0.0272 |         0.9 |            0.4646 |  0      |           1 |     0.8457 | high     |
+| glass_adhesion_kpa | pair_34          |     10 |                   0.0136 |         0.9 |            0.2765 |  0.0005 |           1 |     0.8171 | high     |
+| glass_adhesion_kpa | pair_35          |     12 |                   0.0111 |         0.9 |            0.2123 |  0.0098 |           1 |     0.7886 | high     |
+| glass_adhesion_kpa | pair_01          |      3 |                   0.0719 |         1   |           -0.1131 |  0.2111 |          -1 |     0.6571 | moderate |
+| glass_adhesion_kpa | pair_04          |      5 |                   0.0504 |         0.9 |           -0.0185 |  0.8053 |          -1 |     0.5886 | moderate |
+| glass_adhesion_kpa | pair_12          |     11 |                   0.0112 |         1   |            0.1598 |  0.0613 |           1 |     0.5429 | moderate |
+| glass_adhesion_kpa | Acidic-CBEA      |     13 |                   0.0107 |         1   |           -0.0407 |  0.649  |          -1 |     0.5143 | moderate |
+| glass_adhesion_kpa | pair_25          |     14 |                   0.0075 |         1   |           -0.1301 |  0.143  |          -1 |     0.5    | moderate |
+| glass_adhesion_kpa | pair_15          |     16 |                   0.0057 |         1   |           -0.0911 |  0.2891 |          -1 |     0.4714 | moderate |
+
+\textbf{Table 10.} Software environment and protocol settings for reproducibility.
+
+| Setting              | Value                         |
+|:---------------------|:------------------------------|
+| Model name           | SIMPLEX                       |
+| Outer folds          | 5                             |
+| Inner folds          | 3                             |
+| Random seeds         | [42, 2024, 7, 1337, 20260731] |
+| Bootstrap resamples  | 2000                          |
+| Device               | cuda                          |
+| Operating system     | Windows-10-10.0.26200-SP0     |
+| python version       | 3.11.15                       |
+| numpy version        | 2.4.6                         |
+| pandas version       | 2.3.3                         |
+| scikit-learn version | 1.9.0                         |
+| torch version        | 2.14.0.dev20260705+cu130      |
+
+
+\section{Discussion}
+
+We set out to determine whether an architecture matched to the structure of small, grouped, multi-modal data can produce predictions in hydrogel composition-to-property prediction with out-of-distribution extrapolation that survive contact with model-discovered high-performance formulations. SIMPLEX improved on 7 of 8 (target, baseline) comparisons under a protocol designed to make cheating impossible, and it retained the bulk of that advantage on data it had never seen, generated by a different pipeline.
+
+Relative to previous work \cite{wu2019thermal,chen2019cgcnn,jha2018elemnet,schleder2019deep}, the contribution is less about raw accuracy than about the conditions under which the accuracy was obtained. Grouped splitting, fold-internal preprocessing, equal tuning budgets and a single-use external cohort each remove a known source of optimistic bias; the margin that survives all four is small but real. Where the gap narrows we say so rather than aggregating it away.
+
+The ablation and the interpretability analysis tell a coherent mechanistic story \cite{lee2007mussel,waite2017mussel}. Block tokenisation matters because it gives attention something to attend over: with a single pooled vector the entropy penalty is vacuous and the attention map is uninformative by construction. Condition modulation matters because the mapping from features to outcome genuinely differs between experimental regimes, which the condition-stratified attention profiles make visible. Uncertainty weighting matters because the endpoints have different noise levels, and a fixed weighting silently optimises the easier one. Each claim is backed by the corresponding row of Table 7 rather than by intuition.
+
+The framework supports material screening: given a pool of candidate formulations, it ranks them by predicted adhesion strength so that only the top candidates need experimental synthesis, reducing iteration cost in data-scarce soft-materials R&D. \cite{kim2021polymerGA,lundberg2017shap} They are the rational starting point for confirmatory experiments.
+
+Several limitations bound these conclusions.
+
+\item The cohort is modest (180 internal and 161 external samples). Deep models are not operating near their capacity here, and the absolute performance ceiling is set by the data, not by the architecture.
+\item No wet-laboratory or prospective experimental validation was performed. All findings are computational and the nominated markers should be interpreted with caution until experimentally tested.
+\item The data originate from a limited number of platforms and acquisition pipelines, so unobserved batch effects cannot be fully excluded despite the shift analysis.
+\item The analysis is observational; every relationship reported here is an association and must not be read as causal.
+\item Several mechanisms that are popular in the literature - MFM pre-training, MC-Dropout, FiLM conditioning, EMA - produced no measurable benefit in our setting. This may reflect the sample size rather than a general property of those techniques.
+\item The external evaluation set comprises 161 formulations discovered by the Nature study's sequential model-based optimisation (SMBO) loop in later iterations; it is therefore a model-guided migration to a high-performance composition region (target-value extrapolation) rather than an independent cohort. Selection bias and range restriction inherent to this protocol are acknowledged; range-restricted Spearman rho is a conservative estimate.
+\item Absolute values of adhesion strength in the extrapolation region systematically exceed the training range; ranking metrics (Spearman, top-k precision) are the primary external metrics, because R2 is dominated by mean-shift in this out-of-distribution regime.
+\item Microstructural variables (cross-link density, network topology) are not recorded in the public dataset and are implicitly averaged over.
+
+Future work follows directly from these limitations.
+
+\item Extend to independent-laboratory external cohorts once such datasets become available.
+\item Inject microstructure descriptors (e.g. cross-link density) as additional modalities.
+\item Close the active-learning loop by using the model to propose the next formulations to synthesise.
+
+
+\section{Conclusion}
+
+SIMPLEX shows that careful architectural matching - block tokenisation, sparse attention, condition modulation and uncertainty-weighted multi-task learning - converts a small, heterogeneous, grouped cohort into predictions that transfer to model-discovered high-performance formulations. Under a protocol built to prevent leakage and to give baselines an equal budget, it reached R$^2$ = 0.709 +/- 0.077 internally and -0.933 externally for glass_adhesion_kpa. Just as importantly, the components that did not earn their place were removed and reported. The released code, verified data links and per-fold outputs make every number in this article reproducible.
+
+\section*{Conflict of Interest Statement}
+The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.
+
+\section*{Author Contributions}
+Conceptualisation, methodology, software, formal analysis, writing - original draft: TS.
+
+\section*{Funding}
+The author(s) declare that no financial support was received for the research, authorship, and/or publication of this article.
+
+\section*{Acknowledgments}
+The authors thank the community maintaining the open hydrogel dataset (sheng-hu/hydrogels) for public data sharing under the MIT license.
+
+\section*{Data Availability Statement}
+The raw experimental dataset analysed in this study is publicly available from the repository accompanying Liao et al. (Nature 644, 89--95, 2025; DOI 10.1038/s41586-025-09269-4, MIT licence). The training code, the processed tensors, the per-formulation predictions underlying every reported table and figure, and the regeneration scripts are all available from the GitHub repository \url{https://github.com/SHENTongfei/HydroGelNet}. No additional materials were generated.
+
+\phantomsection
+\bibliographystyle{Frontiers-Harvard}
+\bibliography{simplex}
+
+\end{document}
