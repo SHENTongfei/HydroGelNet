@@ -1,3 +1,8 @@
 timestamp,verdict,metric,variant,proposed,baseline,baseline_score,delta,p_value,failed,next_level
-2026-08-06 11:52:58,FAIL,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,G4_external,0
+2026-08-06 11:52:58,FAIL,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,G4_external,0.0
 2026-08-06 11:53:24,PASS,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,,
+2026-08-06 15:45:08,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability;G4_external,1.0
+2026-08-06 16:13:41,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability;G4_external,2.0
+2026-08-06 16:21:59,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,3.0
+2026-08-06 16:23:04,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,4.0
+2026-08-06 16:23:26,PASS,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,,

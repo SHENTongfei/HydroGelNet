@@ -1,0 +1,4 @@
+=== Mixup variants ===
+standard Mixup intR2=0.705 extR2=-0.679 logR2=-0.466 spear=0.496 top20=0.10 rmse=85.9
+SimplexMix     intR2=0.681 extR2=-0.687 logR2=-0.440 spear=0.567 top20=0.05 rmse=86.1
+mixed 50/50    intR2=0.702 extR2=-0.798 logR2=-0.596 spear=0.357 top20=0.05 rmse=88.8

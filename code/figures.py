@@ -321,7 +321,7 @@ def fig2(ctx: Ctx) -> None:
 
 
 def fig3(ctx: Ctx) -> None:
-    fig, axes = plt.subplots(2, 4, figsize=(ss.DOUBLE_COL, 4.2))
+    fig, axes = plt.subplots(3, 3, figsize=(ss.DOUBLE_COL, 5.6))
     axes = axes.ravel()
     ds, ext = ctx.ds, ctx.ext
 
@@ -401,8 +401,29 @@ def fig3(ctx: Ctx) -> None:
         ax.set_ylabel("groups")
         ax.set_title(f"Grouping ({len(sizes)} groups)")
 
+    def p_target_shift(ax):
+        """Internal vs external target range: the extrapolation demand."""
+        import numpy as np
+        yi = np.asarray(ds['Y']).ravel()
+        ye = np.asarray(ext['Y']).ravel() if ext is not None else np.array([])
+        frac = float(np.mean(ye > yi.max())) if len(ye) else 0.0
+        ax.hist(yi, bins=20, alpha=.6, color=ss.OKABE_ITO[0],
+                label='Internal (n=%d)' % len(yi))
+        if len(ye):
+            ax.hist(ye, bins=20, alpha=.5, color=ss.OKABE_ITO[3],
+                    label='External (n=%d)' % len(ye))
+            ax.axvline(yi.max(), color='k', ls='--', lw=1)
+            ax.text(yi.max(), ax.get_ylim()[1]*0.95, 'train max',
+                    fontsize=6, ha='left', va='top')
+        ax.set_xlabel('Adhesion (kPa)')
+        ax.set_ylabel('count')
+        ax.set_title('Target range shift (%d%% external > train max)'
+                     % round(100*frac))
+        ax.legend(fontsize=6, frameon=False)
+
     for ax, fn in zip(axes, [p_counts, p_targets, p_missing, p_corr,
-                             p_pca, p_cond, p_shift, p_groups]):
+                             p_pca, p_cond, p_shift, p_groups,
+                             p_target_shift]):
         _safe(fn, ax)
     ss.label_panels(axes, dx=-0.22, dy=1.18)
     fig.tight_layout(rect=[0, 0, 1, 0.92])

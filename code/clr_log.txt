@@ -1,0 +1,5 @@
+variant          intR2  extR2  logR2  spear top20  MAPE%  RMSE
+A_raw+pair      0.705 -0.679 -0.466 0.496  0.10   46.7   85.9
+B_clr+pair      0.710 -1.143 -0.929 0.029  0.05   53.4   97.0
+C_raw+clr+pair  0.688 -0.893 -0.608 0.339  0.10   47.8   91.2
+saved -> results/tuning/clr_compare.json

@@ -19,10 +19,10 @@
   "use_domain_constraint": true,
   "constraint_w": 0.1,
   "y_transform": "standard",
-  "max_epochs": 250,
+  "max_epochs": 200,
   "patience": 30,
   "batch_size": 32,
-  "lr": 0.002,
+  "lr": 0.003,
   "weight_decay": 0.001,
   "scaler": "standard"
 }

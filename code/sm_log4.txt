@@ -1,0 +1,6 @@
+=== SimplexMix hyper-parameter compensation ===
+std dr15/e200      intR2=0.705 extR2=-0.679 logR2=-0.466 spear=0.496 top20=0.10 rmse=85.9
+SM dr10/e250/lr2   intR2=0.679 extR2=-0.757 logR2=-0.515 spear=0.370 top20=0.05 rmse=87.8
+SM dr15/e250/lr2   intR2=0.671 extR2=-0.813 logR2=-0.584 spear=0.425 top20=0.10 rmse=89.2
+SM dr10/e200/lr3   intR2=0.683 extR2=-0.876 logR2=-0.666 spear=0.261 top20=0.05 rmse=90.8
+SM dr10/e300/lr2   intR2=0.676 extR2=-0.654 logR2=-0.414 spear=0.364 top20=0.05 rmse=85.2

@@ -6,14 +6,14 @@ Primary metric: **R2**. Outer protocol: 5-fold grouped CV repeated over 5 seed(s
 
 | target             | reference    |   proposed_mean |   reference_mean |   delta |   p_corrected_t |   p_holm | significance   |
 |:-------------------|:-------------|----------------:|-----------------:|--------:|----------------:|---------:|:---------------|
-| glass_adhesion_kpa | ElasticNet   |          0.7092 |           0.5345 |  0.1746 |          0.0055 |   0.0332 | *              |
-| glass_adhesion_kpa | HistGB       |          0.7092 |           0.6919 |  0.0173 |          0.7226 |   1      | ns             |
-| glass_adhesion_kpa | KNN          |          0.7092 |           0.6869 |  0.0223 |          0.6258 |   1      | ns             |
-| glass_adhesion_kpa | MLP          |          0.7092 |           0.3696 |  0.3396 |          0.0717 |   0.3584 | ns             |
-| glass_adhesion_kpa | Mean         |          0.7092 |          -0.003  |  0.7122 |          0      |   0      | ****           |
-| glass_adhesion_kpa | RandomForest |          0.7092 |           0.7186 | -0.0095 |          0.8427 |   1      | ns             |
-| glass_adhesion_kpa | Ridge        |          0.7092 |           0.5406 |  0.1686 |          0.0034 |   0.0237 | *              |
-| glass_adhesion_kpa | SVR-RBF      |          0.7092 |           0.6949 |  0.0142 |          0.7567 |   1      | ns             |
+| glass_adhesion_kpa | ElasticNet   |           0.726 |           0.5345 |  0.1915 |          0.0018 |   0.0107 | *              |
+| glass_adhesion_kpa | HistGB       |           0.726 |           0.6919 |  0.0342 |          0.4975 |   1      | ns             |
+| glass_adhesion_kpa | KNN          |           0.726 |           0.6869 |  0.0392 |          0.2702 |   1      | ns             |
+| glass_adhesion_kpa | MLP          |           0.726 |           0.3696 |  0.3564 |          0.0562 |   0.2812 | ns             |
+| glass_adhesion_kpa | Mean         |           0.726 |          -0.003  |  0.7291 |          0      |   0      | ****           |
+| glass_adhesion_kpa | RandomForest |           0.726 |           0.7186 |  0.0074 |          0.8579 |   1      | ns             |
+| glass_adhesion_kpa | Ridge        |           0.726 |           0.5406 |  0.1855 |          0.0009 |   0.0066 | **             |
+| glass_adhesion_kpa | SVR-RBF      |           0.726 |           0.6949 |  0.0311 |          0.4121 |   1      | ns             |
 
 3/8 comparisons remain significant after Holm correction.
 
@@ -21,18 +21,18 @@ Primary metric: **R2**. Outer protocol: 5-fold grouped CV repeated over 5 seed(s
 
 | scope        | model   | target             | metric   |   point |      lo |       hi |     se |
 |:-------------|:--------|:-------------------|:---------|--------:|--------:|---------:|-------:|
-| internal_oof | SIMPLEX | glass_adhesion_kpa | R2       |  0.7521 |  0.6737 |   0.8148 | 0.0362 |
-| internal_oof | SIMPLEX | glass_adhesion_kpa | RMSE     | 17.9629 | 15.4737 |  20.3096 | 1.2322 |
-| internal_oof | SIMPLEX | glass_adhesion_kpa | MAE      | 13.1354 | 11.3732 |  14.9833 | 0.918  |
-| external     | SIMPLEX | glass_adhesion_kpa | R2       | -0.9333 | -1.3024 |  -0.6526 | 0.1637 |
-| external     | SIMPLEX | glass_adhesion_kpa | RMSE     | 92.1201 | 82.999  | 101.53   | 4.7421 |
-| external     | SIMPLEX | glass_adhesion_kpa | MAE      | 73.5739 | 65.4335 |  82.3773 | 4.4005 |
+| internal_oof | SIMPLEX | glass_adhesion_kpa | R2       |  0.7497 |  0.6647 |   0.8178 | 0.0393 |
+| internal_oof | SIMPLEX | glass_adhesion_kpa | RMSE     | 18.0512 | 15.4293 |  20.5099 | 1.3116 |
+| internal_oof | SIMPLEX | glass_adhesion_kpa | MAE      | 13.1829 | 11.4308 |  15.0491 | 0.9268 |
+| external     | SIMPLEX | glass_adhesion_kpa | R2       | -0.9108 | -1.2698 |  -0.6346 | 0.1612 |
+| external     | SIMPLEX | glass_adhesion_kpa | RMSE     | 91.5836 | 82.3606 | 101.084  | 4.7708 |
+| external     | SIMPLEX | glass_adhesion_kpa | MAE      | 72.9064 | 64.7953 |  81.7507 | 4.406  |
 
 ## Permutation test
 
 | target             | metric   |   observed |   null_mean |   null_p95 |   p_value |   n_perm | significance   |
 |:-------------------|:---------|-----------:|------------:|-----------:|----------:|---------:|:---------------|
-| glass_adhesion_kpa | R2       |    0.75214 |    -0.75005 |   -0.53817 |    0.0002 |     5000 | ***            |
+| glass_adhesion_kpa | R2       |    0.74969 |    -0.75138 |   -0.53711 |    0.0002 |     5000 | ***            |
 
 ## Ablation
 

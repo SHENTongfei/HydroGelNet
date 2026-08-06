@@ -1,0 +1,10 @@
+=== EXTERNAL (5-seed x 5-fold ensemble, dr15_e200_lr3) ===
+  raw R2         = -0.911
+  CALIBRATED R2  = -0.918  (a=0.971, b=2.33)
+  log R2         = -0.815
+  Spearman       = 0.485
+  RMSE(raw)      = 91.6
+  RMSE(cal)      = 91.8
+  MAPE% (cal)    = 49.5
+  ROC-AUC top/bottom half = 0.709
+saved external_ens_v3.npz

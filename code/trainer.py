@@ -176,7 +176,7 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray,
         r_s = stats.spearmanr(y_true, y_pred)[0] if np.std(y_pred) > 0 else 0.0
         denom = np.var(y_true) + np.var(y_pred) + (y_true.mean() - y_pred.mean()) ** 2
         ccc = 2 * np.cov(y_true, y_pred)[0, 1] / denom if denom > 0 else 0.0
-        return {
+        out = {
             "R2": float(r2_score(y_true, y_pred)),
             "RMSE": rmse,
             "MAE": float(mean_absolute_error(y_true, y_pred)),
@@ -185,6 +185,17 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray,
             "SpearmanRho": float(r_s),
             "CCC": float(ccc),
         }
+        # Top-k screening precision is meaningful for the full external cohort
+        # (screening use-case); compute when the evaluation set is large enough.
+        if len(y_true) >= 50:
+            n = len(y_true)
+            top_true = set(np.argsort(-y_true)[:20])
+            top_pred = set(np.argsort(-y_pred)[:20])
+            top_true30 = set(np.argsort(-y_true)[:30])
+            top_pred30 = set(np.argsort(-y_pred)[:30])
+            out["TopK20"] = float(len(top_true & top_pred) / 20)
+            out["TopK30"] = float(len(top_true30 & top_pred30) / 30)
+        return out
 
     y_bin = (y_true > 0.5).astype(int)
     hard = (y_pred > 0.5).astype(int)

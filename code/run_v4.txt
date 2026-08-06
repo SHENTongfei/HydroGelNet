@@ -1,0 +1,198 @@
+
+==============================================================================
+RUN ALL  --  SIMPLEX
+==============================================================================
+  project : C:/Users/TS/WorkBuddy/HydroGelNet
+  python  : C:/Users/TS/.conda/envs/HydroGelNet/python.exe
+  stages  : train -> baselines -> stats -> gate -> interpret -> figures -> tables -> paper
+
+##############################################################################
+# STEP 5/9  cross-validated training
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json --tag main --seeds 5
+##############################################################################
+
+==============================================================================
+STEP 5/9  CROSS-VALIDATED TRAINING
+==============================================================================
+  loaded config: C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+  internal n=180  external n=161  task=regression  seeds=[42, 2024, 7, 1337, 20260731]
+    seed=42 fold=0  R2=0.6601  ep=121  swa=False
+    seed=42 fold=1  R2=0.7190  ep=121  swa=False
+    seed=42 fold=2  R2=0.7781  ep=121  swa=False
+    seed=42 fold=3  R2=0.7996  ep=131  swa=False
+    seed=42 fold=4  R2=0.5651  ep=121  swa=False
+    seed=2024 fold=0  R2=0.7289  ep=121  swa=False
+    seed=2024 fold=1  R2=0.7558  ep=121  swa=False
+    seed=2024 fold=2  R2=0.7060  ep=143  swa=False
+    seed=2024 fold=3  R2=0.6198  ep=125  swa=False
+    seed=2024 fold=4  R2=0.7959  ep=121  swa=False
+    seed=7 fold=0  R2=0.7676  ep=121  swa=False
+    seed=7 fold=1  R2=0.7816  ep=121  swa=False
+    seed=7 fold=2  R2=0.6324  ep=200  swa=False
+    seed=7 fold=3  R2=0.8043  ep=122  swa=False
+    seed=7 fold=4  R2=0.8217  ep=121  swa=False
+    seed=1337 fold=0  R2=0.6768  ep=121  swa=False
+    seed=1337 fold=1  R2=0.7111  ep=121  swa=False
+    seed=1337 fold=2  R2=0.8022  ep=177  swa=False
+    seed=1337 fold=3  R2=0.6783  ep=172  swa=False
+    seed=1337 fold=4  R2=0.6404  ep=121  swa=False
+    seed=20260731 fold=0  R2=0.7368  ep=121  swa=False
+    seed=20260731 fold=1  R2=0.6680  ep=126  swa=False
+    seed=20260731 fold=2  R2=0.7121  ep=121  swa=False
+    seed=20260731 fold=3  R2=0.8096  ep=121  swa=False
+    seed=20260731 fold=4  R2=0.7799  ep=138  swa=False
+  [main] mean R2 = 0.7260 +/- 0.0696   (117.7s)
+
+  internal CV R2: 0.7260
+  external    R2: -0.9108
+
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv
+
+  [train] ok in 121.7s
+
+##############################################################################
+# STEP 6/9  classical baselines
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\baselines.py --seeds 5 --n-iter 40
+##############################################################################
+
+==============================================================================
+STEP 6/9  CLASSICAL BASELINES (equally tuned)
+==============================================================================
+  budget: 40 inner candidates x 3 inner folds x 5 outer folds x 5 seed(s)
+    seed=42 fold=0 done  (leader: RandomForest R2=0.7134)
+    seed=42 fold=1 done  (leader: RandomForest R2=0.6940)
+    seed=42 fold=2 done  (leader: RandomForest R2=0.7251)
+    seed=42 fold=3 done  (leader: RandomForest R2=0.7301)
+    seed=42 fold=4 done  (leader: RandomForest R2=0.7258)
+    seed=2024 fold=0 done  (leader: RandomForest R2=0.7201)
+    seed=2024 fold=1 done  (leader: RandomForest R2=0.7251)
+    seed=2024 fold=2 done  (leader: RandomForest R2=0.7335)
+    seed=2024 fold=3 done  (leader: RandomForest R2=0.7238)
+    seed=2024 fold=4 done  (leader: RandomForest R2=0.7148)
+    seed=7 fold=0 done  (leader: RandomForest R2=0.7126)
+    seed=7 fold=1 done  (leader: RandomForest R2=0.7161)
+    seed=7 fold=2 done  (leader: RandomForest R2=0.7154)
+    seed=7 fold=3 done  (leader: RandomForest R2=0.7158)
+    seed=7 fold=4 done  (leader: RandomForest R2=0.7150)
+    seed=1337 fold=0 done  (leader: RandomForest R2=0.7214)
+    seed=1337 fold=1 done  (leader: RandomForest R2=0.7237)
+    seed=1337 fold=2 done  (leader: RandomForest R2=0.7243)
+    seed=1337 fold=3 done  (leader: RandomForest R2=0.7248)
+    seed=1337 fold=4 done  (leader: RandomForest R2=0.7183)
+    seed=20260731 fold=0 done  (leader: RandomForest R2=0.7197)
+    seed=20260731 fold=1 done  (leader: RandomForest R2=0.7166)
+    seed=20260731 fold=2 done  (leader: RandomForest R2=0.7133)
+    seed=20260731 fold=3 done  (leader: RandomForest R2=0.7149)
+    seed=20260731 fold=4 done  (leader: RandomForest R2=0.7186)
+
+  internal CV summary (mean over folds/seeds/targets):
+                  mean       std  count
+model                                  
+RandomForest  0.718649  0.056829     25
+SVR-RBF       0.694947  0.086407     25
+HistGB        0.691870  0.081526     25
+KNN           0.686854  0.060749     25
+Ridge         0.540556  0.083300     25
+ElasticNet    0.534543  0.086410     25
+MLP           0.369602  0.325315     25
+Mean         -0.003039  0.002831     25
+
+  elapsed 319.3s
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv
+
+  [baselines] ok in 324.5s
+
+##############################################################################
+# STEP 7/9  statistical testing
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\stats_tests.py
+##############################################################################
+
+==============================================================================
+STEP 7/9  STATISTICAL TESTING
+==============================================================================
+  [1/5] 8 pairwise comparisons -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  [2/5] 6 bootstrap CIs -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\bootstrap_ci.csv
+  [3/5] permutation tests -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\permutation.csv
+  [4/5] ablation statistics -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\ablation_stats.csv
+  [5/5] narrative report -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\stats_report.md
+
+  [stats] ok in 22.5s
+
+##############################################################################
+#           PERF-GATE (no-fail protocol)
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\escalate.py --strict
+##############################################################################
+
+==============================================================================
+PERF-GATE  no-fail protocol
+==============================================================================
+  metric   : R2
+  proposed : 0.7260 (main)
+  baseline : 0.7187 (RandomForest)
+  delta    : +0.0074 (+1.03%)  p=1.0
+  [PASS] G1_beats_best_baseline     R2 0.7260 vs RandomForest 0.7186 (delta +0.0074, beats)
+  [FAIL] G2_significant             p_holm = 1 (significant win)
+  [FAIL] G3_seed_stability          3/5 seeds positive (need >= 4, >= 3 seeds)
+  [PASS] G4_external                TopK20 0.3000 vs Mean 0.1500
+  [PASS] G5_ablation_informative    ablation spread in R2 = 0.3149
+
+  verdict  : FAIL
+  report   : C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+  log      : C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\escalation_log.csv
+
+==============================================================================
+  GATE CLOSED -- do not write the manuscript yet.
+==============================================================================
+### ESCALATION LEVEL 3 -- ARCHITECTURE -- change the model family
+
+*Why this level*: The inductive bias does not match the data geometry.
+
+**Do this:**
+1. Re-read the data shape: tabular -> FT-Transformer / TabPFN-style; sequence -> Transformer or dilated CNN; graph -> GNN; multimodal -> cross-attention fusion with a modality gate.
+2. Swap the backbone entirely rather than tweaking the old one.
+3. Add a residual path from a strong shallow predictor so the deep model only has to learn the residual (boosting-style hybrid).
+
+**Commands:**
+```bash
+cd C:/Users/TS/WorkBuddy/HydroGelNet\code
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe tuner.py --coarse 150 --fine 100
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json --tag arch2 --seeds 5
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe stats_tests.py && C:/Users/TS/.conda/envs/HydroGelNet/python.exe escalate.py
+```
+
+  [gate] FAILED (1) in 2.4s
+
+==============================================================================
+SUMMARY
+==============================================================================
+  ok    train        121.7s
+  ok    baselines    324.5s
+  ok    stats         22.5s
+  FAIL  gate           2.4s
+
+  total 7.9 min
+  log   C:/Users/TS/WorkBuddy/HydroGelNet\results\run_log.md
+
+  deliverables:
+  OK  dataset                C:/Users/TS/WorkBuddy/HydroGelNet\data\processed\dataset.npz
+  OK  external dataset       C:/Users/TS/WorkBuddy/HydroGelNet\data\external\dataset_external.npz
+  OK  best config            C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+  OK  internal CV metrics    C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+  OK  baseline metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv
+  OK  external metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv
+  OK  statistics             C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  OK  perf gate              C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\perf_gate.json
+  OK  importance             C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  OK  manuscript (md)        C:/Users/TS/WorkBuddy/HydroGelNet\paper\manuscript.md
+  OK  manuscript (pdf)       C:/Users/TS/WorkBuddy/HydroGelNet\paper\SIMPLEX_manuscript.pdf
+  OK  figures (png)          9 in C:/Users/TS/WorkBuddy/HydroGelNet\figures
+  OK  tables (csv)           10 in C:/Users/TS/WorkBuddy/HydroGelNet\tables
+
+==============================================================================
+  PERF-GATE CLOSED -- the model does not beat the baselines yet.
+  Writing the manuscript now is NOT an option. Open the report,
+  apply the escalation level it prints, then re-run:
+    C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+    python run_all.py --from tune
+==============================================================================
