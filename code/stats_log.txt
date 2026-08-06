@@ -1,0 +1,9 @@
+
+==============================================================================
+STEP 7/9  STATISTICAL TESTING
+==============================================================================
+  [1/5] 8 pairwise comparisons -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  [2/5] 6 bootstrap CIs -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\bootstrap_ci.csv
+  [3/5] permutation tests -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\permutation.csv
+  [4/5] ablation statistics -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\ablation_stats.csv
+  [5/5] narrative report -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\stats_report.md

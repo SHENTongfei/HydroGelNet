@@ -1,0 +1,2 @@
+condition,target,n,R2,RMSE,MAE,NRMSE,PearsonR,SpearmanRho,CCC
+all,glass_adhesion_kpa,360,0.7243,18.945,14.0345,0.5251,0.8521,0.8519,0.8486

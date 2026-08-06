@@ -1,0 +1,45 @@
+
+==============================================================================
+STEP 6/9  CLASSICAL BASELINES (equally tuned)
+==============================================================================
+  budget: 40 inner candidates x 3 inner folds x 5 outer folds x 5 seed(s)
+    seed=42 fold=0 done  (leader: RandomForest R2=0.7134)
+    seed=42 fold=1 done  (leader: RandomForest R2=0.6940)
+    seed=42 fold=2 done  (leader: RandomForest R2=0.7251)
+    seed=42 fold=3 done  (leader: RandomForest R2=0.7301)
+    seed=42 fold=4 done  (leader: RandomForest R2=0.7258)
+    seed=2024 fold=0 done  (leader: RandomForest R2=0.7201)
+    seed=2024 fold=1 done  (leader: RandomForest R2=0.7251)
+    seed=2024 fold=2 done  (leader: RandomForest R2=0.7335)
+    seed=2024 fold=3 done  (leader: RandomForest R2=0.7238)
+    seed=2024 fold=4 done  (leader: RandomForest R2=0.7148)
+    seed=7 fold=0 done  (leader: RandomForest R2=0.7126)
+    seed=7 fold=1 done  (leader: RandomForest R2=0.7161)
+    seed=7 fold=2 done  (leader: RandomForest R2=0.7154)
+    seed=7 fold=3 done  (leader: RandomForest R2=0.7158)
+    seed=7 fold=4 done  (leader: RandomForest R2=0.7150)
+    seed=1337 fold=0 done  (leader: RandomForest R2=0.7214)
+    seed=1337 fold=1 done  (leader: RandomForest R2=0.7237)
+    seed=1337 fold=2 done  (leader: RandomForest R2=0.7243)
+    seed=1337 fold=3 done  (leader: RandomForest R2=0.7248)
+    seed=1337 fold=4 done  (leader: RandomForest R2=0.7183)
+    seed=20260731 fold=0 done  (leader: RandomForest R2=0.7197)
+    seed=20260731 fold=1 done  (leader: RandomForest R2=0.7166)
+    seed=20260731 fold=2 done  (leader: RandomForest R2=0.7133)
+    seed=20260731 fold=3 done  (leader: RandomForest R2=0.7149)
+    seed=20260731 fold=4 done  (leader: RandomForest R2=0.7186)
+
+  internal CV summary (mean over folds/seeds/targets):
+                  mean       std  count
+model                                  
+RandomForest  0.718649  0.056829     25
+SVR-RBF       0.694947  0.086407     25
+HistGB        0.691870  0.081526     25
+KNN           0.686854  0.060749     25
+Ridge         0.540556  0.083300     25
+ElasticNet    0.534543  0.086410     25
+MLP           0.369602  0.325315     25
+Mean         -0.003039  0.002831     25
+
+  elapsed 564.1s
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv

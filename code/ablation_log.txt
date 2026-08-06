@@ -1,0 +1,52 @@
+
+==============================================================================
+STEP 4/9  HYPER-PARAMETER SEARCH + ABLATION
+==============================================================================
+  reusing C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+
+  -- ablation (21 components + 3 fusion variants) --
+    full model                       R2=+0.7131  (49s)
+    w/o multimodal fusion            R2=+0.6198  (42s)
+    w/o sparse attention             R2=+0.7207  (41s)
+    w/o attention sparsity reg.      R2=+0.7133  (42s)
+    w/o FiLM conditioning            R2=+0.7131  (43s)
+    w/o task-specific gating         R2=+0.6916  (42s)
+    w/o residual blocks              R2=+0.6515  (39s)
+    w/o contrastive pre-training     R2=+0.7131  (41s)
+    w/o Mixup                        R2=+0.6460  (39s)
+    w/o SWA                          R2=+0.7131  (39s)
+    w/o uncertainty weighting        R2=+0.7131  (31s)
+    w/o domain constraint            R2=+0.7131  (34s)
+    w/o modality gate                R2=+0.7131  (45s)
+    w/o transformer block            R2=+0.7131  (49s)
+    w/o SAM                          R2=+0.7131  (48s)
+    w/o EMA                          R2=+0.7131  (41s)
+    w/o R-Drop                       R2=+0.7131  (41s)
+    w/o feature noise                R2=+0.7131  (41s)
+    w/o MFM pre-training             R2=+0.7131  (41s)
+    w/o MC-Dropout                   R2=+0.7131  (49s)
+    w/o pretrained transfer          R2=+0.7131  (45s)
+    fusion = film                     R2=+0.6826
+    fusion = cross                    R2=+0.7087
+    fusion = gated                    R2=+0.6513
+
+  -- automatic component pruning --
+    w/o sparse attention: delta R2 = -0.0075 -> component removed from the final model
+    w/o attention sparsity reg.: delta R2 = -0.0002 -> component removed from the final model
+    w/o FiLM conditioning: delta R2 = +0.0000 -> component removed from the final model
+    w/o contrastive pre-training: delta R2 = +0.0000 -> component removed from the final model
+    w/o SWA: delta R2 = +0.0000 -> component removed from the final model
+    w/o uncertainty weighting: delta R2 = +0.0000 -> component removed from the final model
+    w/o domain constraint: delta R2 = +0.0000 -> component removed from the final model
+    w/o modality gate: delta R2 = +0.0000 -> component removed from the final model
+    w/o transformer block: delta R2 = +0.0000 -> component removed from the final model
+    w/o SAM: delta R2 = +0.0000 -> component removed from the final model
+    w/o EMA: delta R2 = +0.0000 -> component removed from the final model
+    w/o R-Drop: delta R2 = +0.0000 -> component removed from the final model
+    w/o feature noise: delta R2 = +0.0000 -> component removed from the final model
+    w/o MFM pre-training: delta R2 = +0.0000 -> component removed from the final model
+    w/o MC-Dropout: delta R2 = +0.0000 -> component removed from the final model
+    w/o pretrained transfer: delta R2 = +0.0000 -> component removed from the final model
+
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\ablation\ablation.csv

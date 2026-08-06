@@ -1,0 +1,21 @@
+# data (downloaded / derived)
+data/raw/
+data/processed/*.npz
+data/external/*.npz
+
+# heavy derived artefacts
+results/models/
+results/preds/
+results/tuning/search_log.csv
+models/
+
+# python
+__pycache__/
+*.pyc
+.conda/
+
+# os
+Thumbs.db
+.DS_Store
+
+# keep code, paper, figures, tables, docs

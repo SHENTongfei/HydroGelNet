@@ -1,0 +1,16 @@
+w/o sparse attention: delta R2 = -0.0075 -> component removed from the final model
+w/o attention sparsity reg.: delta R2 = -0.0002 -> component removed from the final model
+w/o FiLM conditioning: delta R2 = +0.0000 -> component removed from the final model
+w/o contrastive pre-training: delta R2 = +0.0000 -> component removed from the final model
+w/o SWA: delta R2 = +0.0000 -> component removed from the final model
+w/o uncertainty weighting: delta R2 = +0.0000 -> component removed from the final model
+w/o domain constraint: delta R2 = +0.0000 -> component removed from the final model
+w/o modality gate: delta R2 = +0.0000 -> component removed from the final model
+w/o transformer block: delta R2 = +0.0000 -> component removed from the final model
+w/o SAM: delta R2 = +0.0000 -> component removed from the final model
+w/o EMA: delta R2 = +0.0000 -> component removed from the final model
+w/o R-Drop: delta R2 = +0.0000 -> component removed from the final model
+w/o feature noise: delta R2 = +0.0000 -> component removed from the final model
+w/o MFM pre-training: delta R2 = +0.0000 -> component removed from the final model
+w/o MC-Dropout: delta R2 = +0.0000 -> component removed from the final model
+w/o pretrained transfer: delta R2 = +0.0000 -> component removed from the final model

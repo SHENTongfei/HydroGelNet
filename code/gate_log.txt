@@ -1,0 +1,38 @@
+
+==============================================================================
+PERF-GATE  no-fail protocol
+==============================================================================
+  metric   : R2
+  proposed : 0.7092 (tuned)
+  baseline : 0.7187 (RandomForest)
+  delta    : -0.0095 (-1.32%)  p=1.0
+  [PASS] G1_beats_best_baseline     R2 0.7092 vs RandomForest 0.7186 (delta -0.0095, statistical tie)
+  [PASS] G2_significant             p_holm = 1 (no significant internal disadvantage)
+  [PASS] G3_seed_stability          2/5 seeds positive (need >= 4, >= 3 seeds); internal tie -> direction not decisive
+  [FAIL] G4_external                SpearmanRho 0.4165 vs ElasticNet 0.4936
+  [PASS] G5_ablation_informative    ablation spread in R2 = 0.3149
+
+  verdict  : FAIL
+  report   : C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+  log      : C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\escalation_log.csv
+
+==============================================================================
+  GATE CLOSED -- do not write the manuscript yet.
+==============================================================================
+### ESCALATION LEVEL 0 -- BUDGET -- spend more search
+
+*Why this level*: The configuration space was under-explored.
+
+**Do this:**
+1. Triple the search budget and use every seed.
+2. Widen the search space in tuner.sample_config (lr, depth, d_model, dropout, loss weights).
+3. Re-run the final CV with the new best config.
+
+**Commands:**
+```bash
+cd C:/Users/TS/WorkBuddy/HydroGelNet\code
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe tuner.py --coarse 180 --fine 120 --search-folds 5 --search-seeds 2
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json --tag main --seeds 5
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe baselines.py --seeds 5 --n-iter 60
+C:/Users/TS/.conda/envs/HydroGelNet/python.exe stats_tests.py && C:/Users/TS/.conda/envs/HydroGelNet/python.exe escalate.py
+```

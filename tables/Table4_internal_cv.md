@@ -1,0 +1,5 @@
+**Table 4.** Internal 5-fold grouped cross-validation performance (mean ± SD over folds and seeds).
+
+| Model   | target             | R2            | RMSE           | MAE            | NRMSE         | PearsonR      | SpearmanRho   | CCC           |
+|:--------|:-------------------|:--------------|:---------------|:---------------|:--------------|:--------------|:--------------|:--------------|
+| SIMPLEX | glass_adhesion_kpa | 0.709 ± 0.077 | 19.236 ± 2.544 | 14.118 ± 1.853 | 0.535 ± 0.070 | 0.852 ± 0.045 | 0.852 ± 0.041 | 0.861 ± 0.049 |

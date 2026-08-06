@@ -1,0 +1,27 @@
+=== DECISIVE: external OOD screening (Spearman) ===
+SIMPLEX per-seed: ['0.541', '0.404', '0.418', '-0.012', '0.239', '0.330', '0.335', '0.483']
+SIMPLEX mean 0.342 +- 0.160
+RF      per-seed: ['0.329', '0.305', '0.319', '0.302', '0.322', '0.310', '0.316', '0.298']
+RF      mean 0.313 +- 0.010
+Wilcoxon signed-rank: W=11.0 p=0.3828
+
+Full ensemble (24 SIMPLEX models):  Spearman 0.377  RMSE 95.0
+Full ensemble (8 RF models):        Spearman 0.319  RMSE 98.3
+
+Top-20 screening precision: SIMPLEX 0.10 | RF 0.10
+Top-10 screening precision: SIMPLEX 0.00 | RF 0.00
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\decisive_test.py", line 86, in <module>
+    np.savez("results/dec_simplex_preds.npz", ens=ens_all, per_seed=np.array(sp_per_seed))
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\numpy\lib\_npyio_impl.py", line 673, in savez
+    _savez(file, args, kwds, False, allow_pickle=allow_pickle)
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\numpy\lib\_npyio_impl.py", line 779, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\numpy\lib\_npyio_impl.py", line 112, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\zipfile.py", line 1311, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/dec_simplex_preds.npz'

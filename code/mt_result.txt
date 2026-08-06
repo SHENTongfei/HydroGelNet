@@ -1,0 +1,25 @@
+internal multi-target coverage: Glass 180 / Modulus 180 / TanD 179
+fully-observed rows: 179
+
+========== SINGLE-TASK (Glass only) ==========
+
+=== ST (3 seeds x 3 folds ensemble) ===
+  external Glass Spearman: 0.133 +- 0.448
+  external Glass RMSE:     85.4
+
+========== MULTI-TASK (Glass + Modulus) ==========
+
+=== MT2 (3 seeds x 3 folds ensemble) ===
+  external Glass Spearman: -0.102 +- 0.276
+  external Glass RMSE:     126.0
+
+========== MULTI-TASK (Glass + Modulus + TanD) ==========
+
+=== MT3 (3 seeds x 3 folds ensemble) ===
+  external Glass Spearman: -0.005 +- 0.273
+  external Glass RMSE:     118.9
+
+===== SUMMARY =====
+Single-task   : Spearman 0.133  RMSE 85.4
+MT Glass+Mod  : Spearman -0.102  RMSE 126.0
+MT Glass+Mod+T: Spearman -0.005  RMSE 118.9

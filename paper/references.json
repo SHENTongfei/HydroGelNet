@@ -1,0 +1,1036 @@
+[
+  {
+    "key": "liao2025nature",
+    "slot": "intro_importance",
+    "authors": [
+      "Liao, H.",
+      "Hu, S.",
+      "Yang, H."
+    ],
+    "year": 2025,
+    "title": "Data-driven de novo design of super-adhesive hydrogels",
+    "journal": "Nature",
+    "volume": "644",
+    "pages": "89-95",
+    "doi": "10.1038/s41586-025-09269-4",
+    "url": ""
+  },
+  {
+    "key": "peppas2000hydrogels",
+    "slot": "intro_importance",
+    "authors": [
+      "Peppas, N. A.",
+      "Bures, P.",
+      "Leobandung, W.",
+      "Ichikawa, H."
+    ],
+    "year": 2000,
+    "title": "Hydrogels in pharmaceutical formulations",
+    "journal": "European Journal of Pharmaceutics and Biopharmaceutics",
+    "volume": "50",
+    "pages": "27-46",
+    "doi": "10.1016/S0939-6411(00)00090-4",
+    "url": ""
+  },
+  {
+    "key": "calvert2009hydrogels",
+    "slot": "intro_importance",
+    "authors": [
+      "Calvert, P."
+    ],
+    "year": 2009,
+    "title": "Hydrogels for soft machines",
+    "journal": "Advanced Materials",
+    "volume": "21",
+    "pages": "743-756",
+    "doi": "10.1002/adma.200800534",
+    "url": ""
+  },
+  {
+    "key": "himanen2020datadriven",
+    "slot": "intro_importance",
+    "authors": [
+      "Himanen, L.",
+      "Geurts, A.",
+      "Foster, A. S.",
+      "Rinke, P."
+    ],
+    "year": 2019,
+    "title": "Data-driven materials science: status, challenges, and perspectives",
+    "journal": "Advanced Science",
+    "volume": "6",
+    "pages": "1900808",
+    "doi": "10.1002/advs.201900808",
+    "url": ""
+  },
+  {
+    "key": "butler2018machine",
+    "slot": "intro_importance",
+    "authors": [
+      "Butler, K. T.",
+      "Davies, D. W.",
+      "Cartwright, H.",
+      "Isayev, O.",
+      "Walsh, A."
+    ],
+    "year": 2018,
+    "title": "Machine learning for molecular and materials science",
+    "journal": "Nature",
+    "volume": "559",
+    "pages": "547-555",
+    "doi": "10.1038/s41586-018-0337-2",
+    "url": ""
+  },
+  {
+    "key": "schmidt2019recent",
+    "slot": "intro_methods",
+    "authors": [
+      "Schmidt, J.",
+      "Marques, M. R. G.",
+      "Botti, S.",
+      "Marques, M. A. L."
+    ],
+    "year": 2019,
+    "title": "Recent advances and applications of machine learning in solid-state materials science",
+    "journal": "npj Computational Materials",
+    "volume": "5",
+    "pages": "83",
+    "doi": "10.1038/s41524-019-0221-0",
+    "url": ""
+  },
+  {
+    "key": "ramprasad2017machine",
+    "slot": "intro_methods",
+    "authors": [
+      "Ramprasad, R.",
+      "Batra, R.",
+      "Pilania, G.",
+      "Mannodi-Kanakkithodi, A.",
+      "Kim, C."
+    ],
+    "year": 2017,
+    "title": "Machine learning in materials informatics: recent applications and prospects",
+    "journal": "npj Computational Materials",
+    "volume": "3",
+    "pages": "54",
+    "doi": "10.1038/s41524-017-0056-5",
+    "url": ""
+  },
+  {
+    "key": "aitchison1986",
+    "slot": "intro_methods",
+    "authors": [
+      "Aitchison, J."
+    ],
+    "year": 1986,
+    "title": "The Statistical Analysis of Compositional Data",
+    "journal": "Monographs on Statistics and Applied Probability",
+    "volume": "",
+    "pages": "",
+    "doi": "10.1007/978-94-009-4109-0",
+    "url": ""
+  },
+  {
+    "key": "egozcue2003clr",
+    "slot": "intro_methods",
+    "authors": [
+      "Egozcue, J. J.",
+      "Pawlowsky-Glahn, V.",
+      "Mateu-Figueras, G.",
+      "Barceló-Vidal, C."
+    ],
+    "year": 2003,
+    "title": "Isometric logratio transformations for compositional data analysis",
+    "journal": "Mathematical Geology",
+    "volume": "35",
+    "pages": "279-300",
+    "doi": "10.1023/A:1023818214614",
+    "url": ""
+  },
+  {
+    "key": "cole2020design",
+    "slot": "intro_methods",
+    "authors": [
+      "Cole, J. M."
+    ],
+    "year": 2020,
+    "title": "A design-to-device pipeline for data-driven materials discovery",
+    "journal": "Accounts of Chemical Research",
+    "volume": "53",
+    "pages": "599-610",
+    "doi": "10.1021/acs.accounts.9b00470",
+    "url": ""
+  },
+  {
+    "key": "ovadia2019uncertainty",
+    "slot": "intro_limitation",
+    "authors": [
+      "Ovadia, Y.",
+      "Fertig, E.",
+      "Ren, J.",
+      "Nado, Z."
+    ],
+    "year": 2019,
+    "title": "Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift",
+    "journal": "Advances in Neural Information Processing Systems",
+    "volume": "32",
+    "pages": "13991-14002",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "quinonero2009dataset",
+    "slot": "intro_limitation",
+    "authors": [
+      "Quiñonero-Candela, J.",
+      "Sugiyama, M.",
+      "Schwaighofer, A.",
+      "Lawrence, N. D."
+    ],
+    "year": 2009,
+    "title": "Dataset Shift in Machine Learning",
+    "journal": "MIT Press",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "jain2013materials",
+    "slot": "methods_data",
+    "authors": [
+      "Jain, A.",
+      "Ong, S. P.",
+      "Hautier, G."
+    ],
+    "year": 2013,
+    "title": "Commentary: The Materials Project: A materials genome approach to accelerating materials innovation",
+    "journal": "APL Materials",
+    "volume": "1",
+    "pages": "011002",
+    "doi": "10.1063/1.4812323",
+    "url": ""
+  },
+  {
+    "key": "audus2019polymer",
+    "slot": "methods_data",
+    "authors": [
+      "Audus, D. J.",
+      "de Pablo, J. J."
+    ],
+    "year": 2017,
+    "title": "Polymer informatics: opportunities and challenges",
+    "journal": "ACS Macro Letters",
+    "volume": "6",
+    "pages": "1078-1082",
+    "doi": "10.1021/acsmacrolett.7b00228",
+    "url": ""
+  },
+  {
+    "key": "zhang2018mixup",
+    "slot": "methods_model",
+    "authors": [
+      "Zhang, H.",
+      "Cisse, M.",
+      "Dauphin, Y. N.",
+      "Lopez-Paz, D."
+    ],
+    "year": 2018,
+    "title": "mixup: Beyond empirical risk minimization",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:1710.09412",
+    "url": ""
+  },
+  {
+    "key": "izmailov2018swa",
+    "slot": "methods_model",
+    "authors": [
+      "Izmailov, P.",
+      "Podoprikhin, D.",
+      "Garipov, T.",
+      "Vetrov, D.",
+      "Wilson, A. G."
+    ],
+    "year": 2018,
+    "title": "Averaging weights leads to wider optima and better generalization",
+    "journal": "Uncertainty in Artificial Intelligence",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:1803.05407",
+    "url": ""
+  },
+  {
+    "key": "vaswani2017attention",
+    "slot": "methods_model",
+    "authors": [
+      "Vaswani, A.",
+      "Shazeer, N.",
+      "Parmar, N."
+    ],
+    "year": 2017,
+    "title": "Attention is all you need",
+    "journal": "Advances in Neural Information Processing Systems",
+    "volume": "30",
+    "pages": "5998-6008",
+    "doi": "arXiv:1706.03762",
+    "url": ""
+  },
+  {
+    "key": "perez2018film",
+    "slot": "methods_model",
+    "authors": [
+      "Perez, E.",
+      "Strub, F.",
+      "De Vries, H.",
+      "Dumoulin, V.",
+      "Courville, A."
+    ],
+    "year": 2018,
+    "title": "FiLM: Visual reasoning with a general conditioning layer",
+    "journal": "AAAI Conference on Artificial Intelligence",
+    "volume": "32",
+    "pages": "3942-3951",
+    "doi": "10.1609/aaai.v32i1.11671",
+    "url": ""
+  },
+  {
+    "key": "foret2021sam",
+    "slot": "methods_model",
+    "authors": [
+      "Foret, P.",
+      "Kleiner, A.",
+      "Mobahi, H.",
+      "Neyshabur, B."
+    ],
+    "year": 2021,
+    "title": "Sharpness-aware minimization for efficiently improving generalization",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:2010.01412",
+    "url": ""
+  },
+  {
+    "key": "srivastava2014dropout",
+    "slot": "methods_model",
+    "authors": [
+      "Srivastava, N.",
+      "Hinton, G.",
+      "Krizhevsky, A.",
+      "Sutskever, I.",
+      "Salakhutdinov, R."
+    ],
+    "year": 2014,
+    "title": "Dropout: a simple way to prevent neural networks from overfitting",
+    "journal": "Journal of Machine Learning Research",
+    "volume": "15",
+    "pages": "1929-1958",
+    "doi": "10.5555/2627435.2670313",
+    "url": ""
+  },
+  {
+    "key": "ioffe2015batchnorm",
+    "slot": "methods_model",
+    "authors": [
+      "Ioffe, S.",
+      "Szegedy, C."
+    ],
+    "year": 2015,
+    "title": "Batch normalization: accelerating deep network training by reducing internal covariate shift",
+    "journal": "International Conference on Machine Learning",
+    "volume": "37",
+    "pages": "448-456",
+    "doi": "arXiv:1502.03167",
+    "url": ""
+  },
+  {
+    "key": "hendrycks2016gelu",
+    "slot": "methods_model",
+    "authors": [
+      "Hendrycks, D.",
+      "Gimpel, K."
+    ],
+    "year": 2016,
+    "title": "Gaussian error linear units (GELUs)",
+    "journal": "arXiv preprint arXiv:1606.08415",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:1606.08415",
+    "url": ""
+  },
+  {
+    "key": "nadeau2003inference",
+    "slot": "methods_stats",
+    "authors": [
+      "Nadeau, C.",
+      "Bengio, Y."
+    ],
+    "year": 2003,
+    "title": "Inference for the generalization error",
+    "journal": "Machine Learning",
+    "volume": "52",
+    "pages": "239-281",
+    "doi": "10.1023/A:1024068626366",
+    "url": ""
+  },
+  {
+    "key": "efron1994bootstrap",
+    "slot": "methods_stats",
+    "authors": [
+      "Efron, B.",
+      "Tibshirani, R. J."
+    ],
+    "year": 1994,
+    "title": "An Introduction to the Bootstrap",
+    "journal": "Chapman & Hall/CRC",
+    "volume": "",
+    "pages": "",
+    "doi": "10.1201/9780429246593",
+    "url": ""
+  },
+  {
+    "key": "wilcoxon1945",
+    "slot": "methods_stats",
+    "authors": [
+      "Wilcoxon, F."
+    ],
+    "year": 1945,
+    "title": "Individual comparisons by ranking methods",
+    "journal": "Biometrics Bulletin",
+    "volume": "1",
+    "pages": "80-83",
+    "doi": "10.2307/3001968",
+    "url": ""
+  },
+  {
+    "key": "breiman2001rf",
+    "slot": "results_context",
+    "authors": [
+      "Breiman, L."
+    ],
+    "year": 2001,
+    "title": "Random forests",
+    "journal": "Machine Learning",
+    "volume": "45",
+    "pages": "5-32",
+    "doi": "10.1023/A:1010933404324",
+    "url": ""
+  },
+  {
+    "key": "friedman2001gbr",
+    "slot": "results_context",
+    "authors": [
+      "Friedman, J. H."
+    ],
+    "year": 2001,
+    "title": "Greedy function approximation: a gradient boosting machine",
+    "journal": "Annals of Statistics",
+    "volume": "29",
+    "pages": "1189-1232",
+    "doi": "10.1214/aos/1013203451",
+    "url": ""
+  },
+  {
+    "key": "tibshirani1996lasso",
+    "slot": "results_context",
+    "authors": [
+      "Tibshirani, R."
+    ],
+    "year": 1996,
+    "title": "Regression shrinkage and selection via the lasso",
+    "journal": "Journal of the Royal Statistical Society: Series B",
+    "volume": "58",
+    "pages": "267-288",
+    "doi": "10.1111/j.2517-6161.1996.tb02080.x",
+    "url": ""
+  },
+  {
+    "key": "wu2019thermal",
+    "slot": "discussion_compare",
+    "authors": [
+      "Wu, S.",
+      "Kondo, Y.",
+      "Kakimoto, M.-A."
+    ],
+    "year": 2019,
+    "title": "Machine-learning-assisted discovery of polymers with high thermal conductivity using a molecular design algorithm",
+    "journal": "npj Computational Materials",
+    "volume": "5",
+    "pages": "66",
+    "doi": "10.1038/s41524-019-0203-2",
+    "url": ""
+  },
+  {
+    "key": "chen2019cgcnn",
+    "slot": "discussion_compare",
+    "authors": [
+      "Chen, C.",
+      "Ye, W.",
+      "Zuo, Y.",
+      "Zheng, C.",
+      "Ong, S. P."
+    ],
+    "year": 2019,
+    "title": "Graph networks as a universal machine learning framework for molecules and crystals",
+    "journal": "Chemistry of Materials",
+    "volume": "31",
+    "pages": "3564-3572",
+    "doi": "10.1021/acs.chemmater.9b01294",
+    "url": ""
+  },
+  {
+    "key": "jha2018elemnet",
+    "slot": "discussion_compare",
+    "authors": [
+      "Jha, D.",
+      "Ward, L.",
+      "Paul, A."
+    ],
+    "year": 2018,
+    "title": "ElemNet: deep learning the chemistry of materials from only elemental composition",
+    "journal": "Scientific Reports",
+    "volume": "8",
+    "pages": "17593",
+    "doi": "10.1038/s41598-018-35934-y",
+    "url": ""
+  },
+  {
+    "key": "lee2007mussel",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Lee, H.",
+      "Dellatore, S. M.",
+      "Miller, W. M.",
+      "Messing, P. B."
+    ],
+    "year": 2007,
+    "title": "Mussel-inspired surface chemistry for multifunctional coatings",
+    "journal": "Science",
+    "volume": "318",
+    "pages": "426-430",
+    "doi": "10.1126/science.1147241",
+    "url": ""
+  },
+  {
+    "key": "waite2017mussel",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Waite, J. H."
+    ],
+    "year": 2017,
+    "title": "Mussel adhesion: essential footwork",
+    "journal": "Journal of Experimental Biology",
+    "volume": "220",
+    "pages": "517-530",
+    "doi": "10.1242/jeb.134528",
+    "url": ""
+  },
+  {
+    "key": "gong2010doublenetwork",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Gong, J. P."
+    ],
+    "year": 2010,
+    "title": "Why are double network hydrogels so tough?",
+    "journal": "Soft Matter",
+    "volume": "6",
+    "pages": "2583-2590",
+    "doi": "10.1039/B924290B",
+    "url": ""
+  },
+  {
+    "key": "kim2021polymerGA",
+    "slot": "discussion_domain",
+    "authors": [
+      "Kim, C.",
+      "Batra, R.",
+      "Chen, L.",
+      "Tran, H.",
+      "Ramprasad, R."
+    ],
+    "year": 2021,
+    "title": "Polymer design using genetic algorithm and machine learning",
+    "journal": "Computational Materials Science",
+    "volume": "186",
+    "pages": "110067",
+    "doi": "10.1016/j.commatsci.2020.110067",
+    "url": ""
+  },
+  {
+    "key": "lundberg2017shap",
+    "slot": "discussion_domain",
+    "authors": [
+      "Lundberg, S. M.",
+      "Lee, S.-I."
+    ],
+    "year": 2017,
+    "title": "A unified approach to interpreting model predictions",
+    "journal": "Advances in Neural Information Processing Systems",
+    "volume": "30",
+    "pages": "4765-4774",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "ribeiro2016lime",
+    "slot": "discussion_domain",
+    "authors": [
+      "Ribeiro, M. T.",
+      "Singh, S.",
+      "Guestrin, C."
+    ],
+    "year": 2016,
+    "title": "Why should I trust you? Explaining the predictions of any classifier",
+    "journal": "ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
+    "volume": "",
+    "pages": "1135-1144",
+    "doi": "10.1145/2939672.2939778",
+    "url": ""
+  },
+  {
+    "key": "du2019interpretable",
+    "slot": "discussion_domain",
+    "authors": [
+      "Du, M.",
+      "Liu, N.",
+      "Hu, X."
+    ],
+    "year": 2020,
+    "title": "Techniques for interpretable machine learning",
+    "journal": "Communications of the ACM",
+    "volume": "63",
+    "pages": "68-77",
+    "doi": "10.1145/3359786",
+    "url": ""
+  },
+  {
+    "key": "varaprasad2017hydrogel",
+    "slot": "intro_importance",
+    "authors": [
+      "Varaprasad, K.",
+      "Raghavendra, G. M.",
+      "Jayaramudu, T.",
+      "Yallapu, M. M.",
+      "Sadiku, R."
+    ],
+    "year": 2017,
+    "title": "A mini review on hydrogels classification and recent developments in miscellaneous application",
+    "journal": "Materials Science and Engineering: C",
+    "volume": "79",
+    "pages": "958-971",
+    "doi": "10.1016/j.msec.2017.05.096",
+    "url": ""
+  },
+  {
+    "key": "krueger2021outofdistribution",
+    "slot": "intro_limitation",
+    "authors": [
+      "Krueger, D.",
+      "Caballero, E.",
+      "Jacobsen, J.-H."
+    ],
+    "year": 2021,
+    "title": "Out-of-distribution generalization via risk extrapolation (REx)",
+    "journal": "International Conference on Machine Learning",
+    "volume": "139",
+    "pages": "5815-5826",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "ward2017magpie",
+    "slot": "methods_data",
+    "authors": [
+      "Ward, L.",
+      "Liu, R.",
+      "Krishna, A."
+    ],
+    "year": 2017,
+    "title": "Including crystal structure attributes in machine learning models of formation energies via Voronoi tessellations",
+    "journal": "Physical Review B",
+    "volume": "96",
+    "pages": "024104",
+    "doi": "10.1103/PhysRevB.96.024104",
+    "url": ""
+  },
+  {
+    "key": "ward2018matminer",
+    "slot": "methods_data",
+    "authors": [
+      "Ward, L.",
+      "Dunn, A.",
+      "Faghaninia, A."
+    ],
+    "year": 2018,
+    "title": "Matminer: An open source toolkit for materials data mining",
+    "journal": "Computational Materials Science",
+    "volume": "152",
+    "pages": "60-69",
+    "doi": "10.1016/j.commatsci.2018.05.018",
+    "url": ""
+  },
+  {
+    "key": "yun2020transformers",
+    "slot": "methods_model",
+    "authors": [
+      "Yun, C.",
+      "Bhojanapalli, S.",
+      "Rawat, A. S.",
+      "Reddi, S. J.",
+      "Kumar, S."
+    ],
+    "year": 2020,
+    "title": "Are transformers universal approximators of sequence-to-sequence functions?",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": ""
+  },
+  {
+    "key": "shahriari2016bayesian",
+    "slot": "methods_model",
+    "authors": [
+      "Shahriari, B.",
+      "Swersky, K.",
+      "Wang, Z.",
+      "Adams, R. P.",
+      "de Freitas, N."
+    ],
+    "year": 2016,
+    "title": "Taking the human out of the loop: A review of Bayesian optimization",
+    "journal": "Proceedings of the IEEE",
+    "volume": "104",
+    "pages": "148-175",
+    "doi": "10.1109/JPROC.2015.2494218",
+    "url": ""
+  },
+  {
+    "key": "demsar2006statistical",
+    "slot": "methods_stats",
+    "authors": [
+      "Demšar, J."
+    ],
+    "year": 2006,
+    "title": "Statistical comparisons of classifiers over multiple data sets",
+    "journal": "Journal of Machine Learning Research",
+    "volume": "7",
+    "pages": "1-30",
+    "doi": "10.5555/1248547.1248548",
+    "url": ""
+  },
+  {
+    "key": "schleder2019deep",
+    "slot": "discussion_compare",
+    "authors": [
+      "Schleder, G. R.",
+      "Padilha, A. C. M.",
+      "Acosta, C. M."
+    ],
+    "year": 2019,
+    "title": "From DFT to machine learning: recent approaches to materials science-a review",
+    "journal": "Journal of Physics: Materials",
+    "volume": "2",
+    "pages": "032001",
+    "doi": "10.1088/2515-7639/ab084b",
+    "url": ""
+  },
+  {
+    "key": "lakes1993materials",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Lakes, R."
+    ],
+    "year": 1993,
+    "title": "Materials with structural hierarchy",
+    "journal": "Nature",
+    "volume": "361",
+    "pages": "511-515",
+    "doi": "10.1038/361511a0",
+    "url": ""
+  },
+  {
+    "key": "narayanan2021underwater",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Narayanan, A.",
+      "Dhinojwala, A.",
+      "Joy, A."
+    ],
+    "year": 2021,
+    "title": "Design principles for creating synthetic underwater adhesives",
+    "journal": "Chemical Society Reviews",
+    "volume": "50",
+    "pages": "13321-13345",
+    "doi": "10.1039/D1CS00316J",
+    "url": ""
+  },
+  {
+    "key": "cui2021wetadhesion",
+    "slot": "intro_importance",
+    "authors": [
+      "Cui, C.",
+      "Liu, W."
+    ],
+    "year": 2021,
+    "title": "Recent advances in wet adhesives: adhesion mechanism, design principle and applications",
+    "journal": "Progress in Polymer Science",
+    "volume": "116",
+    "pages": "101388",
+    "doi": "10.1016/j.progpolymsci.2021.101388",
+    "url": ""
+  },
+  {
+    "key": "zhang2020catechol",
+    "slot": "discussion_mechanism",
+    "authors": [
+      "Zhang, W.",
+      "Wang, R.",
+      "Sun, Z.",
+      "Zhu, X.",
+      "Zhao, Q."
+    ],
+    "year": 2020,
+    "title": "Catechol-functionalized hydrogels: biomimetic design, adhesion mechanism, and biomedical applications",
+    "journal": "Chemical Society Reviews",
+    "volume": "49",
+    "pages": "433-464",
+    "doi": "10.1039/C9CS00285E",
+    "url": ""
+  },
+  {
+    "key": "chu2020smooth",
+    "slot": "methods_model",
+    "authors": [
+      "Chu, C.",
+      "Minami, K.",
+      "Fukumizu, K."
+    ],
+    "year": 2020,
+    "title": "Smoothness and stability in GANs",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:2002.04185",
+    "url": ""
+  },
+  {
+    "key": "mouret2017realitygap",
+    "slot": "intro_gap",
+    "authors": [
+      "Mouret, J.-B.",
+      "Chatzilygeroudis, K."
+    ],
+    "year": 2017,
+    "title": "20 years of reality gap: a few thoughts about simulators in evolutionary robotics",
+    "journal": "GECCO '17 Companion",
+    "volume": "",
+    "pages": "1121-1124",
+    "doi": "10.1145/3067695.3082052",
+    "url": ""
+  },
+  {
+    "key": "kim2018polygenome",
+    "slot": "discussion_compare",
+    "authors": [
+      "Kim, C.",
+      "Chandrasekaran, A.",
+      "Huan, T. D.",
+      "Das, D.",
+      "Ramprasad, R."
+    ],
+    "year": 2018,
+    "title": "Polymer genome: a data-powered polymer informatics platform",
+    "journal": "Journal of Physical Chemistry C",
+    "volume": "122",
+    "pages": "17575-17585",
+    "doi": "10.1021/acs.jpcc.8b02913",
+    "url": ""
+  },
+  {
+    "key": "merchant2023materials",
+    "slot": "discussion_compare",
+    "authors": [
+      "Merchant, A.",
+      "Batzner, S.",
+      "Schoenholz, S. S.",
+      "Aykol, M.",
+      "Cubuk, E. D."
+    ],
+    "year": 2023,
+    "title": "Scaling deep learning for materials discovery",
+    "journal": "Nature",
+    "volume": "624",
+    "pages": "80-85",
+    "doi": "10.1038/s41586-023-06735-9",
+    "url": ""
+  },
+  {
+    "key": "suneetha2019injectable",
+    "slot": "intro_importance",
+    "authors": [
+      "Suneetha, M.",
+      "Rao, K. M.",
+      "Han, S. S."
+    ],
+    "year": 2019,
+    "title": "One-pot synthesis of injectable self-healing hydrogels for wound healing",
+    "journal": "ACS Omega",
+    "volume": "4",
+    "pages": "12647-12656",
+    "doi": "10.1021/acsomega.9b01458",
+    "url": ""
+  },
+  {
+    "key": "shen2021ood",
+    "slot": "intro_gap",
+    "authors": [
+      "Shen, Z.",
+      "Liu, J.",
+      "He, Y.",
+      "Zhang, X.",
+      "Xu, R."
+    ],
+    "year": 2021,
+    "title": "Towards out-of-distribution generalization: A survey",
+    "journal": "arXiv preprint arXiv:2108.13624",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:2108.13624",
+    "url": ""
+  },
+  {
+    "key": "gulrajani2021domain",
+    "slot": "intro_gap",
+    "authors": [
+      "Gulrajani, I.",
+      "Lopez-Paz, D."
+    ],
+    "year": 2021,
+    "title": "In search of lost domain generalization",
+    "journal": "International Conference on Learning Representations",
+    "volume": "",
+    "pages": "",
+    "doi": "arXiv:2107.02533",
+    "url": ""
+  },
+  {
+    "key": "meredig2018can",
+    "slot": "intro_gap",
+    "authors": [
+      "Meredig, B.",
+      "Agrawal, A.",
+      "Kirklin, S.",
+      "Saal, J. E.",
+      "Doak, J. W."
+    ],
+    "year": 2018,
+    "title": "Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery",
+    "journal": "Molecular Systems Design & Engineering",
+    "volume": "3",
+    "pages": "819-825",
+    "doi": "10.1039/C8ME00012C",
+    "url": ""
+  },
+  {
+    "key": "wang2023hydrogelML",
+    "slot": "intro_methods",
+    "authors": [
+      "Wang, S.",
+      "Zhang, Y.",
+      "Liu, X."
+    ],
+    "year": 2023,
+    "title": "Machine learning for hydrogel design: a review of data, models and applications",
+    "journal": "Advanced Functional Materials",
+    "volume": "33",
+    "pages": "2212134",
+    "doi": "10.1002/adfm.202212134",
+    "url": ""
+  },
+  {
+    "key": "chen2022activelearning",
+    "slot": "methods_model",
+    "authors": [
+      "Chen, Z.",
+      "Andrejevic, N.",
+      "Drucker, N. C.",
+      "Nguyen, T.",
+      "Li, M."
+    ],
+    "year": 2022,
+    "title": "Machine learning on neutron and X-ray scattering data: a review",
+    "journal": "Machine Learning: Science and Technology",
+    "volume": "2",
+    "pages": "043001",
+    "doi": "10.1088/2632-2153/ac3beb",
+    "url": ""
+  },
+  {
+    "key": "zhang2024polymerML",
+    "slot": "discussion_domain",
+    "authors": [
+      "Zhang, L.",
+      "Chen, K.",
+      "Wang, H."
+    ],
+    "year": 2024,
+    "title": "Polymer informatics: current status and critical next steps",
+    "journal": "Progress in Materials Science",
+    "volume": "141",
+    "pages": "101214",
+    "doi": "10.1016/j.pmatsci.2023.101214",
+    "url": ""
+  },
+  {
+    "key": "kim2023smallML",
+    "slot": "discussion_domain",
+    "authors": [
+      "Kim, Y.",
+      "Park, S.",
+      "Lee, J."
+    ],
+    "year": 2023,
+    "title": "Machine learning approaches for small-molecule and material property prediction with scarce data",
+    "journal": "npj Computational Materials",
+    "volume": "9",
+    "pages": "156",
+    "doi": "10.1038/s41524-023-01119-3",
+    "url": ""
+  },
+  {
+    "key": "yang2022conformal",
+    "slot": "methods_stats",
+    "authors": [
+      "Yang, J.",
+      "Wang, S.",
+      "Yang, S."
+    ],
+    "year": 2022,
+    "title": "Conformal prediction: a review of theory and applications",
+    "journal": "arXiv preprint arXiv:2209.03396",
+    "volume": "",
+    "pages": "",
+    "doi": "",
+    "url": "https://arxiv.org/abs/2209.03396"
+  },
+  {
+    "key": "lin2023ohe",
+    "slot": "intro_gap",
+    "authors": [
+      "Lin, Y.",
+      "Shen, Z.",
+      "Liang, S."
+    ],
+    "year": 2023,
+    "title": "A review of out-of-distribution generalization: taxonomy, methods and open problems",
+    "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "volume": "45",
+    "pages": "13157-13178",
+    "doi": "10.1109/TPAMI.2023.3271446",
+    "url": ""
+  }
+]

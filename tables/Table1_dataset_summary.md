@@ -1,0 +1,6 @@
+**Table 1.** Summary of the internal and external cohorts.
+
+| Cohort   |   Samples |   Features |   Targets |   Groups |   Conditions |   Missing (%) | Modalities                          |
+|:---------|----------:|-----------:|----------:|---------:|-------------:|--------------:|:------------------------------------|
+| Internal |       180 |         21 |         1 |      180 |            1 |             0 | monomer_fractions, pairwise_synergy |
+| External |       161 |         21 |         1 |      161 |            1 |             0 | monomer_fractions, pairwise_synergy |

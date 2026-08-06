@@ -1,0 +1,30 @@
+
+==============================================================================
+STEP 9/9  FIGURES
+==============================================================================
+  building Figure 1 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure1_study_design.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure1_study_design.pdf
+  building Figure 2 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure2_architecture.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure2_architecture.pdf
+  building Figure 3 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure3_dataset.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure3_dataset.pdf
+  building Figure 4 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure4_internal_cv.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure4_internal_cv.pdf
+  building Figure 5 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure5_benchmark.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure5_benchmark.pdf
+  building Figure 6 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure6_external.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure6_external.pdf
+  building Figure 7 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure7_ablation.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure7_ablation.pdf
+  building Figure 8 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure8_interpretation.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure8_interpretation.pdf
+
+  8 PNG figure(s) in C:/Users/TS/WorkBuddy/HydroGelNet\figures

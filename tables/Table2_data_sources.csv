@@ -1,0 +1,4 @@
+#,Source,Role,HTTP,Size (bytes),License,Link
+1,hydrogel_df180,internal,206 OK,"19,766",MIT,<https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_180.csv>
+2,hydrogel_df341,external,200 OK,"38,627",MIT,<https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_341.csv>
+3,hydrogel_df316,annotation,200 OK,"35,982",MIT,<https://raw.githubusercontent.com/sheng-hu/hydrogels/68b30240/data/df_316.csv>

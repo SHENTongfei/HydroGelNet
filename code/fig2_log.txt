@@ -1,0 +1,9 @@
+
+==============================================================================
+STEP 9/9  FIGURES
+==============================================================================
+  building Figure 2 ...
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure2_architecture.png
+[figure] wrote C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure2_architecture.pdf
+
+  8 PNG figure(s) in C:/Users/TS/WorkBuddy/HydroGelNet\figures

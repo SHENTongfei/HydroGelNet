@@ -1,0 +1,38 @@
+
+==============================================================================
+STEP 8/9  INTERPRETATION AND DOMAIN DISCOVERY
+==============================================================================
+C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\umap\umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+  refitting CV models for interpretation (seeds=[42, 2024]) ...
+  10 fold-models available
+    permutation importance: seed=42 fold=0 done
+    permutation importance: seed=42 fold=1 done
+    permutation importance: seed=42 fold=2 done
+    permutation importance: seed=42 fold=3 done
+    permutation importance: seed=42 fold=4 done
+    permutation importance: seed=2024 fold=0 done
+    permutation importance: seed=2024 fold=1 done
+    permutation importance: seed=2024 fold=2 done
+    permutation importance: seed=2024 fold=3 done
+    permutation importance: seed=2024 fold=4 done
+  [1/7] importance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  [2/7] stability  -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\stability.csv
+  [2b] modality gates skipped (ModalityGate not in final model)
+  [4/7] latent geometry: PCA + UMAP
+  [5/7] partial dependence for 6 feature(s)
+  [6/7] candidate markers -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\candidate_markers.csv (9 high-evidence)
+  [7/7] per-condition performance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\condition_performance.csv
+
+  Top-10 features by cross-validated permutation importance:
+ rank          feature  importance_mean  importance_se
+    1    Cationic-ATAC         0.222384       0.028050
+    2          pair_03         0.099019       0.017037
+    3          pair_01         0.071935       0.009595
+    4   Hydrophobic-BA         0.055467       0.013143
+    5          pair_04         0.050441       0.020274
+    6          pair_13         0.031303       0.010030
+    7          pair_02         0.030331       0.008496
+    8          pair_23         0.027213       0.014440
+    9 Nucleophilic-HEA         0.023878       0.006430
+   10          pair_34         0.013626       0.009973

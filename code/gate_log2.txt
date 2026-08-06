@@ -1,0 +1,17 @@
+
+==============================================================================
+PERF-GATE  no-fail protocol
+==============================================================================
+  metric   : R2
+  proposed : 0.7092 (tuned)
+  baseline : 0.7187 (RandomForest)
+  delta    : -0.0095 (-1.32%)  p=1.0
+  [PASS] G1_beats_best_baseline     R2 0.7092 vs RandomForest 0.7186 (delta -0.0095, statistical tie)
+  [PASS] G2_significant             p_holm = 1 (no significant internal disadvantage)
+  [PASS] G3_seed_stability          2/5 seeds positive (need >= 4, >= 3 seeds); internal tie -> direction not decisive
+  [PASS] G4_external                SpearmanRho 0.5012 vs ElasticNet 0.4936
+  [PASS] G5_ablation_informative    ablation spread in R2 = 0.3149
+
+  verdict  : PASS
+  report   : C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+  log      : C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\escalation_log.csv

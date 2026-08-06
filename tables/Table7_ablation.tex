@@ -1,0 +1,33 @@
+\begin{table}
+\caption{Ablation study. A positive contribution means removing the component degrades performance.}
+\label{tab:ablation}
+\begin{tabular}{llrrrrrll}
+\toprule
+Target & Variant & Variant R2 & Full R2 & Contribution & Contribution (\%) & p (Holm) & Sig. & Verdict \\
+\midrule
+glass\_adhesion\_kpa & fusion = cross & 0.708700 & 0.713100 & 0.004400 & 0.621300 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & fusion = film & 0.682600 & 0.713100 & 0.030500 & 4.276700 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & fusion = gated & 0.651300 & 0.713100 & 0.061900 & 8.678600 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & w/o EMA & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o FiLM conditioning & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o MC-Dropout & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o MFM pre-training & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o Mixup & 0.646000 & 0.713100 & 0.067100 & 9.415700 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & w/o R-Drop & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o SAM & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o SWA & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o attention sparsity reg. & 0.713300 & 0.713100 & -0.000200 & -0.026800 & 1.000000 & ns & neutral/harmful \\
+glass\_adhesion\_kpa & w/o contrastive pre-training & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o domain constraint & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o feature noise & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o modality gate & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o multimodal fusion & 0.619800 & 0.713100 & 0.093400 & 13.091300 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & w/o pretrained transfer & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o residual blocks & 0.651500 & 0.713100 & 0.061700 & 8.651100 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & w/o sparse attention & 0.720700 & 0.713100 & -0.007500 & -1.056600 & 1.000000 & ns & neutral/harmful \\
+glass\_adhesion\_kpa & w/o task-specific gating & 0.691600 & 0.713100 & 0.021500 & 3.017100 & 1.000000 & ns & beneficial \\
+glass\_adhesion\_kpa & w/o transformer block & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+glass\_adhesion\_kpa & w/o uncertainty weighting & 0.713100 & 0.713100 & 0.000000 & 0.000000 & 0.000000 & **** & neutral/harmful \\
+\bottomrule
+\end{tabular}
+\end{table}

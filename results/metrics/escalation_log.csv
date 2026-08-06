@@ -1,0 +1,3 @@
+timestamp,verdict,metric,variant,proposed,baseline,baseline_score,delta,p_value,failed,next_level
+2026-08-06 11:52:58,FAIL,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,G4_external,0
+2026-08-06 11:53:24,PASS,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,,

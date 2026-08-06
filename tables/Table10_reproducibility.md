@@ -1,0 +1,16 @@
+**Table 10.** Software environment and protocol settings for reproducibility.
+
+| Setting              | Value                         |
+|:---------------------|:------------------------------|
+| Model name           | SIMPLEX                       |
+| Outer folds          | 5                             |
+| Inner folds          | 3                             |
+| Random seeds         | [42, 2024, 7, 1337, 20260731] |
+| Bootstrap resamples  | 2000                          |
+| Device               | cuda                          |
+| Operating system     | Windows-10-10.0.26200-SP0     |
+| python version       | 3.11.15                       |
+| numpy version        | 2.4.6                         |
+| pandas version       | 2.3.3                         |
+| scikit-learn version | 1.9.0                         |
+| torch version        | 2.14.0.dev20260705+cu130      |

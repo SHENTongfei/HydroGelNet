@@ -1,0 +1,78 @@
+{
+  "external_spearman_ci": {
+    "SIMPLEX": {
+      "rho": 0.501,
+      "ci95": [
+        0.369,
+        0.619
+      ]
+    },
+    "RF": {
+      "rho": 0.318,
+      "ci95": [
+        0.164,
+        0.464
+      ]
+    },
+    "ElasticNet": {
+      "rho": 0.53,
+      "ci95": [
+        0.413,
+        0.629
+      ]
+    }
+  },
+  "paired_bootstrap_vs_RF": {
+    "mean_diff": 0.183,
+    "ci95": [
+      0.066,
+      0.311
+    ],
+    "p_pos": 0.999,
+    "verdict": "significant"
+  },
+  "paired_bootstrap_vs_ElasticNet": {
+    "mean_diff": -0.028,
+    "ci95": [
+      -0.157,
+      0.097
+    ],
+    "p_pos": 0.345,
+    "verdict": "tie"
+  },
+  "topk_precision": {
+    "k10": {
+      "SIMPLEX": 0.0,
+      "RF": 0.0,
+      "ElasticNet": 0.1
+    },
+    "k20": {
+      "SIMPLEX": 0.25,
+      "RF": 0.1,
+      "ElasticNet": 0.05
+    },
+    "k30": {
+      "SIMPLEX": 0.37,
+      "RF": 0.07,
+      "ElasticNet": 0.17
+    }
+  },
+  "pred_range_external": {
+    "SIMPLEX": [
+      16,
+      109
+    ],
+    "RF": [
+      26,
+      109
+    ],
+    "ElasticNet": [
+      -82,
+      232
+    ],
+    "true": [
+      3,
+      353
+    ]
+  }
+}

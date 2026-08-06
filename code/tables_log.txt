@@ -1,0 +1,16 @@
+
+==============================================================================
+TABLES
+==============================================================================
+  Table  1  dataset_summary               2 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table1_dataset_summary.csv
+  Table  2  data_sources                  3 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table2_data_sources.csv
+  Table  3  hyperparameters              61 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table3_hyperparameters.csv
+  Table  4  internal_cv                   1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table4_internal_cv.csv
+  Table  5  baseline_comparison           8 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table5_baseline_comparison.csv
+  Table  6  external_validation           1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table6_external_validation.csv
+  Table  7  ablation                     23 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table7_ablation.csv
+  Table  8  candidate_markers            15 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table8_candidate_markers.csv
+  Table  9  condition_performance         1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table9_condition_performance.csv
+  Table 10  reproducibility              12 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table10_reproducibility.csv
+
+  10 table CSV file(s) in C:/Users/TS/WorkBuddy/HydroGelNet\tables

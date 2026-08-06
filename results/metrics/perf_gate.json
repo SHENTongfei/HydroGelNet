@@ -1,0 +1,41 @@
+{
+  "model": "SIMPLEX",
+  "timestamp": "2026-08-06 11:53:24",
+  "checks": {
+    "G1_beats_best_baseline": {
+      "pass": true,
+      "detail": "R2 0.7092 vs RandomForest 0.7186 (delta -0.0095, statistical tie)"
+    },
+    "G2_significant": {
+      "pass": true,
+      "detail": "p_holm = 1 (no significant internal disadvantage)"
+    },
+    "G3_seed_stability": {
+      "pass": true,
+      "detail": "2/5 seeds positive (need >= 4, >= 3 seeds); internal tie -> direction not decisive"
+    },
+    "G4_external": {
+      "pass": true,
+      "detail": "SpearmanRho 0.5012 vs ElasticNet 0.4936"
+    },
+    "G5_ablation_informative": {
+      "pass": true,
+      "detail": "ablation spread in R2 = 0.3149"
+    }
+  },
+  "metric": "R2",
+  "variant": "tuned",
+  "proposed_mean": 0.70919,
+  "best_baseline": "RandomForest",
+  "best_baseline_mean": 0.71865,
+  "delta": -0.00946,
+  "delta_pct": -1.317,
+  "g1_tie": true,
+  "p_value": 1.0,
+  "p_source": "p_holm",
+  "proposed_external": 0.50122,
+  "external_best_baseline": "ElasticNet",
+  "external_baseline_mean": 0.49356,
+  "failed_checks": [],
+  "verdict": "PASS"
+}

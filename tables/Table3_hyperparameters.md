@@ -1,0 +1,65 @@
+**Table 3.** Search space and finally selected hyper-parameter values.
+
+| Hyper-parameter           | Search range   | Selected value   |
+|:--------------------------|:---------------|:-----------------|
+| d_model                   | -              | 64               |
+| n_blocks                  | -              | 2                |
+| n_heads                   | -              | 4                |
+| dropout                   | -              | 0.2              |
+| n_tokens1                 | -              | 6                |
+| n_tokens2                 | -              | 4                |
+| fusion                    | -              | concat           |
+| use_attention             | -              | False            |
+| use_film                  | -              | False            |
+| use_task_gate             | -              | True             |
+| use_residual              | -              | True             |
+| use_modality2             | -              | True             |
+| use_modality_gate         | -              | False            |
+| gate_sparsity_w           | -              | 0.0              |
+| use_transformer           | -              | False            |
+| attn_entropy_w            | -              | 0.0              |
+| proj_dim                  | -              | 32               |
+| lr                        | -              | 0.003            |
+| weight_decay              | -              | 0.001            |
+| batch_size                | -              | 32               |
+| max_epochs                | -              | 150              |
+| patience                  | -              | 30               |
+| grad_clip                 | -              | 1.0              |
+| val_frac                  | -              | 0.2              |
+| scaler                    | -              | standard         |
+| y_transform               | -              | standard         |
+| use_mixup                 | -              | True             |
+| mixup_alpha               | -              | 0.4              |
+| use_swa                   | -              | False            |
+| swa_start_frac            | -              | 0.6              |
+| swa_lr_frac               | -              | 0.25             |
+| use_contrastive           | -              | False            |
+| contrastive_epochs        | -              | 0                |
+| contrastive_temp          | -              | 0.1              |
+| contrastive_bins          | -              | 4                |
+| use_pretrain_recon        | -              | False            |
+| recon_epochs              | -              | 30               |
+| recon_mask_frac           | -              | 0.3              |
+| use_uncertainty_weighting | -              | False            |
+| use_domain_constraint     | -              | False            |
+| constraint_w              | -              | 0.0              |
+| y_low                     | -              | -4.0             |
+| y_high                    | -              | 4.0              |
+| use_sam                   | -              | False            |
+| sam_rho                   | -              | 0.05             |
+| use_ema                   | -              | False            |
+| ema_decay                 | -              | 0.999            |
+| use_rdrop                 | -              | False            |
+| rdrop_w                   | -              | 0.0              |
+| feature_noise             | -              | 0.0              |
+| label_smoothing           | -              | 0.0              |
+| use_mfm                   | -              | False            |
+| mfm_epochs                | -              | 0                |
+| mfm_mask_frac             | -              | 0.25             |
+| pretrained_path           | -              |                  |
+| use_ortho_reg             | -              | False            |
+| ortho_w                   | -              | 0.0001           |
+| use_ranking_loss          | -              | False            |
+| rank_loss_w               | -              | 0.5              |
+| rank_margin               | -              | 0.1              |
+| mc_samples                | -              | 0                |

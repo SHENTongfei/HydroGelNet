@@ -1,0 +1,12 @@
+**Table 5.** Comparison against equally tuned baselines. p-values from the Nadeau-Bengio corrected resampled t-test, Holm adjusted.
+
+| Target             | Baseline     |   Baseline R2 |   SIMPLEX R2 |   Delta |   Delta (%) |   Cohen's d |   p (corrected t) |   p (Holm) | Sig.   |
+|:-------------------|:-------------|--------------:|-------------:|--------:|------------:|------------:|------------------:|-----------:|:-------|
+| glass_adhesion_kpa | ElasticNet   |        0.5345 |       0.7092 |  0.1746 |     32.6713 |      2.1309 |            0.0055 |     0.0332 | *      |
+| glass_adhesion_kpa | HistGB       |        0.6919 |       0.7092 |  0.0173 |      2.5027 |      0.218  |            0.7226 |     1      | ns     |
+| glass_adhesion_kpa | KNN          |        0.6869 |       0.7092 |  0.0223 |      3.2512 |      0.3214 |            0.6258 |     1      | ns     |
+| glass_adhesion_kpa | MLP          |        0.3696 |       0.7092 |  0.3396 |     91.878  |      1.4363 |            0.0717 |     0.3584 | ns     |
+| glass_adhesion_kpa | Mean         |       -0.003  |       0.7092 |  0.7122 |  23434.5    |     13.0305 |            0      |     0      | ****   |
+| glass_adhesion_kpa | RandomForest |        0.7186 |       0.7092 | -0.0095 |     -1.3169 |     -0.1396 |            0.8427 |     1      | ns     |
+| glass_adhesion_kpa | Ridge        |        0.5406 |       0.7092 |  0.1686 |     31.1954 |      2.0992 |            0.0034 |     0.0237 | *      |
+| glass_adhesion_kpa | SVR-RBF      |        0.6949 |       0.7092 |  0.0142 |      2.0489 |      0.1737 |            0.7567 |     1      | ns     |

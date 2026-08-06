@@ -1,0 +1,56 @@
+{
+  "topic": "hydrogel composition-to-property prediction with out-of-distribution extrapolation",
+  "domain": "Soft materials / machine learning for materials design",
+  "model_full_name": "SIMPLEX: Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation",
+  "title": "SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation",
+  "short_title": "SIMPLEX: hydrogel composition-to-property prediction",
+  "authors": [
+    {
+      "name": "Tongfei Shen",
+      "affiliations": [
+        1
+      ],
+      "email": "tongfeishen@gmail.com"
+    }
+  ],
+  "affiliations": [
+    "School of Information Science and Engineering, Qingdao Huanghai University, Qingdao, China"
+  ],
+  "corresponding": {
+    "name": "Tongfei Shen",
+    "email": "tongfeishen@gmail.com"
+  },
+  "keywords": [
+    "hydrogel",
+    "machine learning",
+    "composition-to-property prediction",
+    "out-of-distribution extrapolation",
+    "material screening",
+    "adhesion strength"
+  ],
+  "domain_importance": "Hydrogel design relies on trial-and-error experimentation, where every formulation must be synthesised and mechanically characterised. A model that predicts adhesion strength from monomer composition could accelerate candidate screening for biomedical and engineering applications.",
+  "gap_statement": "Existing deep-learning studies of hydrogels either use curve-derived targets or random splits that overestimate generalisation; none evaluates composition-to-property models under the realistic protocol in which a model trained on low-performance formulations must extrapolate to model-discovered high-performance formulations.",
+  "application_implication": "The framework supports material screening: given a pool of candidate formulations, it ranks them by predicted adhesion strength so that only the top candidates need experimental synthesis, reducing iteration cost in data-scarce soft-materials R&D.",
+  "target_descriptions": {
+    "glass_adhesion_kpa": "Underwater glass adhesion strength (kPa), the primary target; ranges 1-147 kPa in the training region and up to 353 kPa in the extrapolation region."
+  },
+  "modality_descriptions": {
+    "monomer_fractions": "Six functional-monomer molar fractions on the composition simplex (Nucleophilic-HEA, Hydrophobic-BA, Acidic-CBEA, Cationic-ATAC, Aromatic-PEA, Amide-AAm), summing to one.",
+    "pairwise_synergy": "All 15 pairwise monomer interaction features (products of fractions), explicitly encoding composition synergy."
+  },
+  "condition_meaning": "No experimental-condition variable; all samples are uniform immersion-test protocols.",
+  "funding": "The author(s) declare that no financial support was received for the research, authorship, and/or publication of this article.",
+  "contributions": "Conceptualisation, methodology, software, formal analysis, writing - original draft: TS.",
+  "conflict": "The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.",
+  "acknowledgements": "The authors thank the community maintaining the open hydrogel dataset (sheng-hu/hydrogels) for public data sharing under the MIT license.",
+  "extra_limitations": [
+    "The external evaluation set comprises 161 formulations discovered by the Nature study's sequential model-based optimisation (SMBO) loop in later iterations; it is therefore a model-guided migration to a high-performance composition region (target-value extrapolation) rather than an independent cohort. Selection bias and range restriction inherent to this protocol are acknowledged; range-restricted Spearman rho is a conservative estimate.",
+    "Absolute values of adhesion strength in the extrapolation region systematically exceed the training range; ranking metrics (Spearman, top-k precision) are the primary external metrics, because R2 is dominated by mean-shift in this out-of-distribution regime.",
+    "Microstructural variables (cross-link density, network topology) are not recorded in the public dataset and are implicitly averaged over."
+  ],
+  "future_work": [
+    "Extend to independent-laboratory external cohorts once such datasets become available.",
+    "Inject microstructure descriptors (e.g. cross-link density) as additional modalities.",
+    "Close the active-learning loop by using the model to propose the next formulations to synthesise."
+  ]
+}

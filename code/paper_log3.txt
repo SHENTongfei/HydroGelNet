@@ -1,0 +1,14 @@
+
+==============================================================================
+MANUSCRIPT  (Markdown + PDF)
+==============================================================================
+  model=SIMPLEX  task=regression  targets=1  internal n=180  external n=161
+  references loaded: 64
+  markdown -> C:/Users/TS/WorkBuddy/HydroGelNet\paper\manuscript.md
+  pdf      -> C:/Users/TS/WorkBuddy/HydroGelNet\paper\SIMPLEX_manuscript.pdf  (3697 KB)
+  self-check -> C:/Users/TS/WorkBuddy/HydroGelNet\audit\paper_selfcheck.md
+
+  warnings (3):
+    - only 23% of references are from the last 5 years (>=50% expected)
+    - 5 reference(s) lack a DOI or URL
+    - abstract is long (450 words, 200-300 expected)
