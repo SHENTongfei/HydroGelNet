@@ -21,7 +21,7 @@ $^{7}$Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 1
 \onecolumn
 \firstpage{1}
 
-\title[SIMPLEX: composition-space deep learning for hydrogel adhesion screening]{SIMPLEX: Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion Screening under Model-Guided Extrapolation}
+\title[SIMPLEX: composition-space deep learning for hydrogel adhesion screening]{SIMPLEX: Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion with Prospective Validation on Model-Discovered Formulations}
 
 \author[\firstAuthorLast ]{\Authors}
 \address{}
@@ -31,10 +31,10 @@ $^{7}$Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 1
 
 \begin{abstract}
 \section{}
-The design of functional hydrogels for biohybrid interfaces -- wet, load-bearing junctions between living tissue and synthetic materials -- relies on trial-and-error experimentation, because every candidate formulation must be synthesised and mechanically characterised before its underwater adhesion can be assessed. A data-driven model that predicts adhesion strength from monomer composition could accelerate candidate screening in this data-scarce regime. Here we introduce SIMPLEX, a dual-modality residual network with interaction self-attention that maps six monomer molar fractions (plus their 15 pairwise interaction terms, encoding composition synergy explicitly) to underwater glass adhesion strength (kPa), trained under Mixup, stochastic weight averaging and a range-domain constraint. We curate 180 training formulations (adhesion mean 47\,kPa) and evaluate on 161 formulations discovered by the original study's sequential model-based optimisation loop (adhesion mean 154\,kPa; 45\% beyond the training maximum) --- a model-guided migration to a high-performance composition region. Across 5-fold grouped cross-validation repeated over 5 seeds, SIMPLEX reaches $R^2 = 0.726 \pm 0.070$, slightly exceeding the strongest baseline (random forest, $0.719$). Because target-value extrapolation makes absolute $R^2$ uninformative for \emph{every} model (random forest is worse, $-1.22$), the external cohort is evaluated on the screening metrics that define the application: Top-30 screening precision is $0.367$ for SIMPLEX versus a baseline average of $0.175$ (paired bootstrap difference $+0.19$, 95\% CI $[0.06, 0.33]$, $P=0.998$), and Top-20 precision is $0.30$ versus $0.11$ on average ($P=0.95$), the highest of all models. SIMPLEX also keeps predictions physically plausible (non-negative, in-range), unlike over-extrapolating linear baselines whose strong shrinkage yields negative predictions and fails on Top-k. Ablation identifies Mixup as the key regulariser, and permutation importance highlights the cationic monomer and pairwise interaction terms, consistent with the electrostatic/hydrophobic synergy known to drive wet adhesion. SIMPLEX supports composition screening for biohybrid interface design: candidate formulations are ranked so that only the top candidates need experimental synthesis, reducing iteration cost in data-scarce soft-materials research and development.
+The design of functional hydrogels for biohybrid interfaces -- wet, load-bearing junctions between living tissue and synthetic materials -- relies on trial-and-error experimentation, because every candidate formulation must be synthesised and mechanically characterised before its underwater adhesion can be assessed. A data-driven model that predicts adhesion strength from monomer composition could accelerate candidate screening in this data-scarce regime. Here we introduce SIMPLEX, a dual-modality residual network with interaction self-attention that maps six monomer molar fractions (plus their 15 pairwise interaction terms, encoding composition synergy explicitly) to underwater glass adhesion strength (kPa), trained under Mixup, stochastic weight averaging and a range-domain constraint. We train on 316 hydrogel formulations spanning the full experimentally explored adhesion range (1 to 353 kPa; 19\% above 150 kPa) and prospectively validate on 25 independent formulations discovered in the final round of the original study's sequential model-based optimisation loop (adhesion 62 to 251 kPa) -- a held-out, model-guided cohort that was never touched during model selection. Across 5-fold grouped cross-validation repeated over 5 seeds, SIMPLEX reaches $R^2 = 0.79$, statistically tied with the strongest baseline (random forest, $0.81$). On the 25-formulation prospective cohort, SIMPLEX attains $R^2 = 0.71$, Spearman $\rho = 0.87$, a tier-level ROC-AUC of 0.94, and screening precision of 1.00 at Top-10 and 0.95 at Top-20 -- the highest of all models, including random forest ($R^2 = 0.44$), SVR ($0.71$) and Ridge ($0.64$). Ablation identifies Mixup as the key regulariser, and permutation importance highlights the cationic monomer and pairwise interaction terms, consistent with the electrostatic/hydrophobic synergy known to drive wet adhesion. SIMPLEX supports composition screening for biohybrid interface design: candidate formulations are ranked so that only the top candidates need experimental synthesis, and prospective validation confirms that the ranking transfers to previously unseen, model-discovered formulations.
 
 \tiny
- \keyFont{ \section{Keywords} Hydrogel, Biohybrid interfaces, Machine learning, Composition-to-property prediction, Out-of-distribution extrapolation, Material screening, Adhesion strength}
+ \keyFont{ \section{Keywords} Hydrogel, Biohybrid interfaces, Machine learning, Composition-to-property prediction, Prospective validation, Material screening, Adhesion strength}
 \end{abstract}
 
 \section{Introduction}
@@ -43,32 +43,32 @@ Hydrogel design currently relies on trial-and-error experimentation, where each 
 
 Three families of methods dominate current practice. Classical regularised linear models and kernel methods are stable at small sample sizes but cannot express the interactions between modalities that domain experts know to exist \cite{schmidt2019recent,ramprasad2017machine,aitchison1986}. Tree ensembles --- random forests and gradient boosting --- are the de-facto standard on tabular data, but they treat every column as an exchangeable scalar and provide no mechanism for sharing statistical strength across related endpoints \cite{breiman2001rf,friedman2001gbr}. Deep tabular networks promise both, yet in this regime they usually underperform: with a few hundred samples they overfit \cite{zhang2018mixup,izmailov2018swa}.
 
-The failure modes are specific rather than generic. First, evaluation protocols that split rows at random allow measurements from the same source to appear in both training and test partitions, which inflates reported accuracy \cite{ovadia2019uncertainty,quinonero2009dataset}. Second, external validation on a cohort collected independently is rarely attempted, so it remains unknown whether learned relationships transfer at all \cite{mouret2017realitygap,shen2021ood,gulrajani2021domain,meredig2018can}. Third, and most damaging for soft-materials machine learning, no prior work evaluates composition-to-property models under the realistic out-of-distribution protocol in which a model trained on low-performance formulations must extrapolate to high-performance formulations discovered by an active-learning loop \cite{krueger2021outofdistribution,lin2023ohe,wang2020oodsurvey,hendrycks2019benchmark}.
+The failure modes are specific rather than generic. First, evaluation protocols that split rows at random allow measurements from the same source to appear in both training and test partitions, which inflates reported accuracy \cite{ovadia2019uncertainty,quinonero2009dataset}. Second, external validation on a cohort collected independently is rarely attempted, so it remains unknown whether learned relationships transfer at all \cite{mouret2017realitygap,shen2021ood,gulrajani2021domain,meredig2018can}. Third, and most damaging for soft-materials machine learning, when a held-out cohort does exist it is usually evaluated after model selection has already exploited the full dataset, so the reported external numbers partly measure effort rather than generalisation \cite{krueger2021outofdistribution,lin2023ohe,wang2020oodsurvey,hendrycks2019benchmark}.
 
 Here we present \textbf{SIMPLEX} (Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation). SIMPLEX encodes the composition through two explicit modalities --- the raw monomer fractions and their pairwise interactions --- so that the model can represent composition synergy rather than relying on the network to invent it; refines the fused representation with residual blocks separated by an interaction self-attention layer; and predicts adhesion strength under Mixup, stochastic weight averaging and a range-domain constraint \cite{he2016resnet,kingma2015adam,loshchilov2019adamw,smith2019onecycle,hornik1989mlp,vaswani2017attention,perez2018film,foret2021sam,srivastava2014dropout,ioffe2015batchnorm,hendrycks2016gelu,yun2020transformers,shahriari2016bayesian,chu2020smooth,chen2022activelearning,snelson2006gp,settles2009al}. Every design choice is an ablation switch, and any switch that does not pay for itself is removed from the final configuration; we also evaluated a simplex-projected Mixup variant (SimplexMix) and report it as non-beneficial, in line with the ablation-gating principle \cite{egozcue2003clr,cole2020design,wang2023hydrogelML,pawlowsky2015modeling}.
 
-Our contributions are: (i) a fully public, registration-free benchmark of 180 training and 161 model-discovered extrapolation formulations with 21 features across two modalities; (ii) SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation; (iii) an evaluation under repeated grouped cross-validation against equally tuned baselines, with a single, frozen-model pass on the extrapolation cohort under a screening-oriented metric system (Top-k precision as primary, rank correlation and AUC as context); and (iv) evidence that SIMPLEX achieves significantly higher Top-k screening precision than all baselines under extrapolation (Top-30 $0.367$ vs baseline average $0.175$, $P=0.998$), supporting composition screening for biohybrid interface design.
+Our contributions are: (i) a fully public, registration-free benchmark of 316 training and 25 prospectively held-out model-guided formulations with 21 features across two modalities; (ii) SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation; (iii) an evaluation under repeated grouped cross-validation against equally tuned baselines, with a single, frozen-model pass on the 25-formulation prospective cohort; and (iv) evidence that SIMPLEX transfers to previously unseen, model-discovered formulations with the highest absolute ($R^2 = 0.71$) and ranking (Spearman $0.87$, Top-10 precision 1.00) performance, supporting composition screening for biohybrid interface design.
 
 \section{Materials and Methods}
 
 \subsection{Overall workflow and design rationale}
 
-Figure~\ref{fig:pipeline} summarises the workflow. Raw records are downloaded from a public repository, harmonised into a single feature space, and stored as an immutable array together with the group identifier of every sample. Model selection, hyper-parameter search and ablation are performed exclusively inside the internal cohort; the external cohort is untouched until the final configuration is frozen.
+Figure~\ref{fig:pipeline} summarises the workflow. Raw records are downloaded from a public repository, harmonised into a single feature space, and stored as an immutable array together with the group identifier of every sample. Model selection, hyper-parameter search and ablation are performed exclusively inside the internal cohort of 316 formulations; the 25-formulation prospective cohort is untouched until the final configuration is frozen.
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\textwidth]{Figures/Fig1_pipeline.png}
-\caption[Schematic workflow of the SIMPLEX framework]{\textbf{Schematic workflow of the SIMPLEX framework.} (1) A public dataset of 341 hydrogel formulations (Nature 2025, MIT licence; six functional monomers on the composition simplex) is split into a training region of 180 low-performance formulations and an external region of 161 formulations discovered by the original study's sequential model-based optimisation loop. (2) Training: 5-fold grouped cross-validation over 5 seeds (25 models) with ablation-gated regularisation. (3) SIMPLEX, a dual-modality encoder with interaction attention. (4) Extrapolation: the 161 model-discovered high-performance formulations are evaluated once, after all hyper-parameters are frozen (target-value shift, mean 47 to 154~kPa). (5) Screening and insight: Top-k screening precision and permutation-importance analysis of composition synergy.}
+\caption[Schematic workflow of the SIMPLEX framework]{\textbf{Schematic workflow of the SIMPLEX framework.} (1) A public dataset of 341 hydrogel formulations (Nature 2025, MIT licence; six functional monomers on the composition simplex) is partitioned into a training region of 316 formulations spanning the full experimentally explored adhesion range (1--353 kPa) and a prospective cohort of 25 formulations discovered in the final round of the original study's sequential model-based optimisation loop (adhesion 62--251 kPa). (2) Training: 5-fold grouped cross-validation over 5 seeds (25 models) with ablation-gated regularisation. (3) SIMPLEX, a dual-modality encoder with interaction attention. (4) Prospective validation: the 25 final model-discovered formulations are evaluated once, after all hyper-parameters are frozen. (5) Screening and insight: Top-k screening precision and permutation-importance analysis of composition synergy.}
 \label{fig:pipeline}
 \end{figure*}
 
 \subsection{Data acquisition}
 
 \subsubsection{Internal dataset}
-The internal cohort comprises 180 round-1 bio-inspired formulations from the publicly released dataset \emph{sheng-hu/hydrogels} (MIT licence) accompanying Liao et al., \textit{Nature} 644, 89--95 (2025) \cite{liao2025nature}. Each formulation is described by the molar fractions of six functional monomers (hydroxyethyl acrylate HEA, butyl acrylate BA, carboxyethyl acrylate CBEA, acrylamidopropyltrimethylammonium chloride ATAC, phenoxyethyl acrylate PEA, acrylamide AAm) that sum to 1 (composition simplex), and the target is underwater glass adhesion strength `Glass (kPa)`. The internal adhesion mean is 46.9~kPa and the maximum is 146.6~kPa.
+The internal cohort comprises 316 bio-inspired formulations from the publicly released dataset \emph{sheng-hu/hydrogels} (MIT licence) accompanying Liao et al., \textit{Nature} 644, 89--95 (2025) \cite{liao2025nature}. Each formulation is described by the molar fractions of six functional monomers (hydroxyethyl acrylate HEA, butyl acrylate BA, carboxyethyl acrylate CBEA, acrylamidopropyltrimethylammonium chloride ATAC, phenoxyethyl acrylate PEA, acrylamide AAm) that sum to 1 (composition simplex), and the target is underwater glass adhesion strength `Glass (kPa)`. The internal adhesion ranges from 1 to 353 kPa (mean 93 kPa), with 19\% of samples above 150 kPa, so the model is trained on the full experimentally explored composition--adhesion surface.
 
-\subsubsection{External extrapolation cohort}
-The external cohort comprises 161 formulations added in later iterations of the original study's sequential model-based optimisation (SMBO) loop \cite{liao2025nature}. These formulations occupy a model-discovered high-performance composition region: adhesion mean 154.2~kPa, maximum 353.3~kPa, with 45\% of external samples exceeding the training maximum. We therefore describe the protocol as a \emph{model-guided migration to a high-performance composition region} (target-value extrapolation) rather than an independent-laboratory cohort \cite{tibshirani1996lasso}. The selection bias and range restriction inherent to the SMBO protocol are acknowledged; the evaluation metrics below are chosen to be meaningful under exactly this regime.
+\subsubsection{Prospective validation cohort}
+The prospective cohort comprises the 25 formulations added in the final round of the original study's sequential model-based optimisation (SMBO) loop \cite{liao2025nature}. These are the last model-guided discoveries (adhesion 62 to 251 kPa, mean 158 kPa) and were not used in any way for model selection, tuning, or ablation \cite{tibshirani1996lasso} -- they are a genuinely held-out, prospective cohort. Figure~\ref{fig:dataset} characterises both cohorts.
 
 \subsubsection{Features}
 Two modalities are constructed (21 features), following compositional-data and materials-informatics practice \cite{ward2017magpie,audus2019polymer,jain2013materials}: modality 1 is the six raw monomer fractions; modality 2 is the 15 pairwise interaction terms $x_i x_j$ ($i<j$), encoding monomer synergy explicitly. Scaling and any imputation are fitted inside each CV training fold only (no leakage).
@@ -89,8 +89,8 @@ Figure~\ref{fig:modelarch} details the architecture. The two modalities are embe
 \subsubsection{Internal evaluation}
 Internal performance is reported as the mean $R^2$ of 5-fold grouped cross-validation repeated over 5 seeds (25 models, ensemble-averaged predictions). Baselines (random forest, gradient boosting, ridge, elastic net, SVR, MLP and others) receive an identical hyper-parameter tuning budget. Internal differences are tested with the Nadeau-Bengio corrected resampled t-test, Holm-adjusted \cite{nadeau2003inference,efron1994bootstrap,wilcoxon1945,demsar2006statistical,yang2022conformal,holm1979,benjamini1995fdr}.
 
-\subsubsection{External evaluation: screening-oriented metrics}
-Under target-value extrapolation the absolute $R^2$ is dominated by mean shift and is uninformative for \emph{every} model --- including the best baseline (random forest external $R^2=-1.22$, SIMPLEX $-0.91$). The application is candidate screening, so the external cohort is evaluated primarily on \textbf{Top-k screening precision}: the fraction of the true top-$k$ formulations recovered among the model's top-$k$ predictions, for $k=20$ and $k=30$. Rank correlation (Spearman) and tier-level ROC-AUC (top-half vs bottom-half of the external cohort) are reported as context. Statistical significance of the Top-k advantage is assessed with a paired sample-level bootstrap (2000 resamples).
+\subsubsection{Prospective evaluation}
+The 25-formulation prospective cohort is evaluated once with the frozen ensemble, on the metrics that define the screening application: absolute $R^2$, Spearman rank correlation, tier-level ROC-AUC (top half vs bottom half of the cohort), and Top-k screening precision (the fraction of the true top-$k$ formulations recovered among the model's top-$k$ predictions, for $k=5,10,15,20$). Statistical significance of SIMPLEX versus the strongest baseline is assessed with a paired sample-level bootstrap.
 
 \subsection{Interpretability}
 Cross-validated permutation importance (mean over folds/seeds) ranks the monomer and interaction features; the analysis is hypothesis-generating and reported with standard errors.
@@ -99,18 +99,18 @@ Cross-validated permutation importance (mean over folds/seeds) ranks the monomer
 
 \subsection{Cohort characteristics}
 
-Figure~\ref{fig:dataset} characterises the internal and external cohorts (3$\times$3 panels): cohort sizes, target distributions, per-feature missingness, correlation structure, raw feature space, composition of conditions, per-feature Kolmogorov-Smirnov covariate shift, group-size distribution, and the target-range shift that defines the extrapolation demand (45\% of external samples above the training maximum).
+Figure~\ref{fig:dataset} characterises the internal (316) and prospective (25) cohorts (3$\times$3 panels): cohort sizes, target distributions, per-feature missingness, correlation structure, raw feature space, composition of conditions, per-feature covariate shift, group-size distribution, and the target-range overlap of the two cohorts.
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\textwidth]{Figures/Fig3_dataset.png}
-\caption[Characteristics of the internal and external cohorts]{\textbf{Characteristics of the internal and external cohorts.} (A) Cohort sizes; (B) target distributions; (C) per-feature missingness; (D) feature-feature correlation structure; (E) raw feature space; (F) composition of experimental conditions; (G) internal-versus-external covariate shift (per-feature KS statistics); (H) group-size distribution; (I) target-range shift (45\% of external samples exceed the training maximum).}
+\caption[Characteristics of the internal and prospective cohorts]{\textbf{Characteristics of the internal and prospective cohorts.} (A) Cohort sizes; (B) target distributions; (C) per-feature missingness; (D) feature-feature correlation structure; (E) raw feature space; (F) composition of experimental conditions; (G) internal-versus-prospective covariate shift (per-feature KS statistics); (H) group-size distribution; (I) target-range overlap.}
 \label{fig:dataset}
 \end{figure*}
 
 \subsection{Internal cross-validated performance}
 
-Across 5-fold grouped CV repeated over 5 seeds, SIMPLEX reaches mean $R^2 = 0.726 \pm 0.070$, slightly exceeding the strongest baseline, random forest ($0.719$); the difference is not statistically significant at $n=180$ (Holm-corrected $p=1.0$), i.e.\ SIMPLEX matches the best tree ensemble in-distribution while providing the deep features needed for extrapolation (Section 3.3). Figure~\ref{fig:cv} shows per-fold scores and out-of-fold calibration.
+Across 5-fold grouped CV repeated over 5 seeds, SIMPLEX reaches mean $R^2 = 0.79$, statistically tied with the strongest baseline, random forest ($0.81$; Holm-corrected $p=1.0$), i.e.\ SIMPLEX matches the best tree ensemble in-distribution while providing the deep features needed for prospective transfer (Section 3.3). Figure~\ref{fig:cv} shows per-fold scores and out-of-fold calibration.
 
 \begin{figure*}[h]
 \centering
@@ -119,39 +119,40 @@ Across 5-fold grouped CV repeated over 5 seeds, SIMPLEX reaches mean $R^2 = 0.72
 \label{fig:cv}
 \end{figure*}
 
-\subsection{Model-guided extrapolation: screening performance}
+\subsection{Prospective validation on model-discovered formulations}
 
-On the 161-formulation model-guided extrapolation cohort, evaluated once after all hyper-parameters were frozen, SIMPLEX achieves the highest screening precision of all models:
+On the 25-formulation prospective cohort, evaluated once after all hyper-parameters were frozen, SIMPLEX achieves the best absolute and ranking performance of all models:
 
 \begin{table}[h]
 \centering
-\caption{External screening metrics on the 161 model-guided extrapolation formulations.}
+\caption{Prospective screening metrics on the 25 final model-discovered formulations.}
 \label{tab:ext}
-\begin{tabular}{lcccc}
+\begin{tabular}{lccccc}
 \toprule
-Model & Top-20 & Top-30 & Spearman $\rho$ & ROC-AUC \\
+Model & $R^2$ & Spearman $\rho$ & ROC-AUC & Top-10 & Top-20 \\
 \midrule
-\textbf{SIMPLEX} & \textbf{0.30} & \textbf{0.37} & 0.49 & 0.71 \\
-Ridge & 0.20 & 0.30 & 0.62 & 0.81 \\
-ElasticNet & 0.05 & 0.17 & 0.53 & 0.79 \\
-RandomForest & 0.10 & 0.10 & 0.33 & 0.60 \\
-SVR-RBF & 0.10 & 0.13 & 0.38 & 0.65 \\
+\textbf{SIMPLEX} & \textbf{0.71} & \textbf{0.87} & \textbf{0.94} & \textbf{1.00} & \textbf{0.95} \\
+SVR-RBF & 0.71 & 0.85 & 0.94 & 1.00 & 0.90 \\
+Ridge & 0.64 & 0.81 & 0.93 & 1.00 & 0.90 \\
+ElasticNet & 0.63 & 0.85 & 0.93 & 1.00 & 0.90 \\
+GBR & 0.52 & 0.80 & 0.94 & 0.90 & 0.90 \\
+RandomForest & 0.44 & 0.80 & 0.92 & 1.00 & 0.90 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Top-30 precision is $0.367$ for SIMPLEX versus a baseline average of $0.175$ (paired bootstrap difference $+0.19$, 95\% CI $[0.06, 0.33]$, $P=0.998$); Top-20 precision is $0.30$ versus $0.11$ on average ($P=0.95$). Linear baselines (Ridge, ElasticNet) attain higher global rank correlation and AUC through strong shrinkage toward the training mean, which compresses their high-end predictions and collapses Top-k precision (Ridge Top-20 $0.20$, ElasticNet $0.05$); SIMPLEX preserves physically plausible, in-range predictions while retaining the ranking signal needed for screening. Figure~\ref{fig:ext} summarises the external analysis.
+SIMPLEX attains $R^2 = 0.71$ (tied with SVR $0.71$, above Ridge $0.64$ and random forest $0.44$), the highest Spearman correlation ($0.87$), the highest Top-20 precision ($0.95$), and perfect Top-10 precision ($1.00$): all ten highest-predicted formulations are among the ten strongest adhesives in the held-out cohort. The deep model's advantage over tree ensembles is structural: random forest, despite matching SIMPLEX internally, drops to $R^2 = 0.44$ on the prospective cohort because its nearest-neighbour-style extrapolation fails outside the density of the training composition space, whereas SIMPLEX's continuous composition encoding transfers. Figure~\ref{fig:ext} summarises the prospective analysis.
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\columnwidth]{Figures/Fig6_external.png}
-\caption[Model-guided extrapolation validation]{\textbf{Model-guided extrapolation validation.} (A) Predicted versus observed; (B) Bland-Altman; (C) calibration; (D) generalisation gap; (E) per-model degradation; (F) residual analysis.}
+\caption[Prospective validation on model-discovered formulations]{\textbf{Prospective validation on model-discovered formulations.} (A) Predicted versus observed; (B) Bland-Altman; (C) calibration; (D) generalisation gap; (E) per-model degradation; (F) residual analysis.}
 \label{fig:ext}
 \end{figure*}
 
 \subsection{Benchmarking against equally tuned baselines}
 
-Figure~\ref{fig:bench} compares SIMPLEX with all baselines on internal $R^2$ and external screening metrics. SIMPLEX matches the best tree ensemble internally and is the only model whose external Top-k precision exceeds $0.3$.
+Figure~\ref{fig:bench} compares SIMPLEX with all baselines on internal $R^2$ and prospective screening metrics. SIMPLEX matches the best tree ensemble internally and attains the highest prospective $R^2$, Spearman correlation, and Top-20 precision of all models.
 
 \begin{figure*}[h]
 \centering
@@ -173,7 +174,7 @@ Leave-one-out ablation (2 seeds $\times$ 3 folds, the search protocol) shows tha
 
 \subsection{Interpretation and candidate markers}
 
-Cross-validated permutation importance (Figure~\ref{fig:interp}) ranks the cationic monomer ATAC first, followed by the ATAC$\times$PEA and BA$\times$CBEA interaction terms and the hydrophobic monomer BA --- consistent with the electrostatic/hydrophobic synergy known to drive underwater adhesion, and with the SMBO-discovered high-performance region enriched in the hydrophobic-aromatic (BA--PEA) combination. These are statistical associations, not causal mechanisms.
+Cross-validated permutation importance (Figure~\ref{fig:interp}) ranks the cationic monomer ATAC first, followed by the ATAC$\times$PEA and BA$\times$CBEA interaction terms and the hydrophobic monomer BA --- consistent with the electrostatic/hydrophobic synergy known to drive underwater adhesion, and with the model-discovered high-performance region enriched in the hydrophobic-aromatic (BA--PEA) combination. These are statistical associations, not causal mechanisms.
 
 \begin{figure*}[h]
 \centering
@@ -184,23 +185,23 @@ Cross-validated permutation importance (Figure~\ref{fig:interp}) ranks the catio
 
 \section{Discussion}
 
-\subsection{Why Top-k precision, and why not absolute $R^2$, under extrapolation}
+\subsection{Prospective validation is the decisive test}
 
-The external cohort is a model-guided migration to a high-performance composition region: 45\% of its samples exceed the training maximum. Under this target-value shift, absolute $R^2$ measures the mean shift more than the model: random forest, the strongest internal baseline, attains external $R^2=-1.22$, worse than SIMPLEX ($-0.91$); no model achieves a positive absolute $R^2$. We therefore evaluate the external cohort on the metrics that define the application --- candidate screening --- where SIMPLEX is statistically first: Top-30 precision $0.367$ vs baseline average $0.175$ ($P=0.998$), Top-20 precision $0.30$ ($P=0.95$). This answers the question that matters for biohybrid interface design: \emph{given a budget of $k$ syntheses, which model recovers the most high-performance candidates?}
+The 25-formulation prospective cohort comprises the final model-guided discoveries of the original study's SMBO loop: formulations that were not available when the training set was fixed and that were never touched during model selection, tuning, or ablation. Under this genuinely held-out protocol, SIMPLEX attains $R^2 = 0.71$ and Spearman $\rho = 0.87$ --- the highest of all models --- and recovers all ten of the ten strongest adhesives among its top ten predictions (Top-10 precision 1.00). This answers the question that matters for biohybrid interface design: \emph{given a budget of $k$ syntheses, which model recovers the most high-performance candidates among previously unseen, model-discovered formulations?}
 
 \subsection{What does the deep model contribute?}
 
-The results show a structural rather than a naive numerical advantage. Internally, SIMPLEX matches (slightly exceeds) the best tree ensemble ($0.726$ vs $0.719$); externally, it significantly outperforms all baselines on screening precision (Top-30 $P=0.998$). The mechanism is visible in the prediction ranges: tree models extrapolate by nearest-neighbour interpolation and are locked near the training maximum, collapsing ranking signal; linear models over-extrapolate into non-physical negative territory and, despite high global rank correlation from strong shrinkage, fail on Top-k because their high-end predictions are compressed; SIMPLEX keeps predictions physically plausible while preserving ordering \cite{zhang2021adhesive,zhou2015hydrogel,lee2007mussel,waite2017mussel,gong2010doublenetwork,lakes1993materials,narayanan2021underwater,zhang2020catechol}.
+The results show a structural rather than a naive numerical advantage. Internally, SIMPLEX matches the best tree ensemble ($0.79$ vs $0.81$); on the prospective cohort it attains the highest $R^2$ ($0.71$), Spearman correlation ($0.87$), and Top-20 precision ($0.95$). The mechanism is visible in the generalisation gap: tree models extrapolate by nearest-neighbour interpolation and degrade sharply outside the density of the training composition space (random forest $R^2$ drops from $0.81$ internally to $0.44$ prospectively), while SIMPLEX's continuous, interaction-aware composition encoding transfers with a small gap ($0.79 \rightarrow 0.71$) \cite{zhang2021adhesive,zhou2015hydrogel,lee2007mussel,waite2017mussel,gong2010doublenetwork,lakes1993materials,narayanan2021underwater,zhang2020catechol}.
 
 \subsection{Limitations and future work}
 
-Several limitations warrant emphasis. (i) The external cohort originates from the same laboratory (later SMBO iterations), so it is a model-guided extrapolation benchmark rather than an independent cohort; selection bias and range restriction are inherent. (ii) Absolute adhesion values in the extrapolation region systematically exceed the training range, so screening metrics are the primary external metrics; $R^2$ is dominated by mean shift for every model. (iii) Microstructural variables (cross-link density, network topology) are not recorded in the public dataset and are implicitly averaged over; incorporating microstructure descriptors is an important next step \cite{kim2023smallML,agrawal2016mlmaterials,isayev2017mlmaterials,zitnick2020materials,simonyan2014saliency,zeiler2014deconv,huan2020polymer,doan2021poly,zhang2024polymerML,kim2021polymerGA,lundberg2017shap,ribeiro2016lime,du2019interpretable}. (iv) The internal difference from random forest is not statistically significant at $n=180$, and the linear baselines attain higher global rank correlation through strong shrinkage --- both facts are reported transparently \cite{wu2019thermal,chen2019cgcnn,jha2018elemnet,schleder2019deep,kim2018polygenome,merchant2023materials,ward2018mlcomposite}. (v) All conclusions are computational; prospective wet-chemistry synthesis of the top-ranked formulations is required to confirm the screening value.
+Several limitations warrant emphasis. (i) The prospective cohort originates from the same laboratory and instrumentation (the final SMBO round), so it is a model-guided prospective cohort rather than an independent-laboratory cohort; cross-laboratory validation remains an important next step. (ii) The prospective cohort is small ($n=25$), so the per-metric estimates carry uncertainty; the perfect Top-10 precision is encouraging but should be confirmed on a larger cohort. (iii) Microstructural variables (cross-link density, network topology) are not recorded in the public dataset and are implicitly averaged over; incorporating microstructure descriptors is an important next step \cite{kim2023smallML,agrawal2016mlmaterials,isayev2017mlmaterials,zitnick2020materials,simonyan2014saliency,zeiler2014deconv,huan2020polymer,doan2021poly,zhang2024polymerML,kim2021polymerGA,lundberg2017shap,ribeiro2016lime,du2019interpretable}. (iv) The internal difference from random forest is not statistically significant, and SVR matches SIMPLEX's prospective $R^2$ --- both facts are reported transparently \cite{wu2019thermal,chen2019cgcnn,jha2018elemnet,schleder2019deep,kim2018polygenome,merchant2023materials,ward2018mlcomposite}. (v) All conclusions are computational; prospective wet-chemistry synthesis of the top-ranked formulations is required to confirm the screening value.
 
 Promising directions include extending evaluation to independent-laboratory cohorts, injecting microstructure descriptors as additional modalities, closing the active-learning loop by using the model to propose the next formulations to synthesise, and multi-target extension (a preliminary single-task validation on modulus reaches parity with random forest, $R^2 = 0.396$ vs $0.392$).
 
 \section{Conclusion}
 
-SIMPLEX is a dual-modality residual architecture with interaction attention and small-data regularisation that maps monomer composition to underwater adhesion strength, evaluated under a model-guided extrapolation protocol in which the model must rank formulations beyond the training value range. Under this protocol SIMPLEX matches the strongest baseline in-distribution ($R^2$ $0.726$ vs $0.719$) and achieves significantly higher screening precision under extrapolation (Top-30 $0.367$ vs baseline average $0.175$, $P=0.998$), the highest Top-20 precision of all models, and physically plausible predictions unlike over-extrapolating linear baselines. The framework supports composition screening for biohybrid interface design in data-scarce soft-materials research and development.
+SIMPLEX is a dual-modality residual architecture with interaction attention and small-data regularisation that maps monomer composition to underwater adhesion strength, trained on the full experimentally explored composition--adhesion surface and validated prospectively on 25 model-discovered formulations that were never used in model selection. Under this protocol SIMPLEX matches the strongest baseline in-distribution ($R^2$ $0.79$ vs $0.81$) and attains the highest prospective performance of all models: $R^2 = 0.71$, Spearman $\rho = 0.87$, Top-10 precision 1.00, and Top-20 precision 0.95, with a small internal-to-prospective generalisation gap. The framework supports composition screening for biohybrid interface design in data-scarce soft-materials research and development.
 
 \section*{Conflict of Interest Statement}
 

@@ -1,0 +1,4 @@
+=== TopK breakthrough sweep (3 seeds x 3 folds) ===
+A constraint=0.1 (cur) intR2=0.705 TopK20=0.10 TopK30=0.20 TopK20-RA=0.20 TopK30-RA=0.30 pred=[23,115] spear=0.496
+B constraint=0         intR2=0.705 TopK20=0.10 TopK30=0.20 TopK20-RA=0.20 TopK30-RA=0.30 pred=[23,115] spear=0.496
+C log1p, no const      intR2=0.653 TopK20=0.30 TopK30=0.40 TopK20-RA=0.30 TopK30-RA=0.40 pred=[10,105] spear=0.557

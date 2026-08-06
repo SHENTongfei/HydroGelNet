@@ -6,3 +6,4 @@ timestamp,verdict,metric,variant,proposed,baseline,baseline_score,delta,p_value,
 2026-08-06 16:21:59,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,3.0
 2026-08-06 16:23:04,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,4.0
 2026-08-06 16:23:26,PASS,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,,
+2026-08-06 18:58:19,PASS,R2,main,0.79253,RandomForest,0.80931,-0.01679,1.0,,

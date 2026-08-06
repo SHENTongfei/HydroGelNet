@@ -1,0 +1,5 @@
+=== log1p + ranking loss ===
+log1p no-rank        intR2=0.653 TopK20=0.30 TopK30=0.40 TK20-RA=0.30 TK30-RA=0.40 spear=0.557
+log1p rank m0.5 w0.5 intR2=0.636 TopK20=0.15 TopK30=0.27 TK20-RA=0.20 TK30-RA=0.33 spear=0.515
+log1p rank m1.0 w1.0 intR2=0.484 TopK20=0.10 TopK30=0.27 TK20-RA=0.15 TK30-RA=0.27 spear=0.479
+log1p rank m0.3 w2.0 intR2=0.600 TopK20=0.20 TopK30=0.33 TK20-RA=0.20 TK30-RA=0.33 spear=0.512

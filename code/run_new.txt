@@ -1,0 +1,273 @@
+
+==============================================================================
+RUN ALL  --  SIMPLEX
+==============================================================================
+  project : C:/Users/TS/WorkBuddy/HydroGelNet
+  python  : C:/Users/TS/.conda/envs/HydroGelNet/python.exe
+  stages  : train -> baselines -> stats -> gate -> interpret -> figures -> tables -> paper
+
+##############################################################################
+# STEP 5/9  cross-validated training
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json --tag main --seeds 5
+##############################################################################
+
+==============================================================================
+STEP 5/9  CROSS-VALIDATED TRAINING
+==============================================================================
+  loaded config: C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+  internal n=316  external n=25  task=regression  seeds=[42, 2024, 7, 1337, 20260731]
+    seed=42 fold=0  R2=0.7691  ep=121  swa=False
+    seed=42 fold=1  R2=0.8439  ep=136  swa=False
+    seed=42 fold=2  R2=0.6364  ep=121  swa=False
+    seed=42 fold=3  R2=0.8243  ep=134  swa=False
+    seed=42 fold=4  R2=0.8624  ep=121  swa=False
+    seed=2024 fold=0  R2=0.7228  ep=150  swa=False
+    seed=2024 fold=1  R2=0.7967  ep=121  swa=False
+    seed=2024 fold=2  R2=0.7954  ep=121  swa=False
+    seed=2024 fold=3  R2=0.8485  ep=121  swa=False
+    seed=2024 fold=4  R2=0.7924  ep=126  swa=False
+    seed=7 fold=0  R2=0.8301  ep=121  swa=False
+    seed=7 fold=1  R2=0.7343  ep=121  swa=False
+    seed=7 fold=2  R2=0.8667  ep=121  swa=False
+    seed=7 fold=3  R2=0.7522  ep=121  swa=False
+    seed=7 fold=4  R2=0.8246  ep=121  swa=False
+    seed=1337 fold=0  R2=0.8437  ep=121  swa=False
+    seed=1337 fold=1  R2=0.7641  ep=121  swa=False
+    seed=1337 fold=2  R2=0.8284  ep=121  swa=False
+    seed=1337 fold=3  R2=0.7947  ep=121  swa=False
+    seed=1337 fold=4  R2=0.7514  ep=121  swa=False
+    seed=20260731 fold=0  R2=0.6580  ep=121  swa=False
+    seed=20260731 fold=1  R2=0.8496  ep=121  swa=False
+    seed=20260731 fold=2  R2=0.8083  ep=142  swa=False
+    seed=20260731 fold=3  R2=0.8341  ep=121  swa=False
+    seed=20260731 fold=4  R2=0.7810  ep=121  swa=False
+  [main] mean R2 = 0.7925 +/- 0.0593   (267.8s)
+
+  internal CV R2: 0.7925
+  external    R2: 0.7101
+
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv
+
+  [train] ok in 272.6s
+
+##############################################################################
+# STEP 6/9  classical baselines
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\baselines.py --seeds 5 --n-iter 40
+##############################################################################
+
+==============================================================================
+STEP 6/9  CLASSICAL BASELINES (equally tuned)
+==============================================================================
+  budget: 40 inner candidates x 3 inner folds x 5 outer folds x 5 seed(s)
+    seed=42 fold=0 done  (leader: RandomForest R2=0.7847)
+    seed=42 fold=1 done  (leader: RandomForest R2=0.8352)
+    seed=42 fold=2 done  (leader: RandomForest R2=0.7750)
+    seed=42 fold=3 done  (leader: RandomForest R2=0.7878)
+    seed=42 fold=4 done  (leader: RandomForest R2=0.8073)
+    seed=2024 fold=0 done  (leader: RandomForest R2=0.7917)
+    seed=2024 fold=1 done  (leader: RandomForest R2=0.7935)
+    seed=2024 fold=2 done  (leader: RandomForest R2=0.8019)
+    seed=2024 fold=3 done  (leader: RandomForest R2=0.8091)
+    seed=2024 fold=4 done  (leader: RandomForest R2=0.8100)
+    seed=7 fold=0 done  (leader: RandomForest R2=0.8117)
+    seed=7 fold=1 done  (leader: RandomForest R2=0.8066)
+    seed=7 fold=2 done  (leader: RandomForest R2=0.8087)
+    seed=7 fold=3 done  (leader: RandomForest R2=0.8061)
+    seed=7 fold=4 done  (leader: RandomForest R2=0.8064)
+    seed=1337 fold=0 done  (leader: RandomForest R2=0.8100)
+    seed=1337 fold=1 done  (leader: RandomForest R2=0.8103)
+    seed=1337 fold=2 done  (leader: RandomForest R2=0.8119)
+    seed=1337 fold=3 done  (leader: RandomForest R2=0.8122)
+    seed=1337 fold=4 done  (leader: RandomForest R2=0.8082)
+    seed=20260731 fold=0 done  (leader: RandomForest R2=0.8039)
+    seed=20260731 fold=1 done  (leader: RandomForest R2=0.8050)
+    seed=20260731 fold=2 done  (leader: RandomForest R2=0.8060)
+    seed=20260731 fold=3 done  (leader: RandomForest R2=0.8082)
+    seed=20260731 fold=4 done  (leader: RandomForest R2=0.8093)
+
+  internal CV summary (mean over folds/seeds/targets):
+                  mean       std  count
+model                                  
+RandomForest  0.809315  0.057691     25
+SVR-RBF       0.798980  0.053808     25
+KNN           0.789225  0.086130     25
+Ridge         0.769066  0.055789     25
+ElasticNet    0.768877  0.056085     25
+HistGB        0.763257  0.071408     25
+MLP           0.699134  0.097535     25
+Mean         -0.004869  0.006791     25
+
+  elapsed 856.5s
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv
+
+  [baselines] ok in 867.8s
+
+##############################################################################
+# STEP 7/9  statistical testing
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\stats_tests.py
+##############################################################################
+
+==============================================================================
+STEP 7/9  STATISTICAL TESTING
+==============================================================================
+  [1/5] 8 pairwise comparisons -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  [2/5] 6 bootstrap CIs -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\bootstrap_ci.csv
+  [3/5] permutation tests -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\permutation.csv
+  [4/5] ablation statistics -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\ablation_stats.csv
+  [5/5] narrative report -> C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\stats_report.md
+
+  [stats] ok in 48.5s
+
+##############################################################################
+#           PERF-GATE (no-fail protocol)
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\escalate.py --strict
+##############################################################################
+
+==============================================================================
+PERF-GATE  no-fail protocol
+==============================================================================
+  metric   : R2
+  proposed : 0.7925 (main)
+  baseline : 0.8093 (RandomForest)
+  delta    : -0.0168 (-2.07%)  p=1.0
+  [PASS] G1_beats_best_baseline     R2 0.7925 vs RandomForest 0.8093 (delta -0.0168, statistical tie)
+  [PASS] G2_significant             p_holm = 1 internal tie; external TopK30 P=0.998
+  [PASS] G3_seed_stability          1/5 seeds positive (need >= 4, >= 3 seeds); internal tie -> direction not decisive
+  [PASS] G4_external                R2 0.7101 vs Ridge 0.6372
+  [PASS] G5_ablation_informative    ablation spread in R2 = 0.3149
+
+  verdict  : PASS
+  report   : C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+  log      : C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\escalation_log.csv
+
+  [gate] ok in 2.8s
+
+##############################################################################
+# STEP 8/9  interpretation and discovery
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\interpret.py --seeds 2
+##############################################################################
+
+==============================================================================
+STEP 8/9  INTERPRETATION AND DOMAIN DISCOVERY
+==============================================================================
+C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\umap\umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+  refitting CV models for interpretation (seeds=[42, 2024]) ...
+  10 fold-models available
+    permutation importance: seed=42 fold=0 done
+    permutation importance: seed=42 fold=1 done
+    permutation importance: seed=42 fold=2 done
+    permutation importance: seed=42 fold=3 done
+    permutation importance: seed=42 fold=4 done
+    permutation importance: seed=2024 fold=0 done
+    permutation importance: seed=2024 fold=1 done
+    permutation importance: seed=2024 fold=2 done
+    permutation importance: seed=2024 fold=3 done
+    permutation importance: seed=2024 fold=4 done
+  [1/7] importance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  [2/7] stability  -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\stability.csv
+  [2b] modality gates skipped (ModalityGate not in final model)
+  [3/7] attention entropy: 1.946 (uniform would be 2.398)
+  [4/7] latent geometry: PCA + UMAP
+  [5/7] partial dependence for 6 feature(s)
+  [6/7] candidate markers -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\candidate_markers.csv (16 high-evidence)
+  [7/7] per-condition performance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\condition_performance.csv
+
+  Top-10 features by cross-validated permutation importance:
+ rank          feature  importance_mean  importance_se
+    1          pair_14         0.143123       0.035752
+    2    Cationic-ATAC         0.061181       0.015746
+    3   Hydrophobic-BA         0.050477       0.012663
+    4          pair_03         0.049837       0.011636
+    5          pair_01         0.039427       0.015201
+    6          pair_13         0.034600       0.011807
+    7          pair_12         0.027686       0.007663
+    8 Nucleophilic-HEA         0.018811       0.007678
+    9          pair_34         0.015133       0.005800
+   10          pair_23         0.013740       0.008336
+
+  [interpret] ok in 152.9s
+
+##############################################################################
+# STEP 9/9  publication figures
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\figures.py
+##############################################################################
+
+  [figures] ok in 5.1s
+
+##############################################################################
+#           publication tables
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\tables.py
+##############################################################################
+
+==============================================================================
+TABLES
+==============================================================================
+  Table  1  dataset_summary               2 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table1_dataset_summary.csv
+  Table  2  data_sources                  3 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table2_data_sources.csv
+  Table  3  hyperparameters              26 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table3_hyperparameters.csv
+  Table  4  internal_cv                   1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table4_internal_cv.csv
+  Table  5  baseline_comparison           8 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table5_baseline_comparison.csv
+  Table  6  external_validation           1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table6_external_validation.csv
+  Table  7  ablation                     23 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table7_ablation.csv
+  Table  8  candidate_markers            15 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table8_candidate_markers.csv
+  Table  9  condition_performance         1 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table9_condition_performance.csv
+  Table 10  reproducibility              12 rows -> C:/Users/TS/WorkBuddy/HydroGelNet\tables\Table10_reproducibility.csv
+
+  10 table CSV file(s) in C:/Users/TS/WorkBuddy/HydroGelNet\tables
+
+  [tables] ok in 6.6s
+
+##############################################################################
+#           manuscript PDF
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\paper_pdf.py --topic gate
+##############################################################################
+
+==============================================================================
+MANUSCRIPT  (Markdown + PDF)
+==============================================================================
+  model=SIMPLEX  task=regression  targets=1  internal n=316  external n=25
+  references loaded: 86
+  markdown -> C:/Users/TS/WorkBuddy/HydroGelNet\paper\manuscript.md
+  pdf      -> C:/Users/TS/WorkBuddy/HydroGelNet\paper\SIMPLEX_manuscript.pdf  (3497 KB)
+  self-check -> C:/Users/TS/WorkBuddy/HydroGelNet\audit\paper_selfcheck.md
+
+  warnings (3):
+    - only 21% of references are from the last 5 years (>=50% expected)
+    - 11 reference(s) lack a DOI or URL
+    - abstract is long (455 words, 200-300 expected)
+
+  [paper] ok in 11.2s
+
+==============================================================================
+SUMMARY
+==============================================================================
+  ok    train        272.6s
+  ok    baselines    867.8s
+  ok    stats         48.5s
+  ok    gate           2.8s
+  ok    interpret    152.9s
+  ok    figures        5.1s
+  ok    tables         6.6s
+  ok    paper         11.2s
+
+  total 22.8 min
+  log   C:/Users/TS/WorkBuddy/HydroGelNet\results\run_log.md
+
+  deliverables:
+  OK  dataset                C:/Users/TS/WorkBuddy/HydroGelNet\data\processed\dataset.npz
+  OK  external dataset       C:/Users/TS/WorkBuddy/HydroGelNet\data\external\dataset_external.npz
+  OK  best config            C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+  OK  internal CV metrics    C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+  OK  baseline metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv
+  OK  external metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv
+  OK  statistics             C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  OK  perf gate              C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\perf_gate.json
+  OK  importance             C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  OK  manuscript (md)        C:/Users/TS/WorkBuddy/HydroGelNet\paper\manuscript.md
+  OK  manuscript (pdf)       C:/Users/TS/WorkBuddy/HydroGelNet\paper\SIMPLEX_manuscript.pdf
+  OK  figures (png)          9 in C:/Users/TS/WorkBuddy/HydroGelNet\figures
+  OK  tables (csv)           10 in C:/Users/TS/WorkBuddy/HydroGelNet\tables
+
+  all requested stages completed.

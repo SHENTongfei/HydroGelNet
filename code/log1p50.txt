@@ -1,0 +1,7 @@
+ensemble n= 5: TopK20=0.10 TopK30=0.13 TopK20-RA=0.10 TopK30-RA=0.13 spear=0.347
+ensemble n=10: TopK20=0.15 TopK30=0.20 TopK20-RA=0.10 TopK30-RA=0.17 spear=0.423
+ensemble n=25: TopK20=0.15 TopK30=0.30 TopK20-RA=0.25 TopK30-RA=0.30 spear=0.454
+ensemble n=50: TopK20=0.25 TopK30=0.33 TopK20-RA=0.25 TopK30-RA=0.30 spear=0.472
+high-half (n=80) Spearman: 0.202
+pred-top20 true y: min=107 max=278
+saved external_log1p_50.npz

@@ -1,201 +1,201 @@
 model,seed,fold,target,best_params
 Mean,42,0,glass_adhesion_kpa,{}
-Ridge,42,0,glass_adhesion_kpa,{'alpha': np.float64(1.2173252504194043)}
-ElasticNet,42,0,glass_adhesion_kpa,"{'alpha': np.float64(0.01444525102276306), 'l1_ratio': np.float64(0.31210622617823774)}"
-KNN,42,0,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,42,0,glass_adhesion_kpa,"{'C': np.float64(14.689898077648792), 'epsilon': np.float64(0.3585842360750871), 'gamma': np.float64(0.163941274716316)}"
-RandomForest,42,0,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 2, 'n_estimators': 587}"
-HistGB,42,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(6.5507138953920645), 'learning_rate': np.float64(0.003772270565370873), 'max_iter': 712, 'max_leaf_nodes': 51, 'min_samples_leaf': 5}"
-MLP,42,0,glass_adhesion_kpa,"{'alpha': np.float64(7.459343285726558e-05), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00023273922280628724)}"
+Ridge,42,0,glass_adhesion_kpa,{'alpha': np.float64(0.018794668241638456)}
+ElasticNet,42,0,glass_adhesion_kpa,"{'alpha': np.float64(0.0074593432857265485), 'l1_ratio': np.float64(0.9056428757689247)}"
+KNN,42,0,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,42,0,glass_adhesion_kpa,"{'C': np.float64(555.1721685244722), 'epsilon': np.float64(0.39625281322982375), 'gamma': np.float64(0.17123375973163968)}"
+RandomForest,42,0,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 591}"
+HistGB,42,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0024763373012441064), 'learning_rate': np.float64(0.051909639713710286), 'max_iter': 383, 'max_leaf_nodes': 51, 'min_samples_leaf': 26}"
+MLP,42,0,glass_adhesion_kpa,"{'alpha': np.float64(0.0006403036652671174), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.0011103647313054626)}"
 Mean,42,1,glass_adhesion_kpa,{}
 Ridge,42,1,glass_adhesion_kpa,{'alpha': np.float64(0.5450293694558254)}
-ElasticNet,42,1,glass_adhesion_kpa,"{'alpha': np.float64(0.00877781550471966), 'l1_ratio': np.float64(0.2942141285965063)}"
-KNN,42,1,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,42,1,glass_adhesion_kpa,"{'C': np.float64(555.1721685244722), 'epsilon': np.float64(0.39625281322982375), 'gamma': np.float64(0.17123375973163968)}"
+ElasticNet,42,1,glass_adhesion_kpa,"{'alpha': np.float64(0.0033347927286375843), 'l1_ratio': np.float64(0.1379049026057455)}"
+KNN,42,1,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,42,1,glass_adhesion_kpa,"{'C': np.float64(859.8737339212263), 'epsilon': np.float64(0.318897907718663), 'gamma': np.float64(0.0006235377135673159)}"
 RandomForest,42,1,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 2, 'n_estimators': 587}"
-HistGB,42,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.7406828393128095e-06), 'learning_rate': np.float64(0.1788532743297921), 'max_iter': 711, 'max_leaf_nodes': 47, 'min_samples_leaf': 6}"
-MLP,42,1,glass_adhesion_kpa,"{'alpha': np.float64(2.078699690689779e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.002878805718308925)}"
+HistGB,42,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(3.9392386266336232), 'learning_rate': np.float64(0.024850390460806646), 'max_iter': 495, 'max_leaf_nodes': 60, 'min_samples_leaf': 4}"
+MLP,42,1,glass_adhesion_kpa,"{'alpha': np.float64(0.013921548533046514), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.008521393381383607)}"
 Mean,42,2,glass_adhesion_kpa,{}
-Ridge,42,2,glass_adhesion_kpa,{'alpha': np.float64(0.5450293694558254)}
-ElasticNet,42,2,glass_adhesion_kpa,"{'alpha': np.float64(0.01444525102276306), 'l1_ratio': np.float64(0.31210622617823774)}"
-KNN,42,2,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,42,2,glass_adhesion_kpa,"{'C': np.float64(14.689898077648792), 'epsilon': np.float64(0.3585842360750871), 'gamma': np.float64(0.163941274716316)}"
-RandomForest,42,2,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 591}"
-HistGB,42,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.456380559457484), 'learning_rate': np.float64(0.035204702862431825), 'max_iter': 723, 'max_leaf_nodes': 60, 'min_samples_leaf': 8}"
-MLP,42,2,glass_adhesion_kpa,"{'alpha': np.float64(7.459343285726558e-05), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00023273922280628724)}"
+Ridge,42,2,glass_adhesion_kpa,{'alpha': np.float64(0.1767016940294795)}
+ElasticNet,42,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0033205591037519565), 'l1_ratio': np.float64(0.522280788469014)}"
+KNN,42,2,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,42,2,glass_adhesion_kpa,"{'C': np.float64(859.8737339212263), 'epsilon': np.float64(0.318897907718663), 'gamma': np.float64(0.0006235377135673159)}"
+RandomForest,42,2,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 578}"
+HistGB,42,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0004185822729546974), 'learning_rate': np.float64(0.22648248189516848), 'max_iter': 256, 'max_leaf_nodes': 15, 'min_samples_leaf': 23}"
+MLP,42,2,glass_adhesion_kpa,"{'alpha': np.float64(1.1649969967638911e-06), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.00853618986286683)}"
 Mean,42,3,glass_adhesion_kpa,{}
-Ridge,42,3,glass_adhesion_kpa,{'alpha': np.float64(0.4374364439939078)}
-ElasticNet,42,3,glass_adhesion_kpa,"{'alpha': np.float64(0.019069966103000432), 'l1_ratio': np.float64(0.7566583652537123)}"
-KNN,42,3,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,42,3,glass_adhesion_kpa,"{'C': np.float64(75.10418138777538), 'epsilon': np.float64(0.38579957662567566), 'gamma': np.float64(0.3795853142670636)}"
-RandomForest,42,3,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 674}"
-HistGB,42,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.06160715952774549), 'learning_rate': np.float64(0.012311503632415646), 'max_iter': 604, 'max_leaf_nodes': 51, 'min_samples_leaf': 10}"
-MLP,42,3,glass_adhesion_kpa,"{'alpha': np.float64(0.020678409397839485), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0004589824181495653)}"
+Ridge,42,3,glass_adhesion_kpa,{'alpha': np.float64(0.055895242052179224)}
+ElasticNet,42,3,glass_adhesion_kpa,"{'alpha': np.float64(0.0004075596440072873), 'l1_ratio': np.float64(0.49565921910014316)}"
+KNN,42,3,glass_adhesion_kpa,"{'n_neighbors': 7, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,42,3,glass_adhesion_kpa,"{'C': np.float64(859.8737339212263), 'epsilon': np.float64(0.318897907718663), 'gamma': np.float64(0.0006235377135673159)}"
+RandomForest,42,3,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.6, 'min_samples_leaf': 4, 'n_estimators': 530}"
+HistGB,42,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.46398861359008925), 'learning_rate': np.float64(0.007306138957424438), 'max_iter': 638, 'max_leaf_nodes': 40, 'min_samples_leaf': 20}"
+MLP,42,3,glass_adhesion_kpa,"{'alpha': np.float64(0.013921548533046514), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.008521393381383607)}"
 Mean,42,4,glass_adhesion_kpa,{}
-Ridge,42,4,glass_adhesion_kpa,{'alpha': np.float64(1.2173252504194043)}
-ElasticNet,42,4,glass_adhesion_kpa,"{'alpha': np.float64(0.01444525102276306), 'l1_ratio': np.float64(0.31210622617823774)}"
-KNN,42,4,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,42,4,glass_adhesion_kpa,"{'C': np.float64(75.10418138777538), 'epsilon': np.float64(0.38579957662567566), 'gamma': np.float64(0.3795853142670636)}"
+Ridge,42,4,glass_adhesion_kpa,{'alpha': np.float64(0.3905441275210791)}
+ElasticNet,42,4,glass_adhesion_kpa,"{'alpha': np.float64(0.003618723330959626), 'l1_ratio': np.float64(0.5180612190600298)}"
+KNN,42,4,glass_adhesion_kpa,"{'n_neighbors': 3, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,42,4,glass_adhesion_kpa,"{'C': np.float64(859.8737339212263), 'epsilon': np.float64(0.318897907718663), 'gamma': np.float64(0.0006235377135673159)}"
 RandomForest,42,4,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 578}"
-HistGB,42,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(6.5507138953920645), 'learning_rate': np.float64(0.003772270565370873), 'max_iter': 712, 'max_leaf_nodes': 51, 'min_samples_leaf': 5}"
-MLP,42,4,glass_adhesion_kpa,"{'alpha': np.float64(0.0010843543809852564), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00019135880487692312)}"
+HistGB,42,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0024763373012441064), 'learning_rate': np.float64(0.051909639713710286), 'max_iter': 383, 'max_leaf_nodes': 51, 'min_samples_leaf': 26}"
+MLP,42,4,glass_adhesion_kpa,"{'alpha': np.float64(1.4271483774997195e-05), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0007591104805282694)}"
 Mean,2024,0,glass_adhesion_kpa,{}
-Ridge,2024,0,glass_adhesion_kpa,{'alpha': np.float64(0.6967455769894335)}
-ElasticNet,2024,0,glass_adhesion_kpa,"{'alpha': np.float64(0.03358556852195037), 'l1_ratio': np.float64(0.8141034090947709)}"
-KNN,2024,0,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,2024,0,glass_adhesion_kpa,"{'C': np.float64(175.48241290432475), 'epsilon': np.float64(0.3046267605237099), 'gamma': np.float64(0.009965299258583972)}"
-RandomForest,2024,0,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 507}"
-HistGB,2024,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(4.664392378170961e-06), 'learning_rate': np.float64(0.24004349773825623), 'max_iter': 723, 'max_leaf_nodes': 59, 'min_samples_leaf': 7}"
-MLP,2024,0,glass_adhesion_kpa,"{'alpha': np.float64(2.7951537501102865e-05), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0006848110664589038)}"
+Ridge,2024,0,glass_adhesion_kpa,{'alpha': np.float64(0.19780887996026128)}
+ElasticNet,2024,0,glass_adhesion_kpa,"{'alpha': np.float64(0.0029347976556799537), 'l1_ratio': np.float64(0.6594075955893305)}"
+KNN,2024,0,glass_adhesion_kpa,"{'n_neighbors': 3, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,2024,0,glass_adhesion_kpa,"{'C': np.float64(230.9634272865441), 'epsilon': np.float64(0.24726254617002064), 'gamma': np.float64(0.06009682324617861)}"
+RandomForest,2024,0,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 840}"
+HistGB,2024,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.014193665235772824), 'learning_rate': np.float64(0.052588167581120615), 'max_iter': 365, 'max_leaf_nodes': 33, 'min_samples_leaf': 21}"
+MLP,2024,0,glass_adhesion_kpa,"{'alpha': np.float64(0.005027369033082317), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.005848943222502433)}"
 Mean,2024,1,glass_adhesion_kpa,{}
-Ridge,2024,1,glass_adhesion_kpa,{'alpha': np.float64(1.8374824103200829)}
-ElasticNet,2024,1,glass_adhesion_kpa,"{'alpha': np.float64(0.012603486329300214), 'l1_ratio': np.float64(0.10792732179314424)}"
+Ridge,2024,1,glass_adhesion_kpa,{'alpha': np.float64(0.013455869304969966)}
+ElasticNet,2024,1,glass_adhesion_kpa,"{'alpha': np.float64(0.000658167529601583), 'l1_ratio': np.float64(0.9497671760177564)}"
 KNN,2024,1,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,2024,1,glass_adhesion_kpa,"{'C': np.float64(175.48241290432475), 'epsilon': np.float64(0.3046267605237099), 'gamma': np.float64(0.009965299258583972)}"
-RandomForest,2024,1,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 2, 'n_estimators': 695}"
-HistGB,2024,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.05493344741893102), 'learning_rate': np.float64(0.011031541297123198), 'max_iter': 512, 'max_leaf_nodes': 40, 'min_samples_leaf': 14}"
-MLP,2024,1,glass_adhesion_kpa,"{'alpha': np.float64(2.7750912924536596e-05), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.006139896268217156)}"
+SVR-RBF,2024,1,glass_adhesion_kpa,"{'C': np.float64(230.9634272865441), 'epsilon': np.float64(0.24726254617002064), 'gamma': np.float64(0.06009682324617861)}"
+RandomForest,2024,1,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 840}"
+HistGB,2024,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.014193665235772824), 'learning_rate': np.float64(0.052588167581120615), 'max_iter': 365, 'max_leaf_nodes': 33, 'min_samples_leaf': 21}"
+MLP,2024,1,glass_adhesion_kpa,"{'alpha': np.float64(0.00031485669426501193), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.0034687578982979263)}"
 Mean,2024,2,glass_adhesion_kpa,{}
-Ridge,2024,2,glass_adhesion_kpa,{'alpha': np.float64(0.6967455769894335)}
-ElasticNet,2024,2,glass_adhesion_kpa,"{'alpha': np.float64(0.03358556852195037), 'l1_ratio': np.float64(0.8141034090947709)}"
-KNN,2024,2,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,2024,2,glass_adhesion_kpa,"{'C': np.float64(230.9634272865441), 'epsilon': np.float64(0.24726254617002064), 'gamma': np.float64(0.06009682324617861)}"
-RandomForest,2024,2,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 507}"
-HistGB,2024,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.20543554919833543), 'learning_rate': np.float64(0.010836899777889732), 'max_iter': 469, 'max_leaf_nodes': 47, 'min_samples_leaf': 11}"
-MLP,2024,2,glass_adhesion_kpa,"{'alpha': np.float64(0.03239839700816597), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00023748276392988898)}"
+Ridge,2024,2,glass_adhesion_kpa,{'alpha': np.float64(1.8374824103200829)}
+ElasticNet,2024,2,glass_adhesion_kpa,"{'alpha': np.float64(0.04360406038760394), 'l1_ratio': np.float64(0.8810153481830166)}"
+KNN,2024,2,glass_adhesion_kpa,"{'n_neighbors': 7, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,2024,2,glass_adhesion_kpa,"{'C': np.float64(175.48241290432475), 'epsilon': np.float64(0.3046267605237099), 'gamma': np.float64(0.009965299258583972)}"
+RandomForest,2024,2,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 2, 'n_estimators': 695}"
+HistGB,2024,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(3.596859183929653), 'learning_rate': np.float64(0.011136170871093153), 'max_iter': 767, 'max_leaf_nodes': 28, 'min_samples_leaf': 24}"
+MLP,2024,2,glass_adhesion_kpa,"{'alpha': np.float64(0.00031485669426501193), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.0034687578982979263)}"
 Mean,2024,3,glass_adhesion_kpa,{}
-Ridge,2024,3,glass_adhesion_kpa,{'alpha': np.float64(0.6967455769894335)}
-ElasticNet,2024,3,glass_adhesion_kpa,"{'alpha': np.float64(0.012603486329300214), 'l1_ratio': np.float64(0.10792732179314424)}"
-KNN,2024,3,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
+Ridge,2024,3,glass_adhesion_kpa,{'alpha': np.float64(0.0013020920498052978)}
+ElasticNet,2024,3,glass_adhesion_kpa,"{'alpha': np.float64(0.00012460479050773574), 'l1_ratio': np.float64(0.7273385034877214)}"
+KNN,2024,3,glass_adhesion_kpa,"{'n_neighbors': 7, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,2024,3,glass_adhesion_kpa,"{'C': np.float64(230.9634272865441), 'epsilon': np.float64(0.24726254617002064), 'gamma': np.float64(0.06009682324617861)}"
-RandomForest,2024,3,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.6, 'min_samples_leaf': 1, 'n_estimators': 519}"
-HistGB,2024,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.20543554919833543), 'learning_rate': np.float64(0.010836899777889732), 'max_iter': 469, 'max_leaf_nodes': 47, 'min_samples_leaf': 11}"
-MLP,2024,3,glass_adhesion_kpa,"{'alpha': np.float64(2.7750912924536596e-05), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.006139896268217156)}"
+RandomForest,2024,3,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 840}"
+HistGB,2024,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.007370189943801216), 'learning_rate': np.float64(0.020308865030168037), 'max_iter': 402, 'max_leaf_nodes': 21, 'min_samples_leaf': 5}"
+MLP,2024,3,glass_adhesion_kpa,"{'alpha': np.float64(0.026891100973517976), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.000493864649416736)}"
 Mean,2024,4,glass_adhesion_kpa,{}
 Ridge,2024,4,glass_adhesion_kpa,{'alpha': np.float64(0.6967455769894335)}
-ElasticNet,2024,4,glass_adhesion_kpa,"{'alpha': np.float64(0.03358556852195037), 'l1_ratio': np.float64(0.8141034090947709)}"
-KNN,2024,4,glass_adhesion_kpa,"{'n_neighbors': 7, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,2024,4,glass_adhesion_kpa,"{'C': np.float64(230.9634272865441), 'epsilon': np.float64(0.24726254617002064), 'gamma': np.float64(0.06009682324617861)}"
-RandomForest,2024,4,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 840}"
-HistGB,2024,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.00015135633814388673), 'learning_rate': np.float64(0.017845031186204622), 'max_iter': 745, 'max_leaf_nodes': 59, 'min_samples_leaf': 12}"
-MLP,2024,4,glass_adhesion_kpa,"{'alpha': np.float64(2.7951537501102865e-05), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0006848110664589038)}"
+ElasticNet,2024,4,glass_adhesion_kpa,"{'alpha': np.float64(0.0054202566599436735), 'l1_ratio': np.float64(0.3315903434097426)}"
+KNN,2024,4,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,2024,4,glass_adhesion_kpa,"{'C': np.float64(175.48241290432475), 'epsilon': np.float64(0.3046267605237099), 'gamma': np.float64(0.009965299258583972)}"
+RandomForest,2024,4,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.3, 'min_samples_leaf': 3, 'n_estimators': 223}"
+HistGB,2024,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.3465291051989707), 'learning_rate': np.float64(0.009892038363737789), 'max_iter': 687, 'max_leaf_nodes': 44, 'min_samples_leaf': 22}"
+MLP,2024,4,glass_adhesion_kpa,"{'alpha': np.float64(0.0023246020159967697), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.0013934448236455719)}"
 Mean,7,0,glass_adhesion_kpa,{}
-Ridge,7,0,glass_adhesion_kpa,{'alpha': np.float64(0.6404970863644245)}
-ElasticNet,7,0,glass_adhesion_kpa,"{'alpha': np.float64(0.0080298173318452), 'l1_ratio': np.float64(0.10934271221531461)}"
-KNN,7,0,glass_adhesion_kpa,"{'n_neighbors': 14, 'p': 1, 'weights': 'distance'}"
+Ridge,7,0,glass_adhesion_kpa,{'alpha': np.float64(0.19303977330548744)}
+ElasticNet,7,0,glass_adhesion_kpa,"{'alpha': np.float64(0.011613393605749771), 'l1_ratio': np.float64(0.8657809422479049)}"
+KNN,7,0,glass_adhesion_kpa,"{'n_neighbors': 4, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,7,0,glass_adhesion_kpa,"{'C': np.float64(563.1803612766821), 'epsilon': np.float64(0.10212115160838592), 'gamma': np.float64(0.01563002515391279)}"
 RandomForest,7,0,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 1, 'n_estimators': 490}"
-HistGB,7,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.0716007369182679e-05), 'learning_rate': np.float64(0.042835053510240736), 'max_iter': 383, 'max_leaf_nodes': 19, 'min_samples_leaf': 9}"
-MLP,7,0,glass_adhesion_kpa,"{'alpha': np.float64(1.5969048767770238e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0003573766264683751)}"
+HistGB,7,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.10829913599163539), 'learning_rate': np.float64(0.12417165236163052), 'max_iter': 416, 'max_leaf_nodes': 60, 'min_samples_leaf': 30}"
+MLP,7,0,glass_adhesion_kpa,"{'alpha': np.float64(0.01804982233305925), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.0012502009899977204)}"
 Mean,7,1,glass_adhesion_kpa,{}
-Ridge,7,1,glass_adhesion_kpa,{'alpha': np.float64(0.7318244737414893)}
-ElasticNet,7,1,glass_adhesion_kpa,"{'alpha': np.float64(0.012938091500262379), 'l1_ratio': np.float64(0.4338082154164481)}"
-KNN,7,1,glass_adhesion_kpa,"{'n_neighbors': 14, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,7,1,glass_adhesion_kpa,"{'C': np.float64(452.9289687098068), 'epsilon': np.float64(0.019959691020139204), 'gamma': np.float64(0.025246179740589205)}"
+Ridge,7,1,glass_adhesion_kpa,{'alpha': np.float64(1.0156002098994572)}
+ElasticNet,7,1,glass_adhesion_kpa,"{'alpha': np.float64(0.01974535241630056), 'l1_ratio': np.float64(0.6973917102581374)}"
+KNN,7,1,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,7,1,glass_adhesion_kpa,"{'C': np.float64(563.1803612766821), 'epsilon': np.float64(0.10212115160838592), 'gamma': np.float64(0.01563002515391279)}"
 RandomForest,7,1,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 600}"
-HistGB,7,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.0716007369182679e-05), 'learning_rate': np.float64(0.042835053510240736), 'max_iter': 383, 'max_leaf_nodes': 19, 'min_samples_leaf': 9}"
-MLP,7,1,glass_adhesion_kpa,"{'alpha': np.float64(0.00021815456171712106), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0005556091365739911)}"
+HistGB,7,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.10829913599163539), 'learning_rate': np.float64(0.12417165236163052), 'max_iter': 416, 'max_leaf_nodes': 60, 'min_samples_leaf': 30}"
+MLP,7,1,glass_adhesion_kpa,"{'alpha': np.float64(0.00020097937013251223), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0009904629239439677)}"
 Mean,7,2,glass_adhesion_kpa,{}
-Ridge,7,2,glass_adhesion_kpa,{'alpha': np.float64(0.6404970863644245)}
-ElasticNet,7,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0080298173318452), 'l1_ratio': np.float64(0.10934271221531461)}"
-KNN,7,2,glass_adhesion_kpa,"{'n_neighbors': 14, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,7,2,glass_adhesion_kpa,"{'C': np.float64(115.91716495135138), 'epsilon': np.float64(0.18108193321102026), 'gamma': np.float64(0.025085210526374857)}"
+Ridge,7,2,glass_adhesion_kpa,{'alpha': np.float64(0.15679864837306304)}
+ElasticNet,7,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0014174716941154197), 'l1_ratio': np.float64(0.5436409273124274)}"
+KNN,7,2,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,7,2,glass_adhesion_kpa,"{'C': np.float64(563.1803612766821), 'epsilon': np.float64(0.10212115160838592), 'gamma': np.float64(0.01563002515391279)}"
 RandomForest,7,2,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 600}"
-HistGB,7,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.002048286291361206), 'learning_rate': np.float64(0.014953292430794882), 'max_iter': 626, 'max_leaf_nodes': 59, 'min_samples_leaf': 15}"
-MLP,7,2,glass_adhesion_kpa,"{'alpha': np.float64(0.015589534960589067), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0004144453913207418)}"
+HistGB,7,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(2.7160867198454225e-05), 'learning_rate': np.float64(0.016431855796202644), 'max_iter': 754, 'max_leaf_nodes': 15, 'min_samples_leaf': 26}"
+MLP,7,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0522259108684459), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0028597137681187854)}"
 Mean,7,3,glass_adhesion_kpa,{}
-Ridge,7,3,glass_adhesion_kpa,{'alpha': np.float64(0.8802283145964637)}
-ElasticNet,7,3,glass_adhesion_kpa,"{'alpha': np.float64(0.012938091500262379), 'l1_ratio': np.float64(0.4338082154164481)}"
-KNN,7,3,glass_adhesion_kpa,"{'n_neighbors': 14, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,7,3,glass_adhesion_kpa,"{'C': np.float64(452.9289687098068), 'epsilon': np.float64(0.019959691020139204), 'gamma': np.float64(0.025246179740589205)}"
+Ridge,7,3,glass_adhesion_kpa,{'alpha': np.float64(47.809340557770746)}
+ElasticNet,7,3,glass_adhesion_kpa,"{'alpha': np.float64(0.5119599681990566), 'l1_ratio': np.float64(0.487242705838007)}"
+KNN,7,3,glass_adhesion_kpa,"{'n_neighbors': 4, 'p': 1, 'weights': 'distance'}"
+SVR-RBF,7,3,glass_adhesion_kpa,"{'C': np.float64(351.27065815540846), 'epsilon': np.float64(0.06326777830370006), 'gamma': np.float64(0.01240652979012466)}"
 RandomForest,7,3,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 1, 'n_estimators': 490}"
-HistGB,7,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(1.1416041405447281e-06), 'learning_rate': np.float64(0.007866259769140892), 'max_iter': 360, 'max_leaf_nodes': 47, 'min_samples_leaf': 3}"
-MLP,7,3,glass_adhesion_kpa,"{'alpha': np.float64(0.008583273711819057), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00013756379238218927)}"
+HistGB,7,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0009664402495119866), 'learning_rate': np.float64(0.03727656246422985), 'max_iter': 729, 'max_leaf_nodes': 19, 'min_samples_leaf': 19}"
+MLP,7,3,glass_adhesion_kpa,"{'alpha': np.float64(0.004823611529356869), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.002321815513975902)}"
 Mean,7,4,glass_adhesion_kpa,{}
-Ridge,7,4,glass_adhesion_kpa,{'alpha': np.float64(0.8802283145964637)}
-ElasticNet,7,4,glass_adhesion_kpa,"{'alpha': np.float64(0.0080298173318452), 'l1_ratio': np.float64(0.10934271221531461)}"
-KNN,7,4,glass_adhesion_kpa,"{'n_neighbors': 14, 'p': 1, 'weights': 'distance'}"
+Ridge,7,4,glass_adhesion_kpa,{'alpha': np.float64(0.6404970863644245)}
+ElasticNet,7,4,glass_adhesion_kpa,"{'alpha': np.float64(0.015561310098067912), 'l1_ratio': np.float64(0.7011186600478472)}"
+KNN,7,4,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 2, 'weights': 'distance'}"
 SVR-RBF,7,4,glass_adhesion_kpa,"{'C': np.float64(563.1803612766821), 'epsilon': np.float64(0.10212115160838592), 'gamma': np.float64(0.01563002515391279)}"
-RandomForest,7,4,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 1, 'n_estimators': 490}"
-HistGB,7,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.004211730155598131), 'learning_rate': np.float64(0.00647956951977449), 'max_iter': 326, 'max_leaf_nodes': 51, 'min_samples_leaf': 8}"
-MLP,7,4,glass_adhesion_kpa,"{'alpha': np.float64(0.00024378432310349197), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.0003572970377280978)}"
+RandomForest,7,4,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 600}"
+HistGB,7,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.002048286291361206), 'learning_rate': np.float64(0.014953292430794882), 'max_iter': 626, 'max_leaf_nodes': 59, 'min_samples_leaf': 15}"
+MLP,7,4,glass_adhesion_kpa,"{'alpha': np.float64(5.3686449245331034e-05), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.007284706174508092)}"
 Mean,1337,0,glass_adhesion_kpa,{}
-Ridge,1337,0,glass_adhesion_kpa,{'alpha': np.float64(0.5700347391018131)}
-ElasticNet,1337,0,glass_adhesion_kpa,"{'alpha': np.float64(0.013399028958131937), 'l1_ratio': np.float64(0.5036063352452936)}"
+Ridge,1337,0,glass_adhesion_kpa,{'alpha': np.float64(0.45640375816422146)}
+ElasticNet,1337,0,glass_adhesion_kpa,"{'alpha': np.float64(0.028585473230826997), 'l1_ratio': np.float64(0.9255850968819256)}"
 KNN,1337,0,glass_adhesion_kpa,"{'n_neighbors': 11, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,1337,0,glass_adhesion_kpa,"{'C': np.float64(88.44645385409352), 'epsilon': np.float64(0.14990768507999275), 'gamma': np.float64(0.06457952983518012)}"
-RandomForest,1337,0,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 3, 'n_estimators': 284}"
-HistGB,1337,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0003483223354803306), 'learning_rate': np.float64(0.06853811067180199), 'max_iter': 353, 'max_leaf_nodes': 9, 'min_samples_leaf': 26}"
-MLP,1337,0,glass_adhesion_kpa,"{'alpha': np.float64(0.001212446479220539), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0008230480084404595)}"
+RandomForest,1337,0,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 708}"
+HistGB,1337,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.1201040674517337), 'learning_rate': np.float64(0.0052992269617658655), 'max_iter': 771, 'max_leaf_nodes': 35, 'min_samples_leaf': 4}"
+MLP,1337,0,glass_adhesion_kpa,"{'alpha': np.float64(0.00012006705716253996), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.002434663183059664)}"
 Mean,1337,1,glass_adhesion_kpa,{}
-Ridge,1337,1,glass_adhesion_kpa,{'alpha': np.float64(0.5700347391018131)}
-ElasticNet,1337,1,glass_adhesion_kpa,"{'alpha': np.float64(0.013399028958131937), 'l1_ratio': np.float64(0.5036063352452936)}"
-KNN,1337,1,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
+Ridge,1337,1,glass_adhesion_kpa,{'alpha': np.float64(0.001243794732605542)}
+ElasticNet,1337,1,glass_adhesion_kpa,"{'alpha': np.float64(0.0004219778272920156), 'l1_ratio': np.float64(0.9351937446292771)}"
+KNN,1337,1,glass_adhesion_kpa,"{'n_neighbors': 11, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,1337,1,glass_adhesion_kpa,"{'C': np.float64(495.3509528474335), 'epsilon': np.float64(0.3993837597470769), 'gamma': np.float64(0.009245408808643827)}"
 RandomForest,1337,1,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 708}"
-HistGB,1337,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0015567569500370391), 'learning_rate': np.float64(0.002317378172426981), 'max_iter': 784, 'max_leaf_nodes': 61, 'min_samples_leaf': 12}"
-MLP,1337,1,glass_adhesion_kpa,"{'alpha': np.float64(5.46643628343477e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00029668693226448376)}"
+HistGB,1337,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.00027796566723537586), 'learning_rate': np.float64(0.015878389302760657), 'max_iter': 392, 'max_leaf_nodes': 14, 'min_samples_leaf': 4}"
+MLP,1337,1,glass_adhesion_kpa,"{'alpha': np.float64(0.03308537006452642), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.0011632121430721332)}"
 Mean,1337,2,glass_adhesion_kpa,{}
-Ridge,1337,2,glass_adhesion_kpa,{'alpha': np.float64(3.2029397453317667)}
-ElasticNet,1337,2,glass_adhesion_kpa,"{'alpha': np.float64(1.513001644845983), 'l1_ratio': np.float64(0.5992135989558813)}"
-KNN,1337,2,glass_adhesion_kpa,"{'n_neighbors': 15, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,1337,2,glass_adhesion_kpa,"{'C': np.float64(88.44645385409352), 'epsilon': np.float64(0.14990768507999275), 'gamma': np.float64(0.06457952983518012)}"
-RandomForest,1337,2,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 0.3, 'min_samples_leaf': 3, 'n_estimators': 284}"
-HistGB,1337,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.34952483332156803), 'learning_rate': np.float64(0.016680431428416992), 'max_iter': 757, 'max_leaf_nodes': 18, 'min_samples_leaf': 10}"
-MLP,1337,2,glass_adhesion_kpa,"{'alpha': np.float64(2.0423180472770894e-05), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00026617992504136384)}"
+Ridge,1337,2,glass_adhesion_kpa,{'alpha': np.float64(0.5700347391018131)}
+ElasticNet,1337,2,glass_adhesion_kpa,"{'alpha': np.float64(0.028585473230826997), 'l1_ratio': np.float64(0.9255850968819256)}"
+KNN,1337,2,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,1337,2,glass_adhesion_kpa,"{'C': np.float64(495.3509528474335), 'epsilon': np.float64(0.3993837597470769), 'gamma': np.float64(0.009245408808643827)}"
+RandomForest,1337,2,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.6, 'min_samples_leaf': 3, 'n_estimators': 389}"
+HistGB,1337,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.7108454046749976), 'learning_rate': np.float64(0.03248118506536386), 'max_iter': 349, 'max_leaf_nodes': 28, 'min_samples_leaf': 24}"
+MLP,1337,2,glass_adhesion_kpa,"{'alpha': np.float64(1.033963363979401e-06), 'hidden_layer_sizes': (64,), 'learning_rate_init': np.float64(0.004966809255988629)}"
 Mean,1337,3,glass_adhesion_kpa,{}
 Ridge,1337,3,glass_adhesion_kpa,{'alpha': np.float64(0.5700347391018131)}
-ElasticNet,1337,3,glass_adhesion_kpa,"{'alpha': np.float64(0.013399028958131937), 'l1_ratio': np.float64(0.5036063352452936)}"
-KNN,1337,3,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
+ElasticNet,1337,3,glass_adhesion_kpa,"{'alpha': np.float64(0.06646528898631487), 'l1_ratio': np.float64(0.9476502288987982)}"
+KNN,1337,3,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,1337,3,glass_adhesion_kpa,"{'C': np.float64(495.3509528474335), 'epsilon': np.float64(0.3993837597470769), 'gamma': np.float64(0.009245408808643827)}"
 RandomForest,1337,3,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 708}"
-HistGB,1337,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.42943975342789387), 'learning_rate': np.float64(0.12858939899847038), 'max_iter': 483, 'max_leaf_nodes': 49, 'min_samples_leaf': 8}"
-MLP,1337,3,glass_adhesion_kpa,"{'alpha': np.float64(5.46643628343477e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.00029668693226448376)}"
+HistGB,1337,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(4.498259056552505e-05), 'learning_rate': np.float64(0.011602844859998565), 'max_iter': 395, 'max_leaf_nodes': 36, 'min_samples_leaf': 3}"
+MLP,1337,3,glass_adhesion_kpa,"{'alpha': np.float64(5.722957213294448e-05), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0005486334977078168)}"
 Mean,1337,4,glass_adhesion_kpa,{}
-Ridge,1337,4,glass_adhesion_kpa,{'alpha': np.float64(0.9951523392902127)}
-ElasticNet,1337,4,glass_adhesion_kpa,"{'alpha': np.float64(0.011633395877425932), 'l1_ratio': np.float64(0.2292757116845886)}"
-KNN,1337,4,glass_adhesion_kpa,"{'n_neighbors': 9, 'p': 1, 'weights': 'distance'}"
+Ridge,1337,4,glass_adhesion_kpa,{'alpha': np.float64(0.001243794732605542)}
+ElasticNet,1337,4,glass_adhesion_kpa,"{'alpha': np.float64(0.002040396772185805), 'l1_ratio': np.float64(0.9284767563896903)}"
+KNN,1337,4,glass_adhesion_kpa,"{'n_neighbors': 10, 'p': 2, 'weights': 'distance'}"
 SVR-RBF,1337,4,glass_adhesion_kpa,"{'C': np.float64(495.3509528474335), 'epsilon': np.float64(0.3993837597470769), 'gamma': np.float64(0.009245408808643827)}"
-RandomForest,1337,4,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 708}"
-HistGB,1337,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.34952483332156803), 'learning_rate': np.float64(0.016680431428416992), 'max_iter': 757, 'max_leaf_nodes': 18, 'min_samples_leaf': 10}"
-MLP,1337,4,glass_adhesion_kpa,"{'alpha': np.float64(0.023643219017084476), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0004095769811446291)}"
+RandomForest,1337,4,glass_adhesion_kpa,"{'max_depth': None, 'max_features': 0.6, 'min_samples_leaf': 4, 'n_estimators': 817}"
+HistGB,1337,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.1201040674517337), 'learning_rate': np.float64(0.0052992269617658655), 'max_iter': 771, 'max_leaf_nodes': 35, 'min_samples_leaf': 4}"
+MLP,1337,4,glass_adhesion_kpa,"{'alpha': np.float64(0.08274524109786126), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.005312452910550147)}"
 Mean,20260731,0,glass_adhesion_kpa,{}
-Ridge,20260731,0,glass_adhesion_kpa,{'alpha': np.float64(1.589637648792257)}
-ElasticNet,20260731,0,glass_adhesion_kpa,"{'alpha': np.float64(0.017483733985963815), 'l1_ratio': np.float64(0.10414808628474417)}"
-KNN,20260731,0,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
+Ridge,20260731,0,glass_adhesion_kpa,{'alpha': np.float64(0.4910899291916067)}
+ElasticNet,20260731,0,glass_adhesion_kpa,"{'alpha': np.float64(0.00304630251773985), 'l1_ratio': np.float64(0.3042276587459221)}"
+KNN,20260731,0,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,20260731,0,glass_adhesion_kpa,"{'C': np.float64(395.7774241183433), 'epsilon': np.float64(0.2812117365486357), 'gamma': np.float64(0.010606140552368639)}"
 RandomForest,20260731,0,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 590}"
-HistGB,20260731,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0001757942735022828), 'learning_rate': np.float64(0.11701730101713792), 'max_iter': 476, 'max_leaf_nodes': 46, 'min_samples_leaf': 10}"
-MLP,20260731,0,glass_adhesion_kpa,"{'alpha': np.float64(0.0015381761127545885), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.008638549574265322)}"
+HistGB,20260731,0,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0001126669272986208), 'learning_rate': np.float64(0.03467232460613337), 'max_iter': 640, 'max_leaf_nodes': 27, 'min_samples_leaf': 25}"
+MLP,20260731,0,glass_adhesion_kpa,"{'alpha': np.float64(0.09676283737113664), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.0009401362509484474)}"
 Mean,20260731,1,glass_adhesion_kpa,{}
-Ridge,20260731,1,glass_adhesion_kpa,{'alpha': np.float64(0.4910899291916067)}
-ElasticNet,20260731,1,glass_adhesion_kpa,"{'alpha': np.float64(0.007509701192405268), 'l1_ratio': np.float64(0.35617508330529096)}"
+Ridge,20260731,1,glass_adhesion_kpa,{'alpha': np.float64(38.7166244084066)}
+ElasticNet,20260731,1,glass_adhesion_kpa,"{'alpha': np.float64(0.5041803675163096), 'l1_ratio': np.float64(0.6452130192932162)}"
 KNN,20260731,1,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,20260731,1,glass_adhesion_kpa,"{'C': np.float64(395.7774241183433), 'epsilon': np.float64(0.2812117365486357), 'gamma': np.float64(0.010606140552368639)}"
-RandomForest,20260731,1,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.6, 'min_samples_leaf': 3, 'n_estimators': 344}"
-HistGB,20260731,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0008024427786175433), 'learning_rate': np.float64(0.021472368666100677), 'max_iter': 165, 'max_leaf_nodes': 28, 'min_samples_leaf': 8}"
-MLP,20260731,1,glass_adhesion_kpa,"{'alpha': np.float64(3.052626372309333e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0002157528982052183)}"
+SVR-RBF,20260731,1,glass_adhesion_kpa,"{'C': np.float64(821.0744024566342), 'epsilon': np.float64(0.3062068744400649), 'gamma': np.float64(0.044196837733380186)}"
+RandomForest,20260731,1,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 590}"
+HistGB,20260731,1,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0015520512522324992), 'learning_rate': np.float64(0.013166041542238677), 'max_iter': 294, 'max_leaf_nodes': 44, 'min_samples_leaf': 23}"
+MLP,20260731,1,glass_adhesion_kpa,"{'alpha': np.float64(0.051149971593128715), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.0025817862912871203)}"
 Mean,20260731,2,glass_adhesion_kpa,{}
-Ridge,20260731,2,glass_adhesion_kpa,{'alpha': np.float64(0.4910899291916067)}
-ElasticNet,20260731,2,glass_adhesion_kpa,"{'alpha': np.float64(0.005970019301179553), 'l1_ratio': np.float64(0.31575952400422597)}"
-KNN,20260731,2,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
+Ridge,20260731,2,glass_adhesion_kpa,{'alpha': np.float64(0.14731082106388405)}
+ElasticNet,20260731,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0022338141354586354), 'l1_ratio': np.float64(0.669074309556309)}"
+KNN,20260731,2,glass_adhesion_kpa,"{'n_neighbors': 8, 'p': 2, 'weights': 'distance'}"
 SVR-RBF,20260731,2,glass_adhesion_kpa,"{'C': np.float64(395.7774241183433), 'epsilon': np.float64(0.2812117365486357), 'gamma': np.float64(0.010606140552368639)}"
-RandomForest,20260731,2,glass_adhesion_kpa,"{'max_depth': 16, 'max_features': 0.6, 'min_samples_leaf': 3, 'n_estimators': 824}"
-HistGB,20260731,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.000115364441059542), 'learning_rate': np.float64(0.08559616060002391), 'max_iter': 723, 'max_leaf_nodes': 56, 'min_samples_leaf': 16}"
-MLP,20260731,2,glass_adhesion_kpa,"{'alpha': np.float64(0.0029259738597161647), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.00016578593260149315)}"
+RandomForest,20260731,2,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 590}"
+HistGB,20260731,2,glass_adhesion_kpa,"{'l2_regularization': np.float64(7.738661469789181e-05), 'learning_rate': np.float64(0.05057238998200171), 'max_iter': 329, 'max_leaf_nodes': 15, 'min_samples_leaf': 3}"
+MLP,20260731,2,glass_adhesion_kpa,"{'alpha': np.float64(0.007673175734325112), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.00037360612079208127)}"
 Mean,20260731,3,glass_adhesion_kpa,{}
 Ridge,20260731,3,glass_adhesion_kpa,{'alpha': np.float64(0.4910899291916067)}
-ElasticNet,20260731,3,glass_adhesion_kpa,"{'alpha': np.float64(0.008288889276534686), 'l1_ratio': np.float64(0.1704824683078895)}"
+ElasticNet,20260731,3,glass_adhesion_kpa,"{'alpha': np.float64(0.00304630251773985), 'l1_ratio': np.float64(0.3042276587459221)}"
 KNN,20260731,3,glass_adhesion_kpa,"{'n_neighbors': 5, 'p': 1, 'weights': 'distance'}"
 SVR-RBF,20260731,3,glass_adhesion_kpa,"{'C': np.float64(395.7774241183433), 'epsilon': np.float64(0.2812117365486357), 'gamma': np.float64(0.010606140552368639)}"
 RandomForest,20260731,3,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 590}"
-HistGB,20260731,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(9.107514551548183), 'learning_rate': np.float64(0.06288372165920626), 'max_iter': 680, 'max_leaf_nodes': 49, 'min_samples_leaf': 10}"
-MLP,20260731,3,glass_adhesion_kpa,"{'alpha': np.float64(3.052626372309333e-06), 'hidden_layer_sizes': (96, 96, 48), 'learning_rate_init': np.float64(0.0002157528982052183)}"
+HistGB,20260731,3,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0001126669272986208), 'learning_rate': np.float64(0.03467232460613337), 'max_iter': 640, 'max_leaf_nodes': 27, 'min_samples_leaf': 25}"
+MLP,20260731,3,glass_adhesion_kpa,"{'alpha': np.float64(6.90180003203155e-05), 'hidden_layer_sizes': (128, 64), 'learning_rate_init': np.float64(0.003632804103527542)}"
 Mean,20260731,4,glass_adhesion_kpa,{}
-Ridge,20260731,4,glass_adhesion_kpa,{'alpha': np.float64(0.4910899291916067)}
-ElasticNet,20260731,4,glass_adhesion_kpa,"{'alpha': np.float64(0.008288889276534686), 'l1_ratio': np.float64(0.1704824683078895)}"
-KNN,20260731,4,glass_adhesion_kpa,"{'n_neighbors': 13, 'p': 1, 'weights': 'distance'}"
-SVR-RBF,20260731,4,glass_adhesion_kpa,"{'C': np.float64(821.0744024566342), 'epsilon': np.float64(0.3062068744400649), 'gamma': np.float64(0.044196837733380186)}"
-RandomForest,20260731,4,glass_adhesion_kpa,"{'max_depth': 10, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 590}"
-HistGB,20260731,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.7156998905642783), 'learning_rate': np.float64(0.02382288185875197), 'max_iter': 338, 'max_leaf_nodes': 37, 'min_samples_leaf': 12}"
-MLP,20260731,4,glass_adhesion_kpa,"{'alpha': np.float64(0.0023963452641193924), 'hidden_layer_sizes': (256, 128), 'learning_rate_init': np.float64(0.0010308732060939063)}"
+Ridge,20260731,4,glass_adhesion_kpa,{'alpha': np.float64(0.0011018296551709107)}
+ElasticNet,20260731,4,glass_adhesion_kpa,"{'alpha': np.float64(0.00017293463474701593), 'l1_ratio': np.float64(0.934588852325608)}"
+KNN,20260731,4,glass_adhesion_kpa,"{'n_neighbors': 7, 'p': 2, 'weights': 'distance'}"
+SVR-RBF,20260731,4,glass_adhesion_kpa,"{'C': np.float64(395.7774241183433), 'epsilon': np.float64(0.2812117365486357), 'gamma': np.float64(0.010606140552368639)}"
+RandomForest,20260731,4,glass_adhesion_kpa,"{'max_depth': 24, 'max_features': 0.3, 'min_samples_leaf': 3, 'n_estimators': 581}"
+HistGB,20260731,4,glass_adhesion_kpa,"{'l2_regularization': np.float64(0.0001126669272986208), 'learning_rate': np.float64(0.03467232460613337), 'max_iter': 640, 'max_leaf_nodes': 27, 'min_samples_leaf': 25}"
+MLP,20260731,4,glass_adhesion_kpa,"{'alpha': np.float64(0.051149971593128715), 'hidden_layer_sizes': (128,), 'learning_rate_init': np.float64(0.0025817862912871203)}"

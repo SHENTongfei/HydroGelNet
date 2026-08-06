@@ -1,19 +1,19 @@
 **Table 8.** Top candidate markers ranked by combined model-based and univariate evidence.
 
-| Target             | Feature          |   Rank |   Permutation importance |   Stability |   Univariate stat |   FDR q |   Direction |   Evidence | Tier     |
-|:-------------------|:-----------------|-------:|-------------------------:|------------:|------------------:|--------:|------------:|-----------:|:---------|
-| glass_adhesion_kpa | Cationic-ATAC    |      1 |                   0.2224 |         1   |            0.3928 |  0      |           1 |     0.9857 | high     |
-| glass_adhesion_kpa | pair_03          |      2 |                   0.099  |         1   |            0.2207 |  0.0076 |           1 |     0.9714 | high     |
-| glass_adhesion_kpa | Hydrophobic-BA   |      4 |                   0.0555 |         1   |            0.3843 |  0      |           1 |     0.9429 | high     |
-| glass_adhesion_kpa | pair_02          |      7 |                   0.0303 |         1   |           -0.3529 |  0      |          -1 |     0.9    | high     |
-| glass_adhesion_kpa | pair_13          |      6 |                   0.0313 |         0.9 |            0.6426 |  0      |           1 |     0.8743 | high     |
-| glass_adhesion_kpa | Nucleophilic-HEA |      9 |                   0.0239 |         1   |           -0.3147 |  0.0001 |          -1 |     0.8714 | high     |
-| glass_adhesion_kpa | pair_23          |      8 |                   0.0272 |         0.9 |            0.4646 |  0      |           1 |     0.8457 | high     |
-| glass_adhesion_kpa | pair_34          |     10 |                   0.0136 |         0.9 |            0.2765 |  0.0005 |           1 |     0.8171 | high     |
-| glass_adhesion_kpa | pair_35          |     12 |                   0.0111 |         0.9 |            0.2123 |  0.0098 |           1 |     0.7886 | high     |
-| glass_adhesion_kpa | pair_01          |      3 |                   0.0719 |         1   |           -0.1131 |  0.2111 |          -1 |     0.6571 | moderate |
-| glass_adhesion_kpa | pair_04          |      5 |                   0.0504 |         0.9 |           -0.0185 |  0.8053 |          -1 |     0.5886 | moderate |
-| glass_adhesion_kpa | pair_12          |     11 |                   0.0112 |         1   |            0.1598 |  0.0613 |           1 |     0.5429 | moderate |
-| glass_adhesion_kpa | Acidic-CBEA      |     13 |                   0.0107 |         1   |           -0.0407 |  0.649  |          -1 |     0.5143 | moderate |
-| glass_adhesion_kpa | pair_25          |     14 |                   0.0075 |         1   |           -0.1301 |  0.143  |          -1 |     0.5    | moderate |
-| glass_adhesion_kpa | pair_15          |     16 |                   0.0057 |         1   |           -0.0911 |  0.2891 |          -1 |     0.4714 | moderate |
+| Target             | Feature          |   Rank |   Permutation importance |   Stability |   Univariate stat |   FDR q |   Direction |   Evidence | Tier   |
+|:-------------------|:-----------------|-------:|-------------------------:|------------:|------------------:|--------:|------------:|-----------:|:-------|
+| glass_adhesion_kpa | pair_14          |      1 |                   0.1431 |         1   |            0.7336 |  0      |           1 |     0.9857 | high   |
+| glass_adhesion_kpa | Cationic-ATAC    |      2 |                   0.0612 |         1   |            0.2531 |  0      |           1 |     0.9714 | high   |
+| glass_adhesion_kpa | Hydrophobic-BA   |      3 |                   0.0505 |         1   |            0.6169 |  0      |           1 |     0.9571 | high   |
+| glass_adhesion_kpa | pair_03          |      4 |                   0.0498 |         1   |           -0.2273 |  0.0001 |          -1 |     0.9429 | high   |
+| glass_adhesion_kpa | pair_12          |      7 |                   0.0277 |         1   |           -0.4082 |  0      |          -1 |     0.9    | high   |
+| glass_adhesion_kpa | pair_01          |      5 |                   0.0394 |         0.9 |           -0.6317 |  0      |          -1 |     0.8886 | high   |
+| glass_adhesion_kpa | pair_13          |      6 |                   0.0346 |         0.9 |            0.6151 |  0      |           1 |     0.8743 | high   |
+| glass_adhesion_kpa | pair_34          |      9 |                   0.0151 |         1   |            0.6645 |  0      |           1 |     0.8714 | high   |
+| glass_adhesion_kpa | pair_24          |     11 |                   0.0136 |         1   |            0.1554 |  0.0079 |           1 |     0.8429 | high   |
+| glass_adhesion_kpa | Aromatic-PEA     |     13 |                   0.0087 |         1   |            0.6106 |  0      |           1 |     0.8143 | high   |
+| glass_adhesion_kpa | Nucleophilic-HEA |      8 |                   0.0188 |         0.8 |           -0.736  |  0      |          -1 |     0.8057 | high   |
+| glass_adhesion_kpa | pair_02          |     14 |                   0.0058 |         1   |           -0.6541 |  0      |          -1 |     0.8    | high   |
+| glass_adhesion_kpa | Acidic-CBEA      |     17 |                   0.0036 |         1   |           -0.5228 |  0      |          -1 |     0.7571 | high   |
+| glass_adhesion_kpa | pair_45          |     15 |                   0.004  |         0.9 |            0.2911 |  0      |           1 |     0.7457 | high   |
+| glass_adhesion_kpa | pair_15          |     20 |                   0.0027 |         1   |            0.1472 |  0.0115 |           1 |     0.7143 | high   |

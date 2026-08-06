@@ -6,27 +6,27 @@ Primary metric: **R2**. Outer protocol: 5-fold grouped CV repeated over 5 seed(s
 
 | target             | reference    |   proposed_mean |   reference_mean |   delta |   p_corrected_t |   p_holm | significance   |
 |:-------------------|:-------------|----------------:|-----------------:|--------:|----------------:|---------:|:---------------|
-| glass_adhesion_kpa | ElasticNet   |           0.726 |           0.5345 |  0.1915 |          0.0018 |   0.0107 | *              |
-| glass_adhesion_kpa | HistGB       |           0.726 |           0.6919 |  0.0342 |          0.4975 |   1      | ns             |
-| glass_adhesion_kpa | KNN          |           0.726 |           0.6869 |  0.0392 |          0.2702 |   1      | ns             |
-| glass_adhesion_kpa | MLP          |           0.726 |           0.3696 |  0.3564 |          0.0562 |   0.2812 | ns             |
-| glass_adhesion_kpa | Mean         |           0.726 |          -0.003  |  0.7291 |          0      |   0      | ****           |
-| glass_adhesion_kpa | RandomForest |           0.726 |           0.7186 |  0.0074 |          0.8579 |   1      | ns             |
-| glass_adhesion_kpa | Ridge        |           0.726 |           0.5406 |  0.1855 |          0.0009 |   0.0066 | **             |
-| glass_adhesion_kpa | SVR-RBF      |           0.726 |           0.6949 |  0.0311 |          0.4121 |   1      | ns             |
+| glass_adhesion_kpa | ElasticNet   |          0.7925 |           0.7689 |  0.0236 |          0.2766 |   1      | ns             |
+| glass_adhesion_kpa | HistGB       |          0.7925 |           0.7633 |  0.0293 |          0.1255 |   0.7532 | ns             |
+| glass_adhesion_kpa | KNN          |          0.7925 |           0.7892 |  0.0033 |          0.8888 |   1      | ns             |
+| glass_adhesion_kpa | MLP          |          0.7925 |           0.6991 |  0.0934 |          0.0221 |   0.1548 | ns             |
+| glass_adhesion_kpa | Mean         |          0.7925 |          -0.0049 |  0.7974 |          0      |   0      | ****           |
+| glass_adhesion_kpa | RandomForest |          0.7925 |           0.8093 | -0.0168 |          0.2286 |   1      | ns             |
+| glass_adhesion_kpa | Ridge        |          0.7925 |           0.7691 |  0.0235 |          0.2902 |   1      | ns             |
+| glass_adhesion_kpa | SVR-RBF      |          0.7925 |           0.799  | -0.0065 |          0.7451 |   1      | ns             |
 
-3/8 comparisons remain significant after Holm correction.
+1/8 comparisons remain significant after Holm correction.
 
 ## Bootstrap confidence intervals (cluster bootstrap)
 
-| scope        | model   | target             | metric   |   point |      lo |       hi |     se |
-|:-------------|:--------|:-------------------|:---------|--------:|--------:|---------:|-------:|
-| internal_oof | SIMPLEX | glass_adhesion_kpa | R2       |  0.7497 |  0.6647 |   0.8178 | 0.0393 |
-| internal_oof | SIMPLEX | glass_adhesion_kpa | RMSE     | 18.0512 | 15.4293 |  20.5099 | 1.3116 |
-| internal_oof | SIMPLEX | glass_adhesion_kpa | MAE      | 13.1829 | 11.4308 |  15.0491 | 0.9268 |
-| external     | SIMPLEX | glass_adhesion_kpa | R2       | -0.9108 | -1.2698 |  -0.6346 | 0.1612 |
-| external     | SIMPLEX | glass_adhesion_kpa | RMSE     | 91.5836 | 82.3606 | 101.084  | 4.7708 |
-| external     | SIMPLEX | glass_adhesion_kpa | MAE      | 72.9064 | 64.7953 |  81.7507 | 4.406  |
+| scope        | model   | target             | metric   |   point |      lo |      hi |     se |
+|:-------------|:--------|:-------------------|:---------|--------:|--------:|--------:|-------:|
+| internal_oof | SIMPLEX | glass_adhesion_kpa | R2       |  0.7497 |  0.6647 |  0.8178 | 0.0393 |
+| internal_oof | SIMPLEX | glass_adhesion_kpa | RMSE     | 18.0512 | 15.4293 | 20.5099 | 1.3116 |
+| internal_oof | SIMPLEX | glass_adhesion_kpa | MAE      | 13.1829 | 11.4308 | 15.0491 | 0.9268 |
+| external     | SIMPLEX | glass_adhesion_kpa | R2       |  0.7101 |  0.4582 |  0.8571 | 0.1043 |
+| external     | SIMPLEX | glass_adhesion_kpa | RMSE     | 33.657  | 24.7468 | 41.3974 | 4.3314 |
+| external     | SIMPLEX | glass_adhesion_kpa | MAE      | 26.878  | 19.5185 | 34.786  | 4.0322 |
 
 ## Permutation test
 
