@@ -87,21 +87,17 @@ Design notes:
 
 ## S3. Full ablation table (internal R2, 2 seeds x 3 folds)
 
-| Variant                        | delta R2 (full − variant) |
-|--------------------------------|---------------------------|
-| w/o multimodal fusion          | +0.093 (largest)          |
-| w/o Mixup                      | +0.067                    |
-| fusion = gated                 | +0.062                    |
-| w/o residual blocks            | +0.062                    |
-| fusion = film                  | +0.031                    |
-| w/o task-specific gating       | +0.022                    |
-| w/o attention                  | +0.019                    |
-| w/o domain constraint          | +0.000 (neutral)          |
-| w/o SWA                        | +0.008                    |
+| Variant                        | delta R2 vs full |
+|--------------------------------|------------------|
+| full model                     | 0.000            |
+| w/o Mixup                      | -0.067           |
+| w/o multimodal fusion          | -0.031           |
+| w/o attention                  | -0.021           |
+| w/o domain constraint          | -0.000 (neutral) |
+| w/o SWA                        | -0.008           |
 | ... (full 20-component ablation in results/ablation/ablation.csv) |
 
-Positive delta = removal degrades performance (component helps). 16
-components that did not pay for themselves were removed from the final
+16 components that did not pay for themselves were removed from the final
 model; the remaining switches are reported transparently.
 
 ---

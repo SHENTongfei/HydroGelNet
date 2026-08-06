@@ -326,7 +326,11 @@ def main() -> int:
     abl_df = pd.DataFrame(abl_rows)
     if len(abl_df):
         abl_df["p_holm"], abl_df["p_fdr"] = adjust(abl_df["p_corrected_t"].tolist())
-        abl_df["significance"] = abl_df["p_holm"].map(stars)
+        # A zero (or near-zero) delta carries no testable signal: leave the
+        # significance column empty for those rows instead of a spurious p.
+        abl_df["significance"] = [
+            "" if abs(d) < 1e-6 else stars(p)
+            for d, p in zip(abl_df["delta"], abl_df["p_holm"])]
     p_abl = os.path.join(paths.STATS_DIR, "ablation_stats.csv")
     abl_df.to_csv(p_abl, index=False)
     print(f"  [4/5] ablation statistics -> {p_abl}")

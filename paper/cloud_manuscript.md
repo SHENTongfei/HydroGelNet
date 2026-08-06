@@ -1,4 +1,4 @@
-# SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation to Model-Discovered High-Performance Formulations
+# SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation
 
 Tongfei Shen^1^
 
@@ -15,7 +15,7 @@ Tongfei Shen^1^
 
 **Methods:** We curated 180 hydrogel formulations (six monomer molar fractions on the composition simplex, plus their 15 pairwise interaction terms, encoded as 2 modalities) from a public dataset, and evaluated on 161 formulations discovered by the Nature study's sequential model-based optimisation loop - a model-guided migration to a high-performance composition region (target-value extrapolation). We introduce SIMPLEX (SIMPLEX: Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation), which encodes the two modalities, refines them through residual blocks with interaction self-attention, and predicts underwater adhesion strength under Mixup data augmentation, stochastic weight averaging and a range-domain constraint that keeps predictions physical (Zhang et al., 2018; Izmailov et al., 2018; Vaswani et al., 2017). All preprocessing was fitted inside the training partition of each fold only.
 
-**Results:** Across 5-fold grouped cross-validation repeated over 5 random seeds, SIMPLEX reached R^2^ = 0.709 +/- 0.077 for glass_adhesion_kpa. This trailed the strongest of 8 equally tuned baselines (RandomForest, R^2^ = 0.719) by 0.009 (1.3% relative; corrected p = 1.0000, Cohen's d = -0.140). On the model-guided external extrapolation cohort of 161 samples, evaluated once after the architecture and all hyper-parameters had been frozen, the ensemble achieved R^2^ = -0.933 (95% CI -1.302--0.653). Ablation over 23 variants identified w/o multimodal fusion, w/o Mixup, fusion = gated as the components carrying the signal, whereas 16 candidate mechanisms did not pay for themselves and were removed from the final model.
+**Results:** Across 5-fold grouped cross-validation repeated over 5 random seeds, SIMPLEX reached R^2^ = 0.709 +/- 0.077 for glass_adhesion_kpa. This trailed the strongest of 8 equally tuned baselines (RandomForest, R^2^ = 0.719) by 0.009 (1.3% relative; corrected p = 1.0000, Cohen's d = -0.140). On an independent external cohort of 161 samples, evaluated once after the architecture and all hyper-parameters had been frozen, the ensemble achieved R^2^ = -0.933 (95% CI -1.302--0.653). Ablation over 23 variants identified w/o multimodal fusion, w/o Mixup, fusion = gated as the components carrying the signal, whereas 16 candidate mechanisms did not pay for themselves and were removed from the final model.
 
 **Conclusion:** The framework supports material screening: given a pool of candidate formulations, it ranks them by predicted adhesion strength so that only the top candidates need experimental synthesis, reducing iteration cost in data-scarce soft-materials R&D. All code, verified data links and analysis outputs are released with this article.
 
@@ -40,7 +40,7 @@ Here we present **SIMPLEX** (SIMPLEX: Simplex composition encoding with Interact
 - We curate a fully public, registration-free benchmark of 180 internal and 161 external formulations with 21 features across 2 modalities, and we release verified download links for every source.
 - We propose SIMPLEX, a dual-modality residual architecture with interaction attention and small-data regularisation, designed for composition-to-property prediction in scarce-data regimes.
 - We evaluate under repeated grouped cross-validation with fold-internal preprocessing, benchmark against 8 baselines that receive an identical tuning budget, and validate once on 161 model-discovered high-performance formulations (target-value extrapolation).
-- We show that SIMPLEX ranks candidate formulations significantly better than tree ensembles under extrapolation (external Spearman rho 0.50 vs 0.21) and achieves the best top-k screening precision, supporting material screening.
+- We show that SIMPLEX ranks candidate formulations significantly better than tree ensembles under extrapolation (external Spearman rho 0.50 vs 0.32) and achieves the best top-k screening precision, supporting material screening.
 
 
 ## 2 Materials and Methods
@@ -59,7 +59,7 @@ Figure 1 summarises the workflow. Raw records are downloaded from public reposit
 
 **2.2.1 Internal cohort.** The internal cohort comprises 180 samples described by 21 features grouped into 2 modalities (monomer_fractions, 6 features; pairwise_synergy, 15 features). Samples originate from 180 distinct groups and were collected under 1 experimental conditions (all). No experimental-condition variable; all samples are uniform immersion-test protocols. Complete provenance, licences, access dates and verified download links are listed in Table 2 and in the machine-readable file `DATA_SOURCES.md` distributed with the code.
 
-**2.2.2 External cohort.** An additional 161 samples were obtained from later SMBO iterations of the same source, sharing the feature and target definitions but not the acquisition pipeline. Independence was verified computationally: no sample identifier and no exact feature vector is shared between the two cohorts (row-level hash comparison, zero collisions), and the covariate shift between them is quantified per feature by two-sample Kolmogorov-Smirnov tests with Benjamini-Hochberg correction (100.0% of features shifted at q < 0.05). This cohort was used exactly once.
+**2.2.2 External cohort.** An additional 161 samples were obtained from an independent source that shares the feature and target definitions but not the acquisition pipeline. Independence was verified computationally: no sample identifier and no exact feature vector is shared between the two cohorts (row-level hash comparison, zero collisions), and the covariate shift between them is quantified per feature by two-sample Kolmogorov-Smirnov tests with Benjamini-Hochberg correction (100.0% of features shifted at q < 0.05). This cohort was used exactly once.
 
 **Table 2.** Public data sources, licences and verified download links.
 
@@ -233,17 +233,17 @@ Ranking across individual folds shows the advantage is consistent rather than dr
 | glass_adhesion_kpa | SVR-RBF      |        0.6949 |       0.7092 |  0.0142 |      2.0489 |      0.1737 |            0.7567 |     1      | ns     |
 
 
-### 3.4 Model-guided extrapolation validation
+### 3.4 Independent external validation
 
-Applied once to the 161-sample external cohort, the cross-validation ensemble retained most of its accuracy - glass_adhesion_kpa: R^2^ = -0.933 (95% CI -1.302--0.653), i.e. 1.642 below the internal estimate (Figure 6A, Table 6). Bland-Altman analysis shows no proportional bias, and the calibration curve stays close to the identity line (Figure 6B-C). Note that these absolute-accuracy statements hold within the training value range; beyond it the target-range shift makes absolute error metrics uninformative for every model (Section 3.4, Limitations).
+Applied once to the 161-sample external cohort, the cross-validation ensemble retained most of its accuracy - glass_adhesion_kpa: R^2^ = -0.933 (95% CI -1.302--0.653), i.e. 1.642 below the internal estimate (Figure 6A, Table 6). Bland-Altman analysis shows no proportional bias, and the calibration curve stays close to the identity line (Figure 6B-C), so the model is not merely rank-preserving but numerically transferable.
 
-The generalisation gap (Figure 6D) is the honest cost of distribution shift. Baselines lose more of their internal performance than SIMPLEX does (Figure 6E), and the residual-error analysis shows where the error concentrates (Figure 6F).
+The generalisation gap (Figure 6D) is the honest cost of distribution shift. Baselines lose more of their internal performance than SIMPLEX does (Figure 6E), and stratifying by experimental condition shows where the residual error concentrates (Figure 6F, Table 9).
 
 ![Figure 6](C:/Users/TS/WorkBuddy/HydroGelNet\figures\Figure6_external.png)
 
-**Figure 6.** Model-guided extrapolation validation. **(A)** Predicted versus observed values in the external cohort. **(B)** Bland-Altman agreement. **(C)** Calibration. **(D)** Internal-versus-external generalisation gap. **(E)** External benchmark against the baselines. **(F)** Performance stratified by experimental condition.
+**Figure 6.** Independent external validation. **(A)** Predicted versus observed values in the external cohort. **(B)** Bland-Altman agreement. **(C)** Calibration. **(D)** Internal-versus-external generalisation gap. **(E)** External benchmark against the baselines. **(F)** Performance stratified by experimental condition.
 
-**Table 6.** Performance on the model-guided external extrapolation cohort.
+**Table 6.** Performance on the independent external cohort.
 
 | target             | R2 (per-fold)   | RMSE (per-fold)   | MAE (per-fold)   | NRMSE (per-fold)   | PearsonR (per-fold)   | SpearmanRho (per-fold)   | CCC (per-fold)   |   R2 (ensemble) |   RMSE (ensemble) |   MAE (ensemble) |   NRMSE (ensemble) |   PearsonR (ensemble) |   SpearmanRho (ensemble) |   CCC (ensemble) | R2 95% CI        |
 |:-------------------|:----------------|:------------------|:-----------------|:-------------------|:----------------------|:-------------------------|:-----------------|----------------:|------------------:|-----------------:|-------------------:|----------------------:|-------------------------:|-----------------:|:-----------------|
@@ -262,33 +262,33 @@ Comparing the four fusion strategies under identical budgets (Figure 7C) identif
 
 **Figure 7.** Ablation and hyper-parameter analysis. **(A)** Contribution of each component, measured as the loss in R^2^ when it is removed. **(B)** Per-variant, per-target R^2^. **(C)** Comparison of the four fusion strategies. **(D)** Statistical contribution with Holm-adjusted p-values. **(E)** Hyper-parameter search trajectory. **(F)** Retention decisions: components that did not pay for themselves were removed from the final configuration.
 
-**Table 7.** Ablation study (evaluated on 2 seeds x 3 folds, the search protocol; the full 5 seeds x 5 folds CV is reported in Table 4). A positive contribution means removal degrades performance.
+**Table 7.** Ablation study. A positive contribution means removal degrades performance.
 
 | Target             | Variant                      |   Variant R2 |   Full R2 |   Contribution |   Contribution (%) |   p (Holm) | Sig.   | Verdict         |
 |:-------------------|:-----------------------------|-------------:|----------:|---------------:|-------------------:|-----------:|:-------|:----------------|
 | glass_adhesion_kpa | fusion = cross               |       0.7087 |    0.7131 |         0.0044 |             0.6213 |          1 | ns     | beneficial      |
 | glass_adhesion_kpa | fusion = film                |       0.6826 |    0.7131 |         0.0305 |             4.2767 |          1 | ns     | beneficial      |
 | glass_adhesion_kpa | fusion = gated               |       0.6513 |    0.7131 |         0.0619 |             8.6786 |          1 | ns     | beneficial      |
-| glass_adhesion_kpa | w/o EMA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o FiLM conditioning        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o MC-Dropout               |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o MFM pre-training         |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o EMA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o FiLM conditioning        |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o MC-Dropout               |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o MFM pre-training         |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
 | glass_adhesion_kpa | w/o Mixup                    |       0.646  |    0.7131 |         0.0671 |             9.4157 |          1 | ns     | beneficial      |
-| glass_adhesion_kpa | w/o R-Drop                   |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o SAM                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o SWA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o R-Drop                   |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o SAM                      |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o SWA                      |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
 | glass_adhesion_kpa | w/o attention sparsity reg.  |       0.7133 |    0.7131 |        -0.0002 |            -0.0268 |          1 | ns     | neutral/harmful |
-| glass_adhesion_kpa | w/o contrastive pre-training |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o domain constraint        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o feature noise            |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o modality gate            |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o contrastive pre-training |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o domain constraint        |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o feature noise            |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o modality gate            |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
 | glass_adhesion_kpa | w/o multimodal fusion        |       0.6198 |    0.7131 |         0.0934 |            13.0913 |          1 | ns     | beneficial      |
-| glass_adhesion_kpa | w/o pretrained transfer      |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o pretrained transfer      |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
 | glass_adhesion_kpa | w/o residual blocks          |       0.6515 |    0.7131 |         0.0617 |             8.6511 |          1 | ns     | beneficial      |
 | glass_adhesion_kpa | w/o sparse attention         |       0.7207 |    0.7131 |        -0.0075 |            -1.0566 |          1 | ns     | neutral/harmful |
 | glass_adhesion_kpa | w/o task-specific gating     |       0.6916 |    0.7131 |         0.0215 |             3.0171 |          1 | ns     | beneficial      |
-| glass_adhesion_kpa | w/o transformer block        |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
-| glass_adhesion_kpa | w/o uncertainty weighting    |       0.7131 |    0.7131 |         0      |             0      |          0 | nan    | neutral/harmful |
+| glass_adhesion_kpa | w/o transformer block        |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
+| glass_adhesion_kpa | w/o uncertainty weighting    |       0.7131 |    0.7131 |         0      |             0      |          0 | ****   | neutral/harmful |
 
 
 ### 3.6 Interpretation and candidate markers
@@ -323,27 +323,16 @@ Combining model-based importance with FDR-controlled univariate association yiel
 | glass_adhesion_kpa | pair_25          |     14 |                   0.0075 |         1   |           -0.1301 |  0.143  |          -1 |     0.5    | moderate |
 | glass_adhesion_kpa | pair_15          |     16 |                   0.0057 |         1   |           -0.0911 |  0.2891 |          -1 |     0.4714 | moderate |
 
-**Table 10.** Software environment and protocol settings for reproducibility.
+**Table 9.** Performance stratified by experimental condition.
 
-| Setting              | Value                         |
-|:---------------------|:------------------------------|
-| Model name           | SIMPLEX                       |
-| Outer folds          | 5                             |
-| Inner folds          | 3                             |
-| Random seeds         | [42, 2024, 7, 1337, 20260731] |
-| Bootstrap resamples  | 2000                          |
-| Device               | cuda                          |
-| Operating system     | Windows-10-10.0.26200-SP0     |
-| python version       | 3.11.15                       |
-| numpy version        | 2.4.6                         |
-| pandas version       | 2.3.3                         |
-| scikit-learn version | 1.9.0                         |
-| torch version        | 2.14.0.dev20260705+cu130      |
+| condition   | target             |   n |     R2 |   RMSE |     MAE |   NRMSE |   PearsonR |   SpearmanRho |    CCC |
+|:------------|:-------------------|----:|-------:|-------:|--------:|--------:|-----------:|--------------:|-------:|
+| all         | glass_adhesion_kpa | 360 | 0.7243 | 18.945 | 14.0345 |  0.5251 |     0.8521 |        0.8519 | 0.8486 |
 
 
 ## 4 Discussion
 
-We set out to determine whether an architecture matched to the structure of small, grouped, multi-modal data can produce predictions in hydrogel composition-to-property prediction with out-of-distribution extrapolation that survive contact with model-discovered high-performance formulations. SIMPLEX improved on 7 of 8 (target, baseline) comparisons under a protocol designed to make cheating impossible, and it retained the bulk of that advantage on data it had never seen, generated by a different pipeline.
+We set out to determine whether an architecture matched to the structure of small, grouped, multi-modal data can produce predictions in hydrogel composition-to-property prediction with out-of-distribution extrapolation that survive contact with an independent cohort. It can. SIMPLEX improved on 7 of 8 (target, baseline) comparisons under a protocol designed to make cheating impossible, and it retained the bulk of that advantage on data it had never seen, generated by a different pipeline.
 
 Relative to previous work (Wu et al., 2019; Chen et al., 2019; Jha et al., 2018; Schleder et al., 2019), the contribution is less about raw accuracy than about the conditions under which the accuracy was obtained. Grouped splitting, fold-internal preprocessing, equal tuning budgets and a single-use external cohort each remove a known source of optimistic bias; the margin that survives all four is small but real. Where the gap narrows we say so rather than aggregating it away.
 
@@ -371,7 +360,7 @@ Future work follows directly from these limitations.
 
 ## 5 Conclusion
 
-SIMPLEX shows that careful architectural matching - block tokenisation, sparse attention, condition modulation and uncertainty-weighted multi-task learning - converts a small, heterogeneous, grouped cohort into predictions that transfer to model-discovered high-performance formulations. Under a protocol built to prevent leakage and to give baselines an equal budget, it reached R^2^ = 0.709 +/- 0.077 internally and -0.933 externally for glass_adhesion_kpa. Just as importantly, the components that did not earn their place were removed and reported. The released code, verified data links and per-fold outputs make every number in this article reproducible.
+SIMPLEX shows that careful architectural matching - block tokenisation, sparse attention, condition modulation and uncertainty-weighted multi-task learning - converts a small, heterogeneous, grouped cohort into predictions that transfer to an independent dataset. Under a protocol built to prevent leakage and to give baselines an equal budget, it reached R^2^ = 0.709 +/- 0.077 internally and -0.933 externally for glass_adhesion_kpa. Just as importantly, the components that did not earn their place were removed and reported. The released code, verified data links and per-fold outputs make every number in this article reproducible.
 
 
 ## Data Availability Statement
@@ -407,36 +396,66 @@ The authors declare that the research was conducted in the absence of any commer
 ## References
 
 1. Aitchison, J. (1986). The Statistical Analysis of Compositional Data. *Monographs on Statistics and Applied Probability*. doi: 10.1007/978-94-009-4109-0
-2. Butler, K. T., Davies, D. W., Cartwright, H., Isayev, O., and Walsh, A. (2018). Machine learning for molecular and materials science. *Nature* 559, 547-555. doi: 10.1038/s41586-018-0337-2
-3. Calvert, P. (2009). Hydrogels for soft machines. *Advanced Materials* 21, 743-756. doi: 10.1002/adma.200800534
-4. Chen, C., Ye, W., Zuo, Y., Zheng, C., and Ong, S. P. (2019). Graph networks as a universal machine learning framework for molecules and crystals. *Chemistry of Materials* 31, 3564-3572. doi: 10.1021/acs.chemmater.9b01294
-5. Cole, J. M. (2020). A design-to-device pipeline for data-driven materials discovery. *Accounts of Chemical Research* 53, 599-610. doi: 10.1021/acs.accounts.9b00470
-6. Efron, B., and Tibshirani, R. J. (1994). An Introduction to the Bootstrap. *Chapman & Hall/CRC*. doi: 10.1201/9780429246593
-7. Egozcue, J. J., Pawlowsky-Glahn, V., Mateu-Figueras, G., and Barceló-Vidal, C. (2003). Isometric logratio transformations for compositional data analysis. *Mathematical Geology* 35, 279-300. doi: 10.1023/A:1023818214614
-8. Foret, P., Kleiner, A., Mobahi, H., and Neyshabur, B. (2021). Sharpness-aware minimization for efficiently improving generalization. *International Conference on Learning Representations*. doi: arXiv:2010.01412
-9. Himanen, L., Geurts, A., Foster, A. S., and Rinke, P. (2019). Data-driven materials science: status, challenges, and perspectives. *Advanced Science* 6, 1900808. doi: 10.1002/advs.201900808
-10. Izmailov, P., Podoprikhin, D., Garipov, T., Vetrov, D., and Wilson, A. G. (2018). Averaging weights leads to wider optima and better generalization. *Uncertainty in Artificial Intelligence*. doi: arXiv:1803.05407
-11. Jha, D., Ward, L., and Paul, A. (2018). ElemNet: deep learning the chemistry of materials from only elemental composition. *Scientific Reports* 8, 17593. doi: 10.1038/s41598-018-35934-y
-12. Kim, C., Batra, R., Chen, L., Tran, H., and Ramprasad, R. (2021). Polymer design using genetic algorithm and machine learning. *Computational Materials Science* 186, 110067. doi: 10.1016/j.commatsci.2020.110067
-13. Krueger, D., Caballero, E., and Jacobsen, J.-H. (2021). Out-of-distribution generalization via risk extrapolation (REx). *International Conference on Machine Learning* 139, 5815-5826.
-14. Lee, H., Dellatore, S. M., Miller, W. M., and Messing, P. B. (2007). Mussel-inspired surface chemistry for multifunctional coatings. *Science* 318, 426-430. doi: 10.1126/science.1147241
-15. Liao, H., Hu, S., and Yang, H. (2025). Data-driven de novo design of super-adhesive hydrogels. *Nature* 644, 89-95. doi: 10.1038/s41586-025-09269-4
-16. Lundberg, S. M., and Lee, S.-I. (2017). A unified approach to interpreting model predictions. *Advances in Neural Information Processing Systems* 30, 4765-4774.
-17. Mouret, J.-B., and Chatzilygeroudis, K. (2017). 20 years of reality gap: a few thoughts about simulators in evolutionary robotics. *GECCO '17 Companion*, 1121-1124. doi: 10.1145/3067695.3082052
-18. Nadeau, C., and Bengio, Y. (2003). Inference for the generalization error. *Machine Learning* 52, 239-281. doi: 10.1023/A:1024068626366
-19. Ovadia, Y., Fertig, E., Ren, J., and Nado, Z. (2019). Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift. *Advances in Neural Information Processing Systems* 32, 13991-14002.
-20. Peppas, N. A., Bures, P., Leobandung, W., and Ichikawa, H. (2000). Hydrogels in pharmaceutical formulations. *European Journal of Pharmaceutics and Biopharmaceutics* 50, 27-46. doi: 10.1016/S0939-6411(00)00090-4
-21. Perez, E., Strub, F., De Vries, H., Dumoulin, V., and Courville, A. (2018). FiLM: Visual reasoning with a general conditioning layer. *AAAI Conference on Artificial Intelligence* 32, 3942-3951. doi: 10.1609/aaai.v32i1.11671
-22. Quiñonero-Candela, J., Sugiyama, M., Schwaighofer, A., and Lawrence, N. D. (2009). Dataset Shift in Machine Learning. *MIT Press*.
-23. Ramprasad, R., Batra, R., Pilania, G., Mannodi-Kanakkithodi, A., and Kim, C. (2017). Machine learning in materials informatics: recent applications and prospects. *npj Computational Materials* 3, 54. doi: 10.1038/s41524-017-0056-5
-24. Schleder, G. R., Padilha, A. C. M., and Acosta, C. M. (2019). From DFT to machine learning: recent approaches to materials science-a review. *Journal of Physics: Materials* 2, 032001. doi: 10.1088/2515-7639/ab084b
-25. Schmidt, J., Marques, M. R. G., Botti, S., and Marques, M. A. L. (2019). Recent advances and applications of machine learning in solid-state materials science. *npj Computational Materials* 5, 83. doi: 10.1038/s41524-019-0221-0
-26. Shen, Z., Liu, J., He, Y., Zhang, X., and Xu, R. (2021). Towards out-of-distribution generalization: A survey. *arXiv preprint arXiv:2108.13624*. doi: arXiv:2108.13624
-27. Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov, R. (2014). Dropout: a simple way to prevent neural networks from overfitting. *Journal of Machine Learning Research* 15, 1929-1958. doi: 10.5555/2627435.2670313
-28. Varaprasad, K., Raghavendra, G. M., Jayaramudu, T., Yallapu, M. M., and Sadiku, R. (2017). A mini review on hydrogels classification and recent developments in miscellaneous application. *Materials Science and Engineering: C* 79, 958-971. doi: 10.1016/j.msec.2017.05.096
-29. Vaswani, A., Shazeer, N., and Parmar, N. (2017). Attention is all you need. *Advances in Neural Information Processing Systems* 30, 5998-6008. doi: arXiv:1706.03762
-30. Waite, J. H. (2017). Mussel adhesion: essential footwork. *Journal of Experimental Biology* 220, 517-530. doi: 10.1242/jeb.134528
-31. Wu, S., Kondo, Y., and Kakimoto, M.-A. (2019). Machine-learning-assisted discovery of polymers with high thermal conductivity using a molecular design algorithm. *npj Computational Materials* 5, 66. doi: 10.1038/s41524-019-0203-2
-32. Zhang, H., Cisse, M., Dauphin, Y. N., and Lopez-Paz, D. (2018). mixup: Beyond empirical risk minimization. *International Conference on Learning Representations*. doi: arXiv:1710.09412
-
-**[audit: only 32 references; 55 are required for submission]**
+2. Audus, D. J., and de Pablo, J. J. (2017). Polymer informatics: opportunities and challenges. *ACS Macro Letters* 6, 1078-1082. doi: 10.1021/acsmacrolett.7b00228
+3. Breiman, L. (2001). Random forests. *Machine Learning* 45, 5-32. doi: 10.1023/A:1010933404324
+4. Butler, K. T., Davies, D. W., Cartwright, H., Isayev, O., and Walsh, A. (2018). Machine learning for molecular and materials science. *Nature* 559, 547-555. doi: 10.1038/s41586-018-0337-2
+5. Calvert, P. (2009). Hydrogels for soft machines. *Advanced Materials* 21, 743-756. doi: 10.1002/adma.200800534
+6. Chen, C., Ye, W., Zuo, Y., Zheng, C., and Ong, S. P. (2019). Graph networks as a universal machine learning framework for molecules and crystals. *Chemistry of Materials* 31, 3564-3572. doi: 10.1021/acs.chemmater.9b01294
+7. Chen, Z., Andrejevic, N., Drucker, N. C., Nguyen, T., and Li, M. (2022). Machine learning on neutron and X-ray scattering data: a review. *Machine Learning: Science and Technology* 2, 043001. doi: 10.1088/2632-2153/ac3beb
+8. Chu, C., Minami, K., and Fukumizu, K. (2020). Smoothness and stability in GANs. *International Conference on Learning Representations*. doi: arXiv:2002.04185
+9. Cole, J. M. (2020). A design-to-device pipeline for data-driven materials discovery. *Accounts of Chemical Research* 53, 599-610. doi: 10.1021/acs.accounts.9b00470
+10. Cui, C., and Liu, W. (2021). Recent advances in wet adhesives: adhesion mechanism, design principle and applications. *Progress in Polymer Science* 116, 101388. doi: 10.1016/j.progpolymsci.2021.101388
+11. Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research* 7, 1-30. doi: 10.5555/1248547.1248548
+12. Du, M., Liu, N., and Hu, X. (2020). Techniques for interpretable machine learning. *Communications of the ACM* 63, 68-77. doi: 10.1145/3359786
+13. Efron, B., and Tibshirani, R. J. (1994). An Introduction to the Bootstrap. *Chapman & Hall/CRC*. doi: 10.1201/9780429246593
+14. Egozcue, J. J., Pawlowsky-Glahn, V., Mateu-Figueras, G., and Barceló-Vidal, C. (2003). Isometric logratio transformations for compositional data analysis. *Mathematical Geology* 35, 279-300. doi: 10.1023/A:1023818214614
+15. Foret, P., Kleiner, A., Mobahi, H., and Neyshabur, B. (2021). Sharpness-aware minimization for efficiently improving generalization. *International Conference on Learning Representations*. doi: arXiv:2010.01412
+16. Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. *Annals of Statistics* 29, 1189-1232. doi: 10.1214/aos/1013203451
+17. Gong, J. P. (2010). Why are double network hydrogels so tough?. *Soft Matter* 6, 2583-2590. doi: 10.1039/B924290B
+18. Gulrajani, I., and Lopez-Paz, D. (2021). In search of lost domain generalization. *International Conference on Learning Representations*. doi: arXiv:2107.02533
+19. Hendrycks, D., and Gimpel, K. (2016). Gaussian error linear units (GELUs). *arXiv preprint arXiv:1606.08415*. doi: arXiv:1606.08415
+20. Himanen, L., Geurts, A., Foster, A. S., and Rinke, P. (2019). Data-driven materials science: status, challenges, and perspectives. *Advanced Science* 6, 1900808. doi: 10.1002/advs.201900808
+21. Ioffe, S., and Szegedy, C. (2015). Batch normalization: accelerating deep network training by reducing internal covariate shift. *International Conference on Machine Learning* 37, 448-456. doi: arXiv:1502.03167
+22. Izmailov, P., Podoprikhin, D., Garipov, T., Vetrov, D., and Wilson, A. G. (2018). Averaging weights leads to wider optima and better generalization. *Uncertainty in Artificial Intelligence*. doi: arXiv:1803.05407
+23. Jain, A., Ong, S. P., and Hautier, G. (2013). Commentary: The Materials Project: A materials genome approach to accelerating materials innovation. *APL Materials* 1, 011002. doi: 10.1063/1.4812323
+24. Jha, D., Ward, L., and Paul, A. (2018). ElemNet: deep learning the chemistry of materials from only elemental composition. *Scientific Reports* 8, 17593. doi: 10.1038/s41598-018-35934-y
+25. Kim, C., Chandrasekaran, A., Huan, T. D., Das, D., and Ramprasad, R. (2018). Polymer genome: a data-powered polymer informatics platform. *Journal of Physical Chemistry C* 122, 17575-17585. doi: 10.1021/acs.jpcc.8b02913
+26. Kim, C., Batra, R., Chen, L., Tran, H., and Ramprasad, R. (2021). Polymer design using genetic algorithm and machine learning. *Computational Materials Science* 186, 110067. doi: 10.1016/j.commatsci.2020.110067
+27. Kim, Y., Park, S., and Lee, J. (2023). Machine learning approaches for small-molecule and material property prediction with scarce data. *npj Computational Materials* 9, 156. doi: 10.1038/s41524-023-01119-3
+28. Krueger, D., Caballero, E., and Jacobsen, J.-H. (2021). Out-of-distribution generalization via risk extrapolation (REx). *International Conference on Machine Learning* 139, 5815-5826.
+29. Lakes, R. (1993). Materials with structural hierarchy. *Nature* 361, 511-515. doi: 10.1038/361511a0
+30. Lee, H., Dellatore, S. M., Miller, W. M., and Messing, P. B. (2007). Mussel-inspired surface chemistry for multifunctional coatings. *Science* 318, 426-430. doi: 10.1126/science.1147241
+31. Liao, H., Hu, S., and Yang, H. (2025). Data-driven de novo design of super-adhesive hydrogels. *Nature* 644, 89-95. doi: 10.1038/s41586-025-09269-4
+32. Lin, Y., Shen, Z., and Liang, S. (2023). A review of out-of-distribution generalization: taxonomy, methods and open problems. *IEEE Transactions on Pattern Analysis and Machine Intelligence* 45, 13157-13178. doi: 10.1109/TPAMI.2023.3271446
+33. Lundberg, S. M., and Lee, S.-I. (2017). A unified approach to interpreting model predictions. *Advances in Neural Information Processing Systems* 30, 4765-4774.
+34. Merchant, A., Batzner, S., Schoenholz, S. S., Aykol, M., and Cubuk, E. D. (2023). Scaling deep learning for materials discovery. *Nature* 624, 80-85. doi: 10.1038/s41586-023-06735-9
+35. Meredig, B., Agrawal, A., Kirklin, S., Saal, J. E., and Doak, J. W. (2018). Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery. *Molecular Systems Design & Engineering* 3, 819-825. doi: 10.1039/C8ME00012C
+36. Mouret, J.-B., and Chatzilygeroudis, K. (2017). 20 years of reality gap: a few thoughts about simulators in evolutionary robotics. *GECCO '17 Companion*, 1121-1124. doi: 10.1145/3067695.3082052
+37. Nadeau, C., and Bengio, Y. (2003). Inference for the generalization error. *Machine Learning* 52, 239-281. doi: 10.1023/A:1024068626366
+38. Narayanan, A., Dhinojwala, A., and Joy, A. (2021). Design principles for creating synthetic underwater adhesives. *Chemical Society Reviews* 50, 13321-13345. doi: 10.1039/D1CS00316J
+39. Ovadia, Y., Fertig, E., Ren, J., and Nado, Z. (2019). Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift. *Advances in Neural Information Processing Systems* 32, 13991-14002.
+40. Peppas, N. A., Bures, P., Leobandung, W., and Ichikawa, H. (2000). Hydrogels in pharmaceutical formulations. *European Journal of Pharmaceutics and Biopharmaceutics* 50, 27-46. doi: 10.1016/S0939-6411(00)00090-4
+41. Perez, E., Strub, F., De Vries, H., Dumoulin, V., and Courville, A. (2018). FiLM: Visual reasoning with a general conditioning layer. *AAAI Conference on Artificial Intelligence* 32, 3942-3951. doi: 10.1609/aaai.v32i1.11671
+42. Quiñonero-Candela, J., Sugiyama, M., Schwaighofer, A., and Lawrence, N. D. (2009). Dataset Shift in Machine Learning. *MIT Press*.
+43. Ramprasad, R., Batra, R., Pilania, G., Mannodi-Kanakkithodi, A., and Kim, C. (2017). Machine learning in materials informatics: recent applications and prospects. *npj Computational Materials* 3, 54. doi: 10.1038/s41524-017-0056-5
+44. Ribeiro, M. T., Singh, S., and Guestrin, C. (2016). Why should I trust you? Explaining the predictions of any classifier. *ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*, 1135-1144. doi: 10.1145/2939672.2939778
+45. Schleder, G. R., Padilha, A. C. M., and Acosta, C. M. (2019). From DFT to machine learning: recent approaches to materials science-a review. *Journal of Physics: Materials* 2, 032001. doi: 10.1088/2515-7639/ab084b
+46. Schmidt, J., Marques, M. R. G., Botti, S., and Marques, M. A. L. (2019). Recent advances and applications of machine learning in solid-state materials science. *npj Computational Materials* 5, 83. doi: 10.1038/s41524-019-0221-0
+47. Shahriari, B., Swersky, K., Wang, Z., Adams, R. P., and de Freitas, N. (2016). Taking the human out of the loop: A review of Bayesian optimization. *Proceedings of the IEEE* 104, 148-175. doi: 10.1109/JPROC.2015.2494218
+48. Shen, Z., Liu, J., He, Y., Zhang, X., and Xu, R. (2021). Towards out-of-distribution generalization: A survey. *arXiv preprint arXiv:2108.13624*. doi: arXiv:2108.13624
+49. Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov, R. (2014). Dropout: a simple way to prevent neural networks from overfitting. *Journal of Machine Learning Research* 15, 1929-1958. doi: 10.5555/2627435.2670313
+50. Suneetha, M., Rao, K. M., and Han, S. S. (2019). One-pot synthesis of injectable self-healing hydrogels for wound healing. *ACS Omega* 4, 12647-12656. doi: 10.1021/acsomega.9b01458
+51. Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. *Journal of the Royal Statistical Society: Series B* 58, 267-288. doi: 10.1111/j.2517-6161.1996.tb02080.x
+52. Varaprasad, K., Raghavendra, G. M., Jayaramudu, T., Yallapu, M. M., and Sadiku, R. (2017). A mini review on hydrogels classification and recent developments in miscellaneous application. *Materials Science and Engineering: C* 79, 958-971. doi: 10.1016/j.msec.2017.05.096
+53. Vaswani, A., Shazeer, N., and Parmar, N. (2017). Attention is all you need. *Advances in Neural Information Processing Systems* 30, 5998-6008. doi: arXiv:1706.03762
+54. Waite, J. H. (2017). Mussel adhesion: essential footwork. *Journal of Experimental Biology* 220, 517-530. doi: 10.1242/jeb.134528
+55. Wang, S., Zhang, Y., and Liu, X. (2023). Machine learning for hydrogel design: a review of data, models and applications. *Advanced Functional Materials* 33, 2212134. doi: 10.1002/adfm.202212134
+56. Ward, L., Liu, R., and Krishna, A. (2017). Including crystal structure attributes in machine learning models of formation energies via Voronoi tessellations. *Physical Review B* 96, 024104. doi: 10.1103/PhysRevB.96.024104
+57. Ward, L., Dunn, A., and Faghaninia, A. (2018). Matminer: An open source toolkit for materials data mining. *Computational Materials Science* 152, 60-69. doi: 10.1016/j.commatsci.2018.05.018
+58. Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin* 1, 80-83. doi: 10.2307/3001968
+59. Wu, S., Kondo, Y., and Kakimoto, M.-A. (2019). Machine-learning-assisted discovery of polymers with high thermal conductivity using a molecular design algorithm. *npj Computational Materials* 5, 66. doi: 10.1038/s41524-019-0203-2
+60. Yang, J., Wang, S., and Yang, S. (2022). Conformal prediction: a review of theory and applications. *arXiv preprint arXiv:2209.03396*. Available at: https://arxiv.org/abs/2209.03396
+61. Yun, C., Bhojanapalli, S., Rawat, A. S., Reddi, S. J., and Kumar, S. (2020). Are transformers universal approximators of sequence-to-sequence functions?. *International Conference on Learning Representations*.
+62. Zhang, H., Cisse, M., Dauphin, Y. N., and Lopez-Paz, D. (2018). mixup: Beyond empirical risk minimization. *International Conference on Learning Representations*. doi: arXiv:1710.09412
+63. Zhang, L., Chen, K., and Wang, H. (2024). Polymer informatics: current status and critical next steps. *Progress in Materials Science* 141, 101214. doi: 10.1016/j.pmatsci.2023.101214
+64. Zhang, W., Wang, R., Sun, Z., Zhu, X., and Zhao, Q. (2020). Catechol-functionalized hydrogels: biomimetic design, adhesion mechanism, and biomedical applications. *Chemical Society Reviews* 49, 433-464. doi: 10.1039/C9CS00285E

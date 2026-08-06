@@ -39,7 +39,7 @@ cd "C:/Users/TS/WorkBuddy/HydroGelNet\code"
 | `C:/Users/TS/WorkBuddy/HydroGelNet/code` | all Python scripts |
 | `C:/Users/TS/WorkBuddy/HydroGelNet/data/raw` | untouched downloads |
 | `C:/Users/TS/WorkBuddy/HydroGelNet/data/processed/dataset.npz` | internal cohort |
-| `C:/Users/TS/WorkBuddy/HydroGelNet/data/external/dataset_external.npz` | independent cohort |
+| `C:/Users/TS/WorkBuddy/HydroGelNet/data/external/dataset_external.npz` | model-guided extrapolation cohort (SMBO-discovered high-performance region) |
 | `C:/Users/TS/WorkBuddy/HydroGelNet/results` | metrics, predictions, ablation, statistics |
 | `C:/Users/TS/WorkBuddy/HydroGelNet/figures` | publication figures (PNG + PDF, 600 dpi) |
 | `C:/Users/TS/WorkBuddy/HydroGelNet/tables` | publication tables (CSV + LaTeX) |

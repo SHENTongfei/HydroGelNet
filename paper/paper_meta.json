@@ -2,8 +2,8 @@
   "topic": "hydrogel composition-to-property prediction with out-of-distribution extrapolation",
   "domain": "Soft materials / machine learning for materials design",
   "model_full_name": "SIMPLEX: Simplex composition encoding with Interaction-aware attention, Multi-modal fusion, Pretraining-ready regularisation, Learnable domain constraints and EXtrapolation evaluation",
-  "title": "SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation",
-  "short_title": "SIMPLEX: hydrogel composition-to-property prediction",
+  "title": "SIMPLEX: Composition-Space Deep Learning for Hydrogel Adhesion with Out-of-Distribution Extrapolation to Model-Discovered High-Performance Formulations",
+  "short_title": "SIMPLEX: composition-to-property hydrogel prediction",
   "authors": [
     {
       "name": "Tongfei Shen",

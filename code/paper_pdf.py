@@ -135,7 +135,7 @@ FIG_CAPTIONS = {
         "corrected significance annotation. **(D)** Rank of each model across "
         "folds. **(E)** Cluster bootstrap 95% confidence intervals. "
         "**(F)** Label-permutation null distribution."),
-    6: ("Independent external validation. "
+    6: ("Model-guided extrapolation validation. "
         "**(A)** Predicted versus observed values in the external cohort. "
         "**(B)** Bland-Altman agreement. **(C)** Calibration. "
         "**(D)** Internal-versus-external generalisation gap. "
@@ -167,8 +167,10 @@ TAB_CAPTIONS = {
     4: "Internal grouped cross-validation performance (mean +/- SD).",
     5: ("Comparison against equally tuned baselines. p-values from the "
         "Nadeau-Bengio corrected resampled t-test, Holm adjusted."),
-    6: "Performance on the independent external cohort.",
-    7: "Ablation study. A positive contribution means removal degrades performance.",
+    6: "Performance on the model-guided external extrapolation cohort.",
+    7: ("Ablation study (evaluated on 2 seeds x 3 folds, the search protocol; "
+         "the full 5 seeds x 5 folds CV is reported in Table 4). A positive "
+         "contribution means removal degrades performance."),
     8: "Top candidate markers ranked by combined evidence.",
     9: "Performance stratified by experimental condition.",
     10: "Software environment and protocol settings for reproducibility.",
@@ -346,7 +348,12 @@ class Refs:
         def sort_key(e: dict):
             a = (e.get("authors") or ["zzz"])[0]
             return (str(a).lower(), str(e.get("year", "")))
-        return [self.format(e) for e in sorted(self.entries, key=sort_key)]
+        # Only entries actually cited in the text appear in the reference list
+        # (Frontiers / most journals reject uncited bibliography entries).
+        used = [e for e in self.entries if e.get("key") in self._used]
+        if not used:
+            used = self.entries  # fallback if cite() was never called
+        return [self.format(e) for e in sorted(used, key=sort_key)]
 
     def audit(self) -> Dict[str, object]:
         years = [int(e["year"]) for e in self.entries
@@ -617,7 +624,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
     if ext0 is not None:
         ci_txt = (f" (95% CI {f3(ci0[0])}-{f3(ci0[1])})" if ci0 else "")
         res_sentences.append(
-            f"On an independent external cohort of {N.n_ext} samples, "
+            f"On the model-guided external extrapolation cohort of {N.n_ext} samples, "
             f"evaluated once after the architecture and all hyper-parameters "
             f"had been frozen, the ensemble achieved {pm} = {f3(ext0)}"
             f"{ci_txt}.")
@@ -663,7 +670,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
     p("**Conclusion:** "
       + (meta.get("application_implication") or
          f"{M} converts modest, heterogeneous, grouped datasets into "
-         f"predictions that survive an independent cohort, and its attention "
+         f"predictions that survive extrapolation to model-discovered formulations, "
          f"and importance maps nominate a compact, testable shortlist of "
          f"candidate markers for {topic}.")
       + " All code, verified data links and analysis outputs are released "
@@ -729,7 +736,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
        f"architectural: how to build a model that exploits the multi-modal, "
        f"conditioned, grouped structure of {topic} data while being evaluated "
        f"under a protocol strict enough that the resulting numbers survive an "
-       f"independent cohort.")
+       f"model-guided extrapolation cohort.")
       + R.cite("intro_gap", 2)
       + " A method that wins by 0.02 under a leaky protocol is worth less than "
         "a method that wins by 0.01 under a protocol that cannot leak.")
@@ -760,7 +767,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
         f"formulations (target-value extrapolation).",
         f"We show that {M} ranks candidate formulations significantly "
         f"better than tree ensembles under extrapolation (external "
-        f"Spearman rho 0.50 vs 0.32) and achieves the best top-k "
+        f"Spearman rho 0.50 vs 0.21) and achieves the best top-k "
         f"screening precision, supporting material screening.",
     ]))
 
@@ -792,7 +799,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
         f"links are listed in Table 2 and in the machine-readable file "
         f"`DATA_SOURCES.md` distributed with the code.")
     p(f"**2.2.2 External cohort.** An additional {N.n_ext} samples were "
-      f"obtained from an independent source that shares the feature and "
+      f"obtained from later SMBO iterations of the same source, sharing the feature and "
       f"target definitions but not the acquisition pipeline. Independence was "
       f"verified computationally: no sample identifier and no exact feature "
       f"vector is shared between the two cohorts (row-level hash comparison, "
@@ -1040,7 +1047,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
     B.append(("fig", 5))
     B.append(("tab", 5))
 
-    h2("3.4 Independent external validation")
+    h2("3.4 Model-guided extrapolation validation")
     if N.extm is not None:
         segs = []
         for t in N.targets:
@@ -1060,13 +1067,15 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
           + "; ".join(segs) + " (Figure 6A, Table 6). "
           "Bland-Altman analysis shows no proportional bias, and the "
           "calibration curve stays close to the identity line "
-          "(Figure 6B-C), so the model is not merely rank-preserving but "
-          "numerically transferable.")
+          "(Figure 6B-C). Note that these absolute-accuracy statements hold "
+          "within the training value range; beyond it the target-range shift "
+          "makes absolute error metrics uninformative for every model "
+          "(Section 3.4, Limitations).")
         p("The generalisation gap (Figure 6D) is the honest cost of "
           "distribution shift. Baselines lose more of their internal "
           "performance than "
-          f"{M} does (Figure 6E), and stratifying by experimental condition "
-          "shows where the residual error concentrates (Figure 6F, Table 9).")
+          f"{M} does (Figure 6E), and the residual-error analysis shows "
+          "where the error concentrates (Figure 6F).")
     else:
         p(missing(os.path.basename(paths.EXTERNAL_CSV)))
     B.append(("fig", 6))
@@ -1129,7 +1138,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
         p(missing("results/interpret/candidate_markers.csv"))
     B.append(("fig", 8))
     B.append(("tab", 8))
-    B.append(("tab", 9))
+    B.append(("tab", 10))
 
     # =================================================================== #
     # 4 Discussion
@@ -1153,7 +1162,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
 
     p(f"We set out to determine whether an architecture matched to the "
       f"structure of small, grouped, multi-modal data can produce predictions "
-      f"in {topic} that survive contact with an independent cohort. It can. "
+      f"in {topic} that survive contact with model-discovered high-performance formulations. "
       f"{M} {win_phrase} under a protocol "
       f"designed to make cheating impossible, and it retained the bulk of "
       f"that advantage on data it had never seen, generated by a different "
@@ -1235,7 +1244,7 @@ def build_blocks(N: Numbers, R: Refs, meta: dict) -> List[Block]:
     p(f"{M} shows that careful architectural matching - block tokenisation, "
       f"sparse attention, condition modulation and uncertainty-weighted "
       f"multi-task learning - converts a small, heterogeneous, grouped "
-      f"cohort into predictions that transfer to an independent dataset. "
+      f"cohort into predictions that transfer to model-discovered high-performance formulations. "
       f"Under a protocol built to prevent leakage and to give baselines an "
       f"equal budget, it reached {pm} = {N.cv_text(t0)} internally and "
       f"{f3(N.ext_stat(t0))} externally for {t0}. Just as importantly, the "
