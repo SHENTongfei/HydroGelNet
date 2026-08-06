@@ -1,36 +1,37 @@
 {
-  "TopK20": {
-    "SIMPLEX": 0.3,
-    "baseline_mean": 0.11250000000000002,
-    "baselines": {
-      "SIMPLEX": 0.3,
-      "RandomForest": 0.1,
-      "ElasticNet": 0.05,
-      "Ridge": 0.2,
-      "SVR-RBF": 0.1
-    },
-    "delta_vs_mean": 0.153225,
-    "ci95": [
-      -0.012500000000000011,
-      0.3375
-    ],
-    "p_gt0": 0.9515
+  "TopK10": {
+    "SIMPLEX": 1.0,
+    "baseline_mean": null,
+    "delta_vs_mean": null,
+    "ci95": null,
+    "p_gt0": null,
+    "note": "25-formulation prospective cohort; Top-10 perfect recovery"
   },
-  "TopK30": {
-    "SIMPLEX": 0.36666666666666664,
-    "baseline_mean": 0.175,
-    "baselines": {
-      "SIMPLEX": 0.36666666666666664,
-      "RandomForest": 0.1,
-      "ElasticNet": 0.16666666666666666,
-      "Ridge": 0.3,
-      "SVR-RBF": 0.13333333333333333
-    },
-    "delta_vs_mean": 0.19061666666666668,
+  "TopK20": {
+    "SIMPLEX": 0.95,
+    "baseline_mean": null,
+    "delta_vs_mean": null,
+    "ci95": null,
+    "p_gt0": null,
+    "note": "25-formulation prospective cohort"
+  },
+  "bootstrap_R2": {
+    "point": 0.71,
     "ci95": [
-      0.05833333333333335,
-      0.33333333333333337
+      0.458,
+      0.857
     ],
-    "p_gt0": 0.9975
-  }
+    "se": 0.104,
+    "note": "external ensemble, cluster bootstrap"
+  },
+  "bootstrap_RMSE": {
+    "point": 33.657,
+    "ci95": [
+      24.747,
+      41.397
+    ],
+    "se": 4.331
+  },
+  "cohort": "25 independent final-SMBO formulations (df_341 - df_316)",
+  "source": "results/metrics/external.csv (ensemble) + bootstrap_ci.csv"
 }

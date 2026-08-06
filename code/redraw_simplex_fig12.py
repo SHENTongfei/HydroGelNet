@@ -107,7 +107,7 @@ def fig_pipeline(outdir):
     # ---------- Stage 2: training region ----------
     stage_label(ax, L, 28, "2 · Training region")
     box(ax, L, 20, 33.5, 16, 5.5, "Training set", "green", fs=7.5, bold=True,
-        sub="n = 180 · low-performance")
+        sub="n = 316 · full adhesion range")
     box(ax, L, 20, 25.0, 16, 6, "5-fold grouped CV", "green", fs=6.6)
     box(ax, L, 20, 17.0, 16, 6, "5 seeds · 25 models", "green", fs=6.6)
     box(ax, L, 20, 9.0, 16, 6, "Ablation-gated\ncomponents", "green", fs=6.2)
@@ -125,11 +125,11 @@ def fig_pipeline(outdir):
     arrow(ax, 49, 33.5, 49, 31.5)
 
     # ---------- Stage 4: extrapolation ----------
-    stage_label(ax, L, 70, "4 · Extrapolation")
-    box(ax, L, 62, 33.5, 16, 5.5, "External cohort", "red", fs=7.5, bold=True,
-        sub="n = 161 · SMBO-discovered")
+    stage_label(ax, L, 70, "4 · Prospective validation")
+    box(ax, L, 62, 33.5, 16, 5.5, "Prospective cohort", "red", fs=7.5, bold=True,
+        sub="n = 25 · final SMBO")
     box(ax, L, 62, 25.0, 16, 6, "High-performance\ncomposition region", "red", fs=6.4)
-    box(ax, L, 62, 17.0, 16, 6, "Target-value shift\n(mean 47 → 154 kPa)", "red", fs=6.2)
+    box(ax, L, 62, 17.0, 16, 6, "Held-out cohort\n(62–251 kPa)", "red", fs=6.2)
     box(ax, L, 62, 9.0, 16, 6, "Evaluated once,\nafter freezing", "red", fs=6.4)
     arrow(ax, 57, 20, 62, 20)
     arrow(ax, 70, 33.5, 70, 31.5)

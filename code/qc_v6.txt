@@ -1,0 +1,18 @@
+
+==============================================================================
+STEP 3/9  DATA QUALITY CONTROL
+==============================================================================
+ dataset  n_samples  n_features  n_targets  n_groups  max_group_frac  n_duplicate_rows  pct_missing  n_constant_features  n_inf  y_missing
+internal        316          21          1       316        0.003165                 0          0.0                    0      0        0.0
+external         25          21          1        25        0.040000                 0          0.0                    0      0        0.0
+
+  [BLOCK] external: only 25 samples (< 100 required).
+  [BLOCK] 18 row(s) shared between internal and external -> leakage.
+  [NOTE] 9 feature(s) with KS > 0.5 between cohorts; report this as domain shift.
+
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_summary.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_features.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_targets.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_overlap.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_shift.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\qc_report.md
