@@ -24,6 +24,7 @@ Usage
 from __future__ import annotations
 
 import _runtime_guard  # noqa: F401  (must be first)
+import write_guard  # noqa: F401  (purge-before-write for json artifacts)
 import argparse
 import copy
 import json
@@ -892,9 +893,8 @@ def main() -> int:
     pd.DataFrame(hist_rows).to_csv(
         os.path.join(paths.METRICS_DIR, "training_history.csv"), index=False)
 
-    with open(os.path.join(paths.TUNING_DIR, "config_used.json"), "w",
-              encoding="utf-8") as fh:
-        json.dump(cfg.to_dict(), fh, indent=2)
+    write_guard.write_json(
+        os.path.join(paths.TUNING_DIR, "config_used.json"), cfg.to_dict())
 
     pm = PRIMARY_METRIC[ds["task_type"]]
     print(f"\n  internal CV {pm}: {metrics[pm].mean():.4f}")

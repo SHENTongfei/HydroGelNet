@@ -94,9 +94,9 @@ EXTERNAL_NPZ = os.path.join(EXTERNAL_DIR, "dataset_external.npz")
 CV_OUTER_CSV = os.path.join(METRICS_DIR, "cv_outer.csv")
 BASELINES_CSV = os.path.join(METRICS_DIR, "baselines.csv")
 EXTERNAL_CSV = os.path.join(METRICS_DIR, "external.csv")
-ABLATION_CSV = os.path.join(ABLATION_DIR, "ablation.csv")
+ABLATION_CSV = os.path.join(ABLATION_DIR, "ablation_results.csv")
 SEARCH_LOG_CSV = os.path.join(TUNING_DIR, "search_log.csv")
-BEST_CONFIG_JSON = os.path.join(TUNING_DIR, "best_config.json")
+BEST_CONFIG_JSON = os.path.join(TUNING_DIR, "best_config_final.json")
 COMPARISONS_CSV = os.path.join(STATS_DIR, "comparisons.csv")
 IMPORTANCE_CSV = os.path.join(INTERPRET_DIR, "importance.csv")
 LATENT_NPZ = os.path.join(INTERPRET_DIR, "latent.npz")
@@ -107,7 +107,7 @@ MANUSCRIPT_PDF = os.path.join(PAPER_DIR, MODEL_NAME + "_manuscript.pdf")
 # --------------------------------------------------------------------------- #
 # Global experiment constants
 # --------------------------------------------------------------------------- #
-SEEDS = [42, 2024, 7, 1337, 20260731]
+SEEDS = [42, 2024, 7, 1337, 20260731, 11, 99, 555, 888, 31337]
 PRIMARY_SEED = 42
 N_OUTER_FOLDS = 5
 N_INNER_FOLDS = 3

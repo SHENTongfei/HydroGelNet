@@ -185,7 +185,7 @@ bootstrap\_ci.csv):
 \toprule
 Metric & Point & 95\% CI & SE \\
 \midrule
-$R^2$ & 0.710 & [0.458, 0.857] & 0.104 \\
+$R^2$ & 0.6946 & [0.458, 0.857] & 0.104 \\
 RMSE (kPa) & 33.66 & [24.75, 41.40] & 4.33 \\
 MAE (kPa) & 26.88 & [19.52, 34.79] & 4.03 \\
 \bottomrule
@@ -207,8 +207,8 @@ the ten strongest adhesives in the held-out cohort.
 \toprule
 Model & $R^2$ & Spearman $\rho$ & ROC-AUC & Top-10 & Top-20 \\
 \midrule
-\textbf{SIMPLEX} & \textbf{0.71} & \textbf{0.87} & \textbf{0.94} & \textbf{1.00} & \textbf{0.95} \\
-SVR-RBF & 0.71 & 0.85 & 0.94 & 1.00 & 0.90 \\
+\textbf{SIMPLEX} & \textbf{0.69} & \textbf{0.87} & \textbf{0.94} & \textbf{1.00} & \textbf{0.90} \\
+SVR-RBF & 0.63 & 0.85 & 0.94 & 1.00 & 0.90 \\
 Ridge & 0.64 & 0.81 & 0.93 & 1.00 & 0.90 \\
 ElasticNet & 0.63 & 0.85 & 0.93 & 1.00 & 0.90 \\
 GBR & 0.52 & 0.80 & 0.94 & 0.90 & 0.90 \\
@@ -225,7 +225,7 @@ $0.79$), drops to $R^2 = 0.44$ on the prospective cohort because its
 nearest-neighbour-style extrapolation fails outside the density of the
 training composition space, whereas SIMPLEX's continuous, interaction-aware
 composition encoding transfers with a small internal-to-prospective
-generalisation gap ($0.79 \rightarrow 0.71$).
+generalisation gap ($0.79 \rightarrow 0.69$).
 
 \section{Multi-target Extensibility}
 
@@ -305,7 +305,7 @@ permutation importance and candidate-marker screens.
 \subsection{PERF-GATE verdict}
 PASS: G1 internal tie with the best baseline (random forest, $0.79$ vs
 $0.81$, Holm-corrected $p = 1.0$), G2 no significant disadvantage, G3 seed
-stability, G4 prospective $R^2 = 0.710$ above the best baseline (Ridge
+stability, G4 prospective $R^2 = 0.6946$ above the best baseline (Ridge
 $0.637$), G5 informative ablation.
 
 \subsection{Data and Code Availability}

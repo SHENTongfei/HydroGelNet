@@ -151,6 +151,9 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, default=2)
     ap.add_argument("--top-k", type=int, default=20)
     ap.add_argument("--perm-repeats", type=int, default=5)
+    ap.add_argument("--config", default="",
+                    help="absolute path to a JSON config (default: "
+                         "best_config_final.json)")
     ap.add_argument("--quick", action="store_true")
     args = ap.parse_args()
 
@@ -158,9 +161,12 @@ def main() -> int:
     paths.banner("STEP 8/9  INTERPRETATION AND DOMAIN DISCOVERY")
 
     cfg = TrainConfig()
-    if os.path.exists(paths.BEST_CONFIG_JSON):
-        with open(paths.BEST_CONFIG_JSON, "r", encoding="utf-8") as fh:
+    cfg_path = args.config or paths.BEST_CONFIG_JSON
+    if os.path.exists(cfg_path):
+        with open(cfg_path, "r", encoding="utf-8") as fh:
             cfg = TrainConfig.from_dict(json.load(fh))
+    print(f"  interpret config: {os.path.basename(cfg_path)}  "
+          f"y_transform={cfg.y_transform}")
     seeds = paths.SEEDS[:max(1, args.seeds)]
     n_repeats = args.perm_repeats
     if args.quick:

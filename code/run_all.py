@@ -163,7 +163,9 @@ def run_stage(stage: str, a: argparse.Namespace) -> Dict[str, object]:
                 "cmd": " ".join(cmd)}
 
     t0 = time.time()
-    proc = subprocess.run(cmd, cwd=CODE_DIR)
+    env = dict(os.environ)
+    env["PYTHONUNBUFFERED"] = "1"
+    proc = subprocess.run(cmd, cwd=CODE_DIR, env=env)
     dt = time.time() - t0
     status = "ok" if proc.returncode == 0 else f"FAILED ({proc.returncode})"
     print(f"\n  [{stage}] {status} in {dt:.1f}s", flush=True)
@@ -188,8 +190,17 @@ def write_log(records: List[Dict[str, object]], a: argparse.Namespace) -> str:
         lines.append(f"| {r['stage']} | {st} | {float(r['seconds']):.1f} | "
                      f"`{r['cmd']}` |")
     os.makedirs(paths.RESULTS_DIR, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as fh:
-        fh.write("\n".join(lines) + "\n")
+    for _i in range(8):
+        try:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write("\n".join(lines) + "\n")
+            break
+        except PermissionError:
+            import time as _t
+            _t.sleep(4)
+    else:
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines) + "\n")
     return path
 
 

@@ -151,7 +151,7 @@ def main() -> int:
     print(f"  budget: {n_iter} inner candidates x {paths.N_INNER_FOLDS} inner "
           f"folds x {paths.N_OUTER_FOLDS} outer folds x {len(seeds)} seed(s)")
 
-    rows, pred_rows, ext_rows, param_rows = [], [], [], []
+    rows, pred_rows, ext_rows, param_rows, ext_pred_rows = [], [], [], [], []
     t0 = time.time()
 
     for seed in seeds:
@@ -201,6 +201,13 @@ def main() -> int:
                             "sample_id": str(ds["sample_ids"][gi]),
                             "y_true": float(Y[gi, t]),
                             "y_pred": float(p_te[j])})
+                    for j in range(len(ds_ext["Y"])):
+                        ext_pred_rows.append({
+                            "model": name, "seed": seed, "fold": fold,
+                            "target": tname,
+                            "sample_id": str(ds_ext["sample_ids"][j]),
+                            "y_true": float(ds_ext["Y"][j, t]),
+                            "y_pred": float(p_ex[j])})
             done = pd.DataFrame(rows)
             best_now = (done.groupby("model")[pm].mean().sort_values(
                 ascending=False).head(1))
@@ -216,6 +223,11 @@ def main() -> int:
     ext = pd.DataFrame(ext_rows)
     ext.to_csv(os.path.join(paths.METRICS_DIR, "baselines_external.csv"),
                index=False)
+    pd.DataFrame(ext_pred_rows).to_csv(
+        os.path.join(paths.METRICS_DIR, "baselines_external_preds.csv"),
+        index=False)
+    print("  [FIX-2] per-fit external predictions saved -> "
+          "baselines_external_preds.csv (for ensemble-parity audit)")
 
     print("\n  internal CV summary (mean over folds/seeds/targets):")
     summ = (metrics.groupby("model")[pm]

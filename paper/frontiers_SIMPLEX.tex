@@ -115,7 +115,7 @@ Across 5-fold grouped CV repeated over 5 seeds, SIMPLEX reaches mean $R^2 = 0.79
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\columnwidth]{Figures/Fig4_internal_cv.png}
-\caption[Internal cross-validated performance]{\textbf{Internal cross-validated performance of SIMPLEX.} SIMPLEX attains mean internal $R^2 = 0.79$ across 5-fold grouped CV, matching the best-in-class tree ensemble. (A) Per-fold $R^2$ across seeds; (B) out-of-fold predicted versus observed values; (C) residuals versus fitted; (D) error distribution; (E) training and validation loss; (F) metric summary.}
+\caption[Internal cross-validated performance]{\textbf{Internal cross-validated performance of SIMPLEX.} SIMPLEX attains mean internal $R^2 = 0.79$ across 5-fold grouped CV, matching the best-in-class tree ensemble. (A) Per-fold $R^2$ across seeds; (B) out-of-fold predicted versus observed values; (C) per-target $R^2$ slope (SIMPLEX vs Random Forest); (D) residuals versus fitted; (E) error distribution; (F) learning curves; (G) per-seed-fold metric heatmap; (H) density hexbin (predicted $\times$ observed); (I) seed-to-seed stability boxplot.}
 \label{fig:cv}
 \end{figure*}
 
@@ -145,8 +145,8 @@ SIMPLEX attains the best absolute accuracy among all equally tuned baselines ($R
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=1\columnwidth]{Figures/Fig5_external.png}
-\caption[Prospective validation on model-discovered formulations]{\textbf{Prospective validation on model-discovered formulations.} SIMPLEX attains $R^2 = 0.71$ and Spearman $\rho = 0.87$ on the 25-formulation prospective cohort, with perfect Top-10 recovery (1.00). (A) Predicted versus observed; (B) Bland-Altman; (C) calibration; (D) generalisation gap; (E) per-model degradation; (F) residual analysis.}
+\includegraphics[width=1\columnwidth]{Figures/Fig6_external.png}
+\caption[Prospective validation on model-discovered formulations]{\textbf{Prospective validation on model-discovered formulations.} SIMPLEX attains $R^2 = 0.71$ and Spearman $\rho = 0.87$ on the 25-formulation prospective cohort, with perfect Top-10 recovery (1.00) and Top-20 precision 0.90. (A) Predicted versus observed; (B) Bland-Altman; (C) Top-k recovery (headline); (D) calibration; (E) internal-vs-external generalisation gap (0.79 $\rightarrow$ 0.71); (F) error by predicted rank quartile; (G) external benchmark against equally tuned baselines; (H) residual distribution on the prospective cohort; (I) top-50\% ROC (AUC 0.94).}
 \label{fig:ext}
 \end{figure*}
 
@@ -156,8 +156,8 @@ Figure~\ref{fig:bench} compares SIMPLEX with all baselines on internal $R^2$ and
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=1\columnwidth]{Figures/Fig6_benchmark.png}
-\caption[Benchmarking against equally tuned baselines]{\textbf{Benchmarking against equally tuned baselines.} SIMPLEX matches the best tree ensemble internally and attains the highest prospective $R^2$ ($0.71$) and Spearman correlation ($0.87$). (A) Mean internal $R^2$; (B) paired per-fold scores; (C) absolute difference with corrected significance; (D) rank across folds; (E) bootstrap 95\% CIs; (F) permutation null.}
+\includegraphics[width=1\columnwidth]{Figures/Fig5_benchmark.png}
+\caption[Benchmarking against equally tuned baselines]{\textbf{Benchmarking against equally tuned baselines.} SIMPLEX matches the best tree ensemble internally and attains the highest prospective $R^2$ ($0.71$) and Spearman correlation ($0.87$). (A) Mean internal $R^2$ with 95\% CI; (B) paired per-fold scores (SIMPLEX vs best baseline); (C) Top-20 screening precision; (D) $\Delta R^2$ with Holm-adjusted significance; (E) rank across folds; (F) model quality map ($R^2$ vs Spearman $\rho$); (G) cluster bootstrap 95\% CI; (H) permutation test; (I) critical-difference rank diagram.}
 \label{fig:bench}
 \end{figure*}
 
@@ -168,7 +168,7 @@ Leave-one-out ablation (2 seeds $\times$ 3 folds, the search protocol) shows tha
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\columnwidth]{Figures/Fig7_ablation.png}
-\caption[Ablation study]{\textbf{Ablation study.} Positive contribution means removal degrades performance (component helps).}
+\caption[Ablation study]{\textbf{Ablation study.} Each panel reports a different cut at the ablation. Positive contribution means removal degrades performance (component helps). (A) Component contribution (waterfall); (B) $R^2$ per variant (sorted); (C) fusion strategy; (D) statistical contribution (Holm-adjusted $\Delta R^2$); (E) variant performance (error-bar, sorted); (F) per-variant effect (range + mean lollipop); (G) retention decisions from the pruning log; (H) marginal vs interaction cumulative importance; (I) pruning summary (kept vs pruned count).}
 \label{fig:abl}
 \end{figure*}
 
@@ -179,7 +179,7 @@ Cross-validated permutation importance (Figure~\ref{fig:interp}) yields three re
 \begin{figure*}[h]
 \centering
 \includegraphics[width=1\columnwidth]{Figures/Fig8_interpretation.png}
-\caption[Interpretation and candidate markers]{\textbf{Interpretation and candidate markers.} The hydrophobic--aromatic BA$\times$PEA interaction dominates the model's predictions, followed by the cationic monomer ATAC. Permutation importance (top panel) and downstream analyses.}
+\caption[Interpretation and candidate markers]{\textbf{Interpretation and candidate markers.} The hydrophobic--aromatic BA$\times$PEA interaction dominates the model's predictions, followed by the cationic monomer ATAC. (A) Top permutation-importance features (top-3 highlighted in red); (B) stability-selection frequency; (C) CLS attention attribution; (D) attention by condition; (E) latent space coloured by target; (F) latent space coloured by condition; (G) partial dependence of the top 5 features; (H) candidate-marker volcano plot; (I) composition-rule sign (positive in red, negative in green).}
 \label{fig:interp}
 \end{figure*}
 

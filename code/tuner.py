@@ -42,6 +42,24 @@ from trainer import PRIMARY_METRIC, TrainConfig, run_cv
 # --------------------------------------------------------------------------- #
 # Search space
 # --------------------------------------------------------------------------- #
+def _write_csv_retry(df: pd.DataFrame, path: str, tries: int = 15,
+                     delay: float = 8.0) -> None:
+    """Write CSV with retry/backoff for transient Windows file locks.
+
+    Windows antivirus / indexer / directory watchers can transiently hold a
+    file exactly when pandas opens it in 'w' mode (PermissionError 13). Retry
+    a few seconds later; if it still fails, raise so the caller can see it.
+    """
+    import time as _t
+    for i in range(tries):
+        try:
+            df.to_csv(path, index=False)
+            return
+        except PermissionError:
+            _t.sleep(delay)
+    df.to_csv(path, index=False)  # final attempt; raise if still locked
+
+
 def sample_config(rng: np.random.Generator, base: TrainConfig | None = None,
                   local: bool = False) -> TrainConfig:
     """Draw one configuration. ``local=True`` perturbs around ``base``."""
@@ -290,7 +308,7 @@ def main() -> int:
                 best_score, best_cfg = score, cfg
                 print(f"    [{i:3d}] {pm}={score:+.4f}  <-- new best")
 
-        pd.DataFrame(log).to_csv(paths.SEARCH_LOG_CSV, index=False)
+        _write_csv_retry(pd.DataFrame(log), paths.SEARCH_LOG_CSV)
         print(f"\n  search finished. best {pm} = {best_score:+.4f}")
         print(f"  log: {paths.SEARCH_LOG_CSV}")
 
@@ -298,7 +316,7 @@ def main() -> int:
     print(f"\n  -- ablation ({len(ABLATIONS)} components "
           f"+ {len(FUSION_VARIANTS) - 1} fusion variants) --")
     abl = run_ablation(best_cfg, ds, seeds, folds)
-    abl.to_csv(paths.ABLATION_CSV, index=False)
+    _write_csv_retry(abl, paths.ABLATION_CSV)
 
     final_cfg, notes = prune_config(best_cfg, abl, pm)
     print("\n  -- automatic component pruning --")
@@ -308,8 +326,16 @@ def main() -> int:
     else:
         print("    every component earned its place; nothing removed.")
 
-    with open(paths.BEST_CONFIG_JSON, "w", encoding="utf-8") as fh:
-        json.dump(final_cfg.to_dict(), fh, indent=2)
+    for i in range(8):
+        try:
+            with open(paths.BEST_CONFIG_JSON, "w", encoding="utf-8") as fh:
+                json.dump(final_cfg.to_dict(), fh, indent=2)
+            break
+        except PermissionError:
+            time.sleep(4)
+    else:
+        with open(paths.BEST_CONFIG_JSON, "w", encoding="utf-8") as fh:
+            json.dump(final_cfg.to_dict(), fh, indent=2)
     with open(os.path.join(paths.TUNING_DIR, "pruning_notes.txt"), "w",
               encoding="utf-8") as fh:
         fh.write("\n".join(notes) if notes else "No component was removed.\n")
