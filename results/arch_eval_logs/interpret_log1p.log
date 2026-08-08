@@ -1,0 +1,57 @@
+
+==============================================================================
+STEP 8/9  INTERPRETATION AND DOMAIN DISCOVERY
+==============================================================================
+  interpret config: variant_log1p.json  y_transform=log1p
+  refitting CV models for interpretation (seeds=[42, 2024, 7, 1337, 20260731, 11, 99, 555, 888, 31337]) ...
+  50 fold-models available
+    permutation importance: seed=42 fold=0 done
+    permutation importance: seed=42 fold=1 done
+    permutation importance: seed=42 fold=2 done
+    permutation importance: seed=42 fold=3 done
+    permutation importance: seed=42 fold=4 done
+    permutation importance: seed=2024 fold=0 done
+    permutation importance: seed=2024 fold=1 done
+    permutation importance: seed=2024 fold=2 done
+    permutation importance: seed=2024 fold=3 done
+    permutation importance: seed=2024 fold=4 done
+    permutation importance: seed=7 fold=0 done
+    permutation importance: seed=7 fold=1 done
+    permutation importance: seed=7 fold=2 done
+    permutation importance: seed=7 fold=3 done
+    permutation importance: seed=7 fold=4 done
+    permutation importance: seed=1337 fold=0 done
+    permutation importance: seed=1337 fold=1 done
+    permutation importance: seed=1337 fold=2 done
+    permutation importance: seed=1337 fold=3 done
+    permutation importance: seed=1337 fold=4 done
+    permutation importance: seed=20260731 fold=0 done
+    permutation importance: seed=20260731 fold=1 done
+    permutation importance: seed=20260731 fold=2 done
+    permutation importance: seed=20260731 fold=3 done
+    permutation importance: seed=20260731 fold=4 done
+    permutation importance: seed=11 fold=0 done
+    permutation importance: seed=11 fold=1 done
+    permutation importance: seed=11 fold=2 done
+    permutation importance: seed=11 fold=3 done
+    permutation importance: seed=11 fold=4 done
+    permutation importance: seed=99 fold=0 done
+    permutation importance: seed=99 fold=1 done
+    permutation importance: seed=99 fold=2 done
+    permutation importance: seed=99 fold=3 done
+    permutation importance: seed=99 fold=4 done
+    permutation importance: seed=555 fold=0 done
+    permutation importance: seed=555 fold=1 done
+    permutation importance: seed=555 fold=2 done
+    permutation importance: seed=555 fold=3 done
+    permutation importance: seed=555 fold=4 done
+    permutation importance: seed=888 fold=0 done
+    permutation importance: seed=888 fold=1 done
+    permutation importance: seed=888 fold=2 done
+    permutation importance: seed=888 fold=3 done
+    permutation importance: seed=888 fold=4 done
+    permutation importance: seed=31337 fold=0 done
+    permutation importance: seed=31337 fold=1 done
+    permutation importance: seed=31337 fold=2 done
+    permutation importance: seed=31337 fold=3 done
+    permutation importance: seed=31337 fold=4 done

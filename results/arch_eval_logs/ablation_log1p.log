@@ -1,0 +1,53 @@
+ablation base = variant_log1p.json  y_transform=log1p swa=True ema=True
+    full model                       R2=+0.7685  (291s)
+    w/o multimodal fusion            R2=+0.6961  (219s)
+    w/o sparse attention             R2=+0.7461  (234s)
+    w/o attention sparsity reg.      R2=+0.7685  (263s)
+    w/o FiLM conditioning            R2=+0.7651  (270s)
+    w/o task-specific gating         R2=+0.7693  (306s)
+    w/o residual blocks              R2=+0.7593  (292s)
+    w/o contrastive pre-training     R2=+0.7658  (357s)
+    w/o Mixup                        R2=+0.7570  (316s)
+    w/o SWA                          R2=+0.7685  (250s)
+    w/o uncertainty weighting        R2=+0.7685  (289s)
+    w/o domain constraint            R2=+0.7685  (284s)
+    w/o modality gate                R2=+0.7770  (264s)
+    w/o transformer block            R2=+0.7685  (290s)
+    w/o SAM                          R2=+0.7685  (289s)
+    w/o EMA                          R2=+0.7685  (255s)
+    w/o R-Drop                       R2=+0.7766  (186s)
+    w/o feature noise                R2=+0.7621  (275s)
+    w/o MFM pre-training             R2=+0.7685  (269s)
+    w/o MC-Dropout                   R2=+0.7685  (269s)
+    w/o pretrained transfer          R2=+0.7685  (268s)
+    fusion = concat                   R2=+0.7281  (275s)
+    fusion = film                     R2=+0.7632  (290s)
+    fusion = cross                    R2=+0.7580  (338s)
+
+wrote C:/Users/TS/WorkBuddy/HydroGelNet\results\ablation\ablation_results.csv  (216 rows)
+                                mean  count
+variant                                    
+full model                    0.7685      9
+fusion = concat               0.7281      9
+fusion = cross                0.7580      9
+fusion = film                 0.7632      9
+w/o EMA                       0.7685      9
+w/o FiLM conditioning         0.7651      9
+w/o MC-Dropout                0.7685      9
+w/o MFM pre-training          0.7685      9
+w/o Mixup                     0.7570      9
+w/o R-Drop                    0.7766      9
+w/o SAM                       0.7685      9
+w/o SWA                       0.7685      9
+w/o attention sparsity reg.   0.7685      9
+w/o contrastive pre-training  0.7658      9
+w/o domain constraint         0.7685      9
+w/o feature noise             0.7621      9
+w/o modality gate             0.7770      9
+w/o multimodal fusion         0.6961      9
+w/o pretrained transfer       0.7685      9
+w/o residual blocks           0.7593      9
+w/o sparse attention          0.7461      9
+w/o task-specific gating      0.7693      9
+w/o transformer block         0.7685      9
+w/o uncertainty weighting     0.7685      9

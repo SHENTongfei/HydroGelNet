@@ -1,0 +1,5 @@
+C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py:511: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:822.)
+  if float(loss) == 0.0:
+C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\umap\umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(

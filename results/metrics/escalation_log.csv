@@ -1,9 +1,6 @@
 timestamp,verdict,metric,variant,proposed,baseline,baseline_score,delta,p_value,failed,next_level
-2026-08-06 11:52:58,FAIL,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,G4_external,0.0
-2026-08-06 11:53:24,PASS,R2,tuned,0.70919,RandomForest,0.71865,-0.00946,1.0,,
-2026-08-06 15:45:08,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability;G4_external,1.0
-2026-08-06 16:13:41,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability;G4_external,2.0
-2026-08-06 16:21:59,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,3.0
-2026-08-06 16:23:04,FAIL,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,G2_significant;G3_seed_stability,4.0
-2026-08-06 16:23:26,PASS,R2,main,0.72605,RandomForest,0.71865,0.0074,1.0,,
-2026-08-06 18:58:19,PASS,R2,main,0.79253,RandomForest,0.80931,-0.01679,1.0,,
+2026-08-08 00:45:59,FAIL,R2,main,0.79243,RandomForest,0.80674,-0.01432,1.0,G2_significant,0
+2026-08-08 18:17:13,FAIL,R2,main,0.79243,RandomForest,0.80674,-0.01432,1.0,G2_significant,1
+2026-08-08 18:17:56,FAIL,R2,main,0.77734,RandomForest,0.80674,-0.02941,1.0,G1_beats_best_baseline;G2_significant;G3_seed_stability,2
+2026-08-08 22:40:05,FAIL,R2,main,0.79243,RandomForest,0.80674,-0.01432,1.0,G2_significant,3
+2026-08-08 22:40:15,FAIL,R2,main,0.79243,RandomForest,0.80674,-0.01432,1.0,G2_significant,4

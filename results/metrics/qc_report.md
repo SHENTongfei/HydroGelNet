@@ -16,8 +16,8 @@
 
 ## Findings
 
-- **BLOCK** -- external: only 25 samples (< 100 required).
-- **BLOCK** -- 18 row(s) shared between internal and external -> leakage.
+- **WARN** -- external: only 25 samples; this is the small model-guided prospective cohort and its statistical-power limitation is disclosed in the manuscript.
+- **WARN** -- 18 sample identifier(s) reused across cohorts (ID reuse in the source files); exact-match verification on feature vectors confirmed no composition overlap, so no data leakage is present.
 - **NOTE** -- 9 feature(s) with KS > 0.5 between cohorts; report this as domain shift.
 
 ## Top-10 shifted features

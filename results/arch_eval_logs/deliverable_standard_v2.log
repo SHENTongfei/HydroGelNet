@@ -1,0 +1,63 @@
+
+==============================================================================
+STEP 5/9  CROSS-VALIDATED TRAINING
+==============================================================================
+  loaded config: C:/Users/TS/WorkBuddy/HydroGelNet/results/tuning/best_config_final.json
+  internal n=316  external n=25  task=regression  seeds=[42, 2024, 7, 1337, 20260731, 11, 99, 555, 888, 31337]
+    seed=42 fold=0  R2=0.7908  ep=165  swa=False
+    seed=42 fold=1  R2=0.8707  ep=142  swa=False
+    seed=42 fold=2  R2=0.6017  ep=142  swa=False
+    seed=42 fold=3  R2=0.8150  ep=162  swa=False
+    seed=42 fold=4  R2=0.8471  ep=148  swa=False
+    seed=2024 fold=0  R2=0.6727  ep=142  swa=False
+    seed=2024 fold=1  R2=0.8386  ep=163  swa=False
+    seed=2024 fold=2  R2=0.8083  ep=142  swa=False
+    seed=2024 fold=3  R2=0.8320  ep=166  swa=False
+    seed=2024 fold=4  R2=0.8109  ep=190  swa=False
+    seed=7 fold=0  R2=0.8335  ep=142  swa=False
+    seed=7 fold=1  R2=0.7434  ep=183  swa=False
+    seed=7 fold=2  R2=0.8652  ep=225  swa=False
+    seed=7 fold=3  R2=0.7485  ep=175  swa=False
+    seed=7 fold=4  R2=0.8171  ep=142  swa=False
+    seed=1337 fold=0  R2=0.8405  ep=165  swa=False
+    seed=1337 fold=1  R2=0.8069  ep=171  swa=False
+    seed=1337 fold=2  R2=0.7670  ep=220  swa=False
+    seed=1337 fold=3  R2=0.8041  ep=142  swa=False
+    seed=1337 fold=4  R2=0.7242  ep=164  swa=False
+    seed=20260731 fold=0  R2=0.6736  ep=164  swa=False
+    seed=20260731 fold=1  R2=0.8002  ep=142  swa=False
+    seed=20260731 fold=2  R2=0.8270  ep=170  swa=False
+    seed=20260731 fold=3  R2=0.8485  ep=142  swa=False
+    seed=20260731 fold=4  R2=0.7575  ep=142  swa=False
+    seed=11 fold=0  R2=0.8112  ep=142  swa=False
+    seed=11 fold=1  R2=0.7950  ep=161  swa=False
+    seed=11 fold=2  R2=0.8416  ep=156  swa=False
+    seed=11 fold=3  R2=0.7103  ep=151  swa=False
+    seed=11 fold=4  R2=0.8275  ep=164  swa=False
+    seed=99 fold=0  R2=0.8253  ep=189  swa=False
+    seed=99 fold=1  R2=0.8418  ep=160  swa=False
+    seed=99 fold=2  R2=0.8112  ep=142  swa=False
+    seed=99 fold=3  R2=0.8065  ep=158  swa=False
+    seed=99 fold=4  R2=0.6820  ep=147  swa=False
+    seed=555 fold=0  R2=0.8427  ep=142  swa=False
+    seed=555 fold=1  R2=0.7243  ep=190  swa=False
+    seed=555 fold=2  R2=0.8211  ep=165  swa=False
+    seed=555 fold=3  R2=0.8630  ep=148  swa=False
+    seed=555 fold=4  R2=0.7296  ep=143  swa=False
+    seed=888 fold=0  R2=0.7232  ep=192  swa=False
+    seed=888 fold=1  R2=0.7888  ep=156  swa=False
+    seed=888 fold=2  R2=0.8711  ep=191  swa=False
+    seed=888 fold=3  R2=0.7337  ep=223  swa=False
+    seed=888 fold=4  R2=0.8372  ep=146  swa=False
+    seed=31337 fold=0  R2=0.7954  ep=178  swa=False
+    seed=31337 fold=1  R2=0.8408  ep=142  swa=False
+    seed=31337 fold=2  R2=0.7641  ep=191  swa=False
+    seed=31337 fold=3  R2=0.7348  ep=142  swa=False
+    seed=31337 fold=4  R2=0.8542  ep=142  swa=False
+  [main] mean R2 = 0.7924 +/- 0.0598   (3425.3s)
+
+  internal CV R2: 0.7924
+  external    R2: 0.6946
+
+Wrote: C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv

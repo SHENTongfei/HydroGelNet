@@ -1,0 +1,3 @@
+modality,gate_mean,gate_sd,n_folds
+pairwise_synergy,0.6590958988666534,0.06517123589271984,50
+monomer_fractions,0.5705344152450561,0.07152723491105586,50

@@ -1,0 +1,80 @@
+
+==============================================================================
+STEP 8/9  INTERPRETATION AND DOMAIN DISCOVERY
+==============================================================================
+  interpret config: variant_log1p.json  y_transform=log1p
+  refitting CV models for interpretation (seeds=[42, 2024, 7, 1337, 20260731, 11, 99, 555, 888, 31337]) ...
+  50 fold-models available
+    permutation importance: seed=42 fold=0 done
+    permutation importance: seed=42 fold=1 done
+    permutation importance: seed=42 fold=2 done
+    permutation importance: seed=42 fold=3 done
+    permutation importance: seed=42 fold=4 done
+    permutation importance: seed=2024 fold=0 done
+    permutation importance: seed=2024 fold=1 done
+    permutation importance: seed=2024 fold=2 done
+    permutation importance: seed=2024 fold=3 done
+    permutation importance: seed=2024 fold=4 done
+    permutation importance: seed=7 fold=0 done
+    permutation importance: seed=7 fold=1 done
+    permutation importance: seed=7 fold=2 done
+    permutation importance: seed=7 fold=3 done
+    permutation importance: seed=7 fold=4 done
+    permutation importance: seed=1337 fold=0 done
+    permutation importance: seed=1337 fold=1 done
+    permutation importance: seed=1337 fold=2 done
+    permutation importance: seed=1337 fold=3 done
+    permutation importance: seed=1337 fold=4 done
+    permutation importance: seed=20260731 fold=0 done
+    permutation importance: seed=20260731 fold=1 done
+    permutation importance: seed=20260731 fold=2 done
+    permutation importance: seed=20260731 fold=3 done
+    permutation importance: seed=20260731 fold=4 done
+    permutation importance: seed=11 fold=0 done
+    permutation importance: seed=11 fold=1 done
+    permutation importance: seed=11 fold=2 done
+    permutation importance: seed=11 fold=3 done
+    permutation importance: seed=11 fold=4 done
+    permutation importance: seed=99 fold=0 done
+    permutation importance: seed=99 fold=1 done
+    permutation importance: seed=99 fold=2 done
+    permutation importance: seed=99 fold=3 done
+    permutation importance: seed=99 fold=4 done
+    permutation importance: seed=555 fold=0 done
+    permutation importance: seed=555 fold=1 done
+    permutation importance: seed=555 fold=2 done
+    permutation importance: seed=555 fold=3 done
+    permutation importance: seed=555 fold=4 done
+    permutation importance: seed=888 fold=0 done
+    permutation importance: seed=888 fold=1 done
+    permutation importance: seed=888 fold=2 done
+    permutation importance: seed=888 fold=3 done
+    permutation importance: seed=888 fold=4 done
+    permutation importance: seed=31337 fold=0 done
+    permutation importance: seed=31337 fold=1 done
+    permutation importance: seed=31337 fold=2 done
+    permutation importance: seed=31337 fold=3 done
+    permutation importance: seed=31337 fold=4 done
+  [1/7] importance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  [2/7] stability  -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\stability.csv
+  [2b] modality gates -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\modality_gate.csv
+       pairwise_synergy gate=0.670 +- 0.065
+       monomer_fractions gate=0.501 +- 0.082
+  [3/7] attention entropy: 0.247 (uniform would be 1.099)
+  [4/7] latent geometry: PCA + UMAP
+  [5/7] partial dependence for 6 feature(s)
+  [6/7] candidate markers -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\candidate_markers.csv (15 high-evidence)
+  [7/7] per-condition performance -> C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\condition_performance.csv
+
+  Top-10 features by cross-validated permutation importance:
+ rank        feature  importance_mean  importance_se
+    1        pair_14         0.087506       0.004911
+    2        pair_23         0.076785       0.004014
+    3        pair_03         0.073999       0.005120
+    4        pair_01         0.032323       0.002575
+    5        pair_12         0.025538       0.002312
+    6        pair_02         0.021503       0.002410
+    7        pair_13         0.021035       0.001985
+    8        pair_04         0.020574       0.002585
+    9 Hydrophobic-BA         0.016224       0.001914
+   10        pair_34         0.013083       0.001700

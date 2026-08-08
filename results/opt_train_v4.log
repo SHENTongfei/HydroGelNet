@@ -1,0 +1,69 @@
+
+==============================================================================
+RUN ALL  --  SIMPLEX
+==============================================================================
+  project : C:/Users/TS/WorkBuddy/HydroGelNet
+  python  : C:/Users/TS/.conda/envs/HydroGelNet/python.exe
+  stages  : train -> baselines -> stats -> gate -> interpret -> figures -> tables -> paper
+
+##############################################################################
+# STEP 5/9  cross-validated training
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config_final.json --tag main --seeds 10
+##############################################################################
+
+  [train] ok in 5996.8s
+
+##############################################################################
+# STEP 6/9  classical baselines
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\baselines.py --seeds 10 --n-iter 40
+##############################################################################
+
+  [baselines] ok in 1213.6s
+
+##############################################################################
+# STEP 7/9  statistical testing
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\stats_tests.py
+##############################################################################
+
+  [stats] ok in 32.1s
+
+##############################################################################
+#           PERF-GATE (no-fail protocol)
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\escalate.py --strict
+##############################################################################
+
+  [gate] FAILED (1) in 3.8s
+
+==============================================================================
+SUMMARY
+==============================================================================
+  ok    train       5996.8s
+  ok    baselines   1213.6s
+  ok    stats         32.1s
+  FAIL  gate           3.8s
+
+  total 120.8 min
+  log   C:/Users/TS/WorkBuddy/HydroGelNet\results\run_log.md
+
+  deliverables:
+  OK  dataset                C:/Users/TS/WorkBuddy/HydroGelNet\data\processed\dataset.npz
+  OK  external dataset       C:/Users/TS/WorkBuddy/HydroGelNet\data\external\dataset_external.npz
+  OK  best config            C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config_final.json
+  OK  internal CV metrics    C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\cv_outer.csv
+  OK  baseline metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\baselines.csv
+  OK  external metrics       C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\external.csv
+  OK  statistics             C:/Users/TS/WorkBuddy/HydroGelNet\results\stats\comparisons.csv
+  OK  perf gate              C:/Users/TS/WorkBuddy/HydroGelNet\results\metrics\perf_gate.json
+  OK  importance             C:/Users/TS/WorkBuddy/HydroGelNet\results\interpret\importance.csv
+  OK  manuscript (md)        C:/Users/TS/WorkBuddy/HydroGelNet\paper\manuscript.md
+  OK  manuscript (pdf)       C:/Users/TS/WorkBuddy/HydroGelNet\paper\SIMPLEX_manuscript.pdf
+  OK  figures (png)          8 in C:/Users/TS/WorkBuddy/HydroGelNet\figures
+  OK  tables (csv)           10 in C:/Users/TS/WorkBuddy/HydroGelNet\tables
+
+==============================================================================
+  PERF-GATE CLOSED -- the model does not beat the baselines yet.
+  Writing the manuscript now is NOT an option. Open the report,
+  apply the escalation level it prints, then re-run:
+    C:/Users/TS/WorkBuddy/HydroGelNet\audit\PERF_GATE.md
+    python run_all.py --from tune
+==============================================================================

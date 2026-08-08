@@ -1,0 +1,317 @@
+{
+  "winners": [],
+  "results": {
+    "all|mean": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "RandomForest",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.8379897174140634,
+      "external_r2": -0.0016479003238973888,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "all|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "RandomForest",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.9999999999999614,
+      "external_r2": -6.400666178004017,
+      "external_spearman": -0.8076923076923078,
+      "dual_win": false
+    },
+    "all|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "all|blr": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "RandomForest",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "blr",
+      "internal_r2": -29.632116454163597,
+      "external_r2": -3.174769782072206e+30,
+      "external_spearman": -0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_only|mean": {
+      "feats": [
+        "p_sim"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.7947391445872967,
+      "external_r2": 0.694640203457561,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_only|ridge_strong": {
+      "feats": [
+        "p_sim"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.7917332361119134,
+      "external_r2": 0.6988225905855275,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_only|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_only|blr": {
+      "feats": [
+        "p_sim"
+      ],
+      "meta": "blr",
+      "internal_r2": 0.791736453288741,
+      "external_r2": 0.6987777791670052,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_rf|mean": {
+      "feats": [
+        "p_sim",
+        "RandomForest"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.8157393408312545,
+      "external_r2": 0.4940545500599761,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_rf|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "RandomForest"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.814151648587915,
+      "external_r2": 0.26488429593123797,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_rf|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_rf|blr": {
+      "feats": [
+        "p_sim",
+        "RandomForest"
+      ],
+      "meta": "blr",
+      "internal_r2": 0.8141322536295668,
+      "external_r2": 0.2598457081817468,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2ext|mean": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.815854068013883,
+      "external_r2": 0.3985657273519245,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2ext|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.8224263661701446,
+      "external_r2": 0.01603721448405182,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2ext|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_top2ext|blr": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge"
+      ],
+      "meta": "blr",
+      "internal_r2": 0.8224374944621362,
+      "external_r2": 0.016866419784317577,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top3ext|mean": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge",
+        "ElasticNet"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.8108395416031182,
+      "external_r2": 0.30543402408240417,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top3ext|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge",
+        "ElasticNet"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.8218592095698684,
+      "external_r2": 0.038456032204497004,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top3ext|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_top3ext|blr": {
+      "feats": [
+        "p_sim",
+        "SVR-RBF",
+        "Ridge",
+        "ElasticNet"
+      ],
+      "meta": "blr",
+      "internal_r2": 0.8221408463804813,
+      "external_r2": 0.03264798284565584,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2int|mean": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "SVR-RBF"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.9193057897210045,
+      "external_r2": -0.13368809299682027,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2int|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "SVR-RBF"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.9999999999999672,
+      "external_r2": -6.400666717260337,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_top2int|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_top2int|blr": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "SVR-RBF"
+      ],
+      "meta": "blr",
+      "internal_r2": 1.0,
+      "external_r2": -6.400671372692103,
+      "external_spearman": -0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_no_rf|mean": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "mean",
+      "internal_r2": 0.8377592987555545,
+      "external_r2": -0.049341554193520265,
+      "external_spearman": 0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_no_rf|ridge_strong": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "ridge_strong",
+      "internal_r2": 0.9999999999999637,
+      "external_r2": -6.40066635984041,
+      "external_spearman": -0.8076923076923078,
+      "dual_win": false
+    },
+    "sim_no_rf|ridge_pos": {
+      "error": "_BaseRidgeCV.__init__() got an unexpected keyword argument 'positive'"
+    },
+    "sim_no_rf|blr": {
+      "feats": [
+        "p_sim",
+        "y_true_glass_adhesion_kpa",
+        "y_pred_glass_adhesion_kpa",
+        "ElasticNet",
+        "HistGB",
+        "KNN",
+        "MLP",
+        "Mean",
+        "Ridge",
+        "SVR-RBF"
+      ],
+      "meta": "blr",
+      "internal_r2": -1054.1774214027535,
+      "external_r2": -9.484975544689793e+30,
+      "external_spearman": -0.8076923076923078,
+      "dual_win": false
+    }
+  }
+}

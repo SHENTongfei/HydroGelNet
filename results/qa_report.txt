@@ -1,0 +1,23 @@
+
+============================================================
+=== Figure3 dataset ===
+============================================================
+HIGH issues: 2, MED issues: 2
+(no verdict)
+  *   **Panel A:** [HIGH] The text label "25" is rendered directly inside the blue data point circle, overlapping and occluding part
+  *   **Panel G:** [MED] Significant overlap between axis tick labels (e.g., p03, p12) and the numerical value annotations at the en
+  *   **Panel B:** [HIGH] The x-axis label "adhesion strength (kPa)" is positioned too high, physically overlapping the histogram ba
+  *   **Panel C:** [MED] The numerical annotation "316" is placed directly adjacent to/overlapping the data points in the vertical c
+
+============================================================
+=== Figure4 internal_cv ===
+============================================================
+HIGH issues: 3, MED issues: 0
+(no verdict)
+  *   **Panel C** | Severity: **HIGH**
+  *   **Panel B** | Severity: **HIGH**
+  *   **Panel G** | Severity: **HIGH**
+
+============================================================
+=== Figure5 benchmark ===
+============================================================

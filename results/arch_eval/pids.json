@@ -1,0 +1,9 @@
+{
+  "launched_at": "034751",
+  "smoke": false,
+  "pids": {
+    "arch_A_depth": 13968,
+    "arch_B_width": 20332,
+    "arch_C_heads": 10500
+  }
+}

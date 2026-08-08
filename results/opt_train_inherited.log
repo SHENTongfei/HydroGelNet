@@ -1,0 +1,12 @@
+
+==============================================================================
+RUN ALL  --  SIMPLEX
+==============================================================================
+  project : C:/Users/TS/WorkBuddy/HydroGelNet
+  python  : C:/Users/TS/.conda/envs/HydroGelNet/python.exe
+  stages  : train -> baselines -> stats -> gate -> interpret -> figures -> tables -> paper
+
+##############################################################################
+# STEP 5/9  cross-validated training
+# C:/Users/TS/.conda/envs/HydroGelNet/python.exe C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py --config C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config_final.json --tag main --seeds 5
+##############################################################################

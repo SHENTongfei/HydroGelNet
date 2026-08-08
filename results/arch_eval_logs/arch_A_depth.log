@@ -1,0 +1,58 @@
+variant=arch_A_depth  d_model=152 n_blocks=2 n_heads=8 proj_dim=16 swa=True ema=True
+internal n=316  external n=25  task=regression  seeds=10
+    seed=42 fold=0  R2=0.7881  ep=142  swa=False
+    seed=42 fold=1  R2=0.8502  ep=142  swa=False
+    seed=42 fold=2  R2=0.6101  ep=152  swa=False
+    seed=42 fold=3  R2=0.8186  ep=179  swa=False
+    seed=42 fold=4  R2=0.8545  ep=148  swa=False
+    seed=2024 fold=0  R2=0.6892  ep=153  swa=False
+    seed=2024 fold=1  R2=0.7685  ep=142  swa=False
+    seed=2024 fold=2  R2=0.8164  ep=142  swa=False
+    seed=2024 fold=3  R2=0.8408  ep=198  swa=False
+    seed=2024 fold=4  R2=0.8009  ep=142  swa=False
+    seed=7 fold=0  R2=0.8362  ep=146  swa=False
+    seed=7 fold=1  R2=0.7283  ep=142  swa=False
+    seed=7 fold=2  R2=0.8436  ep=153  swa=False
+    seed=7 fold=3  R2=0.7425  ep=190  swa=False
+    seed=7 fold=4  R2=0.8249  ep=142  swa=False
+    seed=1337 fold=0  R2=0.8452  ep=142  swa=False
+    seed=1337 fold=1  R2=0.8125  ep=203  swa=False
+    seed=1337 fold=2  R2=0.7743  ep=143  swa=False
+    seed=1337 fold=3  R2=0.8028  ep=154  swa=False
+    seed=1337 fold=4  R2=0.7328  ep=166  swa=False
+    seed=20260731 fold=0  R2=0.6423  ep=142  swa=False
+    seed=20260731 fold=1  R2=0.7889  ep=187  swa=False
+    seed=20260731 fold=2  R2=0.8307  ep=166  swa=False
+    seed=20260731 fold=3  R2=0.8380  ep=142  swa=False
+    seed=20260731 fold=4  R2=0.7777  ep=142  swa=False
+    seed=11 fold=0  R2=0.8370  ep=148  swa=False
+    seed=11 fold=1  R2=0.7975  ep=181  swa=False
+    seed=11 fold=2  R2=0.8353  ep=163  swa=False
+    seed=11 fold=3  R2=0.7064  ep=142  swa=False
+    seed=11 fold=4  R2=0.8310  ep=145  swa=False
+    seed=99 fold=0  R2=0.8307  ep=142  swa=False
+    seed=99 fold=1  R2=0.8391  ep=174  swa=False
+    seed=99 fold=2  R2=0.8124  ep=142  swa=False
+    seed=99 fold=3  R2=0.8058  ep=157  swa=False
+    seed=99 fold=4  R2=0.7029  ep=142  swa=False
+    seed=555 fold=0  R2=0.8473  ep=160  swa=False
+    seed=555 fold=1  R2=0.7318  ep=142  swa=False
+    seed=555 fold=2  R2=0.8140  ep=142  swa=False
+    seed=555 fold=3  R2=0.8707  ep=153  swa=False
+    seed=555 fold=4  R2=0.7302  ep=142  swa=False
+    seed=888 fold=0  R2=0.7105  ep=147  swa=False
+    seed=888 fold=1  R2=0.8140  ep=165  swa=False
+    seed=888 fold=2  R2=0.8546  ep=146  swa=False
+    seed=888 fold=3  R2=0.7561  ep=193  swa=False
+    seed=888 fold=4  R2=0.8328  ep=142  swa=False
+    seed=31337 fold=0  R2=0.8038  ep=185  swa=False
+    seed=31337 fold=1  R2=0.8504  ep=142  swa=False
+    seed=31337 fold=2  R2=0.7737  ep=147  swa=False
+    seed=31337 fold=3  R2=0.7408  ep=142  swa=False
+    seed=31337 fold=4  R2=0.8552  ep=142  swa=False
+  [arch_A_depth] mean R2 = 0.7928 +/- 0.0585   (2991.3s)
+
+[arch_eval] arch_A_depth DONE in 49.9 min
+  internal R2 = 0.7928 +/- 0.0585
+  external R2 = 0.6970
+  out = C:/Users/TS/WorkBuddy/HydroGelNet\results\arch_eval\arch_A_depth_20260808_034817

@@ -1,0 +1,10 @@
+{
+  "launched_at": "1027",
+  "pids": {
+    "variant_mc16": 25364,
+    "variant_mfm": 42216,
+    "variant_sam": 46424,
+    "variant_rank": 524,
+    "variant_log1p_mc16": 37308
+  }
+}

@@ -1,0 +1,58 @@
+variant=variant_log1p_mc16  d_model=152 n_blocks=1 n_heads=8 proj_dim=16 swa=True ema=True
+internal n=316  external n=25  task=regression  seeds=10
+    seed=42 fold=0  R2=0.7538  ep=172  swa=False
+    seed=42 fold=1  R2=0.6840  ep=142  swa=False
+    seed=42 fold=2  R2=0.5922  ep=142  swa=False
+    seed=42 fold=3  R2=0.7214  ep=142  swa=False
+    seed=42 fold=4  R2=0.6705  ep=142  swa=False
+    seed=2024 fold=0  R2=0.6309  ep=142  swa=False
+    seed=2024 fold=1  R2=0.7737  ep=149  swa=False
+    seed=2024 fold=2  R2=0.7755  ep=142  swa=False
+    seed=2024 fold=3  R2=0.7287  ep=163  swa=False
+    seed=2024 fold=4  R2=0.6415  ep=160  swa=False
+    seed=7 fold=0  R2=0.7870  ep=189  swa=False
+    seed=7 fold=1  R2=0.6502  ep=183  swa=False
+    seed=7 fold=2  R2=0.7694  ep=227  swa=False
+    seed=7 fold=3  R2=0.7165  ep=169  swa=False
+    seed=7 fold=4  R2=0.7778  ep=142  swa=False
+    seed=1337 fold=0  R2=0.7619  ep=184  swa=False
+    seed=1337 fold=1  R2=0.7941  ep=158  swa=False
+    seed=1337 fold=2  R2=0.7094  ep=142  swa=False
+    seed=1337 fold=3  R2=0.7657  ep=160  swa=False
+    seed=1337 fold=4  R2=0.6264  ep=165  swa=False
+    seed=20260731 fold=0  R2=0.6536  ep=171  swa=False
+    seed=20260731 fold=1  R2=0.7270  ep=184  swa=False
+    seed=20260731 fold=2  R2=0.6882  ep=142  swa=False
+    seed=20260731 fold=3  R2=0.5714  ep=142  swa=False
+    seed=20260731 fold=4  R2=0.7350  ep=201  swa=False
+    seed=11 fold=0  R2=0.7366  ep=142  swa=False
+    seed=11 fold=1  R2=0.7526  ep=208  swa=False
+    seed=11 fold=2  R2=0.7204  ep=142  swa=False
+    seed=11 fold=3  R2=0.7023  ep=155  swa=False
+    seed=11 fold=4  R2=0.7076  ep=142  swa=False
+    seed=99 fold=0  R2=0.7570  ep=224  swa=False
+    seed=99 fold=1  R2=0.7096  ep=185  swa=False
+    seed=99 fold=2  R2=0.7718  ep=142  swa=False
+    seed=99 fold=3  R2=0.7327  ep=162  swa=False
+    seed=99 fold=4  R2=0.6548  ep=149  swa=False
+    seed=555 fold=0  R2=0.7117  ep=142  swa=False
+    seed=555 fold=1  R2=0.6278  ep=142  swa=False
+    seed=555 fold=2  R2=0.6675  ep=142  swa=False
+    seed=555 fold=3  R2=0.7627  ep=180  swa=False
+    seed=555 fold=4  R2=0.7405  ep=145  swa=False
+    seed=888 fold=0  R2=0.7351  ep=180  swa=False
+    seed=888 fold=1  R2=0.7365  ep=146  swa=False
+    seed=888 fold=2  R2=0.7357  ep=142  swa=False
+    seed=888 fold=3  R2=0.7321  ep=240  swa=False
+    seed=888 fold=4  R2=0.7395  ep=142  swa=False
+    seed=31337 fold=0  R2=0.7066  ep=142  swa=False
+    seed=31337 fold=1  R2=0.7572  ep=233  swa=False
+    seed=31337 fold=2  R2=0.7229  ep=205  swa=False
+    seed=31337 fold=3  R2=0.7306  ep=142  swa=False
+    seed=31337 fold=4  R2=0.7810  ep=155  swa=False
+  [variant_log1p_mc16] mean R2 = 0.7168 +/- 0.0520   (3762.2s)
+
+[arch_eval] variant_log1p_mc16 DONE in 62.7 min
+  internal R2 = 0.7168 +/- 0.0520
+  external R2 = 0.5670
+  out = C:/Users/TS/WorkBuddy/HydroGelNet\results\arch_eval\variant_log1p_mc16_20260808_102706

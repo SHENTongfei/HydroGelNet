@@ -1,0 +1,54 @@
+
+==============================================================================
+STEP 4/9  HYPER-PARAMETER SEARCH + ABLATION
+==============================================================================
+  reusing C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+
+  -- ablation (21 components + 3 fusion variants) --
+C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py:510: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:822.)
+  if float(loss) == 0.0:
+    full model                       R2=+0.8010  (75s)
+    w/o multimodal fusion            R2=+0.7397  (53s)
+    w/o sparse attention             R2=+0.7651  (68s)
+    w/o attention sparsity reg.      R2=+0.8010  (74s)
+    w/o FiLM conditioning            R2=+0.7940  (86s)
+    w/o task-specific gating         R2=+0.7956  (125s)
+    w/o residual blocks              R2=+0.7848  (159s)
+    w/o contrastive pre-training     R2=+0.7915  (161s)
+    w/o Mixup                        R2=+0.7955  (187s)
+    w/o SWA                          R2=+0.8010  (133s)
+    w/o uncertainty weighting        R2=+0.8010  (118s)
+    w/o domain constraint            R2=+0.8010  (156s)
+    w/o modality gate                R2=+0.7861  (134s)
+    w/o transformer block            R2=+0.8010  (183s)
+    w/o SAM                          R2=+0.8010  (198s)
+    w/o EMA                          R2=+0.8010  (112s)
+    w/o R-Drop                       R2=+0.7954  (85s)
+    w/o feature noise                R2=+0.7913  (132s)
+    w/o MFM pre-training             R2=+0.8010  (137s)
+    w/o MC-Dropout                   R2=+0.8010  (212s)
+    w/o pretrained transfer          R2=+0.8010  (220s)
+    fusion = concat                   R2=+0.7799
+    fusion = film                     R2=+0.7889
+    fusion = cross                    R2=+0.7881
+
+  -- automatic component pruning --
+    w/o attention sparsity reg.: delta R2 = +0.0000 -> component removed from the final model
+    w/o SWA: delta R2 = +0.0000 -> component removed from the final model
+    w/o uncertainty weighting: delta R2 = +0.0000 -> component removed from the final model
+    w/o domain constraint: delta R2 = +0.0000 -> component removed from the final model
+    w/o transformer block: delta R2 = +0.0000 -> component removed from the final model
+    w/o SAM: delta R2 = +0.0000 -> component removed from the final model
+    w/o EMA: delta R2 = +0.0000 -> component removed from the final model
+    w/o MFM pre-training: delta R2 = +0.0000 -> component removed from the final model
+    w/o MC-Dropout: delta R2 = +0.0000 -> component removed from the final model
+    w/o pretrained transfer: delta R2 = +0.0000 -> component removed from the final model
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\tuner.py", line 348, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\tuner.py", line 337, in main
+    with open(paths.BEST_CONFIG_JSON, "w", encoding="utf-8") as fh:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:/Users/TS/WorkBuddy/HydroGelNet\\results\\tuning\\best_config.json'

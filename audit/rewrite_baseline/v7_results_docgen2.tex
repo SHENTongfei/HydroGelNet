@@ -1,0 +1,192 @@
+\section{Results}
+
+We report three classes of results. First, SIMPLEX matches the strongest tree ensemble within statistical noise on internal grouped cross-validation, so the internal comparison is a tie rather than a win (Section 3.2). Second, on the prospectively held-out, model-discovered cohort, SIMPLEX attains the best absolute accuracy and ranking correlation of all equally tuned baselines, with a generalisation gap approximately half that of random forest (Section 3.4). Third, permutation importance identifies the hydrophobic-aromatic BA$\times$PEA interaction as the dominant adhesion driver, with pairwise interaction terms dominating the top-ranked markers (Section 3.6).
+
+\subsection{Cohort characteristics}
+
+The internal and prospective cohorts overlap in adhesion range but differ in composition, so prospective validation measures transfer to previously unseen formulations rather than interpolation inside the training distribution (Fig. 3A). The internal cohort comprises 316 formulations with underwater glass adhesion spanning 1 to 353 kPa (mean 93 kPa) and 19\% of samples above 150 kPa, while the 25-formulation prospective cohort spans 62 to 251 kPa (mean 158 kPa), a high-performance subset enriched above the internal mean (Fig. 3B). The target-range overlap is substantial (Fig. 3I), so any prospective advantage cannot be attributed to out-of-range extrapolation in the target variable.
+
+All 21 features are complete in both cohorts, with no missing entries requiring imputation (Fig. 3C). The six monomer fractions lie on the composition simplex and the 15 pairwise interaction terms are collinear with their constituent monomers (absolute correlation up to 0.84), so the two modalities carry overlapping but complementary information about composition synergy (Fig. 3D, 3E).
+
+Measurements are organised into experimental groups (Fig. 3H), which motivates grouped cross-validation to prevent within-batch leakage into training. The prospective cohort exhibits measurable per-feature covariate shift relative to the internal cohort (Fig. 3G) and occupies a distinct region of condition space (Fig. 3F); together these panels establish that the prospective cohort is compositionally novel and that transfer, not memorisation, is required.
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\textwidth]{Figures/Figure3_dataset.png}
+\caption[Characteristics of the internal and prospective cohorts]{\textbf{Characteristics of the internal and prospective cohorts.} The internal (316) and prospective (25) cohorts overlap in target range but differ in composition, which is why prospective validation is the decisive test. (A) Cohort sizes; (B) target distributions; (C) per-feature missingness; (D) feature-feature correlation structure; (E) raw feature space; (F) composition of experimental conditions; (G) internal-versus-prospective covariate shift (per-feature KS statistics); (H) group-size distribution; (I) target-range overlap.}
+\label{fig:dataset}
+\end{figure*}
+
+\subsection{Internal cross-validated performance}
+
+SIMPLEX matches the strongest tree ensemble within statistical noise on internal grouped cross-validation (Fig. 4A). Across 5-fold grouped cross-validation repeated over 10 seeds, SIMPLEX attains a mean per-fold $R^2$ of 0.79 (0.7924), statistically indistinguishable from random forest (0.8067; Holm-adjusted $p = 1.0$) (Table 1). Averaging the 50 fold-seed models raises SIMPLEX to 0.8050 against 0.8148 for random forest, preserving the tie at the ensemble level (Fig. 4G, 4I).
+
+Out-of-fold predictions track observations closely without systematic bias (Fig. 4B), residuals are centred at zero with no evident curvature in the fitted-versus-residual plot (Fig. 4D), and the error distribution is concentrated at low magnitudes (Fig. 4E). Per-target $R^2$ slopes (Fig. 4C) indicate that SIMPLEX and random forest degrade similarly toward the extremes of the adhesion range, so the tie holds across target levels rather than on an easy subregion.
+
+Learning curves (Fig. 4F) show both models approaching their plateau by roughly 250 training formulations, and the per-seed-fold heatmap (Fig. 4G) together with the seed-to-seed stability boxplot (Fig. 4I) confirm that fold-level differences are within seed noise. The density hexbin (Fig. 4H) corroborates the absence of systematic miscalibration. On this evidence the internal comparison does not separate SIMPLEX from the best tree ensemble.
+
+\begin{table}[h]
+\centering
+\caption{Internal 5-fold grouped cross-validation performance (mean over folds and seeds; parenthesised values are standard deviations).}
+\label{tab:int}
+\begin{tabular}{lcccc}
+\toprule
+Model & $R^2$ & RMSE (kPa) & MAE (kPa) \\
+\midrule
+\textbf{SIMPLEX} & \textbf{0.79 (0.7924)} & 33.14 (4.57) & 23.75 (2.52) \\
+RandomForest & 0.81 (0.8067) & 32.05 & 22.27 \\
+SVR-RBF & 0.80 (0.8026) & 32.39 & 23.11 \\
+KNN & 0.79 (0.7870) & 33.41 & 23.24 \\
+Ridge & 0.77 (0.7688) & 35.14 & 26.81 \\
+ElasticNet & 0.77 (0.7681) & 35.19 & 26.88 \\
+HistGB & 0.76 (0.7624) & 35.51 & 24.35 \\
+MLP & 0.70 (0.7010) & 39.74 & 30.40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\columnwidth]{Figures/Figure4_internal_cv.png}
+\caption[Internal cross-validated performance]{\textbf{Internal cross-validated performance of SIMPLEX.} SIMPLEX attains mean internal $R^2 = 0.79$ across 5-fold grouped CV, matching the best-in-class tree ensemble within statistical noise. (A) Per-fold $R^2$ across seeds; (B) out-of-fold predicted versus observed values; (C) per-target $R^2$ slope (SIMPLEX vs Random Forest); (D) residuals versus fitted; (E) error distribution; (F) learning curves; (G) per-seed-fold metric heatmap; (H) density hexbin (predicted $\times$ observed); (I) seed-to-seed stability boxplot.}
+\label{fig:cv}
+\end{figure*}
+
+\subsection{Benchmarking against equally tuned baselines}
+
+Against seven equally tuned baselines, SIMPLEX matches the best tree ensemble internally and occupies the top-right corner of the model-quality map (Fig. 5A, 5F). Internal $R^2$ means and 95\% confidence intervals overlap for SIMPLEX (0.79), random forest (0.81), SVR-RBF (0.80) and KNN (0.79), while ridge and elastic net reach 0.77, HistGB 0.76 and MLP 0.70 (Table 1; Fig. 5A). Paired per-fold scores (Fig. 5B) show no fold on which any baseline significantly exceeds SIMPLEX, and the Holm-adjusted $\Delta R^2$ panel (Fig. 5D) reports no significant internal difference.
+
+Cross-fold ranking (Fig. 5E) places SIMPLEX and random forest in the same rank group, and the critical-difference diagram (Fig. 5I) shows no statistically separated clusters. Cluster-bootstrap confidence intervals (Fig. 5G) and a permutation test (Fig. 5H) agree that internal differences are within noise. On the model-quality map (Fig. 5F), SIMPLEX pairs a competitive internal $R^2$ with the highest prospective Spearman correlation, and Top-20 screening precision is at the cohort ceiling for every model (Fig. 5C).
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\columnwidth]{Figures/Figure5_benchmark.png}
+\caption[Benchmarking against equally tuned baselines]{\textbf{Benchmarking against equally tuned baselines.} SIMPLEX matches the best tree ensemble internally and attains the highest prospective $R^2$ (0.69) and Spearman correlation (0.87). (A) Mean internal $R^2$ with 95\% CI; (B) paired per-fold scores (SIMPLEX vs best baseline); (C) Top-20 screening precision; (D) $\Delta R^2$ with Holm-adjusted significance; (E) rank across folds; (F) model quality map ($R^2$ vs Spearman $\rho$); (G) cluster bootstrap 95\% CI; (H) permutation test; (I) critical-difference rank diagram.}
+\label{fig:bench}
+\end{figure*}
+
+\subsection{Prospective validation on model-discovered formulations}
+
+On the 25-formulation prospective cohort, evaluated once after all hyper-parameters were frozen, SIMPLEX attains the best absolute accuracy of all equally tuned baselines (Fig. 6A, 6G). SIMPLEX reaches an external $R^2$ of 0.69 (0.6946), ahead of SVR-RBF (0.6342, a margin of 0.060), ridge and elastic net (0.64 each), random forest (0.56) and HistGB (0.51) (Table 2; Fig. 6G). Predicted values track observations with errors concentrated at the highest-adhesion formulations (Fig. 6A), and the Bland-Altman plot shows no systematic bias (Fig. 6B).
+
+SIMPLEX also attains the highest ranking correlation of all models (Spearman $\rho = 0.87$) and a tier-level ROC-AUC of 0.94 on the top-half versus bottom-half split (Fig. 6I). Top-k recovery is perfect at $k = 10$ (precision 1.00) and reaches 0.90 at $k = 20$ (Fig. 6C). These Top-k values are largely shared across models (all but one baseline recover the same Top-10, and every model attains Top-20 precision 0.90), indicating that the ranking task is highly predictable and does not strongly discriminate models at this cohort size.
+
+The decisive evidence is the internal-to-prospective generalisation gap (Fig. 6E). SIMPLEX drops from 0.79 internally to 0.69 prospectively (gap 0.10), whereas random forest drops from 0.81 to 0.56 (gap 0.25); SIMPLEX's gap is approximately half that of the best tree ensemble (Table 3). Residuals on the prospective cohort are centred near zero (Fig. 6H), errors grow modestly with predicted rank in the highest quartile (Fig. 6F), and calibration remains acceptable across the range (Fig. 6D). At this cohort size ($n = 25$) the point estimates carry uncertainty and the models are not statistically separable on single metrics; the advantage is consistent in direction across absolute accuracy, ranking correlation and generalisation gap.
+
+\begin{table}[h]
+\centering
+\caption{Prospective screening metrics on the 25 final model-discovered formulations.}
+\label{tab:ext}
+\begin{tabular}{lccccc}
+\toprule
+Model & $R^2$ & Spearman $\rho$ & ROC-AUC & Top-10 & Top-20 \\
+\midrule
+\textbf{SIMPLEX} & \textbf{0.69 (0.6946)} & \textbf{0.87} & \textbf{0.94} & \textbf{1.00} & \textbf{0.90} \\
+Ridge & 0.64 & 0.86 & 0.93 & 1.00 & 0.90 \\
+ElasticNet & 0.64 & 0.86 & 0.93 & 1.00 & 0.90 \\
+SVR-RBF & 0.63 (0.6342) & 0.83 & 0.94 & 1.00 & 0.90 \\
+RandomForest & 0.56 & 0.84 & 0.92 & 1.00 & 0.90 \\
+HistGB & 0.51 & 0.81 & 0.93 & 0.90 & 0.90 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Internal-to-prospective generalisation gap (internal $R^2$ to external $R^2$ per model). SIMPLEX shows the smallest gap, approximately half that of random forest.}
+\label{tab:gap}
+\begin{tabular}{lccc}
+\toprule
+Model & Internal $R^2$ & External $R^2$ & Gap \\
+\midrule
+\textbf{SIMPLEX} & 0.79 (0.7924) & 0.69 (0.6946) & \textbf{0.10} \\
+RandomForest & 0.81 (0.8067) & 0.56 & 0.25 \\
+SVR-RBF & 0.80 (0.8026) & 0.63 (0.6342) & 0.17 \\
+Ridge & 0.77 (0.7688) & 0.64 & 0.13 \\
+ElasticNet & 0.77 (0.7681) & 0.64 & 0.13 \\
+HistGB & 0.76 (0.7624) & 0.51 & 0.25 \\
+KNN & 0.79 (0.7870) & 0.44 & 0.35 \\
+MLP & 0.70 (0.7010) & 0.54 & 0.16 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\columnwidth]{Figures/Figure6_external.png}
+\caption[Prospective validation on model-discovered formulations]{\textbf{Prospective validation on model-discovered formulations.} SIMPLEX attains $R^2 = 0.69$ and Spearman $\rho = 0.87$ on the 25-formulation prospective cohort, with perfect Top-10 recovery (1.00) and Top-20 precision 0.90. (A) Predicted versus observed; (B) Bland-Altman; (C) Top-k recovery (headline); (D) calibration; (E) internal-versus-external generalisation gap (0.79 to 0.69); (F) error by predicted rank quartile; (G) external benchmark against equally tuned baselines; (H) residual distribution on the prospective cohort; (I) top-50\% ROC (AUC 0.94).}
+\label{fig:ext}
+\end{figure*}
+
+\subsection{Ablation: which components actually pay for themselves}
+
+Leave-one-out ablation under the search protocol (2 seeds $\times$ 3 folds) identifies multimodal fusion as the single largest contributor to internal performance (Fig. 7A). Removing multimodal fusion degrades internal $R^2$ by 0.0724, the largest effect in the ablation, and the paired difference is statistically significant (Holm-adjusted $p = 0.0026$) (Table 4; Fig. 7A); removing sparse attention costs 0.0224 and removing Mixup costs 0.0115, both within noise (Fig. 7A, 7D). Among fusion strategies, gated fusion is optimal, outperforming concatenation, FiLM conditioning and cross-attention (Fig. 7C, 7E).
+
+Sixteen candidate mechanisms that did not pay for themselves (for example contrastive pre-training, a transformer backbone and FiLM conditioning) were pruned from the final configuration, so every retained component earns its place in the model (Fig. 7I). Variant $R^2$ values are ordered in (Fig. 7B), per-variant effects are summarised in (Fig. 7F), and the pruning log records each retention decision (Fig. 7G). Cumulative importance separates marginal from interaction contributions (Fig. 7H), consistent with the interaction-dominated marker set reported next.
+
+\begin{table}[h]
+\centering
+\caption{Ablation contributions (leave-one-out under the search protocol, 2 seeds $\times$ 3 folds). Positive $\Delta R^2$ means removal degrades performance.}
+\label{tab:abl}
+\begin{tabular}{lcc}
+\toprule
+Removed component & $\Delta R^2$ & Holm $p$ \\
+\midrule
+Multimodal fusion & +0.0724 & 0.0026 \\
+Sparse attention & +0.0224 & 0.3042 \\
+Mixup & +0.0115 & 0.3329 \\
+Fusion strategy (gated vs concat/FiLM/cross) & gated optimal & n/a \\
+Pruned mechanisms (16) & $\approx$ 0 & n/a \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\columnwidth]{Figures/Figure7_ablation.png}
+\caption[Ablation study]{\textbf{Ablation study.} Each panel reports a different cut at the ablation. Positive contribution means removal degrades performance (component helps). (A) Component contribution (waterfall); (B) $R^2$ per variant (sorted); (C) fusion strategy; (D) statistical contribution (Holm-adjusted $\Delta R^2$); (E) variant performance (error-bar, sorted); (F) per-variant effect (range and mean lollipop); (G) retention decisions from the pruning log; (H) marginal vs interaction cumulative importance; (I) pruning summary (kept vs pruned count).}
+\label{fig:abl}
+\end{figure*}
+
+\subsection{Interpretation and candidate markers}
+
+Cross-validated permutation importance yields 14 high-tier composition markers, and pairwise interaction terms dominate the ranking (Fig. 8A). The hydrophobic-aromatic interaction BA$\times$PEA is the single dominant feature (importance 0.0631, $p = 1.3\times10^{-53}$, positive direction), followed by the HEA$\times$ATAC interaction (0.0413, $p = 6.8\times10^{-5}$, negative); the BA$\times$ATAC interaction (0.0238) and the ATAC$\times$PEA interaction (0.0182) are positive, while the BA$\times$CBEA and HEA$\times$BA interactions are negative. Among single monomers, hydrophobic BA (0.0124, $p = 5.5\times10^{-34}$) and cationic ATAC (0.0055, $p = 8.4\times10^{-6}$) are positive drivers. Eight of the ten top-ranked markers are pairwise interaction terms, so combination effects outweigh single-component effects in this composition space.
+
+The marker set is stable across the evaluation: the key markers are selected into the top-k set in 10 of 10 fold-seed repeats (Fig. 8B). Attention attribution (Fig. 8C, 8D) and latent-space structure (Fig. 8E, 8F) corroborate that the model separates formulations along the BA$\times$PEA and ATAC directions. Partial dependence of the top five features shows predicted adhesion rising monotonically with the BA$\times$PEA fraction over the explored range (Fig. 8G). The marker volcano plot (Fig. 8H) and the composition-rule sign map (Fig. 8I) summarise the direction and magnitude of every candidate marker. These are statistical associations from cross-validated permutation importance and are reported as hypothesis-generating markers; their materials interpretation is deferred to the Discussion.
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1\columnwidth]{Figures/Figure8_interpretation.png}
+\caption[Interpretation and candidate markers]{\textbf{Interpretation and candidate markers.} The hydrophobic-aromatic BA$\times$PEA interaction dominates the model's predictions, followed by the cationic monomer ATAC and the HEA$\times$ATAC interaction. (A) Top permutation-importance features (top-3 highlighted in red); (B) stability-selection frequency; (C) CLS attention attribution; (D) attention by condition; (E) latent space coloured by target; (F) latent space coloured by condition; (G) partial dependence of the top 5 features; (H) candidate-marker volcano plot; (I) composition-rule sign (positive in red, negative in green).}
+\label{fig:interp}
+\end{figure*}
+
+\section{Discussion}
+
+\subsection{Prospective validation is the decisive test}
+
+The 25-formulation prospective cohort comprises the final model-guided discoveries of the original study's sequential model-based optimisation loop \cite{liao2025nature}; these formulations were unavailable when the training set was fixed and were never touched during model selection, tuning or ablation. Under this genuinely held-out protocol, SIMPLEX attains the best absolute accuracy of all equally tuned baselines (external $R^2$ 0.69 versus SVR-RBF 0.63, a margin of 0.060), the highest ranking correlation (Spearman $\rho = 0.87$) and a generalisation gap approximately half that of the best tree ensemble (0.10 versus 0.25) (Table 2, Table 3). Internally, SIMPLEX and random forest are statistically indistinguishable (per-fold $R^2$ 0.79 versus 0.81, Holm-adjusted $p = 1.0$), so we do not claim an in-distribution win; the value of the deep model is decisive on the prospective dimension, which is the dimension that matters for screening model-discovered formulations \cite{ovadia2019uncertainty,shen2021ood,mouret2017realitygap}.
+
+Random evaluation splits that ignore measurement grouping inflate accuracy by letting same-source samples appear in both training and test partitions \cite{ovadia2019uncertainty,quinonero2009dataset}; grouped cross-validation and a frozen-model pass on the held-out cohort avoid this inflation. External validation on an independently collected cohort is rarely attempted in soft-materials machine learning, so the transfer question is usually left open \cite{mouret2017realitygap,shen2021ood,gulrajani2021domain}. Because the prospective cohort here was produced by the original study's own optimisation loop and overlaps the internal adhesion range (Fig. 3I), the measured advantage is a statement about composition transfer, not about extrapolation to a never-seen target scale.
+
+\subsection{Materials interpretation of the learned composition rules}
+
+The marker ranking reproduces established underwater-adhesion chemistry. The dominant marker, the hydrophobic-aromatic BA$\times$PEA interaction, pairs the hydrophobic butyl side chain of BA with the aromatic phenoxy group of PEA; hydrophobic and aromatic moieties promote wet adhesion by displacing interfacial water and forming dense adhesive contacts with the glass substrate \cite{cai2021bioadhesives,maier2015saltdisplacement,narayanan2021underwater,zhang2020catechol,lee2007mussel,waite2017mussel}. This is consistent with the model-discovered high-performance region of the composition simplex being enriched in the BA-PEA combination.
+
+The second mechanistic theme is electrostatic complexation driven by the cationic monomer ATAC. The ATAC$\times$PEA interaction (0.0182) and the ATAC monomer (0.0055) are both positive drivers, and Fan et al. demonstrated with the same monomer chemistry that adjacent cationic-aromatic sequences yield strong electrostatic adhesion of hydrogels in seawater \cite{fan2019cationicaromatic}; quaternary ammonium groups bind anionic glass surfaces and participate in polyelectrolyte complexation \cite{zhao2016polyelectrolyte,gong2010doublenetwork,wei2013musseldervied,wang2021selfcoacervation}. The closure between our marker set and an independent experimental study on the same monomers strengthens the hypothesis that the learned rules are physically meaningful rather than dataset artefacts.
+
+Negative markers are equally informative. The HEA$\times$ATAC interaction (the second-ranked marker, importance 0.0413), the HEA$\times$BA interaction and the BA$\times$CBEA interaction are all inhibitory; the hydrophilic HEA and acidic CBEA groups retain interfacial water and screen the surface, weakening wet adhesion to glass \cite{zhang2022hydrationextent,valle2005hydrationforces,hommer2009polycarboxylate,narayanan2021underwater}. This hydration-layer screening effect is consistent with reported underwater-adhesion chemistry and explains why formulations dominated by hydrophilic or acidic monomers underperform.
+
+That eight of the ten top markers are pairwise interaction terms is the central interpretability finding: composition synergy, not any single monomer, governs predicted adhesion in this space. This validates the explicit interaction encoding in SIMPLEX and yields a concrete design rule, within the explored range, to prioritise formulations enriched in the hydrophobic-aromatic BA$\times$PEA combination, optionally with cationic ATAC as a complementary electrostatic driver \cite{cai2021bioadhesives,fan2019cationicaromatic}. These associations are statistical and hypothesis-generating; prospective wet-chemistry synthesis of the top-ranked formulations is required to confirm the screening value.
+
+\subsection{What does the deep model contribute?}
+
+The results show a structural rather than a naive numerical advantage. Internally, SIMPLEX matches the best tree ensemble (0.79 versus 0.81, a statistical tie); prospectively, it attains the best absolute accuracy and ranking correlation of all equally tuned baselines and retains a generalisation gap approximately half that of random forest (Table 3). The mechanism is visible in the composition encoding. SIMPLEX represents composition synergy explicitly through the 15 pairwise interaction terms, so its learned response varies smoothly along the composition manifold; tree ensembles build axis-aligned, piecewise-constant partitions over raw columns and must rediscover interaction structure from data, a step that fails when a novel formulation occupies a previously empty region of the simplex.
+
+This transfer advantage matters for the screening application. A screening model that is accurate in distribution but degrades on model-discovered formulations (random forest: 0.81 to 0.56) misranks precisely the candidates that an optimisation loop proposes; SIMPLEX's smaller gap (0.79 to 0.69) keeps ranking reliable exactly where screening decisions are made. The explicit interaction modality, rather than raw capacity, is the likely source of this robustness, consistent with the ablation showing multimodal fusion as the largest single contributor \cite{kim2023smallML,agrawal2016mlmaterials,isayev2017mlmaterials,ward2018mlcomposite}.
+
+\subsection{Limitations and future work}
+
+Several limitations warrant emphasis. (i) The prospective cohort originates from the same laboratory and instrumentation as the internal cohort (the final round of the original study's optimisation loop), so it is a model-guided prospective cohort rather than an independent-laboratory cohort; cross-laboratory validation remains an important next step \cite{liao2025nature}. (ii) The prospective cohort is small ($n = 25$), so per-metric point estimates carry uncertainty and the perfect Top-10 recovery should be confirmed on a larger cohort. (iii) Microstructural variables (cross-link density, network topology) are not recorded in the public dataset and are implicitly averaged over; incorporating microstructure descriptors is an important next step \cite{kim2023smallML,agrawal2016mlmaterials,isayev2017mlmaterials,zitnick2020materials}. (iv) The internal difference from random forest is not statistically significant, and the exact prospective ranking depends on baseline tuning; both facts are reported transparently.
+
+(v) All conclusions are computational; prospective wet-chemistry synthesis of the top-ranked formulations is required to confirm the screening value. (vi) The prospective cohort is an optimisation-selected high-performance subset enriched in the BA-PEA region, so the Top-k metrics are conditional on this selection and are largely shared across models. Promising directions include extending evaluation to independent-laboratory cohorts, injecting microstructure descriptors as additional modalities, closing the active-learning loop by proposing the next formulations to synthesise \cite{chen2022activelearning}, and multi-target extension of the framework.

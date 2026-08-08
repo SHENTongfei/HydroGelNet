@@ -1,0 +1,30 @@
+{
+  "launched_at": "2026-08-07T22:45:08",
+  "pid": 45200,
+  "stage": null,
+  "config": {
+    "swa": true,
+    "ema": true,
+    "marker": true,
+    "d_model": 152
+  },
+  "purged_stale": [
+    "metrics/cv_outer.csv",
+    "metrics/external.csv",
+    "metrics/baselines.csv",
+    "metrics/baselines_external.csv",
+    "metrics/baselines_external_preds.csv",
+    "metrics/perf_gate.json",
+    "metrics/escalation_log.csv",
+    "run_log.md",
+    "stats/comparisons.csv",
+    "stats/bootstrap_ci.csv",
+    "stats/permutation.csv",
+    "stats/ablation_stats.csv",
+    "stats/stats_report.md",
+    "preds/preds_cv_main.csv",
+    "preds/preds_external.csv",
+    "preds/preds_baselines.csv",
+    "tuning/config_used.json"
+  ]
+}

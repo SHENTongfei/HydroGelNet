@@ -1,0 +1,34 @@
+
+==============================================================================
+STEP 4/9  HYPER-PARAMETER SEARCH + ABLATION
+==============================================================================
+  reusing C:/Users/TS/WorkBuddy/HydroGelNet\results\tuning\best_config.json
+
+  -- ablation (21 components + 3 fusion variants) --
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\tuner.py", line 322, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\tuner.py", line 300, in main
+    abl = run_ablation(best_cfg, ds, seeds, folds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\tuner.py", line 174, in run_ablation
+    metrics, _, _ = run_cv(cfg, ds, seeds, tag=name, verbose=False,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py", line 760, in run_cv
+    model, hist = train_single(
+                  ^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py", line 469, in train_single
+    model = build_model(mcfg).to(paths.DEVICE)
+            ^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\model_zoo.py", line 775, in build_model
+    net = SciNet(cfg)
+          ^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\model_zoo.py", line 327, in __init__
+    self.tok1 = BlockTokenizer(cfg.in_dim, cfg.n_tokens1, d, cfg.dropout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\model_zoo.py", line 277, in __init__
+    n_tokens = max(1, min(n_tokens, in_dim))
+                      ^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'int' and 'str'
+EXIT=1

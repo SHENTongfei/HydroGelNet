@@ -1,0 +1,27 @@
+C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py:510: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:822.)
+  if float(loss) == 0.0:
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py", line 908, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\trainer.py", line 877, in main
+    metrics.to_csv(paths.CV_OUTER_CSV, index=False)
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\_runtime_guard.py", line 52, in _retry_to_csv
+    return _orig_to_csv(self, path_or_buf, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\pandas\core\generic.py", line 3989, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\pandas\io\formats\format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\pandas\io\formats\csvs.py", line 251, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "C:\Users\TS\.conda\envs\HydroGelNet\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:/Users/TS/WorkBuddy/HydroGelNet\\results\\metrics\\cv_outer.csv'

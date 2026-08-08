@@ -1,0 +1,94 @@
+{
+  "A_simavg_rf": {
+    "feats": [
+      "p_sim",
+      "RandomForest"
+    ],
+    "internal_r2": 0.8157393408312545,
+    "external_r2": 0.4940545500599761,
+    "external_spearman": 0.8076923076923078,
+    "usable": false
+  },
+  "B_ridge2_strong": {
+    "feats": [
+      "p_sim",
+      "RandomForest"
+    ],
+    "internal_r2": 0.8141518645250608,
+    "external_r2": 0.26488429593123797,
+    "external_spearman": 0.8076923076923078,
+    "usable": false
+  },
+  "C_ridge_all_strong": {
+    "feats": [
+      "p_sim",
+      "y_true_glass_adhesion_kpa",
+      "y_pred_glass_adhesion_kpa",
+      "ElasticNet",
+      "HistGB",
+      "KNN",
+      "MLP",
+      "Mean",
+      "RandomForest",
+      "Ridge",
+      "SVR-RBF"
+    ],
+    "internal_r2": 0.9999999999999991,
+    "external_r2": -6.400671607208487,
+    "external_spearman": -0.8076923076923078,
+    "usable": false
+  },
+  "D_ridge_all_alpha1": {
+    "feats": [
+      "p_sim",
+      "y_true_glass_adhesion_kpa",
+      "y_pred_glass_adhesion_kpa",
+      "ElasticNet",
+      "HistGB",
+      "KNN",
+      "MLP",
+      "Mean",
+      "RandomForest",
+      "Ridge",
+      "SVR-RBF"
+    ],
+    "internal_r2": 0.9999999999999614,
+    "external_r2": -6.400666178004017,
+    "external_spearman": -0.8076923076923078,
+    "usable": false
+  },
+  "E_valweight_all": {
+    "feats": [
+      "p_sim",
+      "y_true_glass_adhesion_kpa",
+      "y_pred_glass_adhesion_kpa",
+      "ElasticNet",
+      "HistGB",
+      "KNN",
+      "MLP",
+      "Mean",
+      "RandomForest",
+      "Ridge",
+      "SVR-RBF"
+    ],
+    "internal_r2": 0.8580351982337147,
+    "external_r2": 0.014734697011371645,
+    "external_spearman": 0.8076923076923078,
+    "usable": false
+  },
+  "_ref_simplex_log1p": {
+    "internal_r2": 0.7773,
+    "external_r2": 0.7368
+  },
+  "_ref_simplex_std": {
+    "internal_r2": 0.7924,
+    "external_r2": 0.6946
+  },
+  "_ref_rf": {
+    "internal_r2": 0.8067,
+    "external_r2": null
+  },
+  "_ref_svr": {
+    "external_r2": 0.6342
+  }
+}

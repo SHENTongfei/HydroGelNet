@@ -1,0 +1,8 @@
+variant=variant_sam  d_model=152 n_blocks=1 n_heads=8 proj_dim=16 swa=True ema=True
+internal n=316  external n=25  task=regression  seeds=10
+    seed=42 fold=0  R2=-1001.7783  ep=142  swa=False
+    seed=42 fold=1  R2=-705.9041  ep=142  swa=False
+    seed=42 fold=2  R2=-1222.4845  ep=142  swa=False
+    seed=42 fold=3  R2=-834.5197  ep=142  swa=False
+    seed=42 fold=4  R2=-936.9014  ep=142  swa=False
+    seed=2024 fold=0  R2=-1186.9410  ep=142  swa=False

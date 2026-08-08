@@ -1,45 +1,44 @@
 {
   "model": "SIMPLEX",
-  "timestamp": "2026-08-06 18:58:19",
+  "timestamp": "2026-08-08 22:40:15",
   "checks": {
     "G1_beats_best_baseline": {
       "pass": true,
-      "detail": "R2 0.7925 vs RandomForest 0.8093 (delta -0.0168, statistical tie)"
+      "detail": "R2 0.7924 vs RandomForest 0.8067 (delta -0.0143, statistical tie)"
     },
     "G2_significant": {
-      "pass": true,
-      "detail": "p_holm = 1 internal tie; external TopK30 P=0.998"
+      "pass": false,
+      "detail": "p_holm = 1 internal tie; external TopK30 P=nan"
     },
     "G3_seed_stability": {
       "pass": true,
-      "detail": "1/5 seeds positive (need >= 4, >= 3 seeds); internal tie -> direction not decisive"
+      "detail": "2/10 seeds positive (need >= 8, >= 3 seeds); internal tie -> direction not decisive"
     },
     "G4_external": {
       "pass": true,
-      "detail": "R2 0.7101 vs Ridge 0.6372"
+      "detail": "R2 0.6946 vs SVR-RBF 0.6342"
     },
     "G5_ablation_informative": {
       "pass": true,
-      "detail": "ablation spread in R2 = 0.3149"
+      "detail": "largest |delta| in ablation = 0.0724"
     }
   },
   "metric": "R2",
   "variant": "main",
-  "proposed_mean": 0.79253,
+  "proposed_mean": 0.79243,
   "best_baseline": "RandomForest",
-  "best_baseline_mean": 0.80931,
-  "delta": -0.01679,
-  "delta_pct": -2.074,
+  "best_baseline_mean": 0.80674,
+  "delta": -0.01432,
+  "delta_pct": -1.774,
   "g1_tie": true,
   "p_value": 1.0,
   "p_source": "p_holm",
-  "external_topk_p": {
-    "TopK20": 0.9515,
-    "TopK30": 0.9975
-  },
-  "proposed_external": 0.71015,
-  "external_best_baseline": "Ridge",
-  "external_baseline_mean": 0.63724,
-  "failed_checks": [],
-  "verdict": "PASS"
+  "external_topk_p": {},
+  "proposed_external": 0.69464,
+  "external_best_baseline": "SVR-RBF",
+  "external_baseline_mean": 0.6342,
+  "failed_checks": [
+    "G2_significant"
+  ],
+  "verdict": "FAIL"
 }

@@ -1,0 +1,4 @@
+figure* begin: 8
+figure* end: 8
+table begin: 4
+table end: 4

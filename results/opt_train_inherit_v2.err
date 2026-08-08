@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\run_all.py", line 360, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\run_all.py", line 326, in main
+    log = write_log(records, a)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\WorkBuddy\HydroGelNet\code\run_all.py", line 202, in write_log
+    with open(path, "w", encoding="utf-8") as fh:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:/Users/TS/WorkBuddy/HydroGelNet\\results\\run_log.md'

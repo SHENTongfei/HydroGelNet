@@ -1,0 +1,9 @@
+{
+  "n_external": 25,
+  "simplex_alone_r2": 0.6937790062546216,
+  "simplex_alone_spearman": 0.803076923076923,
+  "stack_r2": -0.1787193973039174,
+  "stack_spearman": -0.803076923076923,
+  "baseline_only_stack_r2": -0.104677982004997,
+  "baseline_only_stack_spearman": NaN
+}
