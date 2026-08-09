@@ -76,7 +76,10 @@ def _save(fig, name, rect=(0, 0, 1, 0.94), wspace=0.55, hspace=0.70):
 # Figure 3 - cohort / dataset characteristics (3x3, advanced chart types)
 # =========================================================================== #
 def fig3(ctx: Ctx) -> None:
-    fig, axes = plt.subplots(3, 3, figsize=(DOUBLE_COL, 5.8))
+    # 3x2 layout: panels C (missingness ~0), F (single condition) and
+    # H (all singleton groups) carry no variance and are dropped; the
+    # remaining six panels carry the informative cohort description.
+    fig, axes = plt.subplots(3, 2, figsize=(DOUBLE_COL, 6.6))
     axes = axes.ravel()
     ds, ext = ctx.ds, ctx.ext
 
@@ -240,12 +243,11 @@ def fig3(ctx: Ctx) -> None:
         ax.set_title("Internal vs external: target range overlap")
         ax.legend(fontsize=6, frameon=False, loc="upper right")
 
-    fns = [p_counts, p_targets, p_missing, p_corr, p_pca,
-           p_cond, p_shift, p_groups, p_target_shift]
+    fns = [p_counts, p_targets, p_corr, p_pca, p_shift, p_target_shift]
     for ax, fn in zip(axes, fns):
         _safe(fn, ax)
     _label(axes)
-    _save(fig, "Figure3_dataset")
+    _save(fig, "Figure3_dataset", wspace=0.6, hspace=0.75)
 
 
 # =========================================================================== #
@@ -323,13 +325,7 @@ def fig4(ctx: Ctx) -> None:
                    edgecolor="white", linewidth=1.2, zorder=4)
         ax.scatter([v_ours], [0.22], s=180, color=NATURE["ours"],
                    edgecolor="white", linewidth=1.2, zorder=4)
-        ax.text(v_rf + 0.006, -0.22, f"{v_rf:.3f}", va="center",
-                ha="left", fontsize=9, color=NATURE["base_d"],
-                fontweight="bold")
-        ax.text(v_ours + 0.006, 0.22, f"{v_ours:.3f}", va="center",
-                ha="left", fontsize=9, color=NATURE["ours_d"],
-                fontweight="bold")
-        # tie bracket
+        # tie bracket (numbers removed: they collided with the dots)
         ax.plot([min(v_ours, v_rf) - 0.005, max(v_ours, v_rf) + 0.005],
                 [0.65, 0.65], "-", lw=1.2, color=NATURE["neutral"])
         ax.text((v_ours + v_rf) / 2, 0.78, "within tie (Holm p=1.0)",
@@ -436,11 +432,11 @@ def fig4(ctx: Ctx) -> None:
                               for c in cols],
                        edgecolor="white", linewidth=0.7, zorder=3)
         for yy, v in zip(y, vals):
-            ax.text(v + max(vals) * 0.01, yy, f"{v:.3f}", va="center",
-                    ha="left", fontsize=8, color="#222222", fontweight="bold")
+            ax.text(v + max(vals) * 0.03, yy, f"{v:.3f}", va="center",
+                    ha="left", fontsize=6.5, color="#444444")
         ax.set_yticks(y)
-        ax.set_yticklabels(labels, fontsize=7.5)
-        ax.set_xlim(0, vals.max() * 1.25)
+        ax.set_yticklabels(labels, fontsize=7.0)
+        ax.set_xlim(0, vals.max() * 1.32)
         ax.set_xlabel("mean (per-target)")
         ax.set_title(f"Per-target metrics ({_m_short(t, 14)})")
 
@@ -453,7 +449,7 @@ def fig4(ctx: Ctx) -> None:
         g = ctx.oof.groupby("sample_id")[[f"y_true_{t}",
                                           f"y_pred_{t}"]].mean()
         hb = ax.hexbin(g[f"y_true_{t}"], g[f"y_pred_{t}"], gridsize=24,
-                       cmap="YlOrRd", mincnt=1, linewidths=0.3)
+                       cmap="plasma", mincnt=1, linewidths=0.3)
         lo = float(min(g[f"y_true_{t}"].min(), g[f"y_pred_{t}"].min()))
         hi = float(max(g[f"y_true_{t}"].max(), g[f"y_pred_{t}"].max()))
         ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black")
@@ -565,11 +561,11 @@ def fig5(ctx: Ctx) -> None:
         for yy, v, s, c in zip(y, vals, se.values, colors):
             ax.errorbar(v, yy, xerr=1.96 * s, fmt="none", ecolor="#444444",
                         lw=1.0, capsize=2, zorder=2)
-            ax.text(v + 0.008, yy, f"{v:.3f}", va="center", ha="left",
-                    fontsize=7.5, color="#222222", fontweight="bold")
+            ax.text(v + 0.020, yy, f"{v:.3f}", va="center", ha="left",
+                    fontsize=7.0, color="#333333")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=7.5)
-        ax.set_xlim(vals.min() - 0.06, vals.max() + 0.09)
+        ax.set_xlim(vals.min() - 0.06, vals.max() + 0.13)
         ax.set_xlabel(f"{pm} (mean \u00b1 95% CI)")
 
     # ----- B: slope chart (paired per-fold SIMPLEX vs best baseline) ----
