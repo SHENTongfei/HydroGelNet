@@ -79,10 +79,10 @@ def _shade(i, n):
     return plt.cm.Blues(0.35 + 0.60 * i / max(n - 1, 1))
 
 
-def _broken_cut(vals, k=1.6):
+def _broken_cut(vals, k=1.5):
     """Adaptive broken-axis threshold: cut = k * median(positive values).
     Returns None when nothing exceeds the cut (uniform data -> no zigzag,
-    avoiding misleading truncation). k=1.6 keeps truncated bars very close
+    avoiding misleading truncation). k=1.5 keeps truncated bars very close
     to the short bars (user keeps asking for shorter cuts)."""
     vals = np.asarray(vals, dtype=float)
     pos = vals[vals > 0]
@@ -130,12 +130,12 @@ def fig3(ctx: Ctx) -> None:
         vals = [len(ds["Y"]), len(ext["Y"]) if ext is not None else 0]
         colors = [NATURE["ours"], NATURE["base"]]
         # twin horizontal bars (side-by-side), values at bar ends.
-        # Broken axis: 316 >> 25 (12.6x); CUT=40 keeps 25 at ~62% of the
+        # Broken axis: 316 >> 25 (12.6x); CUT=34 keeps 25 at ~74% of the
         # truncated bar.
-        CUT = 40.0
+        CUT = 34.0
         plot_vals = np.minimum(vals, CUT)
         y = np.arange(2)
-        ax.barh(y, plot_vals, height=0.42, color=colors, edgecolor="white",
+        ax.barh(y, plot_vals, height=0.26, color=colors, edgecolor="white",
                 linewidth=0.8, zorder=3)
         for yy, v, c in zip(y, vals, colors):
             if v > CUT:
@@ -147,7 +147,10 @@ def fig3(ctx: Ctx) -> None:
                         ha="left", fontsize=9, color=c, fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=8.5)
-        ax.set_xlim(0, CUT + 28)
+        ax.set_ylim(-0.75, 1.75)
+        # x-limit hugs the truncated bar (CUT*1.5): bars occupy ~2/3 of the
+        # axis, the value label fits inside.
+        ax.set_xlim(0, CUT * 1.5)
         ax.set_xlabel("number of formulations")
 
     # ----- B: target distribution with KDE overlay -----------------------
@@ -506,9 +509,9 @@ def fig4(ctx: Ctx) -> None:
         # Broken axis: RMSE/MAE (~24-33 kPa) dwarf the 0.79-0.90 metrics by
         # >40x.  Bars above CUT are truncated with zigzag break markers and
         # their true values labelled (standard broken-axis treatment).
-        # CUT=2.0 (was 5.0/2.5): truncated bars sit very close to the short
-        # metrics (0.79-0.90 reach ~40-45% of the truncated bar).
-        CUT = 2.0
+        # CUT=1.5 (was 5.0/2.5/2.0): short metrics reach ~53-60% of the
+        # truncated bar.
+        CUT = 1.5
         plot_vals = np.minimum(vals, CUT)
         bars = ax.barh(y, plot_vals, height=0.62, color=bar_colors,
                        edgecolor="white", linewidth=0.7, zorder=3)
@@ -526,7 +529,7 @@ def fig4(ctx: Ctx) -> None:
                         fontsize=6.5, color="#444444")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=7.0)
-        ax.set_xlim(0, 3.0)
+        ax.set_xlim(0, CUT * 1.4)
         ax.set_xlabel("mean (per-target)")
         ax.set_title(f"Per-target metrics ({_m_short(t, 14)})")
 
@@ -1255,7 +1258,7 @@ def fig7(ctx: Ctx) -> None:
                         fontsize=6.8, color="#333333", fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=6.5)
-        ax.set_xlim(0, (cut or d.max()) * 1.30 + (cut * 0.35 if cut else 0))
+        ax.set_xlim(0, (cut or d.max()) * 1.30 + (cut * 0.15 if cut else 0))
         ax.set_xlabel(f"\u0394 {pm} (removal cost, top 12)")
 
     # ----- B: per-variant R² lollipop ------------------------------------
@@ -1525,7 +1528,7 @@ def fig7(ctx: Ctx) -> None:
         vals = [n_kept, n_pruned]
         colors = [NATURE["ours"], NATURE["bad"]]
         y = np.arange(2)[::-1]
-        CUT = 5.0   # 17 pruned >> 3 retained: broken axis with true value
+        CUT = 4.5   # 17 pruned >> 3 retained: broken axis with true value
         plot_vals = np.minimum(vals, CUT)
         ax.barh(y, plot_vals, height=0.5, color=colors,
                 edgecolor="white", linewidth=0.7, zorder=3)
@@ -1539,7 +1542,7 @@ def fig7(ctx: Ctx) -> None:
                         fontsize=10, color="#333333", fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=8)
-        ax.set_xlim(0, CUT + 3.5)
+        ax.set_xlim(0, CUT * 1.5)
         ax.set_xlabel("mechanisms")
         ax.set_title("Retained vs pruned")
 
@@ -1798,7 +1801,7 @@ def fig8(ctx: Ctx) -> None:
         ax.spines["right"].set_visible(False)
         ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
         ax.set_axisbelow(True)
-        ax.set_xlim(0, (cut or vals.max()) * 1.18 + (0.13 if cut else 0))
+        ax.set_xlim(0, (cut or vals.max()) * 1.18 + (0.08 if cut else 0))
         ax.set_xlabel("CLS attention weight")
 
     # ----- D: attention-by-condition heatmap ----------------------------
@@ -1835,7 +1838,7 @@ def fig8(ctx: Ctx) -> None:
                            edgecolor="white", linewidth=0.4, zorder=3,
                            label=lbl)
         if cut:
-            ax.set_ylim(0, cut * 1.40 + 0.15)
+            ax.set_ylim(0, cut * 1.40 + 0.10)
         ax.set_xticks(x + width * (n_tok - 1) / 2)
         ax.set_xticklabels([_hard_shorten(c, 8) for c in piv.columns],
                            rotation=45, ha="right", fontsize=6.5)
