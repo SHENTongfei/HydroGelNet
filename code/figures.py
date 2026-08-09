@@ -460,14 +460,28 @@ def fig4(ctx: Ctx) -> None:
             else:
                 bar_colors.append(_shade(bi, n_b))
                 bi += 1
-        bars = ax.barh(y, vals, height=0.62, color=bar_colors,
+        # Broken axis: RMSE/MAE (~24-33 kPa) dwarf the 0.79-0.90 metrics by
+        # >40x.  Bars above CUT are truncated with zigzag break markers and
+        # their true values labelled (standard broken-axis treatment).
+        CUT = 5.0
+        plot_vals = np.minimum(vals, CUT)
+        bars = ax.barh(y, plot_vals, height=0.62, color=bar_colors,
                        edgecolor="white", linewidth=0.7, zorder=3)
         for yy, v in zip(y, vals):
-            ax.text(v + max(vals) * 0.03, yy, f"{v:.3f}", va="center",
-                    ha="left", fontsize=6.5, color="#444444")
+            if v > CUT:
+                # zigzag "//" break markers on the truncated tip
+                for off in (-0.13, 0.13):
+                    ax.plot([CUT - 0.05, CUT + 0.10],
+                            [yy + off - 0.06, yy + off + 0.06],
+                            color="white", lw=1.2, zorder=6)
+                ax.text(CUT + 0.18, yy, f"{v:.3f}", va="center", ha="left",
+                        fontsize=7.0, color="#8B0000", fontweight="bold")
+            else:
+                ax.text(v + 0.15, yy, f"{v:.3f}", va="center", ha="left",
+                        fontsize=6.5, color="#444444")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=7.0)
-        ax.set_xlim(0, vals.max() * 1.32)
+        ax.set_xlim(0, 6.4)
         ax.set_xlabel("mean (per-target)")
         ax.set_title(f"Per-target metrics ({_m_short(t, 14)})")
 
