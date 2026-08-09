@@ -79,10 +79,11 @@ def _shade(i, n):
     return plt.cm.Blues(0.35 + 0.60 * i / max(n - 1, 1))
 
 
-def _broken_cut(vals, k=2.5):
+def _broken_cut(vals, k=2.0):
     """Adaptive broken-axis threshold: cut = k * median(positive values).
     Returns None when nothing exceeds the cut (uniform data -> no zigzag,
-    avoiding misleading truncation)."""
+    avoiding misleading truncation). k=2.0 keeps truncated bars closer to
+    the short bars (smaller visual gap, per user preference)."""
     vals = np.asarray(vals, dtype=float)
     pos = vals[vals > 0]
     if len(pos) == 0:
@@ -496,7 +497,9 @@ def fig4(ctx: Ctx) -> None:
         # Broken axis: RMSE/MAE (~24-33 kPa) dwarf the 0.79-0.90 metrics by
         # >40x.  Bars above CUT are truncated with zigzag break markers and
         # their true values labelled (standard broken-axis treatment).
-        CUT = 5.0
+        # CUT=2.5 (was 5.0): truncated bars sit closer to the short metrics
+        # so the visual gap shrinks.
+        CUT = 2.5
         plot_vals = np.minimum(vals, CUT)
         bars = ax.barh(y, plot_vals, height=0.62, color=bar_colors,
                        edgecolor="white", linewidth=0.7, zorder=3)
@@ -514,7 +517,7 @@ def fig4(ctx: Ctx) -> None:
                         fontsize=6.5, color="#444444")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=7.0)
-        ax.set_xlim(0, 6.4)
+        ax.set_xlim(0, 3.6)
         ax.set_xlabel("mean (per-target)")
         ax.set_title(f"Per-target metrics ({_m_short(t, 14)})")
 
@@ -1513,7 +1516,7 @@ def fig7(ctx: Ctx) -> None:
         vals = [n_kept, n_pruned]
         colors = [NATURE["ours"], NATURE["bad"]]
         y = np.arange(2)[::-1]
-        CUT = 8.0   # 17 pruned >> 3 retained: broken axis with true value
+        CUT = 6.0   # 17 pruned >> 3 retained: broken axis with true value
         plot_vals = np.minimum(vals, CUT)
         ax.barh(y, plot_vals, height=0.5, color=colors,
                 edgecolor="white", linewidth=0.7, zorder=3)
