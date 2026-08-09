@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.8.7)  9 AUG 2026 19:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.8.7)  9 AUG 2026 20:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -336,7 +336,8 @@ LaTeX Info: Redefining \cite on input line 694.
 .def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count320
-) (v7_test.aux)
+)
+No file v7_test.aux.
 \openout1 = `v7_test.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -357,7 +358,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -426,7 +426,6 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 13.
- (v7_test.out) (v7_test.out)
 \@outlinefile=\write3
 \openout3 = `v7_test.out'.
 
@@ -1871,18 +1870,28 @@ Package natbib Warning: There were undefined citations.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `v7_test.out' has not changed.
-(rerunfilecheck)             Checksum: 5B173862AD3F1F2865228541F1FC292B;5144.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `v7_test.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `v7_test.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  5B173862AD3F1F2865228541F1FC292B;5144.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 14 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12406 strings out of 467871
- 200000 string characters out of 5419829
- 626938 words of memory out of 5000000
- 41082 multiletter control sequences out of 15000+600000
+ 12370 strings out of 467871
+ 199315 string characters out of 5419829
+ 625443 words of memory out of 5000000
+ 41052 multiletter control sequences out of 15000+600000
  635481 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,79p,2578b,568s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1907,9 +1916,9 @@ onts/cm/cmsy9.pfb><C:/Users/TS/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmti10.pfb><C:/Users/TS/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmtt10.pfb><C:/Users/TS/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on v7_test.pdf (17 pages, 318666 bytes).
+Output written on v7_test.pdf (17 pages, 308496 bytes).
 PDF statistics:
- 321 PDF objects out of 1000 (max. 8388607)
+ 239 PDF objects out of 1000 (max. 8388607)
  69 named destinations out of 1000 (max. 500000)
- 217 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
