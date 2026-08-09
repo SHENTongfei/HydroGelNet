@@ -448,8 +448,11 @@ def fig4(ctx: Ctx) -> None:
         t = ctx.targets[0]
         g = ctx.oof.groupby("sample_id")[[f"y_true_{t}",
                                           f"y_pred_{t}"]].mean()
+        from matplotlib.colors import LinearSegmentedColormap
+        red_orange = LinearSegmentedColormap.from_list(
+            "red_orange", ["#FF8C00", "#FF0000"])  # low density orange -> high density pure red
         hb = ax.hexbin(g[f"y_true_{t}"], g[f"y_pred_{t}"], gridsize=24,
-                       cmap="YlOrRd", mincnt=1, linewidths=0.3, vmin=0, vmax=None)
+                       cmap=red_orange, mincnt=1, linewidths=0.3, vmin=0, vmax=None)
         lo = float(min(g[f"y_true_{t}"].min(), g[f"y_pred_{t}"].min()))
         hi = float(max(g[f"y_true_{t}"].max(), g[f"y_pred_{t}"].max()))
         ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black")
@@ -759,18 +762,13 @@ def fig5(ctx: Ctx) -> None:
             ax.scatter(r2[n], spearman[n], s=sz, color=col,
                        edgecolor="white", linewidth=0.8, alpha=0.9,
                        zorder=3, label=lbl)
-        # SIMPLEX inline label; others via compact legend (bottom-right)
-        n_ours = paths.MODEL_NAME
-        ax.annotate("SIMPLEX", (r2[n_ours], spearman[n_ours]),
-                    fontsize=8, fontweight="bold",
-                    xytext=(8, 8), textcoords="offset points",
-                    color=NATURE["ours_d"],
-                    bbox=dict(boxstyle="round,pad=0.18",
-                              facecolor="white", edgecolor="none",
-                              alpha=0.95))
-        leg = ax.legend(fontsize=5.6, frameon=True, loc="lower right",
-                        framealpha=0.9, edgecolor="#cccccc",
-                        borderpad=0.4, labelspacing=0.3, markerscale=0.6)
+        # SIMPLEX in legend (no inline text -> nothing overlaps the scatter
+        # dots); legend sits in the empty band y<0.78 as two rows of 4.
+        leg = ax.legend(fontsize=5.2, frameon=True, loc="lower center",
+                        framealpha=0.90, edgecolor="#cccccc",
+                        borderpad=0.35, labelspacing=0.28,
+                        columnspacing=0.8, handletextpad=0.4,
+                        ncol=4, markerscale=0.6)
         leg.set_zorder(10)
         ax.set_xlim(rmin, rmax)
         ax.set_ylim(smin, smax)
@@ -1478,23 +1476,23 @@ def fig7(ctx: Ctx) -> None:
             ax.pie([1.0],
                    colors=[NATURE["ours"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
             ax.text(0, 0, "interaction", ha="center", va="center",
                     fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.28, "100%", ha="center", va="center",
+            ax.text(0, 0.26, "100%", ha="center", va="center",
                     fontsize=9, color="#222222", fontweight="bold")
         else:
             ax.pie([inter / s, marg / s],
                    colors=[NATURE["ours"], NATURE["base"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
             # merged "num + label" on one line each, one shared halo bbox
-            ax.text(0, 0.24, f"{inter / s * 100:.0f}%  inter",
+            ax.text(0, 0.20, f"{inter / s * 100:.0f}%  inter",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
                               edgecolor="none", alpha=0.60))
-            ax.text(0, -0.28, f"{marg / s * 100:.0f}%  marg",
+            ax.text(0, -0.24, f"{marg / s * 100:.0f}%  marg",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
@@ -1521,23 +1519,23 @@ def fig7(ctx: Ctx) -> None:
             ax.pie([1.0],
                    colors=[NATURE["ours"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
             ax.text(0, 0, "all retained", ha="center", va="center",
                     fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.28, f"({keep})", ha="center", va="center",
+            ax.text(0, 0.26, f"({keep})", ha="center", va="center",
                     fontsize=9, color="#222222", fontweight="bold")
         else:
             ax.pie([keep / s, prune / s],
                    colors=[NATURE["ours"], NATURE["bad"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
             # merged "num + label" on one line each, one shared halo bbox
-            ax.text(0, 0.24, f"{keep}  retain",
+            ax.text(0, 0.20, f"{keep}  retain",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
                               edgecolor="none", alpha=0.60))
-            ax.text(0, -0.28, f"{prune}  prun",
+            ax.text(0, -0.24, f"{prune}  prun",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
