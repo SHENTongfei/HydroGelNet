@@ -741,8 +741,8 @@ def fig5(ctx: Ctx) -> None:
         except Exception:
             _note(ax)
             return
-        rmin = max(0.0, float(r2.min()) - 0.18)
-        rmax = min(1.0, float(r2.max()) + 0.18)
+        rmin = 0.75
+        rmax = 1.0
         smin = max(0.0, float(spearman.min()) - 0.22)
         smax = min(1.0, float(spearman.max()) + 0.22)
         n_b = len(r2) - 1
