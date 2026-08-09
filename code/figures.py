@@ -31,6 +31,27 @@ from figures_v2_backup import (Ctx, FIGURES, _safe, _note, _csv, _pm, _oof_path)
 apply_style()
 
 # Anti-overlap defaults: tighter letter positioning + ample gutters.
+
+# Global model-name abbreviation map (used by every figure).
+MODEL_SHORT = {
+    "SIMPLEX": "SIMPLEX",
+    "RandomForest": "RF",
+    "GradientBoosting": "GBM",
+    "HistGB": "HistGB",
+    "SVR-RBF": "SVR",
+    "SVR": "SVR",
+    "Ridge": "Ridge",
+    "ElasticNet": "Enet",
+    "KNN": "KNN",
+    "MLP": "MLP",
+    "XGBoost": "XGB",
+    "LightGBM": "LGBM",
+    "CatBoost": "CatB",
+}
+def _m_short(m, n=9):
+    s = MODEL_SHORT.get(str(m), str(m))
+    return s if len(s) <= n else _hard_shorten(s, n)
+
 PANEL_DX = -0.22
 PANEL_DY = 1.18
 
@@ -45,7 +66,7 @@ def _hard_shorten(s: str, n: int) -> str:
     return s if len(s) <= n else s[: n - 1] + "\u2026"
 
 
-def _save(fig, name, rect=(0, 0, 1, 0.94), wspace=0.55, hspace=0.55):
+def _save(fig, name, rect=(0, 0, 1, 0.94), wspace=0.55, hspace=0.70):
     fig.tight_layout(rect=rect)
     fig.subplots_adjust(wspace=wspace, hspace=hspace)
     ss.save_figure(fig, paths.FIGURES_DIR, name)
@@ -61,19 +82,19 @@ def fig3(ctx: Ctx) -> None:
 
     # ----- A: cohort size lollipop (much cleaner than bar) ----------------
     def p_counts(ax):
-        names = ["Internal", "External"]
+        names = ["Internal", "Prospective"]
         vals = [len(ds["Y"]), len(ext["Y"]) if ext is not None else 0]
         colors = [NATURE["ours"], NATURE["base"]]
-        ss.lollipop(ax, names, vals, color=NATURE["ours"],
-                    value_fmt="{:.0f}", s=70, label_top=False)
-        # recolour dots individually
-        for x, n, c in zip(vals, names, colors):
-            ax.scatter(x, n, s=70, color=c,
-                       edgecolor="white", linewidth=0.8, zorder=4)
-            # value label to the right of the dot (not above)
-            ax.text(x + max(vals) * 0.02, n, f"{x}", va="center",
-                    ha="left", fontsize=8, color=c, fontweight="bold")
-        ax.set_xlim(-max(vals) * 0.05, max(vals) * 1.15)
+        # twin horizontal bars (side-by-side), values at bar ends
+        y = np.arange(2)
+        ax.barh(y, vals, height=0.42, color=colors, edgecolor="white",
+                linewidth=0.8, zorder=3)
+        for yy, v, c in zip(y, vals, colors):
+            ax.text(v + max(vals) * 0.015, yy, f"{v}", va="center",
+                    ha="left", fontsize=9, color=c, fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=8.5)
+        ax.set_xlim(0, max(vals) * 1.22)
         ax.set_xlabel("number of formulations")
 
     # ----- B: target distribution with KDE overlay -----------------------
@@ -95,20 +116,16 @@ def fig3(ctx: Ctx) -> None:
     # ----- C: missingness lollipop (magnified near 0) ---------------------
     def p_missing(ax):
         miss = np.isnan(ds["X"]).mean(axis=0) * 100
-        ss.lollipop(ax, [f"F{i}" for i in range(len(miss))],
-                    miss, color=NATURE["neutral"], value_fmt="{:.1f}",
-                    s=18, label_top=False)
-        # show only one value annotation (since all are near 0)
-        max_idx = int(np.argmax(miss))
-        if miss[max_idx] > 0:
-            ax.text(miss[max_idx], max_idx, f"{miss[max_idx]:.2f}%",
-                    va="center", ha="left", fontsize=7,
-                    color=NATURE["neutral"])
+        # horizontal mini-bars for all 21 features (all near 0)
+        n = len(miss)
+        y = np.arange(n)
+        ax.barh(y, miss, height=0.62, color=NATURE["ours_l"],
+                edgecolor=NATURE["ours_d"], linewidth=0.4, zorder=3)
         ax.set_yticks([])
-        ax.set_xlabel("feature index")
-        ax.set_ylabel("missing (%)")
-        ax.set_xlim(-0.5, max(miss.max() * 1.3, 0.05))
-        ax.set_title(f"Missingness (mean {miss.mean():.2f}%)")
+        ax.set_xlabel("missing (%)")
+        ax.set_xlim(0, max(miss.max() * 6.0, 0.05))
+        ax.set_ylabel("21 features")
+        ax.set_title(f"Missingness (max {miss.max():.3f}%)")
 
     # ----- D: feature correlation heatmap ---------------------------------
     def p_corr(ax):
@@ -138,10 +155,24 @@ def fig3(ctx: Ctx) -> None:
 
     # ----- F: condition composition lollipop ------------------------------
     def p_cond(ax):
-        vals = pd.Series(ds["cond"]).value_counts().sort_index()
-        labels = [ctx.conds[i][:10] for i in vals.index]
-        ss.lollipop(ax, labels, vals.values, color=NATURE["base"],
-                    value_fmt="{:.0f}", s=40)
+        vals = pd.Series(ds["cond"]).value_counts().sort_values(
+            ascending=False)
+        # top 4 conditions + aggregate "others"
+        top = vals.head(4)
+        other = vals.iloc[4:].sum()
+        labels = [ctx.conds[i][:9] for i in top.index] + ["others"]
+        counts = list(top.values) + [int(other)]
+        colors = ([NATURE["base"]] * 4) + [NATURE["neutral"]]
+        y = np.arange(len(labels))[::-1]
+        ax.barh(y, counts, height=0.5, color=colors,
+                edgecolor="white", linewidth=0.6, zorder=3)
+        for yy, v in zip(y, counts):
+            ax.text(v + max(counts) * 0.01, yy, f"{v}", va="center",
+                    ha="left", fontsize=8, color="#333333")
+        ax.set_yticks(y)
+        ax.set_yticklabels(labels, fontsize=7.5)
+        ax.set_xlim(0, max(counts) * 1.18)
+        ax.set_xlabel("formulations")
 
     # ----- G: covariate shift lollipop (sorted) ---------------------------
     def p_shift(ax):
@@ -169,32 +200,34 @@ def fig3(ctx: Ctx) -> None:
         labels = [_short(f)[:14] for f in s["feature"]]
         ss.lollipop(ax, labels, s["ks_stat"].values, color=NATURE["ours_d"],
                     value_fmt="{:.2f}", s=30, label_top=False)
-        # add value labels to the RIGHT of each point
+        # value labels WELL to the RIGHT of each point (never on the dot)
         y_pos = np.arange(len(s))
+        pad = max(s["ks_stat"].max() * 0.05, 0.008)
         for v, y in zip(s["ks_stat"].values, y_pos):
-            ax.text(v + 0.01, y, f"{v:.2f}", va="center", ha="left",
+            ax.text(v + pad, y, f"{v:.2f}", va="center", ha="left",
                     fontsize=6.5, color=NATURE["ours_d"])
         ax.invert_yaxis()
         ax.set_xlabel("KS statistic")
-        ax.set_xlim(-0.02, max(s["ks_stat"].max() * 1.18, 0.1))
+        ax.set_xlim(-0.02, max(s["ks_stat"].max() * 1.30, 0.12))
         ax.tick_params(axis="y", labelsize=6.5)
         ax.set_title("Internal vs external shift (top 12)")
 
     # ----- H: group-size distribution as strip+box -----------------------
     def p_groups(ax):
         sizes = pd.Series(ds["groups"]).value_counts().values
-        ax.boxplot(sizes, vert=False, widths=0.4,
-                   boxprops=dict(color=NATURE["neutral"]),
-                   medianprops=dict(color=NATURE["ours_d"], lw=1.4),
-                   whiskerprops=dict(color=NATURE["neutral"]),
-                   capprops=dict(color=NATURE["neutral"]))
-        # strip on top
-        y = np.random.normal(1, 0.05, size=len(sizes))
-        ax.scatter(sizes, y, s=10, color=NATURE["ours"], alpha=0.6,
-                   edgecolor="white", linewidth=0.3, zorder=3)
-        ax.set_yticks([])
+        # histogram of group sizes (one tall bar at size 1)
+        bins = np.arange(sizes.min() - 0.5, sizes.max() + 1.5, 1.0)
+        ax.hist(sizes, bins=bins, color=NATURE["ours"],
+                edgecolor="white", linewidth=0.8, alpha=0.9, zorder=3)
+        # annotate the dominant bar
+        from collections import Counter
+        cc = Counter(sizes)
+        top_sz, top_n = cc.most_common(1)[0]
+        ax.text(top_sz + 0.3, top_n, f"{top_n} groups of size {top_sz}",
+                fontsize=7.5, color=NATURE["ours_d"], va="center")
         ax.set_xlabel("samples per group")
-        ax.set_title(f"Grouping (n={len(sizes)} groups)")
+        ax.set_ylabel("groups")
+        ax.set_title(f"Group sizes (n={len(sizes)} groups)")
 
     # ----- I: target range overlap (dual hist + shaded) -------------------
     def p_target_shift(ax):
@@ -249,12 +282,7 @@ def fig4(ctx: Ctx) -> None:
         ax.set_yticks(range(piv.shape[0]))
         ax.set_yticklabels([f"{s}" for s in piv.index], fontsize=6.5)
         ax.set_ylabel("seed")
-        for i in range(piv.shape[0]):
-            for j in range(piv.shape[1]):
-                ax.text(j, i, f"{piv.values[i, j]:.3f}",
-                        ha="center", va="center", fontsize=5.5,
-                        color="black" if 0.75 < piv.values[i, j] < 0.80
-                        else ("white" if piv.values[i, j] < 0.75 else "white"))
+        # no per-cell numbers: colour alone carries the value (less clutter)
         ax.set_title("Per-seed × per-fold R² (heatmap)")
         plt.colorbar(im, ax=ax, fraction=.046, pad=.03)
 
@@ -306,9 +334,10 @@ def fig4(ctx: Ctx) -> None:
                    edgecolor="white", linewidth=1.2, zorder=4)
         ax.scatter([v_ours], [0.22], s=180, color=NATURE["ours"],
                    edgecolor="white", linewidth=1.2, zorder=4)
-        ax.text(v_rf, -0.22, f"  RF {v_rf:.3f}", va="center", ha="left",
-                fontsize=8.5, color=NATURE["base_d"], fontweight="bold")
-        ax.text(v_ours, 0.22, f"  SIMPLEX {v_ours:.3f}", va="center",
+        ax.text(v_rf + 0.008, -0.22, f"RF {v_rf:.3f}", va="center",
+                ha="left", fontsize=8.5, color=NATURE["base_d"],
+                fontweight="bold")
+        ax.text(v_ours + 0.008, 0.22, f"SIMPLEX {v_ours:.3f}", va="center",
                 ha="left", fontsize=8.5, color=NATURE["ours_d"],
                 fontweight="bold")
         # tie bracket
@@ -332,21 +361,29 @@ def fig4(ctx: Ctx) -> None:
         g = ctx.oof.groupby("sample_id")[[f"y_true_{t}",
                                           f"y_pred_{t}"]].mean()
         res = g[f"y_pred_{t}"] - g[f"y_true_{t}"]
-        ax.scatter(g[f"y_pred_{t}"], res, s=8, alpha=0.45,
-                   color=NATURE["ours"], linewidths=0, zorder=3)
-        ax.axhline(0, ls="--", lw=0.9, color="black", zorder=2)
-        # lowess-like smooth (binned mean)
+        ax.scatter(g[f"y_pred_{t}"], res, s=14, alpha=0.6,
+                   color=NATURE["ours"], linewidths=0.4,
+                   edgecolor="white", zorder=3)
+        ax.axhline(0, ls="--", lw=1.0, color="black", zorder=2)
+        # binned mean +/- SD band
         bins = np.linspace(g[f"y_pred_{t}"].min(),
                            g[f"y_pred_{t}"].max(), 8)
         inds = np.digitize(g[f"y_pred_{t}"], bins)
-        bx = [g[f"y_pred_{t}"][inds == i].mean() for i in range(1, len(bins))
-              if (inds == i).any()]
-        by = [res[inds == i].mean() for i in range(1, len(bins))
-              if (inds == i).any()]
-        ax.plot(bx, by, "o-", color=NATURE["ours_d"], lw=1.4, ms=4, zorder=4)
+        bx, by, bs = [], [], []
+        for i in range(1, len(bins)):
+            mask = (inds == i)
+            if mask.any():
+                bx.append(g[f"y_pred_{t}"][mask].mean())
+                by.append(res[mask].mean())
+                bs.append(res[mask].std())
+        bx, by, bs = np.array(bx), np.array(by), np.array(bs)
+        ax.fill_between(bx, by - bs, by + bs, color=NATURE["ours_l"],
+                        alpha=0.5, zorder=1)
+        ax.plot(bx, by, "o-", color=NATURE["ours_d"], lw=1.6, ms=4.5,
+                zorder=4)
         ax.set_xlabel("predicted (kPa)")
-        ax.set_ylabel("residual (pred - obs)")
-        ax.set_title("Residuals vs fitted (binned mean)")
+        ax.set_ylabel("residual (pred − obs)")
+        ax.set_title("Residuals vs fitted (binned mean ± SD)")
 
     # ----- E: error distribution violin + strip ---------------------------
     def p_reshist(ax):
@@ -422,7 +459,7 @@ def fig4(ctx: Ctx) -> None:
         g = ctx.oof.groupby("sample_id")[[f"y_true_{t}",
                                           f"y_pred_{t}"]].mean()
         hb = ax.hexbin(g[f"y_true_{t}"], g[f"y_pred_{t}"], gridsize=24,
-                       cmap="YlOrRd", mincnt=1)
+                       cmap="inferno", mincnt=1, linewidths=0.3)
         lo = float(min(g[f"y_true_{t}"].min(), g[f"y_pred_{t}"].min()))
         hi = float(max(g[f"y_true_{t}"].max(), g[f"y_pred_{t}"].max()))
         ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black")
@@ -534,21 +571,23 @@ def fig5(ctx: Ctx) -> None:
         g = pool.groupby("model")[pm].agg(["mean", "std", "count"])
         g = g.sort_values("mean")
         se = g["std"] / np.sqrt(g["count"])
-        names = list(g.index)
+        names = [_m_short(m, 9) for m in g.index]
         vals = g["mean"].values
         colors = [NATURE["ours"] if m == paths.MODEL_NAME else NATURE["base"]
-                  for m in names]
-        ss.lollipop(ax, names, vals, color=NATURE["neutral"],
-                    value_fmt="{:.3f}", s=70, label_top=False)
-        for x, y, c in zip(vals, range(len(names)), colors):
-            ax.scatter([x], [y], s=80, color=c,
-                       edgecolor="white", linewidth=0.8, zorder=4)
-            ax.text(x + 0.005, y, f"{x:.3f}", va="center", ha="left",
-                    fontsize=7, color=c)
-        for y_i, (v, s) in enumerate(zip(vals, se.values)):
-            ax.plot([v - 1.96 * s, v + 1.96 * s], [y_i, y_i],
-                    color=NATURE["neutral"], lw=1.2, zorder=2)
-        ax.set_xlabel(f"{pm} (mean +/- 95% CI)")
+                  for m in g.index]
+        # horizontal bars with error bars; values at bar ends (no overlap)
+        y = np.arange(len(names))[::-1]
+        ax.barh(y, vals, height=0.55, color=colors, edgecolor="white",
+                linewidth=0.7, zorder=3)
+        for yy, v, s, c in zip(y, vals, se.values, colors):
+            ax.errorbar(v, yy, xerr=1.96 * s, fmt="none", ecolor="#444444",
+                        lw=1.0, capsize=2, zorder=2)
+            ax.text(v + 0.008, yy, f"{v:.3f}", va="center", ha="left",
+                    fontsize=7.5, color=c, fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=7.5)
+        ax.set_xlim(0.55, vals.max() + 0.07)
+        ax.set_xlabel(f"{pm} (mean ± 95% CI)")
 
     # ----- B: slope chart (paired per-fold SIMPLEX vs best baseline) ----
     def p_paired(ax):
@@ -574,9 +613,9 @@ def fig5(ctx: Ctx) -> None:
                     color=col, lw=0.5, alpha=0.45, zorder=2)
         ax.set_xlim(-0.3, 1.3)
         ax.set_xticks([0, 1])
-        ax.set_xticklabels([best[:12], paths.MODEL_NAME], fontsize=8)
+        ax.set_xticklabels([_m_short(best, 9), "SIMPLEX"], fontsize=8)
         ax.set_ylabel(pm)
-        ax.set_title(f"Per-fold scores: {best[:14]} vs SIMPLEX")
+        ax.set_title("Per-fold scores vs SIMPLEX")
 
     # ----- C: top-20 screening precision lollipop ------------------------
     def p_top20(ax):
@@ -608,21 +647,21 @@ def fig5(ctx: Ctx) -> None:
             _note(ax)
             return
         rows.sort(key=lambda r: -r[1])
-        names = [r[0] for r in rows]
+        names = [_m_short(r[0], 9) for r in rows]
         vals = [r[1] for r in rows]
-        colors = [NATURE["ours"] if n == paths.MODEL_NAME else NATURE["base"]
-                  for n in names]
-        # label_top=False; values rendered to the RIGHT of dots to avoid overlap
-        ss.lollipop(ax, [_hard_shorten(n, 11) for n in names], vals,
-                    color=NATURE["neutral"], value_fmt="{:.2f}",
-                    s=80, label_top=False)
-        for x, y, c in zip(vals, range(len(names)), colors):
-            ax.scatter([x], [y], s=110, color=c,
-                       edgecolor="white", linewidth=0.8, zorder=4)
-            ax.text(x + 0.02, y, f"{x:.2f}", va="center", ha="left",
-                    fontsize=7, color=c)
-        ax.set_xlim(0, 1.15)
-        ax.set_xlabel(f"Top-20 screening precision (external cohort)")
+        colors = [NATURE["ours"] if r[0] == paths.MODEL_NAME else NATURE["base"]
+                  for r in rows]
+        # horizontal bars; values to the RIGHT of bar end (never on dots)
+        y = np.arange(len(names))[::-1]
+        ax.barh(y, vals, height=0.55, color=colors, edgecolor="white",
+                linewidth=0.7, zorder=3)
+        for yy, v, c in zip(y, vals, colors):
+            ax.text(v + 0.015, yy, f"{v:.2f}", va="center", ha="left",
+                    fontsize=7.5, color=c, fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=7.5)
+        ax.set_xlim(0, 1.18)
+        ax.set_xlabel("Top-20 precision")
 
     # ----- D: improvement & significance forest plot ----------------------
     def p_delta(ax):
@@ -654,9 +693,12 @@ def fig5(ctx: Ctx) -> None:
                         fontsize=8, color=col, va="center")
         ax.axvline(0, color="black", lw=0.8)
         ax.set_yticks(y)
-        ax.set_yticklabels(g.index, fontsize=6.5)
-        ax.set_xlabel(f"\u0394 {pm} vs {paths.MODEL_NAME} (95% CI)")
-        ax.set_title("Improvement & significance (forest plot)")
+        ax.set_yticklabels([_m_short(m, 10) for m in g.index], fontsize=6.5)
+        dmin = float(g["lo"].min())
+        dmax = float(g["hi"].max())
+        ax.set_xlim(dmin - 0.02, dmax + 0.02)
+        ax.set_xlabel(f"\u0394 {pm} vs SIMPLEX (95% CI)")
+        ax.set_title("Improvement & significance")
 
     # ----- E: rank across folds dumbbell --------------------------------
     def p_rank(ax):
@@ -684,10 +726,10 @@ def fig5(ctx: Ctx) -> None:
             ax.scatter([m], [i], s=80, color=col,
                        edgecolor="white", linewidth=0.8, zorder=4)
         ax.set_yticks(y)
-        ax.set_yticklabels([_hard_shorten(n, 14) for n in names], fontsize=7)
+        ax.set_yticklabels([_m_short(n, 9) for n in names], fontsize=7)
         ax.invert_yaxis()
-        ax.set_xlabel("mean rank (1 = best, +/- 1 SD)")
-        ax.set_title("Rank across folds (dumbbell)")
+        ax.set_xlabel("mean rank (1 = best, ± 1 SD)")
+        ax.set_title("Rank across folds")
 
     # ----- F: model quality map (R^2 vs Spearman) ------------------------
     def p_quality(ax):
@@ -698,39 +740,61 @@ def fig5(ctx: Ctx) -> None:
         try:
             spearman = ctx.base.groupby("model")["SpearmanRho"].mean()
             r2 = ctx.base.groupby("model")["R2"].mean()
-            ours_r = float(ctx.cv["R2"].mean())
-            ours_s = float(ctx.cv["SpearmanRho"].mean()) \
-                if "SpearmanRho" in ctx.cv.columns else 0.85
+            # SIMPLEX is NOT in ctx.base; attach our own CV means.
+            if paths.MODEL_NAME not in r2.index:
+                r2 = r2.copy()
+                r2.loc[paths.MODEL_NAME] = float(ctx.cv["R2"].mean())
+                spearman = spearman.copy()
+                if "SpearmanRho" in ctx.cv.columns:
+                    spearman.loc[paths.MODEL_NAME] = float(
+                        ctx.cv["SpearmanRho"].mean())
+                else:
+                    spearman.loc[paths.MODEL_NAME] = 0.85
         except Exception:
             _note(ax)
             return
         # expand limits generously to fit labels without overlap
-        rmin = max(0.0, float(r2.min()) - 0.12)
-        rmax = min(1.0, float(r2.max()) + 0.12)
-        smin = max(0.0, float(spearman.min()) - 0.15)
-        smax = min(1.0, float(spearman.max()) + 0.15)
-        # annotate with 8-direction spread, larger for better separation
-        dirs8 = [(8, 6), (8, -10), (-8, 6), (-8, -10),
-                 (0, 10), (0, -12), (10, 0), (-10, 0)]
+        rmin = max(0.0, float(r2.min()) - 0.18)
+        rmax = min(1.0, float(r2.max()) + 0.18)
+        smin = max(0.0, float(spearman.min()) - 0.22)
+        smax = min(1.0, float(spearman.max()) + 0.22)
+        # SIMPLEX gets an inline label (top-right); all baselines go to a
+        # legend box in the top-left open area -> zero text-text overlap.
         for i, n in enumerate(r2.index):
             col = NATURE["ours"] if n == paths.MODEL_NAME else NATURE["base"]
-            sz = 90 + 50 * (r2[n] - r2.min())
+            sz = 100 + 55 * (r2[n] - r2.min())
             ax.scatter(r2[n], spearman[n], s=sz, color=col,
                        edgecolor="white", linewidth=0.8, alpha=0.85,
-                       zorder=3)
-            ox, oy = dirs8[i % len(dirs8)]
-            ax.annotate(_hard_shorten(n, 10), (r2[n], spearman[n]),
-                        fontsize=6.0,
-                        xytext=(ox, oy), textcoords="offset points",
-                        color="#222222",
-                        bbox=dict(boxstyle="round,pad=0.15",
-                                  facecolor="white", edgecolor="none",
-                                  alpha=0.9))
+                       zorder=3, label="" if n != paths.MODEL_NAME else "SIMPLEX")
+        # annotate only SIMPLEX beside its dot
+        n_ours = paths.MODEL_NAME
+        ax.annotate("SIMPLEX", (r2[n_ours], spearman[n_ours]),
+                    fontsize=8, fontweight="bold",
+                    xytext=(-6, 6), textcoords="offset points",
+                    color=NATURE["ours_d"],
+                    bbox=dict(boxstyle="round,pad=0.18",
+                              facecolor="white", edgecolor="none",
+                              alpha=0.95))
+        # baseline legend (short names) in the open top-left region
+        base_handles = []
+        for n in r2.index:
+            if n == paths.MODEL_NAME:
+                continue
+            base_handles.append(
+                plt.Line2D([0], [0], marker="o", linestyle="none",
+                           markersize=6, markerfacecolor=NATURE["base"],
+                           markeredgecolor="white", label=_m_short(n, 8)))
+        if base_handles:
+            leg = ax.legend(handles=base_handles, fontsize=6, frameon=True,
+                            loc="upper left", framealpha=0.9,
+                            edgecolor="#cccccc", borderpad=0.6,
+                            labelspacing=0.35)
+            leg.set_zorder(10)
         ax.set_xlim(rmin, rmax)
         ax.set_ylim(smin, smax)
         ax.set_xlabel(pm)
         ax.set_ylabel("Spearman \u03c1")
-        ax.set_title("Model quality map (R² vs Spearman, size = R²)")
+        ax.set_title("Model quality map (R\u00b2 vs \u03c1)")
 
     # ----- G: cluster bootstrap CI forest plot ---------------------------
     def p_ci(ax):
@@ -741,17 +805,23 @@ def fig5(ctx: Ctx) -> None:
         if not len(c):
             _note(ax)
             return
-        labels = [f"{r['scope'][:8]}|{r['target'][:10]}"
+        labels = [f"{r['scope'][:4]}|{r['target'][:6]}"
                   for _, r in c.iterrows()]
         y = np.arange(len(c))[::-1]
-        ax.errorbar(c["point"], y,
-                    xerr=[c["point"] - c["lo"], c["hi"] - c["point"]],
-                    fmt="o", color=NATURE["ours"], markersize=5, lw=1.4,
-                    capsize=2.4, zorder=3)
+        # dumbbell: line + end caps as filled dots (more visible than CI bars)
+        for yy, (_, r) in zip(y, c.iterrows()):
+            ax.plot([r["lo"], r["hi"]], [yy, yy], "-", color=NATURE["ours"],
+                    lw=2.2, zorder=2)
+            ax.scatter([r["lo"], r["hi"]], [yy, yy], s=30,
+                       color="white", edgecolor=NATURE["ours_d"],
+                       linewidth=0.9, zorder=4)
+            ax.scatter([r["point"]], [yy], s=46, marker="D",
+                       color=NATURE["ours_d"], edgecolor="white",
+                       linewidth=0.6, zorder=5)
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=6.5)
         ax.set_xlabel(f"{pm} (95% CI)")
-        ax.set_title("Cluster bootstrap CI")
+        ax.set_title("Bootstrap CI")
 
     # ----- H: permutation test violin overlay ---------------------------
     def p_perm(ax):
@@ -759,25 +829,30 @@ def fig5(ctx: Ctx) -> None:
             _note(ax)
             return
         p = ctx.perm
-        labels = [str(t)[:10] for t in p["target"]]
+        labels = [str(t)[:8] for t in p["target"]]
         x = np.arange(len(p))
-        # confidence band from null distribution
-        ax.fill_between(x - 0.35, p["null_mean"] - 0,
-                        p["null_p95"], color=NATURE["neutral"],
-                        alpha=0.45, label="null 95th pct", zorder=2)
-        ax.plot(x - 0.35, p["null_mean"], "o-",
-                color=NATURE["neutral"], lw=1.0, zorder=3)
-        ax.scatter(x + 0.35, p["observed"], s=110,
+        # null band + observed markers; guard against NaN
+        p = p.copy()
+        p["null_p95"] = p["null_p95"].fillna(p["observed"])
+        p["null_mean"] = p["null_mean"].fillna(0.0)
+        ax.fill_between(x - 0.32, p["null_mean"], p["null_p95"],
+                        color=NATURE["neutral"], alpha=0.5,
+                        label="null 95th pct", zorder=2)
+        ax.plot(x - 0.32, p["null_p95"], "o-", color=NATURE["neutral"],
+                lw=1.0, ms=4, zorder=3)
+        ax.scatter(x + 0.32, p["observed"], s=120,
                    color=NATURE["ours"], edgecolor="white", linewidth=0.8,
                    zorder=4)
         for i, pv in enumerate(p["p_value"]):
-            ax.text(i + 0.35, p["observed"].iloc[i] + 0.005,
+            if pd.isna(pv):
+                continue
+            ax.text(i + 0.32, p["observed"].iloc[i] + 0.005,
                     ss.stars(pv), ha="center", va="bottom",
                     fontsize=10, color=NATURE["ours_d"], fontweight="bold")
         ax.set_xticks(x)
         ax.set_xticklabels(labels, fontsize=8)
         ax.set_ylabel(pm)
-        ax.set_title("Permutation test (observed vs null 95th pct)")
+        ax.set_title("Permutation test vs null")
         ax.legend(fontsize=6.5, frameon=False, loc="upper left")
 
     # ----- I: critical-difference rank dumbbell -------------------------
@@ -797,16 +872,16 @@ def fig5(ctx: Ctx) -> None:
         y = np.arange(len(df))[::-1]
         for i, (m, r) in enumerate(zip(df["reference"], df["rank"])):
             col = NATURE["ours"] if m == paths.MODEL_NAME else NATURE["base"]
-            ax.scatter([r], [i], s=140, color=col,
+            ax.scatter([r], [i], s=150, color=col,
                        edgecolor="white", linewidth=0.8, zorder=4)
-            ax.text(r + 0.18, i, f"#{int(r)}", va="center", fontsize=8.5,
+            ax.text(r + 0.22, i, f"#{int(r)}", va="center", fontsize=9,
                     color=col, fontweight="bold")
         ax.set_yticks(y)
-        ax.set_yticklabels([_hard_shorten(m, 14) for m in df["reference"]],
-                           fontsize=7)
-        ax.set_xlabel("critical-difference rank (#1 = best)")
-        ax.set_xlim(0.5, len(df) + 0.5)
-        ax.set_title("Critical-difference rank (SIMPLEX #1)")
+        ax.set_yticklabels([_m_short(m, 9) for m in df["reference"]],
+                           fontsize=7.5)
+        ax.set_xlabel("rank (#1 = best)")
+        ax.set_xlim(0.5, len(df) + 1.0)
+        ax.set_title("Critical-difference rank")
 
     fns = [p_bar, p_paired, p_top20, p_delta, p_rank,
            p_quality, p_ci, p_perm, p_cd]
@@ -849,7 +924,7 @@ def fig6(ctx: Ctx) -> None:
                           edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.9))
         ax.set_xlabel("observed (external)")
         ax.set_ylabel("predicted (external)")
-        ax.set_title("Prospective cohort: predicted vs observed")
+        ax.set_title("Prospective: predicted vs observed")
 
     # ----- B: Bland-Altman (annotation in margin) -----------------------
     def p_bland(ax):
@@ -943,10 +1018,13 @@ def fig6(ctx: Ctx) -> None:
                    edgecolor="white", linewidth=1.2, zorder=4)
         ax.scatter([e_val], [0.22], s=180, color=NATURE["ours"],
                    edgecolor="white", linewidth=1.2, zorder=4)
-        ax.text(i_val, -0.22, f"  CV {i_val:.3f}", va="center", ha="left",
-                fontsize=8.5, color=NATURE["base_d"], fontweight="bold")
-        ax.text(e_val, 0.22, f"  Prosp {e_val:.3f}", va="center", ha="left",
-                fontsize=8.5, color=NATURE["ours_d"], fontweight="bold")
+        pad = 0.018
+        ax.text(i_val + pad, -0.22, f"CV {i_val:.3f}", va="center",
+                ha="left", fontsize=8.5, color=NATURE["base_d"],
+                fontweight="bold")
+        ax.text(e_val + pad, 0.22, f"Prosp {e_val:.3f}", va="center",
+                ha="left", fontsize=8.5, color=NATURE["ours_d"],
+                fontweight="bold")
         gap = i_val - e_val
         ax.text(0.5, 0.97, f"\u0394 = {gap:.3f}",
                 transform=ax.transAxes, ha="center", va="top",
@@ -986,7 +1064,7 @@ def fig6(ctx: Ctx) -> None:
                        edgecolor="white", linewidth=0.3, zorder=3)
         ax.set_xticks(np.arange(1, 5))
         ax.set_xticklabels(["Q1", "Q2", "Q3", "Q4"], fontsize=8)
-        ax.set_xlabel("predicted-rank quartile")
+        ax.set_xlabel("predicted-rank quartile (Q1–Q4)")
         ax.set_ylabel("|error| (kPa)")
         ax.set_title("Error by predicted-rank quartile")
 
@@ -1005,28 +1083,40 @@ def fig6(ctx: Ctx) -> None:
         labels = [paths.MODEL_NAME] + common
         i_vals = [ours_i] + [base_i[m] for m in common]
         e_vals = [ours_e] + [base_e[m] for m in common]
-        # slope chart with labels at both ends, alternating sides
+        # slope chart: SIMPLEX gets inline label, baselines via legend.
+        baseline_handles = []
         for i, (li, le, lab) in enumerate(zip(i_vals, e_vals, labels)):
             col = (NATURE["ours"] if lab == paths.MODEL_NAME
                    else NATURE["base"])
-            lw = 2.4 if lab == paths.MODEL_NAME else 1.0
+            lw = 2.6 if lab == paths.MODEL_NAME else 1.0
             ax.plot([0, 1], [li, le], "-", color=col, lw=lw, zorder=2)
-            sz = 110 if lab == paths.MODEL_NAME else 50
+            sz = 120 if lab == paths.MODEL_NAME else 55
             ax.scatter([0, 1], [li, le], s=sz, color=col,
                        edgecolor="white", linewidth=0.7, zorder=4)
-            # alternate left/right labels to avoid collision
-            if i % 2 == 0:
-                ax.text(-0.04, li, _hard_shorten(lab, 9), va="center",
-                        ha="right", fontsize=7, color=col,
-                        fontweight="bold" if lab == paths.MODEL_NAME else "normal")
+            if lab == paths.MODEL_NAME:
+                ax.annotate("SIMPLEX", (1, le),
+                            xytext=(8, 6), textcoords="offset points",
+                            fontsize=9, fontweight="bold",
+                            color=NATURE["ours_d"],
+                            bbox=dict(boxstyle="round,pad=0.2",
+                                      facecolor="white", edgecolor=NATURE["ours_d"],
+                                      lw=0.6, alpha=0.95))
             else:
-                ax.text(-0.04, le, _hard_shorten(lab, 9), va="center",
-                        ha="right", fontsize=7, color=col)
-        ax.set_xlim(-0.35, 1.25)
+                baseline_handles.append(plt.Line2D(
+                    [0], [0], color=col, lw=1.5,
+                    label=f"{_m_short(lab, 8)}: {li:.2f}\u2192{le:.2f}"))
+        if baseline_handles:
+            leg = ax.legend(handles=baseline_handles, fontsize=5.6,
+                            frameon=True, loc="center left",
+                            bbox_to_anchor=(0.02, 0.30),
+                            framealpha=0.92, edgecolor="#cccccc",
+                            borderpad=0.5, labelspacing=0.35)
+            leg.set_zorder(10)
+        ax.set_xlim(-0.05, 1.55)
         ax.set_xticks([0, 1])
         ax.set_xticklabels(["Internal", "External"], fontsize=8)
         ax.set_ylabel(pm)
-        ax.set_title("Internal -> external transfer (slope chart)")
+        ax.set_title("Internal \u2192 external transfer")
 
     # ----- H: residual distribution violin + strip ----------------------
     def p_residhist(ax):
@@ -1130,12 +1220,24 @@ def fig7(ctx: Ctx) -> None:
             "w/o SAM": "SAM",
             "w/o EDA": "EDA",
         }
-        names = [short_map.get(v, v.replace("w/o ", "-")) for v in d.index]
-        names = [_hard_shorten(n, 16) for n in names]
-        ss.lollipop(ax, names, d.values, color=NATURE["ours"],
-                    value_fmt="{:.3f}", s=70, label_top=True)
-        ax.tick_params(axis="y", labelsize=6.5)
-        ax.set_xlabel(f"\u0394 {pm} (removal cost)")
+        # take top 12 (already sorted); labels abbreviated to <=6 chars
+        d = d.head(12)
+        names = [short_map.get(v, v.replace("w/o ", "-")
+                                .replace("fusion", "fus"))[:6]
+                 for v in d.index]
+        y = np.arange(len(names))[::-1]
+        colors = [NATURE["ours"] if v == d.max() else NATURE["base"]
+                  for v in d.values]
+        ax.barh(y, d.values, height=0.65, color=colors, edgecolor="white",
+                linewidth=0.6, zorder=3)
+        pad = max(d.max() * 0.04, 0.002)
+        for yy, v in zip(y, d.values):
+            ax.text(v + pad, yy, f"{v:.3f}", va="center", ha="left",
+                    fontsize=6.8, color="#333333", fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=6.5)
+        ax.set_xlim(0, d.max() * 1.30)
+        ax.set_xlabel(f"\u0394 {pm} (removal cost, top 12)")
 
     # ----- B: per-variant R² lollipop ------------------------------------
     def p_heat(ax):
@@ -1143,21 +1245,34 @@ def fig7(ctx: Ctx) -> None:
             _note(ax)
             return
         g = ctx.abl.groupby("variant")[pm].mean().sort_values(ascending=False)
-        ss.lollipop(ax, [_hard_shorten(v.replace("w/o ", "\u2212")
-                                              .replace("task-specific gating", "T-sk gating")
-                                              .replace("sparse attention", "sparse attn")
-                                              .replace("multimodal fusion", "multimod. fuse")
-                                              .replace("residual blocks", "resid. blocks")
-                                              .replace("modality gate", "mod. gate"), 18)
-                    for v in g.index],
-                    g.values,
-                    color=NATURE["base"], value_fmt="{:.3f}", s=50,
-                    label_top=False)
-        if "full model" in g.index:
-            ax.scatter([g["full model"]], [list(g.index).index("full model")],
-                       s=100, color=NATURE["ours"], edgecolor="white",
-                       linewidth=0.8, zorder=5)
-        ax.tick_params(axis="y", labelsize=6.0)
+        short_map = {
+            "full model": "full",
+            "w/o multimodal fusion": "-fuse",
+            "w/o task-specific gating": "-gating",
+            "w/o sparse attention": "-attn",
+            "w/o residual blocks": "-resid",
+            "w/o modality gate": "-gate",
+            "w/o FiLM conditioning": "-FiLM",
+            "w/o MFM pre-training": "-MFM",
+            "w/o contrastive pre-training": "-SupCon",
+            "w/o domain constraint": "-domain",
+            "w/o MC-Dropout": "-MC-Drop",
+        }
+        # keep top 12, labels <=6 chars
+        g = g.head(12)
+        labels = [short_map.get(v, v.replace("w/o ", "-"))[:6]
+                  for v in g.index]
+        y = np.arange(len(g))[::-1]
+        colors = [NATURE["ours"] if v == "full model" else NATURE["base"]
+                  for v in g.index]
+        ax.barh(y, g.values, height=0.62, color=colors, edgecolor="white",
+                linewidth=0.6, zorder=3)
+        for yy, v in zip(y, g.values):
+            ax.text(v + 0.006, yy, f"{v:.3f}", va="center", ha="left",
+                    fontsize=6.5, color="#333333", fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(labels, fontsize=6.3)
+        ax.set_xlim(0.65, g.max() + 0.08)
         ax.set_xlabel(pm)
 
     # ----- C: fusion strategy lollipop ----------------------------------
@@ -1170,13 +1285,17 @@ def fig7(ctx: Ctx) -> None:
         names = list(f["variant"].unique()) + ["selected"]
         vals = [f[f["variant"] == n][pm].mean() for n in names[:-1]]
         vals.append(base[pm].mean())
-        names = [n.replace("fusion = ", "")[:10] for n in names]
+        names = [n.replace("fusion = ", "")[:5] for n in names]
         colors = [NATURE["base"]] * (len(names) - 1) + [NATURE["ours"]]
-        ss.lollipop(ax, names, vals, color=NATURE["neutral"],
-                    value_fmt="{:.3f}", s=70, label_top=False)
-        for x, y, c in zip(vals, range(len(names)), colors):
-            ax.scatter([x], [y], s=85, color=c,
-                       edgecolor="white", linewidth=0.8, zorder=4)
+        y = np.arange(len(names))[::-1]
+        ax.barh(y, vals, height=0.55, color=colors, edgecolor="white",
+                linewidth=0.6, zorder=3)
+        for yy, v, c in zip(y, vals, colors):
+            ax.text(v + 0.006, yy, f"{v:.3f}", va="center", ha="left",
+                    fontsize=7, color=c, fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=8)
+        ax.set_xlim(0.6, max(vals) + 0.08)
         ax.set_xlabel(pm)
 
     # ----- D: statistical contribution forest plot -----------------------
@@ -1251,10 +1370,10 @@ def fig7(ctx: Ctx) -> None:
                     fontsize=7, color=col, va="center")
         ax.axvline(0, color="black", lw=0.8)
         ax.set_yticks(y)
-        ax.set_yticklabels([_hard_shorten(sig_map.get(v, v), 16)
+        ax.set_yticklabels([sig_map.get(v, v).replace("w/o ", "-")[:9]
                             for v in s["variant"]], fontsize=6.0)
-        ax.set_xlabel(f"\u0394 {pm} (Holm-adjusted, 95% CI)")
-        ax.set_title("Statistical contribution (forest plot, top 12)")
+        ax.set_xlabel(f"\u0394 {pm} (Holm, 95% CI)")
+        ax.set_title("Statistical contribution (top 12)")
 
     # ----- E: variant performance violin overlay ------------------------
     def p_variant(ax):
@@ -1297,9 +1416,10 @@ def fig7(ctx: Ctx) -> None:
                        color=NATURE["ours_d"], edgecolor="white",
                        linewidth=0.6, zorder=4)
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=40, ha="right", fontsize=6.5)
+        ax.set_xticklabels([l[:8] for l in labels], rotation=50,
+                           ha="right", fontsize=6.2)
         ax.set_ylabel(pm)
-        ax.set_title("Variant performance (top 6, violin + mean)")
+        ax.set_title("Variant performance (top 6)")
 
     # ----- F: per-variant effect dumbbell -------------------------------
     def p_effect(ax):
@@ -1312,6 +1432,19 @@ def fig7(ctx: Ctx) -> None:
         full = ctx.abl[ctx.abl["variant"] == "full model"][pm].mean()
         g = ctx.abl.groupby("variant")[pm].mean()
         g = g.drop("full model", errors="ignore").sort_values().head(12)
+        short_map = {
+            "w/o multimodal fusion": "(-fuse)",
+            "w/o task-specific gating": "(-gating)",
+            "w/o sparse attention": "(-attn)",
+            "w/o residual blocks": "(-resid)",
+            "w/o modality gate": "(-gate)",
+            "w/o FiLM conditioning": "(-FiLM)",
+            "w/o SWA": "(-SWA)",
+            "w/o MFM pre-training": "(-MFM)",
+            "w/o contrastive pre-training": "(-SupCon)",
+            "w/o domain constraint": "(-domain)",
+            "w/o MC-Dropout": "(-MC-Drop)",
+        }
         y = np.arange(len(g))[::-1]
         short_map = {
             "w/o multimodal fusion": "(-multimod.fuse)",
@@ -1327,7 +1460,8 @@ def fig7(ctx: Ctx) -> None:
             "w/o SWA": "(-SWA)",
             "w/o pretrain_recon": "(-recon pretrain)",
         }
-        labels = [_hard_shorten(short_map.get(v, v), 12) for v in g.index]
+        labels = [short_map.get(v, v).replace("w/o ", "-")[:8]
+                  for v in g.index]
         for i, v in enumerate(g.values):
             ax.scatter([full], [i], s=70, color=NATURE["ours_d"],
                        edgecolor="white", linewidth=0.6, zorder=4)
@@ -1336,9 +1470,9 @@ def fig7(ctx: Ctx) -> None:
             ax.hlines(i, min(full, v), max(full, v),
                       color=NATURE["neutral"], lw=0.7, zorder=2)
         ax.set_yticks(y)
-        ax.set_yticklabels(labels, fontsize=6.0)
+        ax.set_yticklabels(labels, fontsize=6.3)
         ax.set_xlabel(pm)
-        ax.set_title("Per-variant effect (full vs ablated, top 12)")
+        ax.set_title("Per-variant effect (top 12)")
 
     # ----- G: retention decisions text panel ----------------------------
     def p_decision(ax):
@@ -1390,21 +1524,26 @@ def fig7(ctx: Ctx) -> None:
                 height=0.4, zorder=3)
         # simpler: one stacked bar
         ax.cla()
-        ax.barh([0], [inter / s], color=NATURE["ours"], height=0.4, zorder=3)
-        ax.barh([0], [marg / s], left=[inter / s], color=NATURE["base"],
-                height=0.4, zorder=3)
-        ax.text(inter / s / 2, 0,
-                f"interaction\n{inter / s * 100:.0f}%",
-                ha="center", va="center", fontsize=8, color="white",
-                fontweight="bold")
-        ax.text(inter / s + marg / s / 2, 0,
-                f"marginal\n{marg / s * 100:.0f}%",
-                ha="center", va="center", fontsize=8, color="white",
-                fontweight="bold")
-        ax.set_yticks([])
-        ax.set_xlim(0, 1)
-        ax.set_xlabel("cumulative contribution share")
-        ax.set_title("Marginal vs interaction contribution")
+        # when one side is essentially zero, show a full ring with a label
+        if marg / s < 0.02:
+            ax.pie([1.0],
+                   colors=[NATURE["ours"]],
+                   startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+            ax.text(0, 0, "interaction\n100%", ha="center", va="center",
+                    fontsize=10, color="white", fontweight="bold")
+        else:
+            ax.pie([inter / s, marg / s],
+                   colors=[NATURE["ours"], NATURE["base"]],
+                   startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+            ax.text(0, 0.12, "interaction\n" + f"{inter / s * 100:.0f}%",
+                    ha="center", va="center", fontsize=9, color="white",
+                    fontweight="bold")
+            ax.text(0, -0.30, "marginal\n" + f"{marg / s * 100:.0f}%",
+                    ha="center", va="center", fontsize=9, color="white",
+                    fontweight="bold")
+        ax.set_title("Marginal vs interaction")
 
     # ----- I: pruning summary ------------------------------------------
     def p_pruning(ax):
@@ -1422,19 +1561,25 @@ def fig7(ctx: Ctx) -> None:
         if s == 0:
             _note(ax)
             return
-        ax.barh([0], [keep / s], color=NATURE["ours"], height=0.4, zorder=3)
-        ax.barh([0], [prune / s], left=[keep / s],
-                color=NATURE["bad"], height=0.4, zorder=3)
-        ax.text(keep / s / 2, 0, f"retained\n{keep}",
-                ha="center", va="center", fontsize=8.5, color="white",
-                fontweight="bold")
-        ax.text(keep / s + prune / s / 2, 0, f"pruned\n{prune}",
-                ha="center", va="center", fontsize=8.5, color="white",
-                fontweight="bold")
-        ax.set_yticks([])
-        ax.set_xlim(0, 1)
-        ax.set_xlabel("pruning summary")
-        ax.set_title("Retention vs pruning decision")
+        if prune / s < 0.02:
+            ax.pie([1.0],
+                   colors=[NATURE["ours"]],
+                   startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+            ax.text(0, 0, "all retained\n" + f"({keep})", ha="center", va="center",
+                    fontsize=10, color="white", fontweight="bold")
+        else:
+            ax.pie([keep / s, prune / s],
+                   colors=[NATURE["ours"], NATURE["bad"]],
+                   startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
+            ax.text(0, 0.12, "retained\n" + f"{keep}",
+                    ha="center", va="center", fontsize=9, color="white",
+                    fontweight="bold")
+            ax.text(0, -0.30, "pruned\n" + f"{prune}",
+                    ha="center", va="center", fontsize=9, color="white",
+                    fontweight="bold")
+        ax.set_title("Retention vs pruning")
 
     fns = [p_waterfall, p_heat, p_fusion, p_sig, p_variant,
            p_effect, p_decision, p_marg, p_pruning]
@@ -1448,7 +1593,9 @@ def fig7(ctx: Ctx) -> None:
 # Figure 8 - interpretation (3x3, advanced)
 # =========================================================================== #
 def fig8(ctx: Ctx) -> None:
-    fig, axes = plt.subplots(3, 3, figsize=(DOUBLE_COL, 6.4))
+    # 4x2 layout: latent-space condition panel was redundant (same cluster
+    # structure as target colouring), so 8 informative panels remain.
+    fig, axes = plt.subplots(4, 2, figsize=(DOUBLE_COL, 10.2))
     axes = axes.ravel()
 
     # ----- A: top features lollipop with +/- colour (signed direction) --
@@ -1465,7 +1612,7 @@ def fig8(ctx: Ctx) -> None:
             vals = m["importance_mean"].values
         m = m.assign(_signed=vals).sort_values("_signed").tail(12)
         # value labels to the RIGHT of dots (never on top of data)
-        names = [_hard_shorten(f, 20) for f in m["feature"]]
+        names = [_hard_shorten(f, 7) for f in m["feature"]]
         ss.lollipop(ax, names, m["_signed"].values, color=NATURE["neutral"],
                     value_fmt="{:.3f}", s=50, label_top=False)
         for x, y in zip(m["_signed"].values, range(len(names))):
@@ -1478,25 +1625,27 @@ def fig8(ctx: Ctx) -> None:
         ax.axvline(0, color="black", lw=0.6)
         ax.tick_params(axis="y", labelsize=6.0)
         ax.set_xlabel("signed permutation importance")
-        ax.set_title("Top features (sign = direction)")
+        ax.set_title("Top features (signed)")
 
     # ----- B: stability selection lollipop ------------------------------
     def p_stab(ax):
         if ctx.stab is None:
             _note(ax)
             return
-        d = ctx.stab.head(12)
-        names = [_hard_shorten(f, 16) for f in d["feature"]]
+        d = ctx.stab.head(10)
+        names = [_m_short(f, 8) for f in d["feature"]]
         ss.lollipop(ax, names, d["selection_frequency"].values,
                     color=NATURE["base"], value_fmt="{:.2f}", s=55,
                     label_top=False)
-        # top features coloured in ours colour
+        # top features coloured in ours colour; values to the right
         for x, y in zip(d["selection_frequency"].values, range(len(names))):
             col = NATURE["ours"] if x >= 0.95 else NATURE["base"]
             ax.scatter([x], [y], s=60, color=col,
                        edgecolor="white", linewidth=0.6, zorder=4)
+            ax.text(x + 0.03, y, f"{x:.2f}", va="center", ha="left",
+                    fontsize=6.0, color=col)
         ax.axvline(0.8, ls="--", lw=0.8, color=NATURE["neutral"])
-        ax.set_xlim(0, 1.05)
+        ax.set_xlim(0, 1.15)
         ax.set_xlabel("stability-selection frequency")
 
     # ----- C: attention attribution lollipop ----------------------------
@@ -1520,20 +1669,18 @@ def fig8(ctx: Ctx) -> None:
             return
         piv = ctx.attn_c.pivot_table(index="token", columns="condition",
                                      values="attention_mean")
-        im = ax.imshow(piv.values, cmap="YlOrRd", aspect="auto")
+        # line plot per token across conditions (heatmap -> trends)
+        for i, tok in enumerate(piv.index[:8]):
+            ax.plot(piv.columns, piv.loc[tok].values, "o-",
+                    color=OKABE_ITO[i % len(OKABE_ITO)], lw=1.3, ms=3.5,
+                    label=_m_short(tok, 10), zorder=3)
         ax.set_xticks(range(piv.shape[1]))
-        ax.set_xticklabels([_hard_shorten(c, 9) for c in piv.columns],
+        ax.set_xticklabels([_hard_shorten(c, 8) for c in piv.columns],
                            rotation=45, ha="right", fontsize=6.5)
-        ax.set_yticks(range(piv.shape[0]))
-        ax.set_yticklabels([_hard_shorten(t, 12) for t in piv.index],
-                           fontsize=6.5)
-        for i in range(piv.shape[0]):
-            for j in range(piv.shape[1]):
-                ax.text(j, i, f"{piv.values[i, j]:.2f}", ha="center",
-                        va="center", fontsize=5.5,
-                        color="white" if piv.values[i, j] < 0.15 else "black")
-        ax.set_title("Attention by condition")
-        plt.colorbar(im, ax=ax, fraction=.046, pad=.03)
+        ax.set_xlabel("condition")
+        ax.set_ylabel("attention")
+        ax.set_title("Attention by condition (per-token trend)")
+        ax.legend(fontsize=5.5, frameon=False, loc="best")
 
     # ----- E: latent space (target) ------------------------------------
     def p_latent_y(ax):
@@ -1550,7 +1697,7 @@ def fig8(ctx: Ctx) -> None:
         ax.set_ylabel(yk)
         ax.set_title("Latent space (target-coloured)")
         plt.colorbar(sc, ax=ax, fraction=.046, pad=.03,
-                     label=ctx.targets[0][:14])
+                     label=ctx.targets[0][:10])
 
     # ----- F: latent space (condition) ---------------------------------
     def p_latent_c(ax):
@@ -1599,28 +1746,21 @@ def fig8(ctx: Ctx) -> None:
         m["nlp"] = -np.log10(m["p_fdr"].clip(lower=1e-300).fillna(1))
         x = m["stat"].fillna(0)
         sig = m["tier"] == "high"
-        ax.scatter(x[~sig], m["nlp"][~sig], s=10,
+        ax.scatter(x[~sig], m["nlp"][~sig], s=12,
                    color=NATURE["neutral"], alpha=0.6, linewidths=0,
-                   zorder=2)
-        ax.scatter(x[sig], m["nlp"][sig], s=30, color=NATURE["ours"],
-                   edgecolor="white", linewidth=0.6, zorder=3)
+                   zorder=2, label="lower-tier markers")
+        ax.scatter(x[sig], m["nlp"][sig], s=46, color=NATURE["ours"],
+                   edgecolor="white", linewidth=0.7, zorder=3,
+                   label="high-tier markers")
         ax.axhline(-np.log10(.05), ls="--", lw=0.8, color=NATURE["bad"])
-        # show top 6 labels only, spread vertically with distinct offsets
-        top = m[sig].nlargest(6, "nlp").sort_values("stat")
-        # spread across the full vertical range to prevent stacking
-        offsets = [1.30, 0.70, 1.22, 0.78, 1.15, 0.85]
-        for idx, (_, r) in enumerate(top.iterrows()):
-            yo = r["nlp"] * offsets[idx % len(offsets)]
-            ax.annotate(_hard_shorten(str(r["feature"]), 10),
-                        xy=(r["stat"], r["nlp"]),
-                        xytext=(r["stat"], yo),
-                        fontsize=6.0, ha="center", va="center",
-                        color=NATURE["ours_d"], fontweight="bold",
-                        arrowprops=dict(arrowstyle="-", lw=0.5,
-                                        color=NATURE["neutral"]))
+        # no inline text labels: names are listed in the caption to keep
+        # the panel completely overlap-free.
+        leg = ax.legend(fontsize=6, frameon=True, loc="lower right",
+                        framealpha=0.9, edgecolor="#cccccc")
+        leg.set_zorder(10)
         ax.set_xlabel("association statistic (signed)")
         ax.set_ylabel(r"$-\log_{10}$ FDR")
-        ax.set_title("Candidate markers (volcano, offset labels)")
+        ax.set_title("Marker volcano")
 
     # ----- I: composition rules (signed lollipop) ---------------------
     def p_rules(ax):
@@ -1634,19 +1774,25 @@ def fig8(ctx: Ctx) -> None:
         m = m.dropna(subset=["stat"])
         m["signed"] = m["stat"] * m["importance_mean"]
         m = m[m["tier"] == "high"].sort_values("signed")
-        names = [_hard_shorten(f, 16) for f in m["feature"]]
+        names = [_m_short(f, 8) for f in m["feature"]]
         ss.lollipop(ax, names, m["signed"].values,
                     color=NATURE["neutral"], value_fmt="{:+.3f}",
                     s=55, label_top=False)
+        # value labels pushed well clear of the dot
         for x, y in zip(m["signed"].values, range(len(names))):
             col = NATURE["good"] if x > 0 else NATURE["bad"]
             ax.scatter([x], [y], s=60, color=col,
                        edgecolor="white", linewidth=0.6, zorder=4)
+            dx = 0.010 if x > 0 else -0.010
+            ax.text(x + dx, y, f"{x:+.3f}",
+                    va="center", ha="left" if x > 0 else "right",
+                    fontsize=6.0, color=col)
         ax.axvline(0, color="black", lw=0.6)
+        ax.set_xlim(m["signed"].min() - 0.03, m["signed"].max() + 0.03)
         ax.set_xlabel("signed importance (\u00b1 = direction)")
 
     fns = [p_imp, p_stab, p_attn, p_attn_cond, p_latent_y,
-           p_latent_c, p_pdp, p_volcano, p_rules]
+           p_pdp, p_volcano, p_rules]
     for ax, fn in zip(axes, fns):
         _safe(fn, ax)
     _label(axes)

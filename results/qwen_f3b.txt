@@ -1,0 +1,42 @@
+### Figure3 ###
+OVER
+ALL
+:
+ PASS
+
+
+
+No
+ visible
+ text
+-label
+/data
+-point
+ overlap
+,
+ no
+ clipping
+ outside
+ axes
+,
+ titles
+/
+labels
+ do
+ not
+ collide
+ with
+ panels
+ or
+ letters
+,
+ and
+ all
+ text
+ remains
+ leg
+ible
+ across
+ the
+ figure
+.

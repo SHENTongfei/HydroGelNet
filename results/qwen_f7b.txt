@@ -1,0 +1,105 @@
+### Figure7 ###
+OVER
+ALL
+:
+ FAIL
+
+
+[H
+IGH
+]
+ Panel
+ A
+:
+ The
+ y
+-axis
+ labels
+ are
+ extremely
+ crowded
+ and
+ overlapping
+ (
+e
+.g
+.,
+ "
+fusion
+ =
+ concat
+"
+ over
+ "
+mult
+im
+od
+.
+ fuse
+"),
+ rendering
+ them
+ unread
+able
+.
+
+
+[H
+IGH
+]
+ Panel
+ B
+:
+ The
+ right
+-side
+ numerical
+ data
+ labels
+ overlap
+ significantly
+ with
+ the
+ bars
+ and
+ each
+ other
+,
+ creating
+ an
+ illeg
+ible
+ cluster
+ of
+ digits
+.
+
+
+[M
+ED
+]
+ Panel
+ A
+ &
+ B
+:
+ Y
+-axis
+ tick
+ labels
+ are
+ extremely
+ close
+ to
+ their
+ corresponding
+ text
+ labels
+,
+ creating
+ visual
+ clutter
+ and
+ potential
+ collision
+.

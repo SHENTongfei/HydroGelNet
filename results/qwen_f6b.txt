@@ -1,0 +1,116 @@
+### Figure6 ###
+OVER
+ALL
+:
+ FAIL
+
+
+
+[H
+IGH
+]
+ Panel
+ G
+:
+ Axis
+ labels
+ ("
+Mean
+",
+ "
+R
+2
+")
+ and
+ text
+ annotations
+ ("
+M
+EL
+XY
+")
+ significantly
+ overlap
+ the
+ data
+ points
+/
+lines
+,
+ obsc
+uring
+ the
+ visualization
+.
+
+
+[M
+ED
+]
+ Panel
+ A
+:
+ The
+ title
+ "
+Pros
+pective
+ cohort
+:
+ predicted
+ vs
+ observed
+"
+ is
+ too
+ long
+ for
+ the
+ panel
+ width
+ and
+ coll
+ides
+ with
+ the
+ top
+-left
+ panel
+ letter
+ "
+A
+".
+
+
+[M
+ED
+]
+ Panel
+ F
+:
+ The
+ x
+-axis
+ label
+ "
+predicted
+-r
+ank
+ quart
+ile
+"
+ runs
+ directly
+ into
+ the
+ bottom
+ edge
+ of
+ the
+ axis
+ ticks
+ and
+ the
+ panel
+ border
+.

@@ -1,37 +1,27 @@
-\documentclass[utf8]{FrontiersinHarvard}
-\usepackage{url,hyperref,lineno,microtype,subcaption,amsmath,booktabs,multirow}
-% clickable figure/table references
-\newcommand{\Fref}[2]{Fig.~\hyperref[#1]{\ref{#1}#2}}
-\newcommand{\Tref}[1]{Table~\hyperref[#1]{\ref{#1}}}
-
-\usepackage[onehalfspacing]{setspace}
-\linenumbers
-
-\def\keyFont{\fontsize{8}{11}\helveticabold }
-\def\firstAuthorLast{Shen, Lei, Hung, Li, Pan and Fu {et~al.}}
-\def\Authors{Tongfei Shen\,$^{1,2\dagger}$, Xueqin Lei\,$^{3\dagger}$, Hung Ka Lok\,$^{4\dagger}$, Huaicheng Li\,$^{5}$, Zhongze Pan\,$^{6}$ and Xuepeng Fu\,$^{7,*}$}
-\def\Address{$^{1}$School of Information Science and Engineering, Qingdao Huanghai University, Qingdao, China \\
-$^{2}$Department of Computer Science, City University of Hong Kong, Kowloon, China\\
-$^{3}$College of Physics and Electronic Information Engineering, Zhejiang Normal University, Jinhua 321004, China\\
-$^{4}$The Centre for Innovation and Entrepreneurship, The Hang Seng University of Hong Kong, Hong Kong, China\\
-$^{5}$Ability R\&D Energy Research Centre, School of Energy and Environment, City University of Hong Kong, Kowloon, Hong Kong, China\\
-$^{6}$School of Engineering, Nanfang College Guangzhou, Guangzhou, China\\
-$^{7}$Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 161000, China}
-\def\corrAuthor{Xuepeng Fu}
-\def\corrAddress{Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 161000, China}
-\def\corrEmail{02383@qqhru.edu.cn}
-
+\documentclass[10pt]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{subcaption}
+\usepackage[round,authoryear]{natbib}
+\setlength\textwidth{6.5in}
 \begin{document}
-\onecolumn
-\firstpage{1}
+\begin{document}
+
+
 
 \title[SIMPLEX composition-space deep learning for hydrogel adhesion screening]{SIMPLEX Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion with Prospective Validation on Model-Discovered Formulations and Interpretable Composition Rules}
 
-\author[\firstAuthorLast ]{\Authors}
-\address{}
-\correspondance{}
-\extraAuth{}
-\maketitle
+[\firstAuthorLast ]{\Authors}
+
+
+
+
 
 \begin{abstract}
 \section{}
@@ -334,7 +324,7 @@ Pruned mechanisms (16) & $\approx$ 0 & n/a \\
 
 Cross-validated permutation importance yields 14 high-tier composition markers, and pairwise interaction terms dominate the ranking (\Fref{fig:interp}{A}). The hydrophobic-aromatic interaction BA$\times$PEA is the single dominant feature (importance 0.0631, $p = 1.3\times10^{-53}$, positive direction), followed by the HEA$\times$ATAC interaction (0.0413, $p = 6.8\times10^{-5}$, negative); the BA$\times$ATAC interaction (0.0238) and the ATAC$\times$PEA interaction (0.0182) are positive, while the BA$\times$CBEA and HEA$\times$BA interactions are negative. Among single monomers, hydrophobic BA (0.0124, $p = 5.5\times10^{-34}$) and cationic ATAC (0.0055, $p = 8.4\times10^{-6}$) are positive drivers. Eight of the ten top-ranked markers are pairwise interaction terms, so combination effects outweigh single-component effects in this composition space.
 
-The marker set is stable across the evaluation, with the key markers selected into the top-k set in 10 of 10 fold-seed repeats (\Fref{fig:interp}{B}). Attention attribution (\Fref{fig:interp}{C}, \Fref{fig:interp}{D}) and latent-space structure (\Fref{fig:interp}{E}) corroborates that the model separates formulations along the BA$\times$PEA and ATAC directions. Partial dependence of the top five features shows predicted adhesion rising monotonically with the BA$\times$PEA fraction over the explored range (\Fref{fig:interp}{F}). The marker volcano plot and the composition-rule sign map summarise the direction and magnitude of every candidate marker (\Fref{fig:interp}{G}, \Fref{fig:interp}{H}). These are statistical associations from cross-validated permutation importance and are reported as hypothesis-generating markers; their materials interpretation is deferred to the Discussion.
+The marker set is stable across the evaluation, with the key markers selected into the top-k set in 10 of 10 fold-seed repeats (\Fref{fig:interp}{B}). Attention attribution (\Fref{fig:interp}{C}, \Fref{fig:interp}{D}) and latent-space structure (\Fref{fig:interp}{E}, \Fref{fig:interp}{F}) corroborate that the model separates formulations along the BA$\times$PEA and ATAC directions. Partial dependence of the top five features shows predicted adhesion rising monotonically with the BA$\times$PEA fraction over the explored range (\Fref{fig:interp}{G}). The marker volcano plot and the composition-rule sign map summarise the direction and magnitude of every candidate marker (\Fref{fig:interp}{H}, \Fref{fig:interp}{I}). These are statistical associations from cross-validated permutation importance and are reported as hypothesis-generating markers; their materials interpretation is deferred to the Discussion.
 
 \begin{figure*}[h]
 \centering
@@ -344,10 +334,11 @@ The marker set is stable across the evaluation, with the key markers selected in
 (B) Stability selection recovers the top markers in 10 of 10 fold-seed repeats, demonstrating the ranking is reproducible.
 (C) Attention attribution shows the fused-modality token receives the highest CLS attention, confirming the interaction encoder is used.
 (D) Attention is condition-agnostic, ruling out shortcut encoding of the experimental condition.
-(E) Latent-space structure separates formulations along a continuous target gradient, consistent with the learned composition manifold; the single condition cluster confirms the model does not rely on batch identity.
-(F) Partial dependence shows adhesion rising monotonically with the BA$\times$PEA fraction over the explored range.
-(G) The volcano plot concentrates the most significant markers at high effect sizes, with the dominant BA$\times$PEA interaction clearly separated from noise (coloured points, legend).
-(H) The composition-rule sign map distinguishes positive (green) from negative (red) markers, summarising direction and magnitude of every candidate rule.}
+(E) Latent-space structure separates formulations along a continuous target gradient, consistent with the learned composition manifold.
+(F) Latent coordinates form a single condition cluster, so the model does not rely on batch identity.
+(G) Partial dependence shows adhesion rising monotonically with the BA$\times$PEA fraction over the explored range.
+(H) The volcano plot concentrates the most significant markers at high effect sizes, with the dominant BA$\times$PEA interaction clearly separated from noise.
+(I) The composition-rule sign map distinguishes positive (green) from negative (red) markers, summarising direction and magnitude of every candidate rule.}
 \label{fig:interp}
 \end{figure*}
 
@@ -408,4 +399,4 @@ The raw experimental dataset analysed in this study is publicly available from t
 \bibliographystyle{Frontiers-Harvard}
 \bibliography{reference_final}
 
-\end{document}
+\bibliographystyle{plainnat}\bibliography{reference_final}\end{document}

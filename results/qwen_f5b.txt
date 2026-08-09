@@ -1,0 +1,94 @@
+### Figure5 ###
+OVER
+ALL
+:
+ FAIL
+
+
+
+[H
+IGH
+]
+ Panel
+ F
+ (
+Model
+ quality
+ map
+):
+ Significant
+ text
+-text
+ overlap
+ in
+ the
+ top
+-right
+ cluster
+ where
+ labels
+ for
+ "
+K
+NN
+",
+ "
+SV
+R
+",
+ "
+En
+et
+",
+ "
+RF
+",
+ and
+ "
+Hist
+GB
+"
+ collide
+ and
+ are
+ unread
+able
+.
+
+
+[M
+ED
+]
+ Panel
+ G
+ (
+Cluster
+ bootstrap
+ CI
+):
+ The
+ x
+-axis
+ label
+ "
+R
+2
+ (
+9
+5
+%
+ CI
+)"
+ overlaps
+ with
+ the
+ y
+-axis
+ tick
+ label
+ "
+extern
+lg
+lass
+_ad
+".

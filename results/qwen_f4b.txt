@@ -1,0 +1,42 @@
+### Figure4 ###
+OVER
+ALL
+:
+ PASS
+
+
+No
+ major
+ layout
+ issues
+ detected
+.
+ Panel
+ C
+ has
+ tight
+ spacing
+ between
+ the
+ bar
+ ends
+/
+labels
+ and
+ the
+ right
+ margin
+,
+ but
+ no
+ clipping
+ or
+ illeg
+ibility
+.
+ All
+ text
+ elements
+ are
+ distinct
+.
