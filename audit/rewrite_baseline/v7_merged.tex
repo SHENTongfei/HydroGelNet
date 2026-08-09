@@ -25,7 +25,7 @@ $^{7}$Department of Life Science and Agroforestry, Qiqihar University, Qiqihar 1
 \onecolumn
 \firstpage{1}
 
-\title[SIMPLEX composition-space deep learning for hydrogel adhesion screening]{SIMPLEX Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion with Prospective Validation on Model-Discovered Formulations and Interpretable Composition Rules}
+\title[SIMPLEX composition-space deep learning for hydrogel adhesion screening]{SIMPLEX Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion: Prospective Validation on Model-Discovered Formulations and Interpretable Composition Rules}
 
 \author[\firstAuthorLast ]{\Authors}
 \address{}
@@ -153,12 +153,12 @@ Measurements are organised into experimental groups, which motivates grouped cro
 \caption[Characteristics of the internal and prospective cohorts]{\textbf{Cohort characteristics: a 12.6-fold larger training cohort, a balanced target distribution, and a compositionally novel prospective cohort.} SIMPLEX trains on a 316-formulation internal cohort and validates once on 25 held-out, model-discovered formulations.
 (A) The internal cohort outweighs the prospective cohort by a factor of 12.6, securing the statistical power needed for grouped cross-validation.
 (B) The target distribution is right-skewed with a long adhesion tail, concentrating most training mass below 150 kPa.
-(C) The dataset is essentially complete, with missingness below 0.001\%, so no imputation bias enters training.
+(C) All 21 features are complete (0 missing entries), so no imputation bias enters training.
 (D) Pairwise interaction terms are collinear with their constituent monomers (up to 0.84), which justifies the dual-modality encoding rather than redundant features.
 (E) PCA projection separates adhesion strength continuously along the composition manifold, confirming that composition carries a learnable target signal.
-(F) A single experimental condition dominates the internal cohort, ruling out condition leakage as a source of spurious accuracy.
+(F) A single experimental condition covers the whole internal cohort, ruling out condition leakage as a source of spurious accuracy.
 (G) The top-12 KS statistics show pairwise interaction features carry the largest covariate shift, flagging exactly the terms SIMPLEX represents explicitly.
-(H) Every experimental group contributes exactly one formulation, so group-wise splitting is the appropriate leakage barrier.
+(H) All 316 experimental groups contain exactly one formulation, so grouped cross-validation is equivalent to leave-one-formulation-out.
 (I) The prospective cohort sits inside the internal target range, proving the measured advantage reflects composition transfer rather than target extrapolation.}
 \label{fig:dataset}
 \end{figure*}
@@ -211,7 +211,7 @@ MLP & 0.70 (0.7010) & 39.74 & 30.40 \\
 
 Against seven equally tuned baselines, SIMPLEX matches the best tree ensemble internally and occupies the top-right corner of the model-quality map (\Fref{fig:bench}{A}, \Fref{fig:bench}{F}). Internal $R^2$ means and 95\% confidence intervals overlap for SIMPLEX (0.79), random forest (0.81), SVR-RBF (0.80) and KNN (0.79), while ridge and elastic net reach 0.77, HistGB 0.76 and MLP 0.70 (\Tref{tab:int}; \Fref{fig:bench}{A})). Paired per-fold scores show no fold on which any baseline significantly exceeds SIMPLEX, and the Holm-adjusted $\Delta R^2$ panel reports no significant internal difference (\Fref{fig:bench}{B}, \Fref{fig:bench}{D}).
 
-Cross-fold ranking places SIMPLEX and random forest in the same rank group, and the critical-difference diagram shows no statistically separated clusters (\Fref{fig:bench}{E}, \Fref{fig:bench}{I}). Cluster-bootstrap confidence intervals and a permutation test agree that internal differences are within noise (\Fref{fig:bench}{G}, \Fref{fig:bench}{H}). On the model-quality map, SIMPLEX pairs a competitive internal $R^2$ with the highest prospective Spearman correlation, and Top-20 screening precision is at the cohort ceiling for every model (\Fref{fig:bench}{F}, \Fref{fig:bench}{C}).
+Cross-fold ranking places SIMPLEX and random forest in the same rank group, so no baseline separates from the top group by mean rank (\Fref{fig:bench}{E}). On the model-quality map, SIMPLEX pairs a competitive internal $R^2$ with the highest prospective Spearman correlation, and Top-20 screening precision is at the cohort ceiling for every model (\Fref{fig:bench}{F}, \Fref{fig:bench}{C}).
 
 \begin{figure*}[h]
 \centering
@@ -222,10 +222,7 @@ Cross-fold ranking places SIMPLEX and random forest in the same rank group, and 
 (C) SIMPLEX reaches Top-20 screening precision 0.90, above every baseline (best baseline 0.65), establishing the strongest screening utility.
 (D) The Holm-adjusted forest plot shows no significant internal difference between SIMPLEX and any baseline, confirming the internal tie is not an artefact.
 (E) SIMPLEX and random forest occupy the same rank group by mean $R^2$, with SIMPLEX at the top of that group.
-(F) On the model-quality map, SIMPLEX occupies the favourable top-right corner, pairing competitive internal $R^2$ with the highest prospective Spearman correlation.
-(G) Cluster-bootstrap confidence intervals bound the internal-to-prospective gap tightly, supporting the transfer claim.
-(H) The permutation test places the observed $R^2$ above the null 95th percentile, indicating genuine predictive signal.
-(I) The critical-difference rank diagram confirms SIMPLEX is rank one by mean $R^2$ with no statistically separated competitor.}
+(F) On the model-quality map, SIMPLEX occupies the favourable top-right corner, pairing competitive internal $R^2$ with the highest prospective Spearman correlation.}
 \label{fig:bench}
 \end{figure*}
 
