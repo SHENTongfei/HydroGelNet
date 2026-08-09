@@ -742,9 +742,9 @@ def fig5(ctx: Ctx) -> None:
             _note(ax)
             return
         rmin = 0.75
-        rmax = 1.0
-        smin = max(0.0, float(spearman.min()) - 0.22)
-        smax = min(1.0, float(spearman.max()) + 0.22)
+        rmax = 0.83
+        smin = 0.78
+        smax = 0.98
         n_b = len(r2) - 1
         bi = 0
         for i, n in enumerate(r2.index):
@@ -1007,13 +1007,27 @@ def fig6(ctx: Ctx) -> None:
                 baseline_handles.append(plt.Line2D(
                     [0], [0], color=col, lw=1.5,
                     label=f"{_m_short(lab, 8)}: {li:.2f}\u2192{le:.2f}"))
-        if baseline_handles:
-            leg = ax.legend(handles=baseline_handles, fontsize=5.2,
-                            frameon=True, loc="lower right",
-                            framealpha=0.90, edgecolor="#cccccc",
-                            borderpad=0.45, labelspacing=0.45, markerscale=0.7)
-            leg.set_zorder(10)
-        ax.set_xlim(-0.05, 1.55)
+        # no legend box: label each baseline at its right endpoint in the
+        # blank strip x>1.0 (xlim extends to ~1.6), vertically staggered by
+        # rank so labels never overlap each other or the lines.
+        bl = [(le, _m_short(lab, 7)) for i, (li, le, lab)
+              in enumerate(zip(i_vals, e_vals, labels))
+              if lab != paths.MODEL_NAME]
+        bl_sorted = sorted(bl, key=lambda t: -t[0])
+        n_bl = len(bl_sorted)
+        if n_bl > 0:
+            # distribute across the right strip with even spacing
+            ymin = min(t[0] for t in bl_sorted) - 0.03
+            ymax = max(t[0] for t in bl_sorted) + 0.03
+            ys = np.linspace(ymax, ymin, n_bl)
+            for (le, lab_s), yy in zip(bl_sorted, ys):
+                ax.annotate(lab_s, xy=(1.0, le), xytext=(1.10, yy),
+                            fontsize=5.8, va="center", ha="left",
+                            color="#333333",
+                            bbox=dict(boxstyle="round,pad=0.12",
+                                      facecolor="white", edgecolor="none",
+                                      alpha=0.92))
+        ax.set_xlim(-0.05, 1.62)
         ax.set_xticks([0, 1])
         ax.set_xticklabels(["Internal", "External"], fontsize=8)
         ax.set_ylabel(pm)
@@ -1474,25 +1488,17 @@ def fig7(ctx: Ctx) -> None:
                    colors=[NATURE["ours"], NATURE["base"]],
                    startangle=90, counterclock=False,
                    wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
-            # labels swapped: inter on top, marg below (inter > marg)
-            ax.text(0, 0.18, "inter", ha="center", va="center",
-                    fontsize=8, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, 0.40, f"{inter / s * 100:.0f}%", ha="center",
-                    va="center", fontsize=10, color="#222222",
-                    fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, -0.32, "marg", ha="center", va="center",
-                    fontsize=8, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, -0.54, f"{marg / s * 100:.0f}%", ha="center",
-                    va="center", fontsize=10, color="#222222",
-                    fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
+            # merged "num + label" on one line each, one shared halo bbox
+            ax.text(0, 0.24, f"{inter / s * 100:.0f}%  inter",
+                    ha="center", va="center", fontsize=9.5,
+                    color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
+                              edgecolor="none", alpha=0.60))
+            ax.text(0, -0.28, f"{marg / s * 100:.0f}%  marg",
+                    ha="center", va="center", fontsize=9.5,
+                    color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
+                              edgecolor="none", alpha=0.60))
         ax.set_title("Marginal vs interaction")
 
     # ----- I: pruning summary ------------------------------------------
@@ -1525,23 +1531,17 @@ def fig7(ctx: Ctx) -> None:
                    colors=[NATURE["ours"], NATURE["bad"]],
                    startangle=90, counterclock=False,
                    wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
-            # retained on top (bigger share), pruned below
-            ax.text(0, 0.18, "retain", ha="center", va="center",
-                    fontsize=8, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, 0.40, f"{keep}", ha="center", va="center",
-                    fontsize=10, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, -0.32, "prun", ha="center", va="center",
-                    fontsize=8, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
-            ax.text(0, -0.54, f"{prune}", ha="center", va="center",
-                    fontsize=10, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                              edgecolor="none", alpha=0.55))
+            # merged "num + label" on one line each, one shared halo bbox
+            ax.text(0, 0.24, f"{keep}  retain",
+                    ha="center", va="center", fontsize=9.5,
+                    color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
+                              edgecolor="none", alpha=0.60))
+            ax.text(0, -0.28, f"{prune}  prun",
+                    ha="center", va="center", fontsize=9.5,
+                    color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
+                              edgecolor="none", alpha=0.60))
         ax.set_title("Retention vs pruning")
 
     fns = [p_waterfall, p_heat, p_fusion, p_sig, p_variant,
@@ -1686,7 +1686,7 @@ def fig8(ctx: Ctx) -> None:
                         zorder=3)
         ax.set_xlabel(xk, fontsize=8)
         ax.set_ylabel(yk, fontsize=8)
-        ax.set_title("Latent space (target-coloured)")
+        ax.set_title("Latent space (target)")
         plt.colorbar(sc, ax=ax, fraction=.046, pad=.03,
                      label=ctx.targets[0][:10])
 
@@ -1720,13 +1720,16 @@ def fig8(ctx: Ctx) -> None:
         for i, f in enumerate(feats):
             g = d[d["feature"] == f]
             ax.plot(g["grid_value"], g["pd_mean"], "-o",
-                    label=_hard_shorten(str(f), 14),
+                    label=_hard_shorten(str(f), 10),
                     color=OKABE_ITO[i % len(OKABE_ITO)],
                     ms=3, lw=1.4)
         ax.set_xlabel("feature value (grid)")
-        ax.set_ylabel(f"predicted {t0[:10]}")
-        ax.set_title("Partial dependence (top 5 features)")
-        ax.legend(fontsize=6.5, frameon=False, loc="best")
+        ax.set_ylabel("predicted", fontsize=7.5)
+        ax.set_title("Partial dependence (top 5)")
+        leg = ax.legend(fontsize=5.5, frameon=True, loc="lower right",
+                        framealpha=0.9, edgecolor="#cccccc",
+                        borderpad=0.4, labelspacing=0.3, markerscale=0.8)
+        leg.set_zorder(10)
 
     # ----- H: candidate markers volcano (annotation OFFSET to avoid overlap)
     def p_volcano(ax):
@@ -1746,7 +1749,8 @@ def fig8(ctx: Ctx) -> None:
         ax.axhline(-np.log10(.05), ls="--", lw=0.8, color=NATURE["bad"])
         # no inline text labels: names are listed in the caption to keep
         # the panel completely overlap-free.
-        leg = ax.legend(fontsize=5.5, frameon=True, loc="upper left",
+        leg = ax.legend(fontsize=5.5, frameon=True, loc="upper center",
+                        bbox_to_anchor=(0.5, 1.0),
                         framealpha=0.9, edgecolor="#cccccc",
                         borderpad=0.35, labelspacing=0.25, markerscale=0.6)
         leg.set_zorder(10)
