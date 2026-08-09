@@ -35,3 +35,13 @@ paper/*.pdf
 paper/manuscript.md
 paper/CoverLetter.txt
 paper/*.bak
+FRONTIERS_SUBMISSION.txt
+audit_results.py
+check_captions.py
+extract_tables_v7.py
+map_refs.py
+map_tex_structure.py
+read_l5_gate.py
+push_hydrogel_v63.sh
+_push_batch1.json
+_readme_stdout.txt

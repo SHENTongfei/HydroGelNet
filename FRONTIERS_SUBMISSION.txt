@@ -1,7 +1,0 @@
-1. Title: SIMPLEX: Composition-Space Deep Learning for Bio-inspired Hydrogel Adhesion with Prospective Validation on Model-Discovered Formulations
-
-2. Article type: Original Research
-
-3. Research topic: Functional Nanomaterials and Interfaces for Biohybrid Systems
-
-4. Key words: Hydrogel, Biohybrid interfaces, Machine learning, Composition-to-property prediction, Prospective validation, Material screening, Adhesion strength
