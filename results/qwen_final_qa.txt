@@ -1,0 +1,18 @@
+
+============================================================
+### Figure3_dataset
+============================================================
+1.  **Recode the Color Palette:** Abandon default colors. Use a cohesive, publication-grade palette (e.g., Viridis/Magma for heatmaps/scatters; distin
+2.  **Fix Panel C & A Annotations:** Move the text labels in Panel C off the data points using a guide line or offset. In Panel A, ensure value labels
+3.  **Typography Overhaul:** Bold all panel letters (A-I). Increase font weight on axis ticks. Ensure the "Internal vs External" legend in Panel I mat
+
+============================================================
+### Figure4_internal_cv
+============================================================
+1.  **Fix Panel A Heatmap Spacing:** Increase the width of the heatmap cells or rotate x-axis labels (F0-F4) by 90 degrees to prevent them from overla
+2.  **Relocate Panel B Annotation:** Move the `r = 0.866` box away from the origin (bottom-left). Place it in the top-right corner of the plot area wh
+3.  **Fix Panel G Layout:** Increase the left margin (y-axis padding) so "glass_adhesion" does not intrude into the heatmap cells. Consider removing t
+
+============================================================
+### Figure5_benchmark
+============================================================

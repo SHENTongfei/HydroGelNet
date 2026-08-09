@@ -1,0 +1,11 @@
+
+### Figure7_ablation
+1. TEXT-OVERLAP: Panel A (HIGH), Panel D (MED).
+2. TEXT-DATA-OVERLAP: None detected. Clean separation maintained across all panels.
+3. PANEL-LETTER position: PASS. Standard top-left positioning, distinct from axes and data boundaries.
+4. CROPPED text at figure edge: Panel H labels (-T.sk ga...) are visually truncated/squeezed.
+5. STYLE palette: 10/10. Professional high-contrast contrast; elegant consistent usage of orange/blue.
+6. CHART-VARIETY: Excellent range (lollipop, forest plot, violin). Highly sophisticated visualization choices.
+
+OVERALL: PASS
+TOP-3 FIXES: Resolve Panel A label congestion; fix Panel H x-axis truncation; increase Panel D font size for readability.

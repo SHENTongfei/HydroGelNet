@@ -1,0 +1,817 @@
+[
+  {
+    "title": "Recent advances in biodegradable polymers for sustainable applications",
+    "year": 2022,
+    "doi": "10.1038/s41529-022-00277-7",
+    "venue": "npj Materials Degradation",
+    "authors": [
+      "Aya Samir",
+      "Fatma H. Ashour",
+      "A. A. Abdel Hakim",
+      "M. Bassyouni"
+    ],
+    "volume": "6",
+    "issue": "1",
+    "pages": null,
+    "cited_by": 1166
+  },
+  {
+    "title": "Polymeric membranes for CO2 separation and capture",
+    "year": 2021,
+    "doi": "10.1016/j.memsci.2021.119244",
+    "venue": "Journal of Membrane Science",
+    "authors": [
+      "Yang Han",
+      "W.S. Winston Ho"
+    ],
+    "volume": "628",
+    "issue": null,
+    "pages": "119244",
+    "cited_by": 538
+  },
+  {
+    "title": "Bio-Inspired Nanomaterials for Micro/Nanodevices: A New Era in Biomedical Applications",
+    "year": 2023,
+    "doi": "10.3390/mi14091786",
+    "venue": "Micromachines",
+    "authors": [
+      "Mohammad Harun‐Ur‐Rashid",
+      "Israt Jahan",
+      "Tahmina Foyez",
+      "Abu Bin Imran"
+    ],
+    "volume": "14",
+    "issue": "9",
+    "pages": "1786",
+    "cited_by": 136
+  },
+  {
+    "title": "Overcoming the adhesion paradox and switchability conflict on rough surfaces with shape-memory polymers",
+    "year": 2023,
+    "doi": "10.1073/pnas.2221049120",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "authors": [
+      "Changhong Linghu",
+      "Yangchengyi Liu",
+      "Yee Yuan Tan",
+      "Jun Heng Marcus Sing",
+      "Yuxuan Tang",
+      "Aiwu Zhou",
+      "Xiufeng Wang",
+      "Dong Li",
+      "Huajian Gao",
+      "K. Jimmy Hsia"
+    ],
+    "volume": "120",
+    "issue": "13",
+    "pages": "e2221049120",
+    "cited_by": 118
+  },
+  {
+    "title": "Switching (bio-) adhesion and friction in liquid by stimulus responsive polymer coatings",
+    "year": 2021,
+    "doi": "10.1016/j.eurpolymj.2021.110298",
+    "venue": "European Polymer Journal",
+    "authors": [
+      "Yunlong Yu",
+      "Maria Brió Pérez",
+      "Cong Cao",
+      "Sissi de Beer"
+    ],
+    "volume": "147",
+    "issue": null,
+    "pages": "110298",
+    "cited_by": 53
+  },
+  {
+    "title": "BioinspiredLLM: Conversational Large Language Model for the Mechanics of Biological and Bio‐Inspired Materials",
+    "year": 2023,
+    "doi": "10.1002/advs.202306724",
+    "venue": "Advanced Science",
+    "authors": [
+      "Rachel K. Luu",
+      "Markus J. Buehler"
+    ],
+    "volume": "11",
+    "issue": "10",
+    "pages": "e2306724",
+    "cited_by": 108
+  },
+  {
+    "title": "Brain‐Inspired Organic Electronics: Merging Neuromorphic Computing and Bioelectronics Using Conductive Polymers",
+    "year": 2023,
+    "doi": "10.1002/adfm.202307729",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Imke Krauhausen",
+      "Charles‐Théophile Coen",
+      "Simone Spolaor",
+      "Paschalis Gkoupidenis",
+      "Yoeri van de Burgt"
+    ],
+    "volume": "34",
+    "issue": "15",
+    "pages": null,
+    "cited_by": 110
+  },
+  {
+    "title": "Metallization of polymers and composites: State-of-the-art approaches",
+    "year": 2022,
+    "doi": "10.1016/j.matdes.2022.110958",
+    "venue": "Materials & Design",
+    "authors": [
+      "Ruslan Melentiev",
+      "Arief Yudhanto",
+      "Ran Tao",
+      "Todor Vuchkov",
+      "Gilles Lubineau"
+    ],
+    "volume": "221",
+    "issue": null,
+    "pages": "110958",
+    "cited_by": 183
+  },
+  {
+    "title": "Recent progress in superabsorbent polymers for concrete",
+    "year": 2021,
+    "doi": "10.1016/j.cemconres.2021.106648",
+    "venue": "Cement and Concrete Research",
+    "authors": [
+      "Christof Schröfl",
+      "Kendra A. Erk",
+      "Wanwipa Siriwatwechakul",
+      "Mateusz Wyrzykowski",
+      "Didier Snoeck"
+    ],
+    "volume": "151",
+    "issue": null,
+    "pages": "106648",
+    "cited_by": 218
+  },
+  {
+    "title": "Trends and challenges in the development of bio-based barrier coating materials for paper/cardboard food packaging; a review",
+    "year": 2022,
+    "doi": "10.1016/j.scitotenv.2022.158328",
+    "venue": "The Science of The Total Environment",
+    "authors": [
+      "Muhammad Mujtaba",
+      "Juha Lipponen",
+      "Mari Ojanen",
+      "Sami Puttonen",
+      "Henri Vaittinen"
+    ],
+    "volume": "851",
+    "issue": "Pt 2",
+    "pages": "158328",
+    "cited_by": 279
+  },
+  {
+    "title": "Conductive polymer based hydrogels and their application in wearable sensors: a review",
+    "year": 2023,
+    "doi": "10.1039/d3mh00056g",
+    "venue": "Materials Horizons",
+    "authors": [
+      "Dong Liu",
+      "Chenxi Huyan",
+      "Zibi Wang",
+      "Zhanhu Guo",
+      "Xuehua Zhang",
+      "Hamdi Torun",
+      "Daniel M. Mulvihill",
+      "Ben Bin Xu",
+      "Chen Fei"
+    ],
+    "volume": "10",
+    "issue": "8",
+    "pages": "2800",
+    "cited_by": 257
+  },
+  {
+    "title": "A Bio‐Inspired Perspective on Materials Sustainability",
+    "year": 2025,
+    "doi": "10.1002/adma.202413096",
+    "venue": "Advanced Materials",
+    "authors": [
+      "Wolfgang Wagermaier",
+      "Khashayar Razghandi",
+      "Peter Fratzl"
+    ],
+    "volume": "37",
+    "issue": "22",
+    "pages": "e2413096",
+    "cited_by": 51
+  },
+  {
+    "title": "Automated manufacturing of bio-inspired carbon-fibre reinforced polymers",
+    "year": 2021,
+    "doi": "10.1016/j.compositesb.2021.108795",
+    "venue": "Composites Part B Engineering",
+    "authors": [
+      "Verónica Rodríguez",
+      "Roberto Guzmán de Villoria"
+    ],
+    "volume": "215",
+    "issue": null,
+    "pages": "108795",
+    "cited_by": 25
+  },
+  {
+    "title": "Adhesion Engineering in Polymer–Metal Comolded Joints with Biomimetic Polydopamine",
+    "year": 2021,
+    "doi": "10.1021/acsami.1c01070",
+    "venue": "ACS Applied Materials & Interfaces",
+    "authors": [
+      "Georgios Kafkopoulos",
+      "Clemens J. Padberg",
+      "Joost Duvigneau",
+      "G. Julius Vancsó"
+    ],
+    "volume": "13",
+    "issue": "16",
+    "pages": "19244",
+    "cited_by": 44
+  },
+  {
+    "title": "Educational series: characterizing crosslinked polymer networks",
+    "year": 2023,
+    "doi": "10.1039/d3py00914a",
+    "venue": "Polymer Chemistry",
+    "authors": [
+      "Chamoni W. H. Rajawasam",
+      "Obed J. Dodo",
+      "M. A. Sachini N. Weerasinghe",
+      "Ibrahim O. Raji",
+      "Shiwanka V. Wanasinghe",
+      "Dominik Konkolewicz",
+      "Nethmi De Alwis Watuthanthrige"
+    ],
+    "volume": "15",
+    "issue": "4",
+    "pages": "219",
+    "cited_by": 129
+  },
+  {
+    "title": "Physics-informed machine learning",
+    "year": 2021,
+    "doi": "10.1038/s42254-021-00314-5",
+    "venue": "Nature Reviews Physics",
+    "authors": [
+      "George Em Karniadakis",
+      "Ioannis G. Kevrekidis",
+      "Lu Lu",
+      "Paris Perdikaris",
+      "Sifan Wang",
+      "Liu Yang"
+    ],
+    "volume": "3",
+    "issue": "6",
+    "pages": "422",
+    "cited_by": 7201
+  },
+  {
+    "title": "Machine learning and deep learning",
+    "year": 2021,
+    "doi": "10.1007/s12525-021-00475-2",
+    "venue": "Electronic Markets",
+    "authors": [
+      "Christian Janiesch",
+      "Patrick Zschech",
+      "Kai Heinrich"
+    ],
+    "volume": "31",
+    "issue": "3",
+    "pages": "685",
+    "cited_by": 2556
+  },
+  {
+    "title": "Small data machine learning in materials science",
+    "year": 2023,
+    "doi": "10.1038/s41524-023-01000-z",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Pengcheng Xu",
+      "Xiaobo Ji",
+      "Minjie Li",
+      "Wencong Lu"
+    ],
+    "volume": "9",
+    "issue": "1",
+    "pages": null,
+    "cited_by": 759
+  },
+  {
+    "title": "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions",
+    "year": 2021,
+    "doi": "10.1186/s40537-021-00444-8",
+    "venue": "Journal Of Big Data",
+    "authors": [
+      "Laith Alzubaidi",
+      "Jinglan Zhang",
+      "Amjad J. Humaidi",
+      "Ayad Q. Al-Dujaili",
+      "Ye Duan",
+      "Omran Al-Shamma",
+      "José Santamaría",
+      "Mohammed A. Fadhel",
+      "Muthana Al‐Amidie",
+      "Laith Farhan"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "53",
+    "cited_by": 7727
+  },
+  {
+    "title": "LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales",
+    "year": 2021,
+    "doi": "10.1016/j.cpc.2021.108171",
+    "venue": "Computer Physics Communications",
+    "authors": [
+      "Aidan P. Thompson",
+      "Hasan Metin Aktulga",
+      "Richard A. Berger",
+      "Dan Bolintineanu",
+      "William M. Brown",
+      "Paul Crozier",
+      "Pieter J. in ’t Veld",
+      "Axel Kohlmeyer",
+      "Stan Moore",
+      "Trung Dac Nguyen",
+      "Ray Shan",
+      "Mark J. Stevens"
+    ],
+    "volume": "271",
+    "issue": null,
+    "pages": "108171",
+    "cited_by": 12018
+  },
+  {
+    "title": "Machine learning–enabled high-entropy alloy discovery",
+    "year": 2022,
+    "doi": "10.1126/science.abo4940",
+    "venue": "Science",
+    "authors": [
+      "Ziyuan Rao",
+      "Po‐Yen Tung",
+      "Ruiwen Xie",
+      "Ye Wei",
+      "Hongbin Zhang",
+      "Alberto Ferrari",
+      "T.P.C. Klaver",
+      "Fritz Körmann",
+      "Prithiv Thoudden Sukumar",
+      "Alisson Kwiatkowski da Silva",
+      "Yao Chen",
+      "Zhiming Li"
+    ],
+    "volume": "378",
+    "issue": "6615",
+    "pages": "78",
+    "cited_by": 697
+  },
+  {
+    "title": "Scientific Machine Learning Through Physics–Informed Neural Networks: Where we are and What’s Next",
+    "year": 2022,
+    "doi": "10.1007/s10915-022-01939-z",
+    "venue": "Journal of Scientific Computing",
+    "authors": [
+      "Salvatore Cuomo",
+      "Vincenzo Schiano Di Cola",
+      "Fabio Giampaolo",
+      "Gianluigi Rozza",
+      "Maziar Raissi",
+      "Francesco Piccialli"
+    ],
+    "volume": "92",
+    "issue": "3",
+    "pages": null,
+    "cited_by": 2488
+  },
+  {
+    "title": "Dictionary learning for integrative, multimodal and scalable single-cell analysis",
+    "year": 2023,
+    "doi": "10.1038/s41587-023-01767-y",
+    "venue": "Nature Biotechnology",
+    "authors": [
+      "Yuhan Hao",
+      "Tim Stuart",
+      "Madeline H. Kowalski",
+      "Saket Choudhary",
+      "Paul Hoffman",
+      "Austin Hartman",
+      "Avi Srivastava",
+      "Gesmira Molla",
+      "Shaista Madad",
+      "Carlos Fernandez‐Granda",
+      "Rahul Satija"
+    ],
+    "volume": "42",
+    "issue": "2",
+    "pages": "293",
+    "cited_by": 5180
+  },
+  {
+    "title": "Scaling deep learning for materials discovery",
+    "year": 2023,
+    "doi": "10.1038/s41586-023-06735-9",
+    "venue": "Nature",
+    "authors": [
+      "Amil Merchant",
+      "Simon Batzner",
+      "Samuel S. Schoenholz",
+      "Muratahan Aykol",
+      "Gowoon Cheon",
+      "Ekin D. Cubuk"
+    ],
+    "volume": "624",
+    "issue": "7990",
+    "pages": "80",
+    "cited_by": 1281
+  },
+  {
+    "title": "Tackling Climate Change with Machine Learning",
+    "year": 2022,
+    "doi": "10.1145/3485128",
+    "venue": "OPUS 4 (Zuse Institute Berlin)",
+    "authors": [
+      "Lynn H. Kaack",
+      "David Rolnick",
+      "Priya L. Donti",
+      "Kelly Kochanski",
+      "Alexandre Lacoste",
+      "Kris Sankaran",
+      "Andrew Slavin Ross",
+      "Nikola Milojevic-Dupont",
+      "Natasha Jaques",
+      "Anna Waldman‐Brown",
+      "Alexandra Sasha Luccioni",
+      "Tegan Maharaj"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "cited_by": 915
+  },
+  {
+    "title": "Machine learning for perovskite materials design and discovery",
+    "year": 2021,
+    "doi": "10.1038/s41524-021-00495-8",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Qiuling Tao",
+      "Pengcheng Xu",
+      "Minjie Li",
+      "Wencong Lu"
+    ],
+    "volume": "7",
+    "issue": "1",
+    "pages": null,
+    "cited_by": 514
+  },
+  {
+    "title": "Human-in-the-loop machine learning: a state of the art",
+    "year": 2022,
+    "doi": "10.1007/s10462-022-10246-w",
+    "venue": "Artificial Intelligence Review",
+    "authors": [
+      "Eduardo Mosqueira-Rey",
+      "Elena Hernández-Pereira",
+      "David Alonso-Ríos",
+      "José Bobes-Bascarán",
+      "Ángel Fernández-Leal"
+    ],
+    "volume": "56",
+    "issue": "4",
+    "pages": "3005",
+    "cited_by": 912
+  },
+  {
+    "title": "Perspectives in machine learning for wildlife conservation",
+    "year": 2022,
+    "doi": "10.1038/s41467-022-27980-y",
+    "venue": "Nature Communications",
+    "authors": [
+      "Devis Tuia",
+      "Benjamin Kellenberger",
+      "Sara Beery",
+      "Blair R. Costelloe",
+      "Silvia Zuffi",
+      "Benjamin Risse",
+      "Alexander Mathis",
+      "Mackenzie Weygandt Mathis",
+      "Frank van Langevelde",
+      "Tilo Burghardt",
+      "Roland Kays",
+      "Holger Klinck"
+    ],
+    "volume": "13",
+    "issue": "1",
+    "pages": "792",
+    "cited_by": 687
+  },
+  {
+    "title": "Informed Machine Learning - A Taxonomy and Survey of Integrating Prior Knowledge into Learning Systems",
+    "year": 2021,
+    "doi": "10.1109/tkde.2021.3079836",
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "authors": [
+      "Laura von Rueden",
+      "Sebastian Mayer",
+      "Katharina Beckh",
+      "Bogdan Georgiev",
+      "Sven Giesselbach",
+      "Raoul Heese",
+      "Birgit Kirsch",
+      "Michał Walczak",
+      "Julius Pfrommer",
+      "Annika Pick",
+      "Rajkumar Ramamurthy",
+      "Jochen Garcke"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": "1",
+    "cited_by": 794
+  },
+  {
+    "title": "Explainable machine learning in materials science",
+    "year": 2022,
+    "doi": "10.1038/s41524-022-00884-7",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Xiaoting Zhong",
+      "Brian Gallagher",
+      "Shusen Liu",
+      "Bhavya Kailkhura",
+      "Anna M. Hiszpanski",
+      "T. Yong-Jin Han"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": null,
+    "cited_by": 399
+  },
+  {
+    "title": "Ensemble deep learning: A review",
+    "year": 2022,
+    "doi": "10.1016/j.engappai.2022.105151",
+    "venue": "Engineering Applications of Artificial Intelligence",
+    "authors": [
+      "M. A. Ganaie",
+      "Minghui Hu",
+      "A. K. Malik",
+      "M. Tanveer",
+      "Ponnuthurai Nagaratnam Suganthan"
+    ],
+    "volume": "115",
+    "issue": null,
+    "pages": "105151",
+    "cited_by": 2100
+  },
+  {
+    "title": "Accurate predictions on small data with a tabular foundation model",
+    "year": 2025,
+    "doi": "10.1038/s41586-024-08328-6",
+    "venue": "Nature",
+    "authors": [
+      "Noah Hollmann",
+      "Samuel Müller",
+      "Lennart Purucker",
+      "Arjun Krishnakumar",
+      "Max Körfer",
+      "Shi Bin Hoo",
+      "Robin Tibor Schirrmeister",
+      "Frank Hutter"
+    ],
+    "volume": "637",
+    "issue": "8045",
+    "pages": "319",
+    "cited_by": 773
+  },
+  {
+    "title": "Deep Learning: A Comprehensive Overview on Techniques, Taxonomy, Applications and Research Directions",
+    "year": 2021,
+    "doi": "10.1007/s42979-021-00815-1",
+    "venue": "SN Computer Science",
+    "authors": [
+      "Iqbal H. Sarker"
+    ],
+    "volume": "2",
+    "issue": "6",
+    "pages": "420",
+    "cited_by": 2489
+  },
+  {
+    "title": "Machine Learning: Algorithms, Real-World Applications and Research Directions",
+    "year": 2021,
+    "doi": "10.1007/s42979-021-00592-x",
+    "venue": "SN Computer Science",
+    "authors": [
+      "Iqbal H. Sarker"
+    ],
+    "volume": "2",
+    "issue": "3",
+    "pages": "160",
+    "cited_by": 5245
+  },
+  {
+    "title": "A review of uncertainty quantification in deep learning: Techniques, applications and challenges",
+    "year": 2021,
+    "doi": "10.1016/j.inffus.2021.05.008",
+    "venue": "Information Fusion",
+    "authors": [
+      "Moloud Abdar",
+      "Farhad Pourpanah",
+      "Sadiq Hussain",
+      "Dana Rezazadegan",
+      "Li Liu",
+      "Mohammad Ghavamzadeh",
+      "Paul Fieguth",
+      "Xiaochun Cao",
+      "Abbas Khosravi",
+      "U. Rajendra Acharya",
+      "Vladimir Makarenkov",
+      "Saeid Nahavandi"
+    ],
+    "volume": "76",
+    "issue": null,
+    "pages": "243",
+    "cited_by": 2544
+  },
+  {
+    "title": "Converting tabular data into images for deep learning with convolutional neural networks",
+    "year": 2021,
+    "doi": "10.1038/s41598-021-90923-y",
+    "venue": "Scientific Reports",
+    "authors": [
+      "Yitan Zhu",
+      "Thomas Brettin",
+      "Fangfang Xia",
+      "Alexander Partin",
+      "Maulik Shukla",
+      "Hyunseung Yoo",
+      "Yvonne A. Evrard",
+      "James H. Doroshow",
+      "Rick Stevens"
+    ],
+    "volume": "11",
+    "issue": "1",
+    "pages": "11325",
+    "cited_by": 199
+  },
+  {
+    "title": "Revisiting Deep Learning Models for Tabular Data",
+    "year": 2021,
+    "doi": "10.48550/arxiv.2106.11959",
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Yury Gorishniy",
+      "Ivan Rubachev",
+      "Valentin Khrulkov",
+      "Artem Babenko"
+    ],
+    "volume": "34",
+    "issue": null,
+    "pages": null,
+    "cited_by": 115
+  },
+  {
+    "title": "Tabular data: Deep learning is not all you need",
+    "year": 2021,
+    "doi": "10.1016/j.inffus.2021.11.011",
+    "venue": "Information Fusion",
+    "authors": [
+      "Ravid Shwartz-Ziv",
+      "Amitai Armon"
+    ],
+    "volume": "81",
+    "issue": null,
+    "pages": "84",
+    "cited_by": 115
+  },
+  {
+    "title": "Deep-PK: deep learning for small molecule pharmacokinetic and toxicity prediction",
+    "year": 2024,
+    "doi": "10.1093/nar/gkae254",
+    "venue": "Nucleic Acids Research",
+    "authors": [
+      "Yoochan Myung",
+      "Alex G. C. de Sá",
+      "David B. Ascher"
+    ],
+    "volume": "52",
+    "issue": "W1",
+    "pages": "W469",
+    "cited_by": 290
+  },
+  {
+    "title": "The effects of data quality on machine learning performance on tabular data",
+    "year": 2025,
+    "doi": "10.1016/j.is.2025.102549",
+    "venue": "Information Systems",
+    "authors": [
+      "Sedir Mohammed",
+      "Lukas Budach",
+      "Moritz Feuerpfeil",
+      "Nina Ihde",
+      "Andrea Nathansen",
+      "Nele Noack",
+      "Hendrik Patzlaff",
+      "Felix Naumann",
+      "Hazar Harmouch"
+    ],
+    "volume": "132",
+    "issue": null,
+    "pages": "102549",
+    "cited_by": 160
+  },
+  {
+    "title": "A survey of deep meta-learning",
+    "year": 2021,
+    "doi": "10.1007/s10462-021-10004-4",
+    "venue": "Artificial Intelligence Review",
+    "authors": [
+      "Mike Huisman",
+      "Jan N. van Rijn",
+      "Aske Plaat"
+    ],
+    "volume": "54",
+    "issue": "6",
+    "pages": "4483",
+    "cited_by": 364
+  },
+  {
+    "title": "Machine learning and deep learning applications in microbiome research",
+    "year": 2022,
+    "doi": "10.1038/s43705-022-00182-9",
+    "venue": "ISME Communications",
+    "authors": [
+      "Ricardo Hernández Medina",
+      "Svetlana Kutuzova",
+      "Knud Nor Nielsen",
+      "Joachim Johansen",
+      "Lars Hestbjerg Hansen",
+      "Mads Eggert Nielsen",
+      "Simon Rasmussen"
+    ],
+    "volume": "2",
+    "issue": "1",
+    "pages": "98",
+    "cited_by": 328
+  },
+  {
+    "title": "The Effects of Data Quality on Machine Learning Performance on Tabular Data",
+    "year": 2022,
+    "doi": "10.48550/arxiv.2207.14529",
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Mohammed, Sedir",
+      "Lukas Budach",
+      "Moritz Feuerpfeil",
+      "Nina Ihde",
+      "Andrea Nathansen",
+      "Nele Noack",
+      "Hendrik Patzlaff",
+      "Felix Naumann",
+      "Hazar Harmouch"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "cited_by": 137
+  },
+  {
+    "title": "Credit Card Fraud Detection Using State-of-the-Art Machine Learning and Deep Learning Algorithms",
+    "year": 2022,
+    "doi": "10.1109/access.2022.3166891",
+    "venue": "IEEE Access",
+    "authors": [
+      "Fawaz Khaled Alarfaj",
+      "Iqra Malik",
+      "Hikmat Ullah Khan",
+      "Naif Almusallam",
+      "Muhammad Ramzan",
+      "Muzamil Ahmed"
+    ],
+    "volume": "10",
+    "issue": null,
+    "pages": "39700",
+    "cited_by": 402
+  },
+  {
+    "title": "Explainable Deep Learning: A Field Guide for the Uninitiated",
+    "year": 2022,
+    "doi": "10.1613/jair.1.13200",
+    "venue": "Journal of Artificial Intelligence Research",
+    "authors": [
+      "Gabriëlle Ras",
+      "Ning Xie",
+      "Marcel van Gerven",
+      "Derek Doran"
+    ],
+    "volume": "73",
+    "issue": null,
+    "pages": "329",
+    "cited_by": 416
+  }
+]

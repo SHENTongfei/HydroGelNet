@@ -1,0 +1,3374 @@
+[
+  {
+    "title": "Engineering Smart Composite Hydrogels for Wearable Disease Monitoring",
+    "year": 2023,
+    "doi": "10.1007/s40820-023-01079-5",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Jianye Li",
+      "Qiongling Ding",
+      "Hao Wang",
+      "Zixuan Wu",
+      "Xuchun Gui",
+      "Chunwei Li",
+      "Ning Hu",
+      "Kai Tao",
+      "Jin Wu"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "105",
+    "end_page": "105",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogel and Machine Learning for Soft Robots’ Sensing and Signal Processing: A Review",
+    "year": 2022,
+    "doi": "10.1007/s42235-022-00320-y",
+    "venue": "Journal of Bionic Engineering",
+    "authors": [
+      "Shuyu Wang",
+      "Zhaojia Sun"
+    ],
+    "volume": "20",
+    "issue": "3",
+    "pages": "845",
+    "end_page": "857",
+    "type": "article"
+  },
+  {
+    "title": "Polyvinyl Alcohol (PVA)-Based Hydrogels: Recent Progress in Fabrication, Properties, and Multifunctional Applications",
+    "year": 2024,
+    "doi": "10.3390/polym16192755",
+    "venue": "Polymers",
+    "authors": [
+      "Xiaoxu Liang",
+      "Hai‐Jing Zhong",
+      "Hongyao Ding",
+      "Biao Yu",
+      "Xiao Ma",
+      "Xingyu Liu",
+      "Cheong‐Meng Chong",
+      "Jingwei He"
+    ],
+    "volume": "16",
+    "issue": "19",
+    "pages": "2755",
+    "end_page": "2755",
+    "type": "article"
+  },
+  {
+    "title": "A Structural Gel Composite Enabled Robust Underwater Mechanosensing Strategy with High Sensitivity",
+    "year": 2022,
+    "doi": "10.1002/adfm.202201396",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Zibi Wang",
+      "Honghao Zhou",
+      "Dong Liu",
+      "Xue Chen",
+      "Ding Wang",
+      "Sheng Dai",
+      "Chen Fei",
+      "Ben Bin Xu"
+    ],
+    "volume": "32",
+    "issue": "25",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Surfactant‐Enhanced Anti‐Swelling Hydrogel Flexible Sensor for Machine Learning‐Assisted Underwater Gesture Recognition",
+    "year": 2025,
+    "doi": "10.1002/smll.202412346",
+    "venue": "Small",
+    "authors": [
+      "Xin Jiao",
+      "Dengke Song",
+      "Junjie Ding",
+      "Jiayu Li",
+      "Kexin Ding",
+      "Fanlun Meng",
+      "Hui Zheng",
+      "Wenlong Xu"
+    ],
+    "volume": "21",
+    "issue": "27",
+    "pages": "e2412346",
+    "end_page": "e2412346",
+    "type": "article"
+  },
+  {
+    "title": "Environment‐tolerant ionic hydrogel–elastomer hybrids with robust interfaces, high transparence, and biocompatibility for a mechanical–thermal multimode sensor",
+    "year": 2023,
+    "doi": "10.1002/inf2.12409",
+    "venue": "InfoMat",
+    "authors": [
+      "Ya Lu",
+      "Yiying Yue",
+      "Qinqin Ding",
+      "Changtong Mei",
+      "Xinwu Xu",
+      "Shaohua Jiang",
+      "Shuijian He",
+      "Qinglin Wu",
+      "Huining Xiao",
+      "Jingquan Han"
+    ],
+    "volume": "5",
+    "issue": "4",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Advances in Machine Learning for Wearable Sensors",
+    "year": 2024,
+    "doi": "10.1021/acsnano.4c05851",
+    "venue": "ACS Nano",
+    "authors": [
+      "Xiao Xiao",
+      "Junyi Yin",
+      "Jing Xu",
+      "Trinny Tat",
+      "Jun Chen"
+    ],
+    "volume": "18",
+    "issue": "34",
+    "pages": "22734",
+    "end_page": "22751",
+    "type": "article"
+  },
+  {
+    "title": "Soft Electronics for Health Monitoring Assisted by Machine Learning",
+    "year": 2023,
+    "doi": "10.1007/s40820-023-01029-1",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Yancong Qiao",
+      "Jinan Luo",
+      "Tianrui Cui",
+      "Haidong Liu",
+      "Hao Tang",
+      "Ying-Fen Zeng",
+      "Chang Liu",
+      "Yuanfang Li",
+      "Jinming Jian",
+      "Jingzhi Wu",
+      "He Tian",
+      "Yi Yang",
+      "Tian‐Ling Ren",
+      "Jianhua Zhou"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "66",
+    "end_page": "66",
+    "type": "article"
+  },
+  {
+    "title": "Topographic design in wearable MXene sensors with in-sensor machine learning for full-body avatar reconstruction",
+    "year": 2022,
+    "doi": "10.1038/s41467-022-33021-5",
+    "venue": "Nature Communications",
+    "authors": [
+      "Haitao Yang",
+      "Jiali Li",
+      "Xiao Xiao",
+      "Jiahao Wang",
+      "Yufei Li",
+      "Kerui Li",
+      "Zhipeng Li",
+      "Haochen Yang",
+      "Qian Wang",
+      "Jie Yang",
+      "John S. Ho",
+      "Po-Len Yeh",
+      "Koen Mouthaan",
+      "Xiaonan Wang",
+      "Sahil Shah"
+    ],
+    "volume": "13",
+    "issue": "1",
+    "pages": "5311",
+    "end_page": "5311",
+    "type": "article"
+  },
+  {
+    "title": "Underwater communication technologies: a review",
+    "year": 2025,
+    "doi": "10.1007/s11235-025-01279-x",
+    "venue": "Telecommunication Systems",
+    "authors": [
+      "Theocharis Theocharidis",
+      "Ergina Kavallieratou"
+    ],
+    "volume": "88",
+    "issue": "2",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Exploring the Potential of Artificial Intelligence for Hydrogel Development—A Short Review",
+    "year": 2023,
+    "doi": "10.3390/gels9110845",
+    "venue": "Gels",
+    "authors": [
+      "Irina Neguț",
+      "Bogdan Biță"
+    ],
+    "volume": "9",
+    "issue": "11",
+    "pages": "845",
+    "end_page": "845",
+    "type": "article"
+  },
+  {
+    "title": "Transparent, Ultra-Stretching, Tough, Adhesive Carboxyethyl Chitin/Polyacrylamide Hydrogel Toward High-Performance Soft Electronics",
+    "year": 2022,
+    "doi": "10.1007/s40820-022-00980-9",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Jipeng Zhang",
+      "Yang Hu",
+      "Lina Zhang",
+      "Jinping Zhou",
+      "Ang Lu"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "8",
+    "end_page": "8",
+    "type": "article"
+  },
+  {
+    "title": "A skin-mimicking multifunctional hydrogel via hierarchical, reversible noncovalent interactions",
+    "year": 2025,
+    "doi": "10.1126/sciadv.adv8523",
+    "venue": "Science Advances",
+    "authors": [
+      "Xingkui Guo",
+      "Songlin Zhang",
+      "Shubham Patel",
+      "Xiaoou Sun",
+      "You‐Liang Zhu",
+      "Zechang Wei",
+      "Rongguo Wang",
+      "Xiaodong He",
+      "Zuankai Wang",
+      "Cunjiang Yu",
+      "Swee Ching Tan"
+    ],
+    "volume": "11",
+    "issue": "20",
+    "pages": "eadv8523",
+    "end_page": "eadv8523",
+    "type": "article"
+  },
+  {
+    "title": "Protein-Based Hydrogels and Their Biomedical Applications",
+    "year": 2023,
+    "doi": "10.3390/molecules28134988",
+    "venue": "Molecules",
+    "authors": [
+      "Kok Zhi Lee",
+      "Juya Jeon",
+      "Bojing Jiang",
+      "Shri Venkatesh Subramani",
+      "Jingyao Li",
+      "Fuzhong Zhang"
+    ],
+    "volume": "28",
+    "issue": "13",
+    "pages": "4988",
+    "end_page": "4988",
+    "type": "article"
+  },
+  {
+    "title": "A wearable ionic hydrogel strain sensor with double cross-linked network for human–machine interface",
+    "year": 2024,
+    "doi": "10.1007/s42114-024-01083-2",
+    "venue": "Advanced Composites and Hybrid Materials",
+    "authors": [
+      "Zijian Wu",
+      "Liying Zhang",
+      "Meng Wang",
+      "Defeng Zang",
+      "Haiyong Long",
+      "Ling Weng",
+      "Ning Guo",
+      "Junguo Gao",
+      "Yonghong Liu",
+      "Ben Bin Xu"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Bioinspired materials for underwater adhesion with pathways to switchability",
+    "year": 2023,
+    "doi": "10.1016/j.xcrp.2023.101597",
+    "venue": "Cell Reports Physical Science",
+    "authors": [
+      "Chanhong Lee",
+      "Shi Hui-qi",
+      "Jiyoung Jung",
+      "Bowen Zheng",
+      "Kan Wang",
+      "Ravi Tutika",
+      "Rong Long",
+      "Bruce P. Lee",
+      "Grace X. Gu",
+      "Michael D. Bartlett"
+    ],
+    "volume": "4",
+    "issue": "10",
+    "pages": "101597",
+    "end_page": "101597",
+    "type": "article"
+  },
+  {
+    "title": "Modulation and Mechanisms of Cellulose‐Based Hydrogels for Flexible Sensors",
+    "year": 2024,
+    "doi": "10.1002/sus2.255",
+    "venue": "SusMat",
+    "authors": [
+      "Meng Zhang",
+      "Ting Xu",
+      "Kun Liu",
+      "Liyu Zhu",
+      "Chengyun Miao",
+      "Ting Chen",
+      "Mengge Gao",
+      "Junfeng Wang",
+      "Chuanling Si"
+    ],
+    "volume": "5",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Electric Eel‐Inspired Elastomer‐Encapsulated Hydrogel Sensor with Superior Anti‐Swelling, Self‐Adhesion, and Electrical Stability for Diverse Underwater Applications",
+    "year": 2025,
+    "doi": "10.1002/smll.202503207",
+    "venue": "Small",
+    "authors": [
+      "Guang Chen",
+      "Binyao Zhang",
+      "Boning Tan",
+      "Weizhong Yuan"
+    ],
+    "volume": "21",
+    "issue": "34",
+    "pages": "e2503207",
+    "end_page": "e2503207",
+    "type": "article"
+  },
+  {
+    "title": "Recent progress on underwater soft robots: adhesion, grabbing, actuating, and sensing",
+    "year": 2023,
+    "doi": "10.3389/fbioe.2023.1196922",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "Yeming Zhang",
+      "Demin Kong",
+      "Yan Shi",
+      "Maolin Cai",
+      "Qihui Yu",
+      "Shuping Li",
+      "Kai Wang",
+      "Chuangchuang Liu"
+    ],
+    "volume": "11",
+    "issue": null,
+    "pages": "1196922",
+    "end_page": "1196922",
+    "type": "article"
+  },
+  {
+    "title": "Recent advances in hydrogel-based flexible strain sensors for harsh environment applications",
+    "year": 2024,
+    "doi": "10.1039/d4sc05295a",
+    "venue": "Chemical Science",
+    "authors": [
+      "Miaoyu Li",
+      "Jie Pu",
+      "Qinghe Cao",
+      "Wenbo Zhao",
+      "Yong Gao",
+      "Ting Meng",
+      "Jipeng Chen",
+      "Cao Guan"
+    ],
+    "volume": "15",
+    "issue": "43",
+    "pages": "17799",
+    "end_page": "17822",
+    "type": "article"
+  },
+  {
+    "title": "Smart and Biomimetic 3D and 4D Printed Composite Hydrogels: Opportunities for Different Biomedical Applications",
+    "year": 2021,
+    "doi": "10.3390/biomedicines9111537",
+    "venue": "Biomedicines",
+    "authors": [
+      "Samira Malekmohammadi",
+      "Negar Sedghi Aminabad",
+      "Amin Sabzi",
+      "Amir Zarebkohan",
+      "Mehdi Razavi",
+      "Massoud Vosough",
+      "Mahdi Bodaghi",
+      "Hajar Maleki"
+    ],
+    "volume": "9",
+    "issue": "11",
+    "pages": "1537",
+    "end_page": "1537",
+    "type": "article"
+  },
+  {
+    "title": "Recent Advances in Hydrogel‐Based Soft Bioelectronics and its Convergence with Machine Learning",
+    "year": 2024,
+    "doi": "10.1002/adem.202401432",
+    "venue": "Advanced Engineering Materials",
+    "authors": [
+      "Eun Seo Lee",
+      "Min Young Lee",
+      "Dae‐Hyeong Kim",
+      "Ja Hoon Koo"
+    ],
+    "volume": "26",
+    "issue": "22",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Antiswelling, Ultrastretchable, and Ultrastable Hydrogel Sensors for Long‐Term Underwater Monitoring",
+    "year": 2025,
+    "doi": "10.1002/smll.202503067",
+    "venue": "Small",
+    "authors": [
+      "Hao Wang",
+      "Xingyue Lin",
+      "Xin Li",
+      "Dong Lv",
+      "Jing Zhang",
+      "Linjie Wei",
+      "Jiahui Tang",
+      "Yintong Lin",
+      "Xu Wu",
+      "Xiubin Xu"
+    ],
+    "volume": "21",
+    "issue": "27",
+    "pages": "e2503067",
+    "end_page": "e2503067",
+    "type": "article"
+  },
+  {
+    "title": "Overcoming the adhesion paradox and switchability conflict on rough surfaces with shape-memory polymers",
+    "year": 2023,
+    "doi": "10.1073/pnas.2221049120",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "authors": [
+      "Changhong Linghu",
+      "Yangchengyi Liu",
+      "Yee Yuan Tan",
+      "Jun Heng Marcus Sing",
+      "Yuxuan Tang",
+      "Aiwu Zhou",
+      "Xiufeng Wang",
+      "Dong Li",
+      "Huajian Gao",
+      "K. Jimmy Hsia"
+    ],
+    "volume": "120",
+    "issue": "13",
+    "pages": "e2221049120",
+    "end_page": "e2221049120",
+    "type": "article"
+  },
+  {
+    "title": "A Review on Thermal Properties of Hydrogels for Electronic Devices Applications",
+    "year": 2022,
+    "doi": "10.3390/gels9010007",
+    "venue": "Gels",
+    "authors": [
+      "Fei Xin",
+      "Qiang Lyu"
+    ],
+    "volume": "9",
+    "issue": "1",
+    "pages": "7",
+    "end_page": "7",
+    "type": "article"
+  },
+  {
+    "title": "Bioinspired sensor system for health care and human‐machine interaction",
+    "year": 2022,
+    "doi": "10.1002/eom2.12209",
+    "venue": "EcoMat",
+    "authors": [
+      "Jiangtao Xue",
+      "Yang Zou",
+      "Yulin Deng",
+      "Zhou Li"
+    ],
+    "volume": "4",
+    "issue": "5",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Machine-learned wearable sensors for real-time hand-motion recognition: toward practical applications",
+    "year": 2023,
+    "doi": "10.1093/nsr/nwad298",
+    "venue": "National Science Review",
+    "authors": [
+      "Kyung Rok Pyun",
+      "Kangkyu Kwon",
+      "Myung Jin Yoo",
+      "Kyun Kyu Kim",
+      "Dohyeon Gong",
+      "Woon‐Hong Yeo",
+      "Seungyong Han",
+      "Seung Hwan Ko"
+    ],
+    "volume": "11",
+    "issue": "2",
+    "pages": "nwad298",
+    "end_page": "nwad298",
+    "type": "article"
+  },
+  {
+    "title": "Rapidly self-healing electronic skin for machine learning–assisted physiological and movement evaluation",
+    "year": 2025,
+    "doi": "10.1126/sciadv.ads1301",
+    "venue": "Science Advances",
+    "authors": [
+      "Yongju Lee",
+      "Xinyu Tian",
+      "Jaewon Park",
+      "Dong Hyun Nam",
+      "Zhuohong Wu",
+      "Hyo-Jeong Choi",
+      "Ju-Hwan Kim",
+      "Dong‐Wook Park",
+      "Keren Zhou",
+      "Sang Won Lee",
+      "Tanveer A. Tabish",
+      "Xuanbing Cheng",
+      "Sam Emaminejad",
+      "Tae‐Woo Lee",
+      "Hyeok Kim"
+    ],
+    "volume": "11",
+    "issue": "7",
+    "pages": "eads1301",
+    "end_page": "eads1301",
+    "type": "article"
+  },
+  {
+    "title": "Engineered Janus hydrogels: biomimetic surface engineering and biomedical applications",
+    "year": 2024,
+    "doi": "10.1093/nsr/nwae316",
+    "venue": "National Science Review",
+    "authors": [
+      "Mingfei Pan",
+      "Tao Shui",
+      "Ziqian Zhao",
+      "Li Xiang",
+      "Bin Yan",
+      "Ning Gu",
+      "Hongbo Zeng"
+    ],
+    "volume": "11",
+    "issue": "10",
+    "pages": "nwae316",
+    "end_page": "nwae316",
+    "type": "article"
+  },
+  {
+    "title": "Wet soft bio-adhesion of insect-inspired polymeric oil-loadable perforated microcylinders",
+    "year": 2021,
+    "doi": "10.1016/j.cej.2021.130194",
+    "venue": "Chemical Engineering Journal",
+    "authors": [
+      "Jin Ho Song",
+      "Sangyul Baik",
+      "Da Wan Kim",
+      "Tae‐Heon Yang",
+      "Changhyun Pang"
+    ],
+    "volume": "423",
+    "issue": null,
+    "pages": "130194",
+    "end_page": "130194",
+    "type": "article"
+  },
+  {
+    "title": "A mussel-inspired film for adhesion to wet buccal tissue and efficient buccal drug delivery",
+    "year": 2021,
+    "doi": "10.1038/s41467-021-21989-5",
+    "venue": "Nature Communications",
+    "authors": [
+      "Shanshan Hu",
+      "Xibo Pei",
+      "Lunliang Duan",
+      "Zhou Zhu",
+      "Yanhua Liu",
+      "Junyu Chen",
+      "Tao Chen",
+      "Ping Ji",
+      "Qianbing Wan",
+      "Jian Wang"
+    ],
+    "volume": "12",
+    "issue": "1",
+    "pages": "1689",
+    "end_page": "1689",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogel tapes for fault-tolerant strong wet adhesion",
+    "year": 2021,
+    "doi": "10.1038/s41467-021-27529-5",
+    "venue": "Nature Communications",
+    "authors": [
+      "Bin Xue",
+      "Jie Gu",
+      "Lan Li",
+      "Wenting Yu",
+      "Sheng Yin",
+      "Meng Qin",
+      "Qing Jiang",
+      "Wei Wang",
+      "Yi Cao"
+    ],
+    "volume": "12",
+    "issue": "1",
+    "pages": "7156",
+    "end_page": "7156",
+    "type": "article"
+  },
+  {
+    "title": "Recent advances in biodegradable polymers for sustainable applications",
+    "year": 2022,
+    "doi": "10.1038/s41529-022-00277-7",
+    "venue": "npj Materials Degradation",
+    "authors": [
+      "Aya Samir",
+      "Fatma H. Ashour",
+      "A. A. Abdel Hakim",
+      "M. Bassyouni"
+    ],
+    "volume": "6",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Implication of Surface Properties, Bacterial Motility, and Hydrodynamic Conditions on Bacterial Surface Sensing and Their Initial Adhesion",
+    "year": 2021,
+    "doi": "10.3389/fbioe.2021.643722",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "Sherry Li Zheng",
+      "Marwa Bawazir",
+      "Atul Dhall",
+      "Hye‐Eun Kim",
+      "Le He",
+      "Joseph Heo",
+      "Geelsu Hwang"
+    ],
+    "volume": "9",
+    "issue": null,
+    "pages": "643722",
+    "end_page": "643722",
+    "type": "article"
+  },
+  {
+    "title": "Bio-Inspired Muco-Adhesive Polymers for Drug Delivery Applications",
+    "year": 2022,
+    "doi": "10.3390/polym14245459",
+    "venue": "Polymers",
+    "authors": [
+      "Zina Jawadi",
+      "Christine Yang",
+      "Ziyad S. Haidar",
+      "Peter L. Santa Maria",
+      "Solange Massa"
+    ],
+    "volume": "14",
+    "issue": "24",
+    "pages": "5459",
+    "end_page": "5459",
+    "type": "article"
+  },
+  {
+    "title": "Natural and Synthetic Polymers for Biomedical and Environmental Applications",
+    "year": 2024,
+    "doi": "10.3390/polym16081159",
+    "venue": "Polymers",
+    "authors": [
+      "Galina Satchanska",
+      "Slavena Davidova",
+      "Petar Petrov"
+    ],
+    "volume": "16",
+    "issue": "8",
+    "pages": "1159",
+    "end_page": "1159",
+    "type": "article"
+  },
+  {
+    "title": "Polymeric membranes for CO2 separation and capture",
+    "year": 2021,
+    "doi": "10.1016/j.memsci.2021.119244",
+    "venue": "Journal of Membrane Science",
+    "authors": [
+      "Yang Han",
+      "W.S. Winston Ho"
+    ],
+    "volume": "628",
+    "issue": null,
+    "pages": "119244",
+    "end_page": "119244",
+    "type": "article"
+  },
+  {
+    "title": "Blue-ringed octopus-inspired microneedle patch for robust tissue surface adhesion and active injection drug delivery",
+    "year": 2023,
+    "doi": "10.1126/sciadv.adh2213",
+    "venue": "Science Advances",
+    "authors": [
+      "Zhou Zhu",
+      "Jian Wang",
+      "Xibo Pei",
+      "Junyu Chen",
+      "Xinwei Wei",
+      "Yanhua Liu",
+      "Pengcheng Xia",
+      "Qianbing Wan",
+      "Zhen Gu",
+      "Yong He"
+    ],
+    "volume": "9",
+    "issue": "25",
+    "pages": "eadh2213",
+    "end_page": "eadh2213",
+    "type": "article"
+  },
+  {
+    "title": "Solution-processable, soft, self-adhesive, and conductive polymer composites for soft electronics",
+    "year": 2022,
+    "doi": "10.1038/s41467-022-28027-y",
+    "venue": "Nature Communications",
+    "authors": [
+      "Peng Tan",
+      "Haifei Wang",
+      "Furui Xiao",
+      "Xi Lu",
+      "Wenhui Shang",
+      "Xiaobo Deng",
+      "Huafeng Song",
+      "Ziyao Xu",
+      "Junfeng Cao",
+      "Tiansheng Gan",
+      "Ben Wang",
+      "Xuechang Zhou"
+    ],
+    "volume": "13",
+    "issue": "1",
+    "pages": "358",
+    "end_page": "358",
+    "type": "article"
+  },
+  {
+    "title": "Bio-Inspired Nanomaterials for Micro/Nanodevices: A New Era in Biomedical Applications",
+    "year": 2023,
+    "doi": "10.3390/mi14091786",
+    "venue": "Micromachines",
+    "authors": [
+      "Mohammad Harun‐Ur‐Rashid",
+      "Israt Jahan",
+      "Tahmina Foyez",
+      "Abu Bin Imran"
+    ],
+    "volume": "14",
+    "issue": "9",
+    "pages": "1786",
+    "end_page": "1786",
+    "type": "article"
+  },
+  {
+    "title": "Design Challenges in Polymeric Scaffolds for Tissue Engineering",
+    "year": 2021,
+    "doi": "10.3389/fbioe.2021.617141",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "Maria I. Echeverria Molina",
+      "Katerina G. Malollari",
+      "K. Komvopoulos"
+    ],
+    "volume": "9",
+    "issue": null,
+    "pages": "617141",
+    "end_page": "617141",
+    "type": "article"
+  },
+  {
+    "title": "Recent progress in polymer hydrogel bioadhesives",
+    "year": 2021,
+    "doi": "10.1002/pol.20210249",
+    "venue": "Journal of Polymer Science",
+    "authors": [
+      "Xinjie Pei",
+      "Jintao Wang",
+      "Yang Cong",
+      "Jun Fu"
+    ],
+    "volume": "59",
+    "issue": "13",
+    "pages": "1312",
+    "end_page": "1337",
+    "type": "article"
+  },
+  {
+    "title": "Bio‐inspired Protein‐Based and Activatable Adhesion Systems",
+    "year": 2023,
+    "doi": "10.1002/adfm.202303609",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Christina Heinritz",
+      "Xuen J. Ng",
+      "Thomas Scheibel"
+    ],
+    "volume": "34",
+    "issue": "35",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Recent progress in bio-inspired macrostructure array materials with special wettability—from surface engineering to functional applications",
+    "year": 2023,
+    "doi": "10.1088/2631-7990/ad0471",
+    "venue": "International Journal of Extreme Manufacturing",
+    "authors": [
+      "Zhongxu Lian",
+      "Jianhui Zhou",
+      "Wanfei Ren",
+      "Faze Chen",
+      "Jinkai Xu",
+      "Yanling Tian",
+      "Huadong Yu"
+    ],
+    "volume": "6",
+    "issue": "1",
+    "pages": "012008",
+    "end_page": "012008",
+    "type": "article"
+  },
+  {
+    "title": "A sandcastle worm-inspired strategy to functionalize wet hydrogels",
+    "year": 2021,
+    "doi": "10.1038/s41467-021-26659-0",
+    "venue": "Nature Communications",
+    "authors": [
+      "Donghui Zhang",
+      "Jingjing Liu",
+      "Qi Chen",
+      "Weinan Jiang",
+      "Yibing Wang",
+      "Jiayang Xie",
+      "Kaiqian Ma",
+      "Chao Shi",
+      "Haodong Zhang",
+      "Minzhang Chen",
+      "Jianglin Wan",
+      "Pengcheng Ma",
+      "Jingcheng Zou",
+      "Wenjing Zhang",
+      "Feng Zhou"
+    ],
+    "volume": "12",
+    "issue": "1",
+    "pages": "6331",
+    "end_page": "6331",
+    "type": "article"
+  },
+  {
+    "title": "Stimuli-responsive surfaces for switchable wettability and adhesion",
+    "year": 2021,
+    "doi": "10.1098/rsif.2021.0162",
+    "venue": "Journal of The Royal Society Interface",
+    "authors": [
+      "Chang Li",
+      "Ming Li",
+      "Zhongshi Ni",
+      "Qingwen Guan",
+      "B.R.K. Blackman",
+      "Eduardo Saiz"
+    ],
+    "volume": "18",
+    "issue": "179",
+    "pages": "20210162",
+    "end_page": "20210162",
+    "type": "article"
+  },
+  {
+    "title": "Bio‐inspired adhesive hydrogel for biomedicine—principles and design strategies",
+    "year": 2022,
+    "doi": "10.1002/smmd.20220024",
+    "venue": "Smart Medicine",
+    "authors": [
+      "Wenzhao Li",
+      "Xinyuan Yang",
+      "Puxiang Lai",
+      "Luoran Shang"
+    ],
+    "volume": "1",
+    "issue": "1",
+    "pages": "e20220024",
+    "end_page": "e20220024",
+    "type": "article"
+  },
+  {
+    "title": "Bio-based and bio-inspired adhesives from animals and plants for biomedical applications",
+    "year": 2022,
+    "doi": "10.1016/j.mtbio.2022.100203",
+    "venue": "Materials Today Bio",
+    "authors": [
+      "Theresa Lutz",
+      "Ceren Kımna",
+      "Angela Casini",
+      "Oliver Lieleg"
+    ],
+    "volume": "13",
+    "issue": null,
+    "pages": "100203",
+    "end_page": "100203",
+    "type": "article"
+  },
+  {
+    "title": "Switching (bio-) adhesion and friction in liquid by stimulus responsive polymer coatings",
+    "year": 2021,
+    "doi": "10.1016/j.eurpolymj.2021.110298",
+    "venue": "European Polymer Journal",
+    "authors": [
+      "Yunlong Yu",
+      "Maria Brió Pérez",
+      "Cong Cao",
+      "Sissi de Beer"
+    ],
+    "volume": "147",
+    "issue": null,
+    "pages": "110298",
+    "end_page": "110298",
+    "type": "article"
+  },
+  {
+    "title": "Sculpting Bio‐Inspired Surface Textures: An Adhesive Janus Periosteum",
+    "year": 2021,
+    "doi": "10.1002/adfm.202104636",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Yuhe Yang",
+      "Tianpeng Xu",
+      "Ho Pan Bei",
+      "Yuanjin Zhao",
+      "Xin Zhao"
+    ],
+    "volume": "31",
+    "issue": "37",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Mussel‐Inspired, Underwater Self‐Healing Ionoelastomers Based on α‐Lipoic Acid for Iontronics",
+    "year": 2023,
+    "doi": "10.1002/smll.202207334",
+    "venue": "Small",
+    "authors": [
+      "Jiaxiang Gao",
+      "Qing Zhang",
+      "Bo Wu",
+      "Xiaodan Gao",
+      "Zhengyuan Liu",
+      "Haoyu Yang",
+      "Jikang Yuan",
+      "Jijun Huang"
+    ],
+    "volume": "19",
+    "issue": "21",
+    "pages": "e2207334",
+    "end_page": "e2207334",
+    "type": "article"
+  },
+  {
+    "title": "Swarming magnetic nanorobots bio-interfaced by heparinoid-polymer brushes for in vivo safe synergistic thrombolysis",
+    "year": 2023,
+    "doi": "10.1126/sciadv.adk7251",
+    "venue": "Science Advances",
+    "authors": [
+      "Manyi Yang",
+      "Yaoyu Zhang",
+      "Fangzhi Mou",
+      "Chuan Cao",
+      "Lingxia Yu",
+      "Zhi Li",
+      "Jianguo Guan"
+    ],
+    "volume": "9",
+    "issue": "48",
+    "pages": "eadk7251",
+    "end_page": "eadk7251",
+    "type": "article"
+  },
+  {
+    "title": "A mussel-inspired wet-adhesion hydrogel with hemostasis and local anti-inflammation for managing the development of acute wounds",
+    "year": 2021,
+    "doi": "10.1016/j.matdes.2021.110347",
+    "venue": "Materials & Design",
+    "authors": [
+      "Jieyu Zhu",
+      "Kaijing Zhong",
+      "Yuan Zong",
+      "Shunhua Wang",
+      "Huiyu Yang",
+      "Zhen Li",
+      "Siying Tao",
+      "Li‐Zhong Sun",
+      "Jiaojiao Yang",
+      "Jiyao Li"
+    ],
+    "volume": "213",
+    "issue": null,
+    "pages": "110347",
+    "end_page": "110347",
+    "type": "article"
+  },
+  {
+    "title": "Tough, Waterproofing, and Sustainable Bio‐Adhesive Inspired by the Dragonfly Wing",
+    "year": 2024,
+    "doi": "10.1002/adfm.202406557",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Ying Zhou",
+      "Jing Luo",
+      "Qiumei Jing",
+      "Shengbo Ge",
+      "Sherry Chen",
+      "Zhanhu Guo",
+      "Jianzhang Li",
+      "Zixiao Liu",
+      "Ping He",
+      "Ximin He",
+      "Ben Bin Xu"
+    ],
+    "volume": "34",
+    "issue": "42",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Ultrastrong underwater adhesion on diverse substrates using non-canonical phenolic groups",
+    "year": 2022,
+    "doi": "10.1038/s41467-022-29427-w",
+    "venue": "Nature Communications",
+    "authors": [
+      "Bohan Cheng",
+      "Jinhong Yu",
+      "Toma Arisawa",
+      "Koki Hayashi",
+      "Joseph J. Richardson",
+      "Yasushi Shibuta",
+      "Hirotaka Ejima"
+    ],
+    "volume": "13",
+    "issue": "1",
+    "pages": "1892",
+    "end_page": "1892",
+    "type": "article"
+  },
+  {
+    "title": "Post-Processing of 3D-Printed Polymers",
+    "year": 2021,
+    "doi": "10.3390/technologies9030061",
+    "venue": "Technologies",
+    "authors": [
+      "John Ryan C. Dizon",
+      "Ciara Catherine L. Gache",
+      "Honelly Mae S. Cascolan",
+      "Lina T. Cancino",
+      "Rigoberto C. Advíncula"
+    ],
+    "volume": "9",
+    "issue": "3",
+    "pages": "61",
+    "end_page": "61",
+    "type": "article"
+  },
+  {
+    "title": "Ultra-strong bio-glue from genetically engineered polypeptides",
+    "year": 2021,
+    "doi": "10.1038/s41467-021-23117-9",
+    "venue": "Nature Communications",
+    "authors": [
+      "Chao Ma",
+      "Jing Sun",
+      "Bo Li",
+      "Yang Feng",
+      "Yao Sun",
+      "Li Xiang",
+      "Baiheng Wu",
+      "Lingling Xiao",
+      "Baimei Liu",
+      "Vladislav S. Petrovskii",
+      "Bin Liu",
+      "Jinrui Zhang",
+      "Zili Wang",
+      "Hongyan Li",
+      "Lei Zhang"
+    ],
+    "volume": "12",
+    "issue": "1",
+    "pages": "3613",
+    "end_page": "3613",
+    "type": "article"
+  },
+  {
+    "title": "Bio-inspired water resistant and fast multi-responsive Janus actuator assembled by cellulose nanopaper and graphene with lignin adhesion",
+    "year": 2021,
+    "doi": "10.1016/j.cej.2021.133672",
+    "venue": "Chemical Engineering Journal",
+    "authors": [
+      "Xinpeng Che",
+      "Meiyan Wu",
+      "Guang Yu",
+      "Chao Liu",
+      "Huanfei Xu",
+      "Bin Li",
+      "Chaoxu Li"
+    ],
+    "volume": "433",
+    "issue": null,
+    "pages": "133672",
+    "end_page": "133672",
+    "type": "article"
+  },
+  {
+    "title": "Physics-informed machine learning",
+    "year": 2021,
+    "doi": "10.1038/s42254-021-00314-5",
+    "venue": "Nature Reviews Physics",
+    "authors": [
+      "George Em Karniadakis",
+      "Ioannis G. Kevrekidis",
+      "Lu Lu",
+      "Paris Perdikaris",
+      "Sifan Wang",
+      "Liu Yang"
+    ],
+    "volume": "3",
+    "issue": "6",
+    "pages": "422",
+    "end_page": "440",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning and deep learning",
+    "year": 2021,
+    "doi": "10.1007/s12525-021-00475-2",
+    "venue": "Electronic Markets",
+    "authors": [
+      "Christian Janiesch",
+      "Patrick Zschech",
+      "Kai Heinrich"
+    ],
+    "volume": "31",
+    "issue": "3",
+    "pages": "685",
+    "end_page": "695",
+    "type": "article"
+  },
+  {
+    "title": "Small data machine learning in materials science",
+    "year": 2023,
+    "doi": "10.1038/s41524-023-01000-z",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Pengcheng Xu",
+      "Xiaobo Ji",
+      "Minjie Li",
+      "Wencong Lu"
+    ],
+    "volume": "9",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions",
+    "year": 2021,
+    "doi": "10.1186/s40537-021-00444-8",
+    "venue": "Journal Of Big Data",
+    "authors": [
+      "Laith Alzubaidi",
+      "Jinglan Zhang",
+      "Amjad J. Humaidi",
+      "Ayad Q. Al-Dujaili",
+      "Ye Duan",
+      "Omran Al-Shamma",
+      "José Santamaría",
+      "Mohammed A. Fadhel",
+      "Muthana Al‐Amidie",
+      "Laith Farhan"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "53",
+    "end_page": "53",
+    "type": "article"
+  },
+  {
+    "title": "LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales",
+    "year": 2021,
+    "doi": "10.1016/j.cpc.2021.108171",
+    "venue": "Computer Physics Communications",
+    "authors": [
+      "Aidan P. Thompson",
+      "Hasan Metin Aktulga",
+      "Richard A. Berger",
+      "Dan Bolintineanu",
+      "William M. Brown",
+      "Paul Crozier",
+      "Pieter J. in ’t Veld",
+      "Axel Kohlmeyer",
+      "Stan Moore",
+      "Trung Dac Nguyen",
+      "Ray Shan",
+      "Mark J. Stevens",
+      "Julien Tranchida",
+      "Christian Robert Trott",
+      "Steven J. Plimpton"
+    ],
+    "volume": "271",
+    "issue": null,
+    "pages": "108171",
+    "end_page": "108171",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning–enabled high-entropy alloy discovery",
+    "year": 2022,
+    "doi": "10.1126/science.abo4940",
+    "venue": "Science",
+    "authors": [
+      "Ziyuan Rao",
+      "Po‐Yen Tung",
+      "Ruiwen Xie",
+      "Ye Wei",
+      "Hongbin Zhang",
+      "Alberto Ferrari",
+      "T.P.C. Klaver",
+      "Fritz Körmann",
+      "Prithiv Thoudden Sukumar",
+      "Alisson Kwiatkowski da Silva",
+      "Yao Chen",
+      "Zhiming Li",
+      "Dirk Ponge",
+      "Jörg Neugebauer",
+      "Oliver Gutfleisch"
+    ],
+    "volume": "378",
+    "issue": "6615",
+    "pages": "78",
+    "end_page": "85",
+    "type": "article"
+  },
+  {
+    "title": "Scientific Machine Learning Through Physics–Informed Neural Networks: Where we are and What’s Next",
+    "year": 2022,
+    "doi": "10.1007/s10915-022-01939-z",
+    "venue": "Journal of Scientific Computing",
+    "authors": [
+      "Salvatore Cuomo",
+      "Vincenzo Schiano Di Cola",
+      "Fabio Giampaolo",
+      "Gianluigi Rozza",
+      "Maziar Raissi",
+      "Francesco Piccialli"
+    ],
+    "volume": "92",
+    "issue": "3",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Dictionary learning for integrative, multimodal and scalable single-cell analysis",
+    "year": 2023,
+    "doi": "10.1038/s41587-023-01767-y",
+    "venue": "Nature Biotechnology",
+    "authors": [
+      "Yuhan Hao",
+      "Tim Stuart",
+      "Madeline H. Kowalski",
+      "Saket Choudhary",
+      "Paul Hoffman",
+      "Austin Hartman",
+      "Avi Srivastava",
+      "Gesmira Molla",
+      "Shaista Madad",
+      "Carlos Fernandez‐Granda",
+      "Rahul Satija"
+    ],
+    "volume": "42",
+    "issue": "2",
+    "pages": "293",
+    "end_page": "304",
+    "type": "article"
+  },
+  {
+    "title": "Scaling deep learning for materials discovery",
+    "year": 2023,
+    "doi": "10.1038/s41586-023-06735-9",
+    "venue": "Nature",
+    "authors": [
+      "Amil Merchant",
+      "Simon Batzner",
+      "Samuel S. Schoenholz",
+      "Muratahan Aykol",
+      "Gowoon Cheon",
+      "Ekin D. Cubuk"
+    ],
+    "volume": "624",
+    "issue": "7990",
+    "pages": "80",
+    "end_page": "85",
+    "type": "article"
+  },
+  {
+    "title": "Tackling Climate Change with Machine Learning",
+    "year": 2022,
+    "doi": "10.1145/3485128",
+    "venue": "OPUS 4 (Zuse Institute Berlin)",
+    "authors": [
+      "Lynn H. Kaack",
+      "David Rolnick",
+      "Priya L. Donti",
+      "Kelly Kochanski",
+      "Alexandre Lacoste",
+      "Kris Sankaran",
+      "Andrew Slavin Ross",
+      "Nikola Milojevic-Dupont",
+      "Natasha Jaques",
+      "Anna Waldman‐Brown",
+      "Alexandra Sasha Luccioni",
+      "Tegan Maharaj",
+      "Evan David Sherwin",
+      "Mukkavilli, Karthik",
+      "Konrad P. Körding"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning for perovskite materials design and discovery",
+    "year": 2021,
+    "doi": "10.1038/s41524-021-00495-8",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Qiuling Tao",
+      "Pengcheng Xu",
+      "Minjie Li",
+      "Wencong Lu"
+    ],
+    "volume": "7",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Human-in-the-loop machine learning: a state of the art",
+    "year": 2022,
+    "doi": "10.1007/s10462-022-10246-w",
+    "venue": "Artificial Intelligence Review",
+    "authors": [
+      "Eduardo Mosqueira-Rey",
+      "Elena Hernández-Pereira",
+      "David Alonso-Ríos",
+      "José Bobes-Bascarán",
+      "Ángel Fernández-Leal"
+    ],
+    "volume": "56",
+    "issue": "4",
+    "pages": "3005",
+    "end_page": "3054",
+    "type": "article"
+  },
+  {
+    "title": "Perspectives in machine learning for wildlife conservation",
+    "year": 2022,
+    "doi": "10.1038/s41467-022-27980-y",
+    "venue": "Nature Communications",
+    "authors": [
+      "Devis Tuia",
+      "Benjamin Kellenberger",
+      "Sara Beery",
+      "Blair R. Costelloe",
+      "Silvia Zuffi",
+      "Benjamin Risse",
+      "Alexander Mathis",
+      "Mackenzie Weygandt Mathis",
+      "Frank van Langevelde",
+      "Tilo Burghardt",
+      "Roland Kays",
+      "Holger Klinck",
+      "Martin Wikelski",
+      "Iain D. Couzin",
+      "Grant Van Horn"
+    ],
+    "volume": "13",
+    "issue": "1",
+    "pages": "792",
+    "end_page": "792",
+    "type": "article"
+  },
+  {
+    "title": "Informed Machine Learning - A Taxonomy and Survey of Integrating Prior Knowledge into Learning Systems",
+    "year": 2021,
+    "doi": "10.1109/tkde.2021.3079836",
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "authors": [
+      "Laura von Rueden",
+      "Sebastian Mayer",
+      "Katharina Beckh",
+      "Bogdan Georgiev",
+      "Sven Giesselbach",
+      "Raoul Heese",
+      "Birgit Kirsch",
+      "Michał Walczak",
+      "Julius Pfrommer",
+      "Annika Pick",
+      "Rajkumar Ramamurthy",
+      "Jochen Garcke",
+      "Christian Bauckhage",
+      "Jannis Schuecker"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": "1",
+    "end_page": "1",
+    "type": "article"
+  },
+  {
+    "title": "Explainable machine learning in materials science",
+    "year": 2022,
+    "doi": "10.1038/s41524-022-00884-7",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Xiaoting Zhong",
+      "Brian Gallagher",
+      "Shusen Liu",
+      "Bhavya Kailkhura",
+      "Anna M. Hiszpanski",
+      "T. Yong-Jin Han"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Recent advances and applications of deep learning methods in materials science",
+    "year": 2022,
+    "doi": "10.1038/s41524-022-00734-6",
+    "venue": "npj Computational Materials",
+    "authors": [
+      "Kamal Choudhary",
+      "Brian DeCost",
+      "Chi Chen",
+      "Anubhav Jain",
+      "Francesca Tavazza",
+      "Ryan Cohn",
+      "Cheol Woo Park",
+      "Alok Choudhary",
+      "Ankit Agrawal",
+      "Simon J. L. Billinge",
+      "Elizabeth A. Holm",
+      "Shyue Ping Ong",
+      "Chris Wolverton"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Interpretable machine learning: Fundamental principles and 10 grand challenges",
+    "year": 2022,
+    "doi": "10.1214/21-ss133",
+    "venue": "Statistics Surveys",
+    "authors": [
+      "Cynthia Rudin",
+      "Chaofan Chen",
+      "Zhi Chen",
+      "Haiyang Huang",
+      "Lesia Semenova",
+      "Chudi Zhong"
+    ],
+    "volume": "16",
+    "issue": "none",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Machine-learning interatomic potentials for materials science",
+    "year": 2021,
+    "doi": "10.1016/j.actamat.2021.116980",
+    "venue": "Acta Materialia",
+    "authors": [
+      "Y. Mishin"
+    ],
+    "volume": "214",
+    "issue": null,
+    "pages": "116980",
+    "end_page": "116980",
+    "type": "article"
+  },
+  {
+    "title": "Applications of Machine Learning in Human Microbiome Studies: A Review on Feature Selection, Biomarker Identification, Disease Prediction and Treatment",
+    "year": 2021,
+    "doi": "10.3389/fmicb.2021.634511",
+    "venue": "Frontiers in Microbiology",
+    "authors": [
+      "Laura Judith Marcos-Zambrano",
+      "Kanita Karađuzović-Hadžiabdić",
+      "Tatjana Lončar-Turukalo",
+      "Piotr Przymus",
+      "Vladimir Trajkovik",
+      "Oliver Aasmets",
+      "Magali Berland",
+      "Aleksandra Gruca",
+      "Jasminka Hasic",
+      "Karel Hron",
+      "Thomas Klammsteiner",
+      "Mikhail Kolev",
+      "Leo Lahti",
+      "Marta B. Lopes",
+      "Vı́ctor Moreno"
+    ],
+    "volume": "12",
+    "issue": null,
+    "pages": "634511",
+    "end_page": "634511",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning in polymer informatics",
+    "year": 2021,
+    "doi": "10.1002/inf2.12167",
+    "venue": "InfoMat",
+    "authors": [
+      "Wuxin Sha",
+      "Yan Li",
+      "Shun Tang",
+      "Jie Tian",
+      "Yuming Zhao",
+      "Yaqing Guo",
+      "Weixin Zhang",
+      "Xinfang Zhang",
+      "Songfeng Lu",
+      "Yuan‐Cheng Cao",
+      "Shijie Cheng"
+    ],
+    "volume": "3",
+    "issue": "4",
+    "pages": "353",
+    "end_page": "361",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning for a sustainable energy future",
+    "year": 2022,
+    "doi": "10.1038/s41578-022-00490-5",
+    "venue": "Nature Reviews Materials",
+    "authors": [
+      "Zhenpeng Yao",
+      "Yanwei Lum",
+      "Andrew Johnston",
+      "L.M. Mejía-Mendoza",
+      "Xin Zhou",
+      "Yonggang Wen",
+      "Alán Aspuru‐Guzik",
+      "Edward H. Sargent",
+      "Zhi Wei Seh"
+    ],
+    "volume": "8",
+    "issue": "3",
+    "pages": "202",
+    "end_page": "215",
+    "type": "article"
+  },
+  {
+    "title": "Influence of Data Splitting on Performance of Machine Learning Models in Prediction of Shear Strength of Soil",
+    "year": 2021,
+    "doi": "10.1155/2021/4832864",
+    "venue": "Mathematical Problems in Engineering",
+    "authors": [
+      "Quang Hung Nguyen",
+      "Hai‐Bang Ly",
+      "Lanh Si Ho",
+      "Nadhir Al‐Ansari",
+      "Hiep Van Le",
+      "Van Quan Tran",
+      "Indra Prakash",
+      "Binh Thai Pham"
+    ],
+    "volume": "2021",
+    "issue": null,
+    "pages": "1",
+    "end_page": "15",
+    "type": "article"
+  },
+  {
+    "title": "Multi-omic machine learning predictor of breast cancer therapy response",
+    "year": 2021,
+    "doi": "10.1038/s41586-021-04278-5",
+    "venue": "Nature",
+    "authors": [
+      "Stephen‐John Sammut",
+      "Mireia Crispin‐Ortuzar",
+      "Suet‐Feung Chin",
+      "Elena Provenzano",
+      "Helen Bardwell",
+      "Wenxin Ma",
+      "Wei Cope",
+      "A. Dariush",
+      "Sarah‐Jane Dawson",
+      "Jean Abraham",
+      "Janet Dunn",
+      "Louise Hiller",
+      "Jeremy Thomas",
+      "David Cameron",
+      "John M.S. Bartlett"
+    ],
+    "volume": "601",
+    "issue": "7894",
+    "pages": "623",
+    "end_page": "629",
+    "type": "article"
+  },
+  {
+    "title": "Prediction of concrete strengths enabled by missing data imputation and interpretable machine learning",
+    "year": 2022,
+    "doi": "10.1016/j.cemconcomp.2022.104414",
+    "venue": "Cement and Concrete Composites",
+    "authors": [
+      "Gideon A. Lyngdoh",
+      "Mohd Zaki",
+      "N. M. Anoop Krishnan",
+      "Sumanta Das"
+    ],
+    "volume": "128",
+    "issue": null,
+    "pages": "104414",
+    "end_page": "104414",
+    "type": "article"
+  },
+  {
+    "title": "Applied Machine Learning for Prediction of CO<sub>2</sub> Adsorption on Biomass Waste-Derived Porous Carbons",
+    "year": 2021,
+    "doi": "10.1021/acs.est.1c01849",
+    "venue": "Environmental Science & Technology",
+    "authors": [
+      "Xiangzhou Yuan",
+      "Manu Suvarna",
+      "Sean Low",
+      "Pavani Dulanja Dissanayake",
+      "Ki Bong Lee",
+      "Jie Li",
+      "Xiaonan Wang",
+      "Yong Sik Ok"
+    ],
+    "volume": "55",
+    "issue": "17",
+    "pages": "11925",
+    "end_page": "11936",
+    "type": "article"
+  },
+  {
+    "title": "Integrating Scientific Knowledge with Machine Learning for Engineering and Environmental Systems",
+    "year": 2022,
+    "doi": "10.1145/3514228",
+    "venue": "ACM Computing Surveys",
+    "authors": [
+      "Jared Willard",
+      "Xiaowei Jia",
+      "Shaoming Xu",
+      "Michael Steinbach",
+      "Vipin Kumar"
+    ],
+    "volume": "55",
+    "issue": "4",
+    "pages": "1",
+    "end_page": "37",
+    "type": "article"
+  },
+  {
+    "title": "Representations of Materials for Machine Learning",
+    "year": 2023,
+    "doi": "10.1146/annurev-matsci-080921-085947",
+    "venue": "Annual Review of Materials Research",
+    "authors": [
+      "James Damewood",
+      "Jessica Karaguesian",
+      "Jaclyn R. Lunger",
+      "Aik Rui Tan",
+      "Mingrou Xie",
+      "Jiayu Peng",
+      "Rafael Gómez‐Bombarelli"
+    ],
+    "volume": "53",
+    "issue": "1",
+    "pages": "399",
+    "end_page": "426",
+    "type": "article"
+  },
+  {
+    "title": "Chemprop: A Machine Learning Package for Chemical Property Prediction",
+    "year": 2023,
+    "doi": "10.1021/acs.jcim.3c01250",
+    "venue": "Journal of Chemical Information and Modeling",
+    "authors": [
+      "Esther Heid",
+      "Kevin P. Greenman",
+      "Yunsie Chung",
+      "Shih‐Cheng Li",
+      "David Graff",
+      "Florence H. Vermeire",
+      "Haoyang Wu",
+      "William H. Green",
+      "Charles J. McGill"
+    ],
+    "volume": "64",
+    "issue": "1",
+    "pages": "9",
+    "end_page": "17",
+    "type": "article"
+  },
+  {
+    "title": "Fairness in Machine Learning: A Survey",
+    "year": 2023,
+    "doi": "10.1145/3616865",
+    "venue": "ACM Computing Surveys",
+    "authors": [
+      "Simon Caton",
+      "Christian Haas"
+    ],
+    "volume": "56",
+    "issue": "7",
+    "pages": "1",
+    "end_page": "38",
+    "type": "article"
+  },
+  {
+    "title": "Membership Inference Attacks on Machine Learning: A Survey",
+    "year": 2022,
+    "doi": "10.1145/3523273",
+    "venue": "ACM Computing Surveys",
+    "authors": [
+      "Hongsheng Hu",
+      "Zoran Salčić",
+      "Lichao Sun",
+      "Gillian Dobbie",
+      "Philip S. Yu",
+      "Xuyun Zhang"
+    ],
+    "volume": "54",
+    "issue": "11s",
+    "pages": "1",
+    "end_page": "37",
+    "type": "article"
+  },
+  {
+    "title": "Ensemble deep learning: A review",
+    "year": 2022,
+    "doi": "10.1016/j.engappai.2022.105151",
+    "venue": "Engineering Applications of Artificial Intelligence",
+    "authors": [
+      "M. A. Ganaie",
+      "Minghui Hu",
+      "A. K. Malik",
+      "M. Tanveer",
+      "Ponnuthurai Nagaratnam Suganthan"
+    ],
+    "volume": "115",
+    "issue": null,
+    "pages": "105151",
+    "end_page": "105151",
+    "type": "article"
+  },
+  {
+    "title": "Accurate predictions on small data with a tabular foundation model",
+    "year": 2025,
+    "doi": "10.1038/s41586-024-08328-6",
+    "venue": "Nature",
+    "authors": [
+      "Noah Hollmann",
+      "Samuel Müller",
+      "Lennart Purucker",
+      "Arjun Krishnakumar",
+      "Max Körfer",
+      "Shi Bin Hoo",
+      "Robin Tibor Schirrmeister",
+      "Frank Hutter"
+    ],
+    "volume": "637",
+    "issue": "8045",
+    "pages": "319",
+    "end_page": "326",
+    "type": "article"
+  },
+  {
+    "title": "Deep Learning: A Comprehensive Overview on Techniques, Taxonomy, Applications and Research Directions",
+    "year": 2021,
+    "doi": "10.1007/s42979-021-00815-1",
+    "venue": "SN Computer Science",
+    "authors": [
+      "Iqbal H. Sarker"
+    ],
+    "volume": "2",
+    "issue": "6",
+    "pages": "420",
+    "end_page": "420",
+    "type": "article"
+  },
+  {
+    "title": "Machine Learning: Algorithms, Real-World Applications and Research Directions",
+    "year": 2021,
+    "doi": "10.1007/s42979-021-00592-x",
+    "venue": "SN Computer Science",
+    "authors": [
+      "Iqbal H. Sarker"
+    ],
+    "volume": "2",
+    "issue": "3",
+    "pages": "160",
+    "end_page": "160",
+    "type": "article"
+  },
+  {
+    "title": "A review of uncertainty quantification in deep learning: Techniques, applications and challenges",
+    "year": 2021,
+    "doi": "10.1016/j.inffus.2021.05.008",
+    "venue": "Information Fusion",
+    "authors": [
+      "Moloud Abdar",
+      "Farhad Pourpanah",
+      "Sadiq Hussain",
+      "Dana Rezazadegan",
+      "Li Liu",
+      "Mohammad Ghavamzadeh",
+      "Paul Fieguth",
+      "Xiaochun Cao",
+      "Abbas Khosravi",
+      "U. Rajendra Acharya",
+      "Vladimir Makarenkov",
+      "Saeid Nahavandi"
+    ],
+    "volume": "76",
+    "issue": null,
+    "pages": "243",
+    "end_page": "297",
+    "type": "article"
+  },
+  {
+    "title": "Converting tabular data into images for deep learning with convolutional neural networks",
+    "year": 2021,
+    "doi": "10.1038/s41598-021-90923-y",
+    "venue": "Scientific Reports",
+    "authors": [
+      "Yitan Zhu",
+      "Thomas Brettin",
+      "Fangfang Xia",
+      "Alexander Partin",
+      "Maulik Shukla",
+      "Hyunseung Yoo",
+      "Yvonne A. Evrard",
+      "James H. Doroshow",
+      "Rick Stevens"
+    ],
+    "volume": "11",
+    "issue": "1",
+    "pages": "11325",
+    "end_page": "11325",
+    "type": "article"
+  },
+  {
+    "title": "Tabular data: Deep learning is not all you need",
+    "year": 2021,
+    "doi": "10.1016/j.inffus.2021.11.011",
+    "venue": "Information Fusion",
+    "authors": [
+      "Ravid Shwartz-Ziv",
+      "Amitai Armon"
+    ],
+    "volume": "81",
+    "issue": null,
+    "pages": "84",
+    "end_page": "90",
+    "type": "article"
+  },
+  {
+    "title": "Deep-PK: deep learning for small molecule pharmacokinetic and toxicity prediction",
+    "year": 2024,
+    "doi": "10.1093/nar/gkae254",
+    "venue": "Nucleic Acids Research",
+    "authors": [
+      "Yoochan Myung",
+      "Alex G. C. de Sá",
+      "David B. Ascher"
+    ],
+    "volume": "52",
+    "issue": "W1",
+    "pages": "W469",
+    "end_page": "W475",
+    "type": "article"
+  },
+  {
+    "title": "The effects of data quality on machine learning performance on tabular data",
+    "year": 2025,
+    "doi": "10.1016/j.is.2025.102549",
+    "venue": "Information Systems",
+    "authors": [
+      "Sedir Mohammed",
+      "Lukas Budach",
+      "Moritz Feuerpfeil",
+      "Nina Ihde",
+      "Andrea Nathansen",
+      "Nele Noack",
+      "Hendrik Patzlaff",
+      "Felix Naumann",
+      "Hazar Harmouch"
+    ],
+    "volume": "132",
+    "issue": null,
+    "pages": "102549",
+    "end_page": "102549",
+    "type": "article"
+  },
+  {
+    "title": "A survey of deep meta-learning",
+    "year": 2021,
+    "doi": "10.1007/s10462-021-10004-4",
+    "venue": "Artificial Intelligence Review",
+    "authors": [
+      "Mike Huisman",
+      "Jan N. van Rijn",
+      "Aske Plaat"
+    ],
+    "volume": "54",
+    "issue": "6",
+    "pages": "4483",
+    "end_page": "4541",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning and deep learning applications in microbiome research",
+    "year": 2022,
+    "doi": "10.1038/s43705-022-00182-9",
+    "venue": "ISME Communications",
+    "authors": [
+      "Ricardo Hernández Medina",
+      "Svetlana Kutuzova",
+      "Knud Nor Nielsen",
+      "Joachim Johansen",
+      "Lars Hestbjerg Hansen",
+      "Mads Eggert Nielsen",
+      "Simon Rasmussen"
+    ],
+    "volume": "2",
+    "issue": "1",
+    "pages": "98",
+    "end_page": "98",
+    "type": "article"
+  },
+  {
+    "title": "Credit Card Fraud Detection Using State-of-the-Art Machine Learning and Deep Learning Algorithms",
+    "year": 2022,
+    "doi": "10.1109/access.2022.3166891",
+    "venue": "IEEE Access",
+    "authors": [
+      "Fawaz Khaled Alarfaj",
+      "Iqra Malik",
+      "Hikmat Ullah Khan",
+      "Naif Almusallam",
+      "Muhammad Ramzan",
+      "Muzamil Ahmed"
+    ],
+    "volume": "10",
+    "issue": null,
+    "pages": "39700",
+    "end_page": "39715",
+    "type": "article"
+  },
+  {
+    "title": "A review: Data pre-processing and data augmentation techniques",
+    "year": 2022,
+    "doi": "10.1016/j.gltp.2022.04.020",
+    "venue": "Global Transitions Proceedings",
+    "authors": [
+      "Kiran Kishor Maharana",
+      "Surajit Mondal",
+      "Bhushankumar Nemade"
+    ],
+    "volume": "3",
+    "issue": "1",
+    "pages": "91",
+    "end_page": "99",
+    "type": "article"
+  },
+  {
+    "title": "Explainable Deep Learning: A Field Guide for the Uninitiated",
+    "year": 2022,
+    "doi": "10.1613/jair.1.13200",
+    "venue": "Journal of Artificial Intelligence Research",
+    "authors": [
+      "Gabriëlle Ras",
+      "Ning Xie",
+      "Marcel van Gerven",
+      "Derek Doran"
+    ],
+    "volume": "73",
+    "issue": null,
+    "pages": "329",
+    "end_page": "397",
+    "type": "article"
+  },
+  {
+    "title": "Deep Learning applications for COVID-19",
+    "year": 2021,
+    "doi": "10.1186/s40537-020-00392-9",
+    "venue": "Journal Of Big Data",
+    "authors": [
+      "Connor Shorten",
+      "Taghi M. Khoshgoftaar",
+      "Borko Furht"
+    ],
+    "volume": "8",
+    "issue": "1",
+    "pages": "18",
+    "end_page": "18",
+    "type": "article"
+  },
+  {
+    "title": "Synthetic data generation for tabular health records: A systematic review",
+    "year": 2022,
+    "doi": "10.1016/j.neucom.2022.04.053",
+    "venue": "Neurocomputing",
+    "authors": [
+      "Mikel Hernandez",
+      "Gorka Epelde",
+      "Ane Alberdi",
+      "Rodrigo Cilla",
+      "Debbie Rankin"
+    ],
+    "volume": "493",
+    "issue": null,
+    "pages": "28",
+    "end_page": "45",
+    "type": "review"
+  },
+  {
+    "title": "A Survey on the Explainability of Supervised Machine Learning",
+    "year": 2021,
+    "doi": "10.1613/jair.1.12228",
+    "venue": "Journal of Artificial Intelligence Research",
+    "authors": [
+      "Nadia Burkart",
+      "Marco F. Huber"
+    ],
+    "volume": "70",
+    "issue": null,
+    "pages": "245",
+    "end_page": "317",
+    "type": "article"
+  },
+  {
+    "title": "The class imbalance problem in deep learning",
+    "year": 2022,
+    "doi": "10.1007/s10994-022-06268-8",
+    "venue": "Machine Learning",
+    "authors": [
+      "Kushankur Ghosh",
+      "Colin Bellinger",
+      "Roberto Corizzo",
+      "Paula Branco",
+      "Bartosz Krawczyk",
+      "Nathalie Japkowicz"
+    ],
+    "volume": "113",
+    "issue": "7",
+    "pages": "4845",
+    "end_page": "4901",
+    "type": "article"
+  },
+  {
+    "title": "A review and taxonomy of wind and solar energy forecasting methods based on deep learning",
+    "year": 2021,
+    "doi": "10.1016/j.egyai.2021.100060",
+    "venue": "Energy and AI",
+    "authors": [
+      "Ghadah Alkhayat",
+      "Rashid Mehmood"
+    ],
+    "volume": "4",
+    "issue": null,
+    "pages": "100060",
+    "end_page": "100060",
+    "type": "article"
+  },
+  {
+    "title": "Learning for a Robot: Deep Reinforcement Learning, Imitation Learning, Transfer Learning",
+    "year": 2021,
+    "doi": "10.3390/s21041278",
+    "venue": "Sensors",
+    "authors": [
+      "Jiang Hua",
+      "Liangcai Zeng",
+      "Gongfa Li",
+      "Zhaojie Ju"
+    ],
+    "volume": "21",
+    "issue": "4",
+    "pages": "1278",
+    "end_page": "1278",
+    "type": "article"
+  },
+  {
+    "title": "Deep learning-based approaches for multi-omics data integration and analysis",
+    "year": 2024,
+    "doi": "10.1186/s13040-024-00391-z",
+    "venue": "BioData Mining",
+    "authors": [
+      "Jenna L. Ballard",
+      "Zexuan Wang",
+      "Wenrui Li",
+      "Li Shen",
+      "Qi Long"
+    ],
+    "volume": "17",
+    "issue": "1",
+    "pages": "38",
+    "end_page": "38",
+    "type": "article"
+  },
+  {
+    "title": "scBERT as a large-scale pretrained deep language model for cell type annotation of single-cell RNA-seq data",
+    "year": 2022,
+    "doi": "10.1038/s42256-022-00534-z",
+    "venue": "Nature Machine Intelligence",
+    "authors": [
+      "Fan Yang",
+      "Wenchuan Wang",
+      "Fang Wang",
+      "Yuan Fang",
+      "Duyu Tang",
+      "Junzhou Huang",
+      "Hui Lü",
+      "Jianhua Yao"
+    ],
+    "volume": "4",
+    "issue": "10",
+    "pages": "852",
+    "end_page": "866",
+    "type": "article"
+  },
+  {
+    "title": "Deep Learning Methods for Vessel Trajectory Prediction Based on Recurrent Neural Networks",
+    "year": 2021,
+    "doi": "10.1109/taes.2021.3096873",
+    "venue": "Florence Research (University of Florence)",
+    "authors": [
+      "Samuele Capobianco",
+      "Leonardo M. Millefiori",
+      "Nicola Forti",
+      "Paolo Braca",
+      "Peter Willett"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Machine Learning and Deep Learning Approaches for Brain Disease Diagnosis: Principles and Recent Advances",
+    "year": 2021,
+    "doi": "10.1109/access.2021.3062484",
+    "venue": "IEEE Access",
+    "authors": [
+      "Protima Khan",
+      "Md. Fazlul Kader",
+      "S. M. Riazul Islam",
+      "Aisha B Rahman",
+      "Md. Shahriar Kamal",
+      "Masbah Uddin Toha",
+      "Kyung Sup Kwak"
+    ],
+    "volume": "9",
+    "issue": null,
+    "pages": "37622",
+    "end_page": "37655",
+    "type": "article"
+  },
+  {
+    "title": "Dynamically Weighted Balanced Loss: Class Imbalanced Learning and Confidence Calibration of Deep Neural Networks",
+    "year": 2021,
+    "doi": "10.1109/tnnls.2020.3047335",
+    "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+    "authors": [
+      "K. Ruwani M. Fernando",
+      "Chris P. Tsokos"
+    ],
+    "volume": "33",
+    "issue": "7",
+    "pages": "2940",
+    "end_page": "2951",
+    "type": "article"
+  },
+  {
+    "title": "A Review of Tabular Data Synthesis Using GANs on an IDS Dataset",
+    "year": 2021,
+    "doi": "10.3390/info12090375",
+    "venue": "Information",
+    "authors": [
+      "Stavroula Bourou",
+      "Andreas El Saer",
+      "Terpsichori-Helen Velivassaki",
+      "Artemis Voulkidis",
+      "Theodοre Zahariadis"
+    ],
+    "volume": "12",
+    "issue": "9",
+    "pages": "375",
+    "end_page": "375",
+    "type": "article"
+  },
+  {
+    "title": "Finite Element-Based Machine Learning Model for Predicting the Mechanical Properties of Composite Hydrogels",
+    "year": 2022,
+    "doi": "10.3390/app122110835",
+    "venue": "Applied Sciences",
+    "authors": [
+      "Yasin Shokrollahi",
+      "Pengfei Dong",
+      "Peshala Thibbotuwawa Gamage",
+      "Nashaita Y. Patrawalla",
+      "Vipuil Kishore",
+      "Hozhabr Mozafari",
+      "Linxia Gu"
+    ],
+    "volume": "12",
+    "issue": "21",
+    "pages": "10835",
+    "end_page": "10835",
+    "type": "article"
+  },
+  {
+    "title": "Machine learning-assisted strategies to enhance the mechanical properties of PVA hydrogels",
+    "year": 2025,
+    "doi": "10.1016/j.jmbbm.2025.107027",
+    "venue": "Journal of the mechanical behavior of biomedical materials/Journal of mechanical behavior of biomedical materials",
+    "authors": [
+      "Jun Li",
+      "Chuang Zhang",
+      "Weiwei Lan",
+      "Weiyi Chen",
+      "Di Huang"
+    ],
+    "volume": "168",
+    "issue": null,
+    "pages": "107027",
+    "end_page": "107027",
+    "type": "article"
+  },
+  {
+    "title": "Ultra stretchable, tough, elastic and transparent hydrogel skins integrated with intelligent sensing functions enabled by machine learning algorithms",
+    "year": 2022,
+    "doi": "10.1016/j.cej.2022.138212",
+    "venue": "Chemical Engineering Journal",
+    "authors": [
+      "Meng Wu",
+      "Mingfei Pan",
+      "Chenyu Qiao",
+      "Yuhao Ma",
+      "Bin Yan",
+      "Wenshuai Yang",
+      "Qiongyao Peng",
+      "Linbo Han",
+      "Hongbo Zeng"
+    ],
+    "volume": "450",
+    "issue": null,
+    "pages": "138212",
+    "end_page": "138212",
+    "type": "article"
+  },
+  {
+    "title": "Machine Learning-Enhanced Flexible Mechanical Sensing",
+    "year": 2023,
+    "doi": "10.1007/s40820-023-01013-9",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Yuejiao Wang",
+      "Mukhtar Lawan Adam",
+      "Yunlong Zhao",
+      "Weihao Zheng",
+      "Libo Gao",
+      "Zongyou Yin",
+      "Haitao Zhao"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "55",
+    "end_page": "55",
+    "type": "article"
+  },
+  {
+    "title": "MXene‐Induced Flexible, Water‐Retention, Semi‐Interpenetrating Network Hydrogel for Ultra‐Stable Strain Sensors with Real‐Time Gesture Recognition",
+    "year": 2023,
+    "doi": "10.1002/advs.202303922",
+    "venue": "Advanced Science",
+    "authors": [
+      "Lianjia Zhao",
+      "Hao Xu",
+      "Lingchen Liu",
+      "Yiqiang Zheng",
+      "Wei Han",
+      "Lili Wang"
+    ],
+    "volume": "10",
+    "issue": "30",
+    "pages": "e2303922",
+    "end_page": "e2303922",
+    "type": "article"
+  },
+  {
+    "title": "Nanoparticle classification, physicochemical properties, characterization, and applications: a comprehensive review for biologists",
+    "year": 2022,
+    "doi": "10.1186/s12951-022-01477-8",
+    "venue": "Journal of Nanobiotechnology",
+    "authors": [
+      "Nadeem Joudeh",
+      "Dirk Linke"
+    ],
+    "volume": "20",
+    "issue": "1",
+    "pages": "262",
+    "end_page": "262",
+    "type": "article"
+  },
+  {
+    "title": "Machine Learning Methods for Small Data Challenges in Molecular Science",
+    "year": 2023,
+    "doi": "10.1021/acs.chemrev.3c00189",
+    "venue": "Chemical Reviews",
+    "authors": [
+      "Bozheng Dou",
+      "Zailiang Zhu",
+      "Ekaterina Merkurjev",
+      "Ke Lü",
+      "Long Chen",
+      "Jiang Jian",
+      "Yueying Zhu",
+      "Jie Liu",
+      "Bengong Zhang",
+      "Guo‐Wei Wei"
+    ],
+    "volume": "123",
+    "issue": "13",
+    "pages": "8736",
+    "end_page": "8780",
+    "type": "article"
+  },
+  {
+    "title": "Mechanical metamaterials and beyond",
+    "year": 2023,
+    "doi": "10.1038/s41467-023-41679-8",
+    "venue": "Nature Communications",
+    "authors": [
+      "Pengcheng Jiao",
+      "J. Howard Mueller",
+      "Jordan R. Raney",
+      "Xiaoyu Zheng",
+      "Amir H. Alavi"
+    ],
+    "volume": "14",
+    "issue": "1",
+    "pages": "6004",
+    "end_page": "6004",
+    "type": "article"
+  },
+  {
+    "title": "3D Printing‐Based Hydrogel Dressings for Wound Healing",
+    "year": 2024,
+    "doi": "10.1002/advs.202404580",
+    "venue": "Advanced Science",
+    "authors": [
+      "Xuan Zhou",
+      "Xunzhou Yu",
+      "Tingting You",
+      "Baohua Zhao",
+      "Lanlan Dong",
+      "Can Huang",
+      "Xiaoqing Zhou",
+      "Malcolm Xing",
+      "Wei Qian",
+      "Gaoxing Luo"
+    ],
+    "volume": "11",
+    "issue": "47",
+    "pages": "e2404580",
+    "end_page": "e2404580",
+    "type": "article"
+  },
+  {
+    "title": "Injectable and biodegradable piezoelectric hydrogel for osteoarthritis treatment",
+    "year": 2023,
+    "doi": "10.1038/s41467-023-41594-y",
+    "venue": "Nature Communications",
+    "authors": [
+      "Tra Vinikoor",
+      "Godwin K. Dzidotor",
+      "Thinh T. Le",
+      "Yang Liu",
+      "Ho‐Man Kan",
+      "Srimanta Barui",
+      "Meysam T. Chorsi",
+      "Eli Curry",
+      "Emily Reinhardt",
+      "Hanzhang Wang",
+      "Parbeen Singh",
+      "Marc A. Merriman",
+      "Ethan D’Orio",
+      "Jinyoung Park",
+      "Shuyang Xiao"
+    ],
+    "volume": "14",
+    "issue": "1",
+    "pages": "6257",
+    "end_page": "6257",
+    "type": "article"
+  },
+  {
+    "title": "Smart hydrogel dressing for machine learning-enabled visual monitoring and promote diabetic wound healing",
+    "year": 2024,
+    "doi": "10.1016/j.nantod.2024.102559",
+    "venue": "Nano Today",
+    "authors": [
+      "Duanyu Deng",
+      "Lihua Liang",
+      "Kaize Su",
+      "Han Gu",
+      "Xu Wang",
+      "Yan Wang",
+      "Xiangcun Shang",
+      "Wenhuan Huang",
+      "Henghui Chen",
+      "Xiaoxian Wu",
+      "Xiaoxian Wu",
+      "Wing‐Leung Wong",
+      "Dongli Li",
+      "Kun Zhang",
+      "Keke Wu"
+    ],
+    "volume": "60",
+    "issue": null,
+    "pages": "102559",
+    "end_page": "102559",
+    "type": "article"
+  },
+  {
+    "title": "Engineered hydrogels for mechanobiology",
+    "year": 2022,
+    "doi": "10.1038/s43586-022-00179-7",
+    "venue": "Nature Reviews Methods Primers",
+    "authors": [
+      "Ulrich Blache",
+      "Eden M. Ford",
+      "Byung Hang Ha",
+      "Laura Rijns",
+      "Ovijit Chaudhuri",
+      "Patricia Y. W. Dankers",
+      "April M. Kloxin",
+      "Jess G. Snedeker",
+      "Eileen Gentleman"
+    ],
+    "volume": "2",
+    "issue": "1",
+    "pages": "98",
+    "end_page": "98",
+    "type": "article"
+  },
+  {
+    "title": "Skin-Inspired Ultra-Tough Supramolecular Multifunctional Hydrogel Electronic Skin for Human–Machine Interaction",
+    "year": 2023,
+    "doi": "10.1007/s40820-023-01084-8",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Kun Chen",
+      "Kewei Liang",
+      "He Liu",
+      "Ruonan Liu",
+      "Yiying Liu",
+      "Sijia Zeng",
+      "Ye Tian"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "102",
+    "end_page": "102",
+    "type": "article"
+  },
+  {
+    "title": "Artificial Intelligence in Predicting Mechanical Properties of Composite Materials",
+    "year": 2023,
+    "doi": "10.3390/jcs7090364",
+    "venue": "Journal of Composites Science",
+    "authors": [
+      "Fasikaw Kibrete",
+      "Tomasz Trzepieciński",
+      "Hailu Shimels Gebremedhen",
+      "Dereje Engida Woldemichael"
+    ],
+    "volume": "7",
+    "issue": "9",
+    "pages": "364",
+    "end_page": "364",
+    "type": "article"
+  },
+  {
+    "title": "Antifreezing hydrogels: from mechanisms and strategies to applications",
+    "year": 2025,
+    "doi": "10.1039/d4cs00718b",
+    "venue": "Chemical Society Reviews",
+    "authors": [
+      "Dong Zhang",
+      "Hong Chen",
+      "Yanxian Zhang",
+      "Jintao Yang",
+      "Qiang Chen",
+      "Jiang Wu",
+      "Yonglan Liu",
+      "Chao Zhao",
+      "Yijing Tang",
+      "Jie Zheng"
+    ],
+    "volume": "54",
+    "issue": "11",
+    "pages": "5292",
+    "end_page": "5341",
+    "type": "article"
+  },
+  {
+    "title": "Liquid-in-liquid printing of 3D and mechanically tunable conductive hydrogels",
+    "year": 2023,
+    "doi": "10.1038/s41467-023-40004-7",
+    "venue": "Nature Communications",
+    "authors": [
+      "Xinjian Xie",
+      "Zhonggang Xu",
+      "Yu Xin",
+      "Hong Jiang",
+      "Hongjiao Li",
+      "Wenqian Feng"
+    ],
+    "volume": "14",
+    "issue": "1",
+    "pages": "4289",
+    "end_page": "4289",
+    "type": "article"
+  },
+  {
+    "title": "Pectin Hydrogels: Gel-Forming Behaviors, Mechanisms, and Food Applications",
+    "year": 2023,
+    "doi": "10.3390/gels9090732",
+    "venue": "Gels",
+    "authors": [
+      "Nurul Saadah Said",
+      "Ibukunoluwa Fola Olawuyi",
+      "Won‐Young Lee"
+    ],
+    "volume": "9",
+    "issue": "9",
+    "pages": "732",
+    "end_page": "732",
+    "type": "article"
+  },
+  {
+    "title": "Wearable one-handed keyboard using hydrogel-based mechanical sensors for human-machine interaction",
+    "year": 2024,
+    "doi": "10.1016/j.jmst.2024.01.097",
+    "venue": "Journal of Material Science and Technology",
+    "authors": [
+      "Wen Li",
+      "Shunxin Wu",
+      "Meicun Kang",
+      "Xiaobo Zhang",
+      "Xiyang Zhong",
+      "Hao Qiao",
+      "Jinghan Chen",
+      "Ping Wang",
+      "Lu‐Qi Tao"
+    ],
+    "volume": "201",
+    "issue": null,
+    "pages": "130",
+    "end_page": "138",
+    "type": "article"
+  },
+  {
+    "title": "Machine Learning Enabled Reusable Adhesion, Entangled Network-Based Hydrogel for Long-Term, High-Fidelity EEG Recording and Attention Assessment",
+    "year": 2025,
+    "doi": "10.1007/s40820-025-01780-7",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Kai Zheng",
+      "Chengcheng Zheng",
+      "Lixian Zhu",
+      "Bohao Yang",
+      "Xiaokun Jin",
+      "Su‐Jane Wang",
+      "Zikai Song",
+      "Jingyu Liu",
+      "Yan Xiong",
+      "Fuze Tian",
+      "Ran Cai",
+      "Bin Hu"
+    ],
+    "volume": "17",
+    "issue": "1",
+    "pages": "281",
+    "end_page": "281",
+    "type": "article"
+  },
+  {
+    "title": "MXene-Based Skin-Like Hydrogel Sensor and Machine Learning-Assisted Handwriting Recognition",
+    "year": 2024,
+    "doi": "10.1021/acsami.4c10043",
+    "venue": "ACS Applied Materials & Interfaces",
+    "authors": [
+      "Fengying Wang",
+      "Dengke Song",
+      "Can Zhou",
+      "Xusheng Li",
+      "Yang Huang",
+      "Wenlong Xu",
+      "Guijing Liu",
+      "Song Zhou"
+    ],
+    "volume": "16",
+    "issue": "31",
+    "pages": "41583",
+    "end_page": "41595",
+    "type": "article"
+  },
+  {
+    "title": "Bioinspired Super‐Robust Conductive Hydrogels for Machine Learning‐Assisted Tactile Perception System",
+    "year": 2025,
+    "doi": "10.1002/adma.202416275",
+    "venue": "Advanced Materials",
+    "authors": [
+      "Chao Xue",
+      "Yanran Zhao",
+      "Yuantai Liao",
+      "Hongyu Zhang"
+    ],
+    "volume": "37",
+    "issue": "10",
+    "pages": "e2416275",
+    "end_page": "e2416275",
+    "type": "article"
+  },
+  {
+    "title": "Preparation and Identification of Magnetic Iron Nanoparticle based on a Natural Hydrogel and its Performance in Targeted Drug Delivery",
+    "year": 2024,
+    "doi": "10.38124/ijisrt/ijisrt24may1088",
+    "venue": "International Journal of Innovative Science and Research Technology (IJISRT)",
+    "authors": [
+      "Vahid Hosseini",
+      "Seyed Masoud Ghoreishi Mokri",
+      "Dalia hafezghoran",
+      "Bahareh Karimi",
+      "Anastasia A. Anashkina",
+      "Anna Borisovna Yazykova"
+    ],
+    "volume": null,
+    "issue": null,
+    "pages": "704",
+    "end_page": "720",
+    "type": "article"
+  },
+  {
+    "title": "Advancements in Hydrogels: A Comprehensive Review of Natural and Synthetic Innovations for Biomedical Applications",
+    "year": 2025,
+    "doi": "10.3390/polym17152026",
+    "venue": "Polymers",
+    "authors": [
+      "Adina‐Elena Segneanu",
+      "Ludovic Everard Bejenaru",
+      "Cornelia Bejenaru",
+      "Antonia Blendea",
+      "George Dan Mogoşanu",
+      "Andrei Biţă",
+      "Eugen Radu Boia"
+    ],
+    "volume": "17",
+    "issue": "15",
+    "pages": "2026",
+    "end_page": "2026",
+    "type": "article"
+  },
+  {
+    "title": "Discriminating Soft Actuators’ Thermal Stimuli and Mechanical Deformation by Hydrogel Sensors and Machine Learning",
+    "year": 2022,
+    "doi": "10.1002/aisy.202200089",
+    "venue": "Advanced Intelligent Systems",
+    "authors": [
+      "Zhaojia Sun",
+      "Shuyu Wang",
+      "Yuliang Zhao",
+      "Zhitao Zhong",
+      "Lei Zuo"
+    ],
+    "volume": "4",
+    "issue": "9",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogel Network Architecture Design Space: Impact on Mechanical and Viscoelastic Properties",
+    "year": 2025,
+    "doi": "10.3390/gels11080588",
+    "venue": "Gels",
+    "authors": [
+      "Andres F. Roca-Arroyo",
+      "Jhonatan A. Gutierrez-Rivera",
+      "Logan D. Morton",
+      "David A. Castilla‐Casadiego"
+    ],
+    "volume": "11",
+    "issue": "8",
+    "pages": "588",
+    "end_page": "588",
+    "type": "article"
+  },
+  {
+    "title": "Tough Hydrogel Bioadhesives for Sutureless Wound Sealing, Hemostasis and Biointerfaces",
+    "year": 2021,
+    "doi": "10.1002/adfm.202111465",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Kuan Zhang",
+      "Xingmei Chen",
+      "Yuhua Xue",
+      "Jingsen Lin",
+      "Xiangyu Liang",
+      "Jiajun Zhang",
+      "Jun Zhang",
+      "Guangda Chen",
+      "Chengcheng Cai",
+      "Ji Liu"
+    ],
+    "volume": "32",
+    "issue": "15",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Current hydrogel advances in physicochemical and biological response-driven biomedical application diversity",
+    "year": 2021,
+    "doi": "10.1038/s41392-021-00830-x",
+    "venue": "Signal Transduction and Targeted Therapy",
+    "authors": [
+      "Huấn Cao",
+      "Lixia Duan",
+      "Yan Zhang",
+      "Jun Cao",
+      "Kun Zhang"
+    ],
+    "volume": "6",
+    "issue": "1",
+    "pages": "426",
+    "end_page": "426",
+    "type": "article"
+  },
+  {
+    "title": "Emerging Role of Hydrogels in Drug Delivery Systems, Tissue Engineering and Wound Management",
+    "year": 2021,
+    "doi": "10.3390/pharmaceutics13030357",
+    "venue": "Pharmaceutics",
+    "authors": [
+      "Shery Jacob",
+      "Anroop B. Nair",
+      "Jigar Shah",
+      "Nagaraja Sreeharsha",
+      "Sumeet Gupta",
+      "Pottathil Shinu"
+    ],
+    "volume": "13",
+    "issue": "3",
+    "pages": "357",
+    "end_page": "357",
+    "type": "article"
+  },
+  {
+    "title": "Biomimetic Natural Biopolymer‐Based Wet‐Tissue Adhesive for Tough Adhesion, Seamless Sealed, Emergency/Nonpressing Hemostasis, and Promoted Wound Healing",
+    "year": 2022,
+    "doi": "10.1002/adfm.202211340",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Wen Yang",
+      "Xinyi Kang",
+      "Xu Gao",
+      "Yan Zhuang",
+      "Caixai Fan",
+      "He Shen",
+      "Yanyan Chen",
+      "Jianwu Dai"
+    ],
+    "volume": "33",
+    "issue": "6",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Relationship between Structure and Rheology of Hydrogels for Various Applications",
+    "year": 2021,
+    "doi": "10.3390/gels7040255",
+    "venue": "Gels",
+    "authors": [
+      "Gorjan Stojkov",
+      "Zafarjon Niyazov",
+      "Francesco Picchioni",
+      "Ranjita K. Bose"
+    ],
+    "volume": "7",
+    "issue": "4",
+    "pages": "255",
+    "end_page": "255",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogel Bioadhesives with Extreme Acid‐Tolerance for Gastric Perforation Repairing",
+    "year": 2022,
+    "doi": "10.1002/adfm.202202285",
+    "venue": "Advanced Functional Materials",
+    "authors": [
+      "Xingmei Chen",
+      "Jun Zhang",
+      "Guangda Chen",
+      "Yuhua Xue",
+      "Jiajun Zhang",
+      "Xiangyu Liang",
+      "Iek Man Lei",
+      "Jingsen Lin",
+      "Ben Bin Xu",
+      "Ji Liu"
+    ],
+    "volume": "32",
+    "issue": "29",
+    "pages": "",
+    "end_page": "",
+    "type": "article"
+  },
+  {
+    "title": "Freeze/thawed polyvinyl alcohol hydrogels: Present, past and future",
+    "year": 2021,
+    "doi": "10.1016/j.eurpolymj.2021.110974",
+    "venue": "European Polymer Journal",
+    "authors": [
+      "Hossein Adelnia",
+      "Reza Ensandoost",
+      "Shehzahdi S. Moonshi",
+      "Jaber Nasrollah Gavgani",
+      "Emad Izadi Vasafi",
+      "Hang T. Ta"
+    ],
+    "volume": "164",
+    "issue": null,
+    "pages": "110974",
+    "end_page": "110974",
+    "type": "article"
+  },
+  {
+    "title": "New Insights of Scaffolds Based on Hydrogels in Tissue Engineering",
+    "year": 2022,
+    "doi": "10.3390/polym14040799",
+    "venue": "Polymers",
+    "authors": [
+      "Denisa-Maria Radulescu",
+      "Ionela Andreea Neacșu",
+      "Alexandru Mihai Grumezescu",
+      "Ecaterina Andronescu"
+    ],
+    "volume": "14",
+    "issue": "4",
+    "pages": "799",
+    "end_page": "799",
+    "type": "article"
+  },
+  {
+    "title": "Recent progress of antibacterial hydrogels in wound dressings",
+    "year": 2023,
+    "doi": "10.1016/j.mtbio.2023.100582",
+    "venue": "Materials Today Bio",
+    "authors": [
+      "Ben Jia",
+      "Guowei Li",
+      "Ertai Cao",
+      "Jinlong Luo",
+      "Xin Zhao",
+      "Heyuan Huang"
+    ],
+    "volume": "19",
+    "issue": null,
+    "pages": "100582",
+    "end_page": "100582",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogels and Their Role in Biosensing Applications",
+    "year": 2021,
+    "doi": "10.1002/adhm.202100062",
+    "venue": "Advanced Healthcare Materials",
+    "authors": [
+      "Anna Herrmann",
+      "Rainer Haag",
+      "Uwe Schedler"
+    ],
+    "volume": "10",
+    "issue": "11",
+    "pages": "e2100062",
+    "end_page": "e2100062",
+    "type": "article"
+  },
+  {
+    "title": "Natural Polymer-Based Hydrogels: From Polymer to Biomedical Applications",
+    "year": 2023,
+    "doi": "10.3390/pharmaceutics15102514",
+    "venue": "Pharmaceutics",
+    "authors": [
+      "Lingling Zhao",
+      "Yifan Zhou",
+      "Jiaying Zhang",
+      "Hongze Liang",
+      "Xianwu Chen",
+      "Huı Tan"
+    ],
+    "volume": "15",
+    "issue": "10",
+    "pages": "2514",
+    "end_page": "2514",
+    "type": "article"
+  },
+  {
+    "title": "Smart Hydrogels for Advanced Drug Delivery Systems",
+    "year": 2022,
+    "doi": "10.3390/ijms23073665",
+    "venue": "International Journal of Molecular Sciences",
+    "authors": [
+      "Aidin Bordbar‐Khiabani",
+      "Michael Gasik"
+    ],
+    "volume": "23",
+    "issue": "7",
+    "pages": "3665",
+    "end_page": "3665",
+    "type": "article"
+  },
+  {
+    "title": "Intrinsically Nonswellable Multifunctional Hydrogel with Dynamic Nanoconfinement Networks for Robust Tissue‐Adaptable Bioelectronics",
+    "year": 2023,
+    "doi": "10.1002/advs.202207237",
+    "venue": "Advanced Science",
+    "authors": [
+      "Jae Park",
+      "Ju Yeon Kim",
+      "Jeong Hyun Heo",
+      "Yeonju Kim",
+      "Soo A Kim",
+      "Kijun Park",
+      "Yeontaek Lee",
+      "Yoonhee Jin",
+      "Su Ryon Shin",
+      "Dae Woo Kim",
+      "Jungmok Seo"
+    ],
+    "volume": "10",
+    "issue": "12",
+    "pages": "e2207237",
+    "end_page": "e2207237",
+    "type": "article"
+  },
+  {
+    "title": "Novel Trends in Hydrogel Development for Biomedical Applications: A Review",
+    "year": 2022,
+    "doi": "10.3390/polym14153023",
+    "venue": "Polymers",
+    "authors": [
+      "Pablo Sánchez‐Cid",
+      "Mercedes Jiménez‐Rosado",
+      "Alberto Romero",
+      "Víctor Manuel Pérez Puyana"
+    ],
+    "volume": "14",
+    "issue": "15",
+    "pages": "3023",
+    "end_page": "3023",
+    "type": "article"
+  },
+  {
+    "title": "A Review on the Design of Hydrogels With Different Stiffness and Their Effects on Tissue Repair",
+    "year": 2022,
+    "doi": "10.3389/fbioe.2022.817391",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "T. David Luo",
+      "Bowen Tan",
+      "Lengjing Zhu",
+      "Yating Wang",
+      "Jinfeng Liao"
+    ],
+    "volume": "10",
+    "issue": null,
+    "pages": "817391",
+    "end_page": "817391",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogels and Wound Healing: Current and Future Prospects",
+    "year": 2024,
+    "doi": "10.3390/gels10010043",
+    "venue": "Gels",
+    "authors": [
+      "Varshan Gounden",
+      "Moganavelli Singh"
+    ],
+    "volume": "10",
+    "issue": "1",
+    "pages": "43",
+    "end_page": "43",
+    "type": "article"
+  },
+  {
+    "title": "Bioadhesive polymer semiconductors and transistors for intimate biointerfaces",
+    "year": 2023,
+    "doi": "10.1126/science.adg8758",
+    "venue": "Science",
+    "authors": [
+      "Nan Li",
+      "Yang Li",
+      "Zhe Cheng",
+      "Youdi Liu",
+      "Yahao Dai",
+      "Seounghun Kang",
+      "Songsong Li",
+      "Naisong Shan",
+      "Shinya Wai",
+      "Aidan Ziaja",
+      "Yunfei Wang",
+      "Joseph Strzalka",
+      "Wei Liu",
+      "Cheng Zhang",
+      "Xiaodan Gu"
+    ],
+    "volume": "381",
+    "issue": "6658",
+    "pages": "686",
+    "end_page": "693",
+    "type": "article"
+  },
+  {
+    "title": "Versatility of Hydrogels: From Synthetic Strategies, Classification, and Properties to Biomedical Applications",
+    "year": 2022,
+    "doi": "10.3390/gels8030167",
+    "venue": "Gels",
+    "authors": [
+      "Zubair Ahmad",
+      "Saad Salman",
+      "Shahid Ali Khan",
+      "Abdul Amin",
+      "Zia Ur Rahman",
+      "Youssef O. Al‐Ghamdi",
+      "Kalsoom Akhtar",
+      "Esraa M. Bakhsh",
+      "Sher Bahadar Khan"
+    ],
+    "volume": "8",
+    "issue": "3",
+    "pages": "167",
+    "end_page": "167",
+    "type": "article"
+  },
+  {
+    "title": "Silk fibroin hydrogel adhesive enables sealed-tight reconstruction of meniscus tears",
+    "year": 2024,
+    "doi": "10.1038/s41467-024-47029-6",
+    "venue": "Nature Communications",
+    "authors": [
+      "Xihao Pan",
+      "Rui Li",
+      "Wenyue Li",
+      "Wei Sun",
+      "Yiyang Yan",
+      "Xiaochen Xiang",
+      "Jinghua Fang",
+      "Youguo Liao",
+      "Chang Xie",
+      "Xiaozhao Wang",
+      "Youzhi Cai",
+      "Xudong Yao",
+      "Hongwei Ouyang"
+    ],
+    "volume": "15",
+    "issue": "1",
+    "pages": "2651",
+    "end_page": "2651",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogel Preparation Methods and Biomaterials for Wound Dressing",
+    "year": 2021,
+    "doi": "10.3390/life11101016",
+    "venue": "Life",
+    "authors": [
+      "Jingjing Su",
+      "Jiankang Li",
+      "Jiankang Li",
+      "Kun Zhang",
+      "Jingan Li"
+    ],
+    "volume": "11",
+    "issue": "10",
+    "pages": "1016",
+    "end_page": "1016",
+    "type": "article"
+  },
+  {
+    "title": "Recent Advances in Cellulose-Based Hydrogels for Tissue Engineering Applications",
+    "year": 2022,
+    "doi": "10.3390/polym14163335",
+    "venue": "Polymers",
+    "authors": [
+      "Chao Chen",
+      "Yuewei Xi",
+      "Yunxuan Weng"
+    ],
+    "volume": "14",
+    "issue": "16",
+    "pages": "3335",
+    "end_page": "3335",
+    "type": "article"
+  },
+  {
+    "title": "Evolution of Hybrid Hydrogels: Next-Generation Biomaterials for Drug Delivery and Tissue Engineering",
+    "year": 2024,
+    "doi": "10.3390/gels10040216",
+    "venue": "Gels",
+    "authors": [
+      "Md Mohosin Rana",
+      "Hector De la Hoz Siegler"
+    ],
+    "volume": "10",
+    "issue": "4",
+    "pages": "216",
+    "end_page": "216",
+    "type": "article"
+  },
+  {
+    "title": "Hydrogels for Tissue Engineering: Addressing Key Design Needs Toward Clinical Translation",
+    "year": 2022,
+    "doi": "10.3389/fbioe.2022.849831",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "Fei Xu",
+      "Chloe Dawson",
+      "Makenzie Lamb",
+      "Eva Mueller",
+      "Evan Stefanek",
+      "Mohsen Akbari",
+      "Todd Hoare"
+    ],
+    "volume": "10",
+    "issue": null,
+    "pages": "849831",
+    "end_page": "849831",
+    "type": "article"
+  },
+  {
+    "title": "Adhesive hydrogels in osteoarthritis: from design to application",
+    "year": 2023,
+    "doi": "10.1186/s40779-022-00439-3",
+    "venue": "Military Medical Research",
+    "authors": [
+      "Wanglin Duan",
+      "Lining Zhang",
+      "Raghvendra A. Bohara",
+      "Sergio Martín‐Saldaña",
+      "Fei Yang",
+      "Yiyang Zhao",
+      "Yong Xie",
+      "Yazhong Bu",
+      "Abhay Pandit"
+    ],
+    "volume": "10",
+    "issue": "1",
+    "pages": "4",
+    "end_page": "4",
+    "type": "article"
+  },
+  {
+    "title": "Bioinspired Injectable Self-Healing Hydrogel Sealant with Fault-Tolerant and Repeated Thermo-Responsive Adhesion for Sutureless Post-Wound-Closure and Wound Healing",
+    "year": 2022,
+    "doi": "10.1007/s40820-022-00928-z",
+    "venue": "Nano-Micro Letters",
+    "authors": [
+      "Yuqing Liang",
+      "Huiru Xu",
+      "Zhenlong Li",
+      "Aodi Zhangji",
+      "Baolin Guo"
+    ],
+    "volume": "14",
+    "issue": "1",
+    "pages": "185",
+    "end_page": "185",
+    "type": "article"
+  },
+  {
+    "title": "Biomimetic Hydrogels to Promote Wound Healing",
+    "year": 2021,
+    "doi": "10.3389/fbioe.2021.718377",
+    "venue": "Frontiers in Bioengineering and Biotechnology",
+    "authors": [
+      "Fei Fan",
+      "Sanjoy Saha",
+      "Donny Hanjaya‐Putra"
+    ],
+    "volume": "9",
+    "issue": null,
+    "pages": "718377",
+    "end_page": "718377",
+    "type": "article"
+  },
+  {
+    "title": "A Review on Hydrogels with Photothermal Effect in Wound Healing and Bone Tissue Engineering",
+    "year": 2021,
+    "doi": "10.3390/polym13132100",
+    "venue": "Polymers",
+    "authors": [
+      "Xu Zhang",
+      "Bowen Tan",
+      "Yanting Wu",
+      "Min Zhang",
+      "Jinfeng Liao"
+    ],
+    "volume": "13",
+    "issue": "13",
+    "pages": "2100",
+    "end_page": "2100",
+    "type": "article"
+  },
+  {
+    "title": "Recent advances in hyaluronic acid-based hydrogels for 3D bioprinting in tissue engineering applications",
+    "year": 2022,
+    "doi": "10.1016/j.smaim.2022.07.003",
+    "venue": "Smart Materials in Medicine",
+    "authors": [
+      "Yanwen Ding",
+      "Xu-Wei Zhang",
+      "Chen‐Hui Mi",
+      "Xin-Ya Qi",
+      "Jing Zhou",
+      "Dai‐Xu Wei"
+    ],
+    "volume": "4",
+    "issue": null,
+    "pages": "59",
+    "end_page": "68",
+    "type": "article"
+  },
+  {
+    "title": "Hybrid Methacrylated Gelatin and Hyaluronic Acid Hydrogel Scaffolds. Preparation and Systematic Characterization for Prospective Tissue Engineering Applications",
+    "year": 2021,
+    "doi": "10.3390/ijms22136758",
+    "venue": "International Journal of Molecular Sciences",
+    "authors": [
+      "Brenda Velasco",
+      "Tania Diaz‐Vidal",
+      "Luis Carlos Rosales‐Rivera",
+      "Carlos A. García‐González",
+      "Carmen Alvarez‐Lorenzo",
+      "Abeer Al‐Modlej",
+      "Vicente Domínguez-Arca",
+      "Gerardo Prieto",
+      "Sílvia Barbosa",
+      "J. F. A. Soltero",
+      "Pablo Taboada"
+    ],
+    "volume": "22",
+    "issue": "13",
+    "pages": "6758",
+    "end_page": "6758",
+    "type": "article"
+  },
+  {
+    "title": "Biodegradable Natural Hydrogels for Tissue Engineering, Controlled Release, and Soil Remediation",
+    "year": 2024,
+    "doi": "10.3390/polym16182599",
+    "venue": "Polymers",
+    "authors": [
+      "Ane García-García",
+      "Sara Muñana-González",
+      "S. Lanceros‐Méndez",
+      "Leire Ruiz‐Rubio",
+      "Leyre Pérez‐Álvarez",
+      "José Luis Vilas‐Vilela"
+    ],
+    "volume": "16",
+    "issue": "18",
+    "pages": "2599",
+    "end_page": "2599",
+    "type": "article"
+  }
+]

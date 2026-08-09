@@ -247,12 +247,14 @@ def fig4(ctx: Ctx) -> None:
         ax.set_xticks(range(piv.shape[1]))
         ax.set_xticklabels([f"F{c}" for c in piv.columns], fontsize=7)
         ax.set_yticks(range(piv.shape[0]))
-        ax.set_yticklabels([f"seed {s}" for s in piv.index], fontsize=6.5)
+        ax.set_yticklabels([f"{s}" for s in piv.index], fontsize=6.5)
+        ax.set_ylabel("seed")
         for i in range(piv.shape[0]):
             for j in range(piv.shape[1]):
                 ax.text(j, i, f"{piv.values[i, j]:.3f}",
                         ha="center", va="center", fontsize=5.5,
-                        color="white" if piv.values[i, j] < 0.75 else "black")
+                        color="black" if 0.75 < piv.values[i, j] < 0.80
+                        else ("white" if piv.values[i, j] < 0.75 else "white"))
         ax.set_title("Per-seed × per-fold R² (heatmap)")
         plt.colorbar(im, ax=ax, fraction=.046, pad=.03)
 
@@ -276,11 +278,11 @@ def fig4(ctx: Ctx) -> None:
         ax.plot(xx, np.polyval(coef, xx), "-", lw=1.4,
                 color=NATURE["ours_d"], zorder=4)
         r = np.corrcoef(g[yc], g[pc])[0, 1]
-        # annotation OUTSIDE data area, lower-left margin
-        ax.text(0.04, 0.04, f"r = {r:.3f}   n = {len(g)}",
-                transform=ax.transAxes, fontsize=8, va="bottom", ha="left",
+        # annotation in TOP-LEFT white space (data clustered bottom-right)
+        ax.text(0.04, 0.96, f"r = {r:.3f}   n = {len(g)}",
+                transform=ax.transAxes, fontsize=8, va="top", ha="left",
                 bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                          edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.85))
+                          edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.9))
         ax.set_xlabel("observed (kPa)")
         ax.set_ylabel("predicted (kPa)")
         ax.set_title("Out-of-fold predicted vs observed")
@@ -610,13 +612,16 @@ def fig5(ctx: Ctx) -> None:
         vals = [r[1] for r in rows]
         colors = [NATURE["ours"] if n == paths.MODEL_NAME else NATURE["base"]
                   for n in names]
+        # label_top=False; values rendered to the RIGHT of dots to avoid overlap
         ss.lollipop(ax, [_hard_shorten(n, 11) for n in names], vals,
                     color=NATURE["neutral"], value_fmt="{:.2f}",
-                    s=80, label_top=True)
+                    s=80, label_top=False)
         for x, y, c in zip(vals, range(len(names)), colors):
             ax.scatter([x], [y], s=110, color=c,
                        edgecolor="white", linewidth=0.8, zorder=4)
-        ax.set_xlim(0, 1.1)
+            ax.text(x + 0.02, y, f"{x:.2f}", va="center", ha="left",
+                    fontsize=7, color=c)
+        ax.set_xlim(0, 1.15)
         ax.set_xlabel(f"Top-20 screening precision (external cohort)")
 
     # ----- D: improvement & significance forest plot ----------------------
@@ -699,26 +704,28 @@ def fig5(ctx: Ctx) -> None:
         except Exception:
             _note(ax)
             return
-        rmin = max(0.0, float(r2.min()) - 0.08)
-        rmax = min(1.0, float(r2.max()) + 0.08)
-        smin = max(0.0, float(spearman.min()) - 0.10)
-        smax = min(1.0, float(spearman.max()) + 0.10)
-        # annotate below-left of point so labels don't pile up
-        offsets = [(6, 6), (6, -8), (-6, 6), (-6, -8)]
+        # expand limits generously to fit labels without overlap
+        rmin = max(0.0, float(r2.min()) - 0.12)
+        rmax = min(1.0, float(r2.max()) + 0.12)
+        smin = max(0.0, float(spearman.min()) - 0.15)
+        smax = min(1.0, float(spearman.max()) + 0.15)
+        # annotate with 8-direction spread, larger for better separation
+        dirs8 = [(8, 6), (8, -10), (-8, 6), (-8, -10),
+                 (0, 10), (0, -12), (10, 0), (-10, 0)]
         for i, n in enumerate(r2.index):
             col = NATURE["ours"] if n == paths.MODEL_NAME else NATURE["base"]
             sz = 90 + 50 * (r2[n] - r2.min())
             ax.scatter(r2[n], spearman[n], s=sz, color=col,
                        edgecolor="white", linewidth=0.8, alpha=0.85,
                        zorder=3)
-            ox, oy = offsets[i % len(offsets)]
+            ox, oy = dirs8[i % len(dirs8)]
             ax.annotate(_hard_shorten(n, 10), (r2[n], spearman[n]),
                         fontsize=6.0,
                         xytext=(ox, oy), textcoords="offset points",
                         color="#222222",
                         bbox=dict(boxstyle="round,pad=0.15",
                                   facecolor="white", edgecolor="none",
-                                  alpha=0.75))
+                                  alpha=0.9))
         ax.set_xlim(rmin, rmax)
         ax.set_ylim(smin, smax)
         ax.set_xlabel(pm)
@@ -835,9 +842,9 @@ def fig6(ctx: Ctx) -> None:
         ax.plot(xx, np.polyval(coef, xx), "-", lw=1.4,
                 color=NATURE["ours_d"], zorder=4)
         r = np.corrcoef(ctx.extp[yc], ctx.extp[pc])[0, 1]
-        ax.text(0.04, 0.04,
+        ax.text(0.04, 0.96,
                 f"r = {r:.3f}    n = {len(ctx.extp)}",
-                transform=ax.transAxes, fontsize=8, va="bottom", ha="left",
+                transform=ax.transAxes, fontsize=8, va="top", ha="left",
                 bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
                           edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.9))
         ax.set_xlabel("observed (external)")
@@ -1456,14 +1463,18 @@ def fig8(ctx: Ctx) -> None:
             vals = (m["importance_mean"] * np.sign(m["stat"].fillna(0))).values
         else:
             vals = m["importance_mean"].values
-        m = m.assign(_signed=vals).sort_values("_signed").tail(14)
-        names = [_hard_shorten(f, 18) for f in m["feature"]]
+        m = m.assign(_signed=vals).sort_values("_signed").tail(12)
+        # value labels to the RIGHT of dots (never on top of data)
+        names = [_hard_shorten(f, 20) for f in m["feature"]]
         ss.lollipop(ax, names, m["_signed"].values, color=NATURE["neutral"],
                     value_fmt="{:.3f}", s=50, label_top=False)
         for x, y in zip(m["_signed"].values, range(len(names))):
             col = NATURE["good"] if x > 0 else NATURE["bad"]
             ax.scatter([x], [y], s=60, color=col,
                        edgecolor="white", linewidth=0.6, zorder=4)
+            ax.text(x + 0.003, y, f"{x:.3f}", va="center",
+                    ha="left" if x > 0 else "right",
+                    fontsize=6.0, color=col)
         ax.axvline(0, color="black", lw=0.6)
         ax.tick_params(axis="y", labelsize=6.0)
         ax.set_xlabel("signed permutation importance")
@@ -1594,10 +1605,10 @@ def fig8(ctx: Ctx) -> None:
         ax.scatter(x[sig], m["nlp"][sig], s=30, color=NATURE["ours"],
                    edgecolor="white", linewidth=0.6, zorder=3)
         ax.axhline(-np.log10(.05), ls="--", lw=0.8, color=NATURE["bad"])
-        # show top 6 labels only with strategic offset
+        # show top 6 labels only, spread vertically with distinct offsets
         top = m[sig].nlargest(6, "nlp").sort_values("stat")
-        # alternate far above / far below to avoid stacking
-        offsets = [1.12, 0.88, 1.12, 0.88, 1.12, 0.88]
+        # spread across the full vertical range to prevent stacking
+        offsets = [1.30, 0.70, 1.22, 0.78, 1.15, 0.85]
         for idx, (_, r) in enumerate(top.iterrows()):
             yo = r["nlp"] * offsets[idx % len(offsets)]
             ax.annotate(_hard_shorten(str(r["feature"]), 10),
