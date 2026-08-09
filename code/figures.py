@@ -449,7 +449,7 @@ def fig4(ctx: Ctx) -> None:
         g = ctx.oof.groupby("sample_id")[[f"y_true_{t}",
                                           f"y_pred_{t}"]].mean()
         hb = ax.hexbin(g[f"y_true_{t}"], g[f"y_pred_{t}"], gridsize=24,
-                       cmap="plasma", mincnt=1, linewidths=0.3)
+                       cmap="YlOrRd", mincnt=1, linewidths=0.3, vmin=0, vmax=None)
         lo = float(min(g[f"y_true_{t}"].min(), g[f"y_pred_{t}"].min()))
         hi = float(max(g[f"y_true_{t}"].max(), g[f"y_pred_{t}"].max()))
         ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black")
@@ -1008,11 +1008,10 @@ def fig6(ctx: Ctx) -> None:
                     [0], [0], color=col, lw=1.5,
                     label=f"{_m_short(lab, 8)}: {li:.2f}\u2192{le:.2f}"))
         if baseline_handles:
-            leg = ax.legend(handles=baseline_handles, fontsize=5.6,
-                            frameon=True, loc="center left",
-                            bbox_to_anchor=(0.02, 0.30),
-                            framealpha=0.92, edgecolor="#cccccc",
-                            borderpad=0.5, labelspacing=0.35)
+            leg = ax.legend(handles=baseline_handles, fontsize=5.2,
+                            frameon=True, loc="lower right",
+                            framealpha=0.90, edgecolor="#cccccc",
+                            borderpad=0.4, labelspacing=0.30, markerscale=0.7)
             leg.set_zorder(10)
         ax.set_xlim(-0.05, 1.55)
         ax.set_xticks([0, 1])
@@ -1128,8 +1127,16 @@ def fig7(ctx: Ctx) -> None:
                                 .replace("fusion", "fus"))[:6]
                  for v in d.index]
         y = np.arange(len(names))[::-1]
-        colors = [NATURE["ours"] if v == d.max() else NATURE["base"]
-                  for v in d.values]
+        # largest bar = ours colour; the rest graded blue (light->dark)
+        n_b = len(d) - 1
+        bi = 0
+        colors = []
+        for v in d.values:
+            if v == d.max():
+                colors.append(NATURE["ours"])
+            else:
+                colors.append(plt.cm.Blues(0.40 + 0.55 * bi / max(n_b - 1, 1)))
+                bi += 1
         ax.barh(y, d.values, height=0.65, color=colors, edgecolor="white",
                 linewidth=0.6, zorder=3)
         pad = max(d.max() * 0.04, 0.002)
@@ -1165,8 +1172,15 @@ def fig7(ctx: Ctx) -> None:
         labels = [short_map.get(v, v.replace("w/o ", "-"))[:6]
                   for v in g.index]
         y = np.arange(len(g))[::-1]
-        colors = [NATURE["ours"] if v == "full model" else NATURE["base"]
-                  for v in g.index]
+        n_b = len(g) - 1
+        bi = 0
+        colors = []
+        for v in g.index:
+            if v == "full model":
+                colors.append(NATURE["ours"])
+            else:
+                colors.append(plt.cm.Blues(0.40 + 0.55 * bi / max(n_b - 1, 1)))
+                bi += 1
         ax.barh(y, g.values, height=0.62, color=colors, edgecolor="white",
                 linewidth=0.6, zorder=3)
         for yy, v in zip(y, g.values):
@@ -1188,7 +1202,9 @@ def fig7(ctx: Ctx) -> None:
         vals = [f[f["variant"] == n][pm].mean() for n in names[:-1]]
         vals.append(base[pm].mean())
         names = [n.replace("fusion = ", "")[:5] for n in names]
-        colors = [NATURE["base"]] * (len(names) - 1) + [NATURE["ours"]]
+        n_b = len(names) - 1
+        colors = [plt.cm.Blues(0.40 + 0.55 * i / max(n_b - 1, 1))
+                  for i in range(n_b)] + [NATURE["ours"]]
         y = np.arange(len(names))[::-1]
         ax.barh(y, vals, height=0.55, color=colors, edgecolor="white",
                 linewidth=0.6, zorder=3)
@@ -1364,10 +1380,14 @@ def fig7(ctx: Ctx) -> None:
         }
         labels = [short_map.get(v, v).replace("w/o ", "-")[:8]
                   for v in g.index]
+        # full-model endpoint: deep brown; ablated endpoints: graded brown
+        n_b = len(g)
+        browns = [plt.cm.BrBG(0.78 - 0.55 * i / max(n_b - 1, 1))
+                  for i in range(n_b)]
         for i, v in enumerate(g.values):
-            ax.scatter([full], [i], s=70, color=NATURE["ours_d"],
+            ax.scatter([full], [i], s=70, color="#8B5A2B",
                        edgecolor="white", linewidth=0.6, zorder=4)
-            ax.scatter([v], [i], s=70, color=NATURE["base"],
+            ax.scatter([v], [i], s=70, color=browns[i],
                        edgecolor="white", linewidth=0.6, zorder=4)
             ax.hlines(i, min(full, v), max(full, v),
                       color=NATURE["neutral"], lw=0.7, zorder=2)
@@ -1454,16 +1474,25 @@ def fig7(ctx: Ctx) -> None:
                    colors=[NATURE["ours"], NATURE["base"]],
                    startangle=90, counterclock=False,
                    wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
-            ax.text(0, 0.12, f"{inter / s * 100:.0f}%",
-                    ha="center", va="center", fontsize=10, color="#222222",
-                    fontweight="bold")
-            ax.text(0, 0.30, "interaction", ha="center", va="center",
-                    fontsize=7.5, color=NATURE["ours_d"])
-            ax.text(0, -0.28, f"{marg / s * 100:.0f}%",
-                    ha="center", va="center", fontsize=10, color="#222222",
-                    fontweight="bold")
-            ax.text(0, -0.46, "marginal", ha="center", va="center",
-                    fontsize=7.5, color=NATURE["base_d"])
+            # labels swapped: inter on top, marg below (inter > marg)
+            ax.text(0, 0.18, "inter", ha="center", va="center",
+                    fontsize=8, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, 0.40, f"{inter / s * 100:.0f}%", ha="center",
+                    va="center", fontsize=10, color="#222222",
+                    fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, -0.32, "marg", ha="center", va="center",
+                    fontsize=8, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, -0.54, f"{marg / s * 100:.0f}%", ha="center",
+                    va="center", fontsize=10, color="#222222",
+                    fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
         ax.set_title("Marginal vs interaction")
 
     # ----- I: pruning summary ------------------------------------------
@@ -1496,14 +1525,23 @@ def fig7(ctx: Ctx) -> None:
                    colors=[NATURE["ours"], NATURE["bad"]],
                    startangle=90, counterclock=False,
                    wedgeprops=dict(width=0.42, edgecolor="white", linewidth=1.2))
-            ax.text(0, 0.12, f"{keep}", ha="center", va="center",
-                    fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.30, "retained", ha="center", va="center",
-                    fontsize=7.5, color=NATURE["ours_d"])
-            ax.text(0, -0.28, f"{prune}", ha="center", va="center",
-                    fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, -0.46, "pruned", ha="center", va="center",
-                    fontsize=7.5, color=NATURE["bad"])
+            # retained on top (bigger share), pruned below
+            ax.text(0, 0.18, "retain", ha="center", va="center",
+                    fontsize=8, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, 0.40, f"{keep}", ha="center", va="center",
+                    fontsize=10, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, -0.32, "prun", ha="center", va="center",
+                    fontsize=8, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
+            ax.text(0, -0.54, f"{prune}", ha="center", va="center",
+                    fontsize=10, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                              edgecolor="none", alpha=0.55))
         ax.set_title("Retention vs pruning")
 
     fns = [p_waterfall, p_heat, p_fusion, p_sig, p_variant,
@@ -1618,17 +1656,21 @@ def fig8(ctx: Ctx) -> None:
             return
         piv = ctx.attn_c.pivot_table(index="token", columns="condition",
                                      values="attention_mean")
-        # line plot per token across conditions (heatmap -> trends)
-        for i, tok in enumerate(piv.index[:8]):
-            ax.plot(piv.columns, piv.loc[tok].values, "o-",
-                    color=OKABE_ITO[i % len(OKABE_ITO)], lw=1.3, ms=3.5,
-                    label=_m_short(tok, 10), zorder=3)
-        ax.set_xticks(range(piv.shape[1]))
+        # grouped bars: one bar per token per condition (readable at a glance)
+        toks = list(piv.index[:6])
+        n_tok = len(toks)
+        x = np.arange(piv.shape[1])
+        width = 0.8 / max(n_tok, 1)
+        for i, tok in enumerate(toks):
+            ax.bar(x + i * width, piv.loc[tok].values, width=width * 0.85,
+                   color=OKABE_ITO[i % len(OKABE_ITO)], edgecolor="white",
+                   linewidth=0.4, label=_m_short(tok, 8), zorder=3)
+        ax.set_xticks(x + width * (n_tok - 1) / 2)
         ax.set_xticklabels([_hard_shorten(c, 8) for c in piv.columns],
                            rotation=45, ha="right", fontsize=6.5)
         ax.set_xlabel("condition")
         ax.set_ylabel("attention")
-        ax.set_title("Attention by condition (per-token trend)")
+        ax.set_title("Attention by condition")
         ax.legend(fontsize=5.5, frameon=False, loc="best")
 
     # ----- E: latent space (target) ------------------------------------
@@ -1697,15 +1739,16 @@ def fig8(ctx: Ctx) -> None:
         sig = m["tier"] == "high"
         ax.scatter(x[~sig], m["nlp"][~sig], s=12,
                    color=NATURE["neutral"], alpha=0.6, linewidths=0,
-                   zorder=2, label="lower-tier markers")
+                   zorder=2, label="lower tier")
         ax.scatter(x[sig], m["nlp"][sig], s=46, color=NATURE["ours"],
                    edgecolor="white", linewidth=0.7, zorder=3,
-                   label="high-tier markers")
+                   label="high tier")
         ax.axhline(-np.log10(.05), ls="--", lw=0.8, color=NATURE["bad"])
         # no inline text labels: names are listed in the caption to keep
         # the panel completely overlap-free.
-        leg = ax.legend(fontsize=6, frameon=True, loc="upper left",
-                        framealpha=0.9, edgecolor="#cccccc")
+        leg = ax.legend(fontsize=5.5, frameon=True, loc="upper left",
+                        framealpha=0.9, edgecolor="#cccccc",
+                        borderpad=0.35, labelspacing=0.25, markerscale=0.6)
         leg.set_zorder(10)
         ax.set_xlabel("association statistic (signed)")
         ax.set_ylabel(r"$-\log_{10}$ FDR")
