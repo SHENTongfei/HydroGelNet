@@ -293,20 +293,9 @@ def fig3(ctx: Ctx) -> None:
         bins = np.linspace(min(yi.min(), (ye.min() if len(ye) else yi.min())),
                            max(yi.max(), (ye.max() if len(ye) else yi.max())),
                            22)
-        # Broken y-axis: internal peak (~58) dwarfs external (max ~5).
-        # CUT=6 keeps the external cohort clearly visible (~83% of the bar).
-        bw = bins[1] - bins[0]
-        n_i, _ = np.histogram(yi, bins=bins)
-        CUT = 6.0
-        centers = (bins[:-1] + bins[1:]) / 2
-        ax.bar(centers, np.minimum(n_i, CUT), width=bw * 0.98,
-               alpha=0.55, color=NATURE["base"],
-               label=f"Internal (n={len(yi)})",
-               edgecolor="white", linewidth=0.3, zorder=3)
-        for cx, v in zip(centers, n_i):
-            if v > CUT:
-                _break_marks(ax, CUT, cx, bw * 0.45, orient="v",
-                             tick=max(CUT * 0.07, 0.5), color="white")
+        ax.hist(yi, bins=bins, alpha=0.55, color=NATURE["base"],
+                label=f"Internal (n={len(yi)})",
+                edgecolor="white", linewidth=0.3)
         if len(ye):
             ax.hist(ye, bins=bins, alpha=0.9, color=NATURE["ours_d"],
                     label=f"External (n={len(ye)})",
@@ -314,7 +303,6 @@ def fig3(ctx: Ctx) -> None:
             # overlap shading
             ax.hist(yi, bins=bins, alpha=0.18, color="#666666",
                     edgecolor="none", zorder=0)
-        ax.set_ylim(0, CUT * 1.55)
         ax.set_xlabel("adhesion strength (kPa)")
         ax.set_ylabel("count")
         ax.set_title("Internal vs external: target range overlap")
@@ -1746,20 +1734,28 @@ def fig8(ctx: Ctx) -> None:
             "Acidic-CBEA": "Acid-CBEA",
         }
         names = [feat_short.get(str(f), str(f))[:7] for f in d["feature"]]
-        ss.lollipop(ax, names, d["selection_frequency"].values,
-                    color=NATURE["base"], value_fmt="{:.2f}", s=55,
-                    label_top=False)
-        # top features coloured in ours colour; values to the right w/ halo
-        for x, y in zip(d["selection_frequency"].values, range(len(names))):
+        vals = d["selection_frequency"].values
+        y_pos = np.arange(len(vals))
+        # zoom x to 0.8-1.0 (all data 0.98-1.00); lines start at the 0.8
+        # threshold; value labels sit to the LEFT of each dot (left-top zone).
+        ax.hlines(y=y_pos, xmin=0.8, xmax=vals, color=NATURE["base"],
+                  lw=1.4, alpha=0.85)
+        for x, y in zip(vals, y_pos):
             col = NATURE["ours"] if x >= 0.95 else NATURE["base"]
             ax.scatter([x], [y], s=45, color=col,
                        edgecolor="white", linewidth=0.6, zorder=4)
-            ax.text(x + 0.06, y, f"{x:.2f}", va="center", ha="left",
+            ax.text(x - 0.012, y, f"{x:.2f}", va="center", ha="right",
                     fontsize=5.6, color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.10", facecolor="white",
                               edgecolor="none", alpha=0.85))
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(names, fontsize=6.0)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
+        ax.set_axisbelow(True)
         ax.axvline(0.8, ls="--", lw=0.8, color=NATURE["neutral"])
-        ax.set_xlim(0, 1.18)
+        ax.set_xlim(0.8, 1.0)
         ax.set_xlabel("stability frequency")
 
     # ----- C: attention attribution lollipop ----------------------------
@@ -1802,7 +1798,7 @@ def fig8(ctx: Ctx) -> None:
         ax.spines["right"].set_visible(False)
         ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
         ax.set_axisbelow(True)
-        ax.set_xlim(0, (cut or vals.max()) * 1.18 + (0.20 if cut else 0))
+        ax.set_xlim(0, (cut or vals.max()) * 1.18 + (0.13 if cut else 0))
         ax.set_xlabel("CLS attention weight")
 
     # ----- D: attention-by-condition heatmap ----------------------------
