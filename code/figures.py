@@ -79,11 +79,11 @@ def _shade(i, n):
     return plt.cm.Blues(0.35 + 0.60 * i / max(n - 1, 1))
 
 
-def _broken_cut(vals, k=2.0):
+def _broken_cut(vals, k=1.6):
     """Adaptive broken-axis threshold: cut = k * median(positive values).
     Returns None when nothing exceeds the cut (uniform data -> no zigzag,
-    avoiding misleading truncation). k=2.0 keeps truncated bars closer to
-    the short bars (smaller visual gap, per user preference)."""
+    avoiding misleading truncation). k=1.6 keeps truncated bars very close
+    to the short bars (user keeps asking for shorter cuts)."""
     vals = np.asarray(vals, dtype=float)
     pos = vals[vals > 0]
     if len(pos) == 0:
@@ -129,16 +129,25 @@ def fig3(ctx: Ctx) -> None:
         names = ["Internal", "Prospective"]
         vals = [len(ds["Y"]), len(ext["Y"]) if ext is not None else 0]
         colors = [NATURE["ours"], NATURE["base"]]
-        # twin horizontal bars (side-by-side), values at bar ends
+        # twin horizontal bars (side-by-side), values at bar ends.
+        # Broken axis: 316 >> 25 (12.6x); CUT=40 keeps 25 at ~62% of the
+        # truncated bar.
+        CUT = 40.0
+        plot_vals = np.minimum(vals, CUT)
         y = np.arange(2)
-        ax.barh(y, vals, height=0.42, color=colors, edgecolor="white",
+        ax.barh(y, plot_vals, height=0.42, color=colors, edgecolor="white",
                 linewidth=0.8, zorder=3)
         for yy, v, c in zip(y, vals, colors):
-            ax.text(v + max(vals) * 0.015, yy, f"{v}", va="center",
-                    ha="left", fontsize=9, color=c, fontweight="bold")
+            if v > CUT:
+                _break_marks(ax, CUT, yy, 0.21, tick=max(CUT * 0.04, 2.0))
+                ax.text(CUT + max(CUT * 0.08, 3), yy, f"{v}", va="center",
+                        ha="left", fontsize=9, color=c, fontweight="bold")
+            else:
+                ax.text(v + max(vals) * 0.015, yy, f"{v}", va="center",
+                        ha="left", fontsize=9, color=c, fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=8.5)
-        ax.set_xlim(0, max(vals) * 1.22)
+        ax.set_xlim(0, CUT + 28)
         ax.set_xlabel("number of formulations")
 
     # ----- B: target distribution with KDE overlay -----------------------
@@ -284,9 +293,20 @@ def fig3(ctx: Ctx) -> None:
         bins = np.linspace(min(yi.min(), (ye.min() if len(ye) else yi.min())),
                            max(yi.max(), (ye.max() if len(ye) else yi.max())),
                            22)
-        ax.hist(yi, bins=bins, alpha=0.55, color=NATURE["base"],
-                label=f"Internal (n={len(yi)})",
-                edgecolor="white", linewidth=0.3)
+        # Broken y-axis: internal peak (~58) dwarfs external (max ~5).
+        # CUT=6 keeps the external cohort clearly visible (~83% of the bar).
+        bw = bins[1] - bins[0]
+        n_i, _ = np.histogram(yi, bins=bins)
+        CUT = 6.0
+        centers = (bins[:-1] + bins[1:]) / 2
+        ax.bar(centers, np.minimum(n_i, CUT), width=bw * 0.98,
+               alpha=0.55, color=NATURE["base"],
+               label=f"Internal (n={len(yi)})",
+               edgecolor="white", linewidth=0.3, zorder=3)
+        for cx, v in zip(centers, n_i):
+            if v > CUT:
+                _break_marks(ax, CUT, cx, bw * 0.45, orient="v",
+                             tick=max(CUT * 0.07, 0.5), color="white")
         if len(ye):
             ax.hist(ye, bins=bins, alpha=0.9, color=NATURE["ours_d"],
                     label=f"External (n={len(ye)})",
@@ -294,6 +314,7 @@ def fig3(ctx: Ctx) -> None:
             # overlap shading
             ax.hist(yi, bins=bins, alpha=0.18, color="#666666",
                     edgecolor="none", zorder=0)
+        ax.set_ylim(0, CUT * 1.55)
         ax.set_xlabel("adhesion strength (kPa)")
         ax.set_ylabel("count")
         ax.set_title("Internal vs external: target range overlap")
@@ -497,9 +518,9 @@ def fig4(ctx: Ctx) -> None:
         # Broken axis: RMSE/MAE (~24-33 kPa) dwarf the 0.79-0.90 metrics by
         # >40x.  Bars above CUT are truncated with zigzag break markers and
         # their true values labelled (standard broken-axis treatment).
-        # CUT=2.5 (was 5.0): truncated bars sit closer to the short metrics
-        # so the visual gap shrinks.
-        CUT = 2.5
+        # CUT=2.0 (was 5.0/2.5): truncated bars sit very close to the short
+        # metrics (0.79-0.90 reach ~40-45% of the truncated bar).
+        CUT = 2.0
         plot_vals = np.minimum(vals, CUT)
         bars = ax.barh(y, plot_vals, height=0.62, color=bar_colors,
                        edgecolor="white", linewidth=0.7, zorder=3)
@@ -517,7 +538,7 @@ def fig4(ctx: Ctx) -> None:
                         fontsize=6.5, color="#444444")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=7.0)
-        ax.set_xlim(0, 3.6)
+        ax.set_xlim(0, 3.0)
         ax.set_xlabel("mean (per-target)")
         ax.set_title(f"Per-target metrics ({_m_short(t, 14)})")
 
@@ -1516,7 +1537,7 @@ def fig7(ctx: Ctx) -> None:
         vals = [n_kept, n_pruned]
         colors = [NATURE["ours"], NATURE["bad"]]
         y = np.arange(2)[::-1]
-        CUT = 6.0   # 17 pruned >> 3 retained: broken axis with true value
+        CUT = 5.0   # 17 pruned >> 3 retained: broken axis with true value
         plot_vals = np.minimum(vals, CUT)
         ax.barh(y, plot_vals, height=0.5, color=colors,
                 edgecolor="white", linewidth=0.7, zorder=3)
