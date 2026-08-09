@@ -79,6 +79,39 @@ def _shade(i, n):
     return plt.cm.Blues(0.35 + 0.60 * i / max(n - 1, 1))
 
 
+def _broken_cut(vals, k=2.5):
+    """Adaptive broken-axis threshold: cut = k * median(positive values).
+    Returns None when nothing exceeds the cut (uniform data -> no zigzag,
+    avoiding misleading truncation)."""
+    vals = np.asarray(vals, dtype=float)
+    pos = vals[vals > 0]
+    if len(pos) == 0:
+        return None
+    med = float(np.median(pos))
+    cut = k * med
+    if vals.max() <= cut:
+        return None
+    return float(cut)
+
+
+def _break_marks(ax, cut, pos, span, orient="h", color="white", lw=1.2, tick=None):
+    """Zigzag '//' break markers at the truncated end of a bar/line.
+    orient='h': bar extends in +x, truncated at x=cut, bar centre y=pos,
+    half-height=span. orient='v': bar extends in +y, truncated at y=cut."""
+    if tick is None:
+        tick = max(abs(cut) * 0.015, span * 0.10)
+    if orient == "h":
+        for off in (-span, span):
+            ax.plot([cut - tick, cut + 2 * tick],
+                    [pos + off - tick, pos + off + tick],
+                    color=color, lw=lw, zorder=6)
+    else:
+        for off in (-span, span):
+            ax.plot([pos + off - tick, pos + off + tick],
+                    [cut - tick, cut + 2 * tick],
+                    color=color, lw=lw, zorder=6)
+
+
 # =========================================================================== #
 # Figure 3 - cohort / dataset characteristics (3x3, advanced chart types)
 # =========================================================================== #
@@ -1194,15 +1227,23 @@ def fig7(ctx: Ctx) -> None:
             else:
                 colors.append(plt.cm.Blues(0.40 + 0.55 * bi / max(n_b - 1, 1)))
                 bi += 1
-        ax.barh(y, d.values, height=0.65, color=colors, edgecolor="white",
+        cut = _broken_cut(d.values)          # break axis if a removal cost
+        plot_vals = np.minimum(d.values, cut) if cut else d.values
+        ax.barh(y, plot_vals, height=0.65, color=colors, edgecolor="white",
                 linewidth=0.6, zorder=3)
         pad = max(d.max() * 0.04, 0.002)
         for yy, v in zip(y, d.values):
-            ax.text(v + pad, yy, f"{v:.3f}", va="center", ha="left",
-                    fontsize=6.8, color="#333333", fontweight="bold")
+            if cut and v > cut:
+                _break_marks(ax, cut, yy, 0.33, tick=max(cut * 0.05, 0.003))
+                ax.text(cut + max(cut * 0.12, 0.008), yy, f"{v:.3f}",
+                        va="center", ha="left", fontsize=6.8,
+                        color=NATURE["ours_d"], fontweight="bold")
+            else:
+                ax.text(v + pad, yy, f"{v:.3f}", va="center", ha="left",
+                        fontsize=6.8, color="#333333", fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=6.5)
-        ax.set_xlim(0, d.max() * 1.30)
+        ax.set_xlim(0, (cut or d.max()) * 1.30 + (cut * 0.35 if cut else 0))
         ax.set_xlabel(f"\u0394 {pm} (removal cost, top 12)")
 
     # ----- B: per-variant R² lollipop ------------------------------------
@@ -1472,14 +1513,21 @@ def fig7(ctx: Ctx) -> None:
         vals = [n_kept, n_pruned]
         colors = [NATURE["ours"], NATURE["bad"]]
         y = np.arange(2)[::-1]
-        ax.barh(y, vals, height=0.5, color=colors,
+        CUT = 8.0   # 17 pruned >> 3 retained: broken axis with true value
+        plot_vals = np.minimum(vals, CUT)
+        ax.barh(y, plot_vals, height=0.5, color=colors,
                 edgecolor="white", linewidth=0.7, zorder=3)
         for yy, v in zip(y, vals):
-            ax.text(v + 0.3, yy, f"{v}", va="center", ha="left",
-                    fontsize=10, color="#333333", fontweight="bold")
+            if v > CUT:
+                _break_marks(ax, CUT, yy, 0.25, tick=0.5)
+                ax.text(CUT + 0.7, yy, f"{v}", va="center", ha="left",
+                        fontsize=10, color="#8B0000", fontweight="bold")
+            else:
+                ax.text(v + 0.3, yy, f"{v}", va="center", ha="left",
+                        fontsize=10, color="#333333", fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=8)
-        ax.set_xlim(0, max(vals) * 1.6 + 0.5)
+        ax.set_xlim(0, CUT + 3.5)
         ax.set_xlabel("mechanisms")
         ax.set_title("Retained vs pruned")
 
@@ -1620,19 +1668,41 @@ def fig8(ctx: Ctx) -> None:
         # value labels: ALL to the right of the dot with a clear gap and a
         # white halo so they never merge with the y-tick text.
         names = [_hard_shorten(f, 7) for f in m["feature"]]
-        ss.lollipop(ax, names, m["_signed"].values, color=NATURE["neutral"],
-                    value_fmt="{:.3f}", s=50, label_top=False)
-        for x, y in zip(m["_signed"].values, range(len(names))):
+        vals = m["_signed"].values
+        y_pos = np.arange(len(vals))
+        cut = _broken_cut(vals)
+        plot_vals = np.minimum(vals, cut) if cut else vals
+        ax.hlines(y=y_pos, xmin=0, xmax=plot_vals, color=NATURE["neutral"],
+                  lw=1.4, alpha=0.85)
+        for i, (x, yp) in enumerate(zip(vals, y_pos)):
             col = NATURE["good"] if x > 0 else NATURE["bad"]
-            ax.scatter([x], [y], s=60, color=col,
-                       edgecolor="white", linewidth=0.6, zorder=4)
-            ax.text(x + 0.025, y, f"{x:+.3f}", va="center", ha="left",
-                    fontsize=6.0, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.12", facecolor="white",
-                              edgecolor="none", alpha=0.85))
+            if cut and x > cut:
+                ax.scatter([cut], [yp], s=60, color=col,
+                           edgecolor="white", linewidth=0.6, zorder=4)
+                _break_marks(ax, cut, yp, 0.42,
+                             tick=max(cut * 0.05, 0.004))
+                ax.text(cut + max(cut * 0.12, 0.006), yp, f"{x:+.3f}",
+                        va="center", ha="left", fontsize=6.0,
+                        color="#8B0000", fontweight="bold",
+                        bbox=dict(boxstyle="round,pad=0.12", facecolor="white",
+                                  edgecolor="none", alpha=0.85))
+            else:
+                ax.scatter([x], [yp], s=60, color=col,
+                           edgecolor="white", linewidth=0.6, zorder=4)
+                ax.text(x + 0.025, yp, f"{x:+.3f}", va="center", ha="left",
+                        fontsize=6.0, color="#222222", fontweight="bold",
+                        bbox=dict(boxstyle="round,pad=0.12", facecolor="white",
+                                  edgecolor="none", alpha=0.85))
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(names, fontsize=6.0)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
+        ax.set_axisbelow(True)
         ax.axvline(0, color="black", lw=0.6)
         ax.tick_params(axis="y", labelsize=6.0)
-        ax.set_xlim(m["_signed"].min() - 0.01, m["_signed"].max() + 0.06)
+        ax.set_xlim(m["_signed"].min() - 0.01,
+                    (cut or m["_signed"].max()) + 0.06)
         ax.set_xlabel("signed permutation importance")
         ax.set_title("Top features (signed)")
 
@@ -1682,14 +1752,33 @@ def fig8(ctx: Ctx) -> None:
             "cls_token": "CLS",
         }
         names = [tok_short.get(str(t), str(t))[:8] for t in d["token"]]
-        ss.lollipop(ax, names, d["attention_mean"].values,
-                    color=NATURE["ours"], value_fmt="{:.3f}", s=55,
-                    label_top=False)
+        vals = d["attention_mean"].values
+        y_pos = np.arange(len(vals))
+        cut = _broken_cut(vals)
+        plot_vals = np.minimum(vals, cut) if cut else vals
+        ax.hlines(y=y_pos, xmin=0, xmax=plot_vals, color=NATURE["ours"],
+                  lw=1.4, alpha=0.85)
         # values to the RIGHT of dots to avoid title collision
-        for x, y in zip(d["attention_mean"].values, range(len(names))):
-            ax.text(x + 0.015, y, f"{x:.3f}", va="center", ha="left",
-                    fontsize=6.0, color=NATURE["ours_d"])
-        ax.tick_params(axis="y", labelsize=6.5)
+        for x, yp in zip(vals, y_pos):
+            if cut and x > cut:
+                ax.scatter([cut], [yp], s=55, color=NATURE["ours"], zorder=3,
+                           edgecolor="white", linewidth=0.8)
+                _break_marks(ax, cut, yp, 0.42, tick=max(cut * 0.04, 0.012))
+                ax.text(cut + max(cut * 0.09, 0.02), yp, f"{x:.3f}",
+                        va="center", ha="left", fontsize=6.0,
+                        color="#8B0000", fontweight="bold")
+            else:
+                ax.scatter([x], [yp], s=55, color=NATURE["ours"], zorder=3,
+                           edgecolor="white", linewidth=0.8)
+                ax.text(x + 0.015, yp, f"{x:.3f}", va="center", ha="left",
+                        fontsize=6.0, color=NATURE["ours_d"])
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(names, fontsize=6.5)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
+        ax.set_axisbelow(True)
+        ax.set_xlim(0, (cut or vals.max()) * 1.18 + (0.20 if cut else 0))
         ax.set_xlabel("CLS attention weight")
 
     # ----- D: attention-by-condition heatmap ----------------------------
@@ -1704,10 +1793,29 @@ def fig8(ctx: Ctx) -> None:
         n_tok = len(toks)
         x = np.arange(piv.shape[1])
         width = 0.8 / max(n_tok, 1)
+        cut = _broken_cut(piv.values.ravel())
         for i, tok in enumerate(toks):
-            ax.bar(x + i * width, piv.loc[tok].values, width=width * 0.85,
-                   color=OKABE_ITO[i % len(OKABE_ITO)], edgecolor="white",
-                   linewidth=0.4, label=_m_short(tok, 8), zorder=3)
+            vals_t = piv.loc[tok].values
+            plot_t = np.minimum(vals_t, cut) if cut else vals_t
+            col_t = OKABE_ITO[i % len(OKABE_ITO)]
+            for j, (v, pv) in enumerate(zip(vals_t, plot_t)):
+                bx = x[j] + i * width
+                lbl = _m_short(tok, 8) if j == 0 else None
+                if cut and v > cut:
+                    ax.bar(bx, pv, width=width * 0.85, color=col_t,
+                           edgecolor="white", linewidth=0.4, zorder=3,
+                           label=lbl)
+                    _break_marks(ax, cut, bx, width * 0.42, orient="v",
+                                 tick=max(cut * 0.04, 0.02))
+                    ax.text(bx, cut + max(cut * 0.10, 0.03), f"{v:.2f}",
+                            ha="center", va="bottom", fontsize=5.5,
+                            color="#8B0000", fontweight="bold")
+                else:
+                    ax.bar(bx, v, width=width * 0.85, color=col_t,
+                           edgecolor="white", linewidth=0.4, zorder=3,
+                           label=lbl)
+        if cut:
+            ax.set_ylim(0, cut * 1.40 + 0.15)
         ax.set_xticks(x + width * (n_tok - 1) / 2)
         ax.set_xticklabels([_hard_shorten(c, 8) for c in piv.columns],
                            rotation=45, ha="right", fontsize=6.5)
