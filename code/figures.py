@@ -912,7 +912,7 @@ def fig6(ctx: Ctx) -> None:
                    edgecolor="white", linewidth=1.2, zorder=4)
         ax.scatter([e_val], [0.22], s=180, color=NATURE["ours"],
                    edgecolor="white", linewidth=1.2, zorder=4)
-        pad = 0.018
+        pad = 0.030
         ax.text(i_val + pad, -0.22, f"CV {i_val:.3f}", va="center",
                 ha="left", fontsize=8.5, color=NATURE["base_d"],
                 fontweight="bold")
@@ -1011,7 +1011,7 @@ def fig6(ctx: Ctx) -> None:
             leg = ax.legend(handles=baseline_handles, fontsize=5.2,
                             frameon=True, loc="lower right",
                             framealpha=0.90, edgecolor="#cccccc",
-                            borderpad=0.4, labelspacing=0.30, markerscale=0.7)
+                            borderpad=0.45, labelspacing=0.45, markerscale=0.7)
             leg.set_zorder(10)
         ax.set_xlim(-0.05, 1.55)
         ax.set_xticks([0, 1])
@@ -1615,11 +1615,11 @@ def fig8(ctx: Ctx) -> None:
         # top features coloured in ours colour; values to the right w/ halo
         for x, y in zip(d["selection_frequency"].values, range(len(names))):
             col = NATURE["ours"] if x >= 0.95 else NATURE["base"]
-            ax.scatter([x], [y], s=60, color=col,
+            ax.scatter([x], [y], s=45, color=col,
                        edgecolor="white", linewidth=0.6, zorder=4)
-            ax.text(x + 0.05, y, f"{x:.2f}", va="center", ha="left",
-                    fontsize=6.0, color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.12", facecolor="white",
+            ax.text(x + 0.06, y, f"{x:.2f}", va="center", ha="left",
+                    fontsize=5.6, color="#222222", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.10", facecolor="white",
                               edgecolor="none", alpha=0.85))
         ax.axvline(0.8, ls="--", lw=0.8, color=NATURE["neutral"])
         ax.set_xlim(0, 1.18)

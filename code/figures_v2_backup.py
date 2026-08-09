@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.gridspec import GridSpec
-from matplotlib.patches import FancyBboxPatch
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
 import paths
 import sci_style as ss
@@ -193,13 +193,20 @@ def _p_psave(fig, name, L, outdir):
 
 # Figure 1 -- SIMPLEX pipeline (schematic)
 # =========================================================================== #
+# aliases: fig1 body uses short names, definitions carry a _p_ prefix
+_pbox = _p_pbox
+_parrow = _p_parrow
+_stage_label = __stage_label
+_psave = _p_psave
+
+
 def fig1(ctx: Ctx) -> None:
     fig, ax = plt.subplots(figsize=(9.8, 4.8))
     ax.set_xlim(0, 106); ax.set_ylim(0, 44); ax.axis("off")
     L = Layout()
 
     # ---------- Stage 1: data ----------
-    _stage_label(ax, L, 8.5, "1 · Data")
+    _stage_label(ax, L, 8.5, "A · Data")
     _pbox(ax, L, 1, 33.5, 15, 5.5, "Public dataset", "blue", fs=7.5, bold=True,
         sub="Nature 2025 · MIT licence")
     _pbox(ax, L, 1.5, 24.5, 14, 6, "341 formulations", "blue", fs=6.6)
@@ -209,17 +216,17 @@ def fig1(ctx: Ctx) -> None:
     _parrow(ax, 8.5, 24.5, 8.5, 23.0)
 
     # ---------- Stage 2: training region ----------
-    _stage_label(ax, L, 28, "2 · Training region")
+    _stage_label(ax, L, 28, "B · Training region")
     _pbox(ax, L, 20, 33.5, 16, 5.5, "Training set", "green", fs=7.5, bold=True,
-        sub="n = 180 · low-performance")
+        sub="n = 316 · internal cohort")
     _pbox(ax, L, 20, 25.0, 16, 6, "5-fold grouped CV", "green", fs=6.6)
-    _pbox(ax, L, 20, 17.0, 16, 6, "5 seeds · 25 models", "green", fs=6.6)
+    _pbox(ax, L, 20, 17.0, 16, 6, "10 seeds · 50 models", "green", fs=6.6)
     _pbox(ax, L, 20, 9.0, 16, 6, "Ablation-gated\ncomponents", "green", fs=6.2)
     _parrow(ax, 16, 20, 20, 20)
     _parrow(ax, 28, 33.5, 28, 31.5)
 
     # ---------- Stage 3: model ----------
-    _stage_label(ax, L, 49, "3 · SIMPLEX")
+    _stage_label(ax, L, 49, "C · SIMPLEX")
     _pbox(ax, L, 41, 33.5, 16, 5.5, "SIMPLEX", "orange", fs=8.5, bold=True,
         sub="dual-modality encoder")
     _pbox(ax, L, 41, 25.0, 16, 6, "Monomers +\npairwise terms", "orange", fs=6.4)
@@ -229,26 +236,26 @@ def fig1(ctx: Ctx) -> None:
     _parrow(ax, 49, 33.5, 49, 31.5)
 
     # ---------- Stage 4: extrapolation ----------
-    _stage_label(ax, L, 70, "4 · Extrapolation")
-    _pbox(ax, L, 62, 33.5, 16, 5.5, "External cohort", "red", fs=7.5, bold=True,
-        sub="n = 161 · SMBO-discovered")
-    _pbox(ax, L, 62, 25.0, 16, 6, "High-performance\ncomposition region", "red", fs=6.4)
-    _pbox(ax, L, 62, 17.0, 16, 6, "Target-value shift\n(mean 47 → 154 kPa)", "red", fs=6.2)
+    _stage_label(ax, L, 70, "D · Prospective validation")
+    _pbox(ax, L, 62, 33.5, 16, 5.5, "Prospective cohort", "red", fs=7.5, bold=True,
+        sub="n = 25 · model-discovered")
+    _pbox(ax, L, 62, 25.0, 16, 6, "Held-out during\nall tuning", "red", fs=6.4)
+    _pbox(ax, L, 62, 17.0, 16, 6, "High-adhesion region\n(62–251 kPa)", "red", fs=6.2)
     _pbox(ax, L, 62, 9.0, 16, 6, "Evaluated once,\nafter freezing", "red", fs=6.4)
     _parrow(ax, 57, 20, 62, 20)
     _parrow(ax, 70, 33.5, 70, 31.5)
 
     # ---------- Stage 5: screening ----------
-    _stage_label(ax, L, 92.5, "5 · Screening")
+    _stage_label(ax, L, 92.5, "E · Screening & insight")
     _pbox(ax, L, 83, 33.5, 19, 5.5, "Ranking + insight", "purple", fs=7.5, bold=True)
-    _pbox(ax, L, 83, 25.5, 19, 6, "Spearman ρ = 0.50\nvs RF 0.21", "purple", fs=6.4)
-    _pbox(ax, L, 83, 17.5, 19, 6, "Top-20 precision 0.25\nvs RF 0.10", "purple", fs=6.4)
+    _pbox(ax, L, 83, 25.5, 19, 6, "Spearman ρ = 0.87\n(prospective)", "purple", fs=6.4)
+    _pbox(ax, L, 83, 17.5, 19, 6, "Top-20 precision 0.90\n(prospective)", "purple", fs=6.4)
     _pbox(ax, L, 83, 9.5, 19, 6, "Permutation importance\n→ composition synergy", "bp", fs=6.2)
     _pbox(ax, L, 83, 2.5, 19, 5.5, "Accelerated screening", "purple", fs=6.6, bold=True)
     _parrow(ax, 78, 20, 83, 20)
     _parrow(ax, 92.5, 9.5, 92.5, 8.5)
 
-    _psave(fig, "Figure1_pipeline", L, outdir)
+    _psave(fig, "Figure1_pipeline", L, paths.FIGURES_DIR)
 
 # =========================================================================== #
 # FIGURE 2 -- SIMPLEX architecture (polished)
