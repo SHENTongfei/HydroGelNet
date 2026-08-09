@@ -72,6 +72,13 @@ def _save(fig, name, rect=(0, 0, 1, 0.94), wspace=0.55, hspace=0.70):
     ss.save_figure(fig, paths.FIGURES_DIR, name)
 
 
+def _shade(i, n):
+    """blue-shade gradient for baselines (n models, i index)."""
+    if n <= 1:
+        return NATURE["base"]
+    return plt.cm.Blues(0.35 + 0.60 * i / max(n - 1, 1))
+
+
 # =========================================================================== #
 # Figure 3 - cohort / dataset characteristics (3x3, advanced chart types)
 # =========================================================================== #
@@ -194,15 +201,30 @@ def fig3(ctx: Ctx) -> None:
                     return f.replace(k, v)
             return f.replace("pair_", "p")
         labels = [_short(f)[:14] for f in s["feature"]]
-        ss.lollipop(ax, labels, s["ks_stat"].values, color=NATURE["ours_d"],
-                    value_fmt="{:.2f}", s=30, label_top=False)
-        # value labels WELL to the RIGHT of each point (never on the dot)
+        vals = s["ks_stat"].values
         y_pos = np.arange(len(s))
-        pad = max(s["ks_stat"].max() * 0.05, 0.008)
-        for v, y in zip(s["ks_stat"].values, y_pos):
+        # brown gradient: small ks -> light brown, large ks -> dark brown
+        from matplotlib.colors import LinearSegmentedColormap
+        brown_cmap = LinearSegmentedColormap.from_list(
+            "browns", ["#E0B28A", "#8C2D04"])
+        norm = (vals - vals.min()) / (vals.max() - vals.min() + 1e-12)
+        colors = [brown_cmap(float(n)) for n in norm]
+        ax.hlines(y=y_pos, xmin=0, xmax=vals, color=colors,
+                  lw=1.4, alpha=0.85)
+        ax.scatter(vals, y_pos, s=30, color=colors, zorder=3,
+                   edgecolor="white", linewidth=0.8)
+        # value labels WELL to the RIGHT of each point (never on the dot)
+        pad = max(vals.max() * 0.05, 0.008)
+        for v, y, c in zip(vals, y_pos, colors):
             ax.text(v + pad, y, f"{v:.2f}", va="center", ha="left",
-                    fontsize=6.5, color=NATURE["ours_d"])
+                    fontsize=6.5, color=c)
         ax.invert_yaxis()
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(labels, fontsize=6.5)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
+        ax.set_axisbelow(True)
         ax.set_xlabel("KS statistic")
         ax.set_xlim(-0.02, max(s["ks_stat"].max() * 1.30, 0.12))
         ax.tick_params(axis="y", labelsize=6.5)
@@ -427,9 +449,18 @@ def fig4(ctx: Ctx) -> None:
         vals = m.loc[t, cols].values
         labels = [c if c != "R2" else "R\u00b2" for c in cols]
         y = np.arange(len(vals))[::-1]
-        bars = ax.barh(y, vals, height=0.62,
-                       color=[NATURE["ours"] if c == "R2" else NATURE["base"]
-                              for c in cols],
+        # R2 keeps the orange emphasis; the other metrics get a light->dark
+        # blue gradient (top->bottom), same _shade scheme as Fig5A.
+        n_b = len(cols) - 1
+        bi = 0
+        bar_colors = []
+        for c in cols:
+            if c == "R2":
+                bar_colors.append(NATURE["ours"])
+            else:
+                bar_colors.append(_shade(bi, n_b))
+                bi += 1
+        bars = ax.barh(y, vals, height=0.62, color=bar_colors,
                        edgecolor="white", linewidth=0.7, zorder=3)
         for yy, v in zip(y, vals):
             ax.text(v + max(vals) * 0.03, yy, f"{v:.3f}", va="center",
@@ -450,7 +481,7 @@ def fig4(ctx: Ctx) -> None:
                                           f"y_pred_{t}"]].mean()
         from matplotlib.colors import LinearSegmentedColormap
         red_orange = LinearSegmentedColormap.from_list(
-            "red_orange", ["#FF8C00", "#FF0000"])  # low density orange -> high density pure red
+            "red_orange", ["#FFDFA8", "#FF0000"])  # low density pale orange -> high density pure red
         hb = ax.hexbin(g[f"y_true_{t}"], g[f"y_pred_{t}"], gridsize=24,
                        cmap=red_orange, mincnt=1, linewidths=0.3, vmin=0, vmax=None)
         lo = float(min(g[f"y_true_{t}"].min(), g[f"y_pred_{t}"].min()))
@@ -1476,23 +1507,23 @@ def fig7(ctx: Ctx) -> None:
             ax.pie([1.0],
                    colors=[NATURE["ours"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
             ax.text(0, 0, "interaction", ha="center", va="center",
                     fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.26, "100%", ha="center", va="center",
+            ax.text(0, 0.18, "100%", ha="center", va="center",
                     fontsize=9, color="#222222", fontweight="bold")
         else:
             ax.pie([inter / s, marg / s],
                    colors=[NATURE["ours"], NATURE["base"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
             # merged "num + label" on one line each, one shared halo bbox
-            ax.text(0, 0.20, f"{inter / s * 100:.0f}%  inter",
+            ax.text(0, 0.14, f"{inter / s * 100:.0f}%  inter",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
                               edgecolor="none", alpha=0.60))
-            ax.text(0, -0.24, f"{marg / s * 100:.0f}%  marg",
+            ax.text(0, -0.16, f"{marg / s * 100:.0f}%  marg",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
@@ -1519,23 +1550,23 @@ def fig7(ctx: Ctx) -> None:
             ax.pie([1.0],
                    colors=[NATURE["ours"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
             ax.text(0, 0, "all retained", ha="center", va="center",
                     fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.26, f"({keep})", ha="center", va="center",
+            ax.text(0, 0.18, f"({keep})", ha="center", va="center",
                     fontsize=9, color="#222222", fontweight="bold")
         else:
             ax.pie([keep / s, prune / s],
                    colors=[NATURE["ours"], NATURE["bad"]],
                    startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.52, edgecolor="white", linewidth=1.2))
+                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
             # merged "num + label" on one line each, one shared halo bbox
-            ax.text(0, 0.20, f"{keep}  retain",
+            ax.text(0, 0.14, f"{keep}  retain",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
                               edgecolor="none", alpha=0.60))
-            ax.text(0, -0.24, f"{prune}  prun",
+            ax.text(0, -0.16, f"{prune}  prun",
                     ha="center", va="center", fontsize=9.5,
                     color="#222222", fontweight="bold",
                     bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
