@@ -1,0 +1,5 @@
+[01:48:25] START outdir=../_r4_cpu1 seeds=[2024, 7] device=cpu
+[01:48:54] START outdir=../_r4_cpu1 seeds=[2024, 7] device=cpu
+[01:49:25] seed 2024: rho=0.8192 rf=0.8023 30.8s
+[01:49:46] seed 7: rho=0.8877 rf=0.7946 21.2s
+[01:49:46] ALL_DONE

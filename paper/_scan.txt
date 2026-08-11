@@ -1,0 +1,64 @@
+[first] 1 hits
+   L7: \firstpage{1}
+[best] 2 hits
+   L262: \caption{Automated quality-gate outcome as recorded in $perf\_gate.json$. Overall verdict: FAIL. Check names (e.g., \texttt{G1\_beats\_best\_baseline}) are mach
+   L268: \texttt{G1\_beats\_best\_baseline} & pass & R2 0.7924 vs RandomForest 0.8067 (delta $-0.0143$, statistical tie) & Pass depends on a \texttt{tie\_tol = 0.02} cla
+[highest] 1 hits
+   L153: Two facts in the single-calibre columns point in opposite directions and are both stated. Under the single-run protocol, SIMPLEX attains the highest $R^2$ (0.67
+[hold-out] 2 hits
+   L24: \section{S2. External-batch provenance: the batch is a Bayesian-optimisation acquisition, not a random hold-out}
+   L26: The 25 external formulations are \textbf{not an i.i.d. hold-out}. They are the batch acquired in the \textbf{fourth round of the source study's sequential model
+[single-run] 1 hits
+   L153: Two facts in the single-calibre columns point in opposite directions and are both stated. Under the single-run protocol, SIMPLEX attains the highest $R^2$ (0.67
+
+=== SECTIONS ===
+L12: \section{S1. Data construction pipeline: the 316-formulation internal set and the deprecation of the $n = 161$ definition}
+L24: \section{S2. External-batch provenance: the batch is a Bayesian-optimisation acquisition, not a random hold-out}
+L32: \section{S3. Scheff\'e design-matrix rank deficiency and the compositional-data control}
+L42: \section{S4. Model configuration}
+L81: \section{S5. Hyperparameter search space and trajectory}
+L89: \section{S6. Cross-validation protocol}
+L99: \section{S7. Internal benchmark: eight models, five metrics}
+L128: \section{S8. External benchmark: dual-calibre disclosure}
+L159: \section{S9. Complete 23-arm ablation}
+L204: \section{S10. LOCO tests of the Scheff\'e interaction terms}
+L217: \section{S11. Full permutation importance}
+L256: \section{S12. Pre-registered quality gate: verdict FAIL, reported as recorded}
+L279: \section{S13. Reproduction}
+L285: \section{S14. Data and code licence declarations}
+
+=== TABLES ===
+L46: table
+L49: \label{tab:S4}
+L103: table
+L106: \label{tab:S7}
+L132: table
+L135: \label{tab:S8}
+L163: table
+L166: \label{tab:S9}
+L221: table
+L224: \label{tab:S11}
+L260: table
+L263: \label{tab:S12}
+
+=== CITES (line-level) ===
+The internal set comprises the \textbf{316 formulations} in $df\_316$, which correspond to the round-3 cohort of the sou
+The 25 external formulations are \textbf{not an i.i.d. hold-out}. They are the batch acquired in the \textbf{fourth roun
+\textbf{Information gap.} The exact acquisition-function implementation (EI variant), the surrogate used at round 4, and
+The 21-dimensional feature vector is, in form, the \textbf{Scheff\'e second-degree canonical mixture polynomial} --- six
+The centred log-ratio (CLR) transform, a standard compositional-data remedy \cite{aitchison1986}, does not by itself rem
+Consistent with the practice of releasing full search trajectories \cite{grinsztajn2022}, the complete search record is 
+The upstream data and code originate from the public repository \texttt{sheng-hu/hydrogels} accompanying Liao et al., \t
+
+=== TODO markers ===
+L22: \textbf{Information gap.} A per-sample tally of \emph{why} each of the 161 formulations was excluded under the
+L30: \textbf{Information gap.} The exact acquisition-function implementation (EI variant), the surrogate used at ro
+L40: \textbf{Information gap.} A fully ILR-corrected re-estimate of the benchmark is not among the released numbers
+L87: \textbf{Information gap.} The aggregate compute budget (sum of per-trial seconds) is not aggregated in any rel
+L97: \textbf{Information gap.} The per-fold standard deviation of each metric (needed for mean $\pm$ sd reporting) 
+L105: \caption{Internal $10 \times 5$ grouped cross-validated benchmark on the 316-formulation dataset (means over 5
+L126: \textbf{Information gap.} Per-fold standard deviations and per-model bootstrap intervals on the Table~\ref{tab
+L157: \textbf{Information gap.} Per-fold standard deviations for the external single-calibre metrics are $[待填写]$ (co
+L215: \textbf{Information gap.} The exact test statistic and degrees of freedom of the LOCO comparison are not recor
+L283: \textbf{Information gap.} The exact interpreter and library versions (Python, PyTorch, scikit-learn, SciPy, st
+L295: \textbf{Information gap.} Until those two files are committed, the licensing of this repository's own contents

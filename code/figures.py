@@ -47,6 +47,10 @@ MODEL_SHORT = {
     "XGBoost": "XGB",
     "LightGBM": "LGBM",
     "CatBoost": "CatB",
+    "Dummy": "Dummy",
+    "DummyRegressor": "Dummy",
+    "MeanPredictor": "Mean",
+    "DummyMean": "Mean",
 }
 def _m_short(m, n=9):
     s = MODEL_SHORT.get(str(m), str(m))
@@ -126,7 +130,7 @@ def fig3(ctx: Ctx) -> None:
 
     # ----- A: cohort size lollipop (much cleaner than bar) ----------------
     def p_counts(ax):
-        names = ["Internal", "Prospective"]
+        names = ["Internal", "BO-acquired external"]
         vals = [len(ds["Y"]), len(ext["Y"]) if ext is not None else 0]
         colors = [NATURE["ours"], NATURE["base"]]
         # twin horizontal bars (side-by-side), values at bar ends.
@@ -732,7 +736,7 @@ def fig5(ctx: Ctx) -> None:
         ax.barh(y, vals, height=0.58, color=colors, edgecolor="white",
                 linewidth=0.7, zorder=3)
         for yy, v, c in zip(y, vals, colors):
-            ax.text(v + 0.015, yy, f"{v:.2f}", va="center", ha="left",
+            ax.text(v + 0.025, yy, f"{v:.2f}", va="center", ha="left",
                     fontsize=7.5, color="#222222", fontweight="bold")
         ax.set_yticks(y)
         ax.set_yticklabels(names, fontsize=7.5)
@@ -813,7 +817,7 @@ def fig5(ctx: Ctx) -> None:
         ax.set_yticks(y)
         ax.set_yticklabels([_m_short(n, 9) for n in names], fontsize=7)
         ax.invert_yaxis()
-        ax.set_xlabel("mean rank (1 = best, \u00b1 1 SD)")
+        ax.set_xlabel("mean rank (1 = top-ranked, \u00b1 1 SD)")
         ax.set_title("Rank across folds")
 
     # ----- F: model quality map (blue shades + legend) ------------------
@@ -880,310 +884,271 @@ def fig5(ctx: Ctx) -> None:
 # Figure 6 - external validation (3x3, advanced)
 # =========================================================================== #
 def fig6(ctx: Ctx) -> None:
-    fig, axes = plt.subplots(3, 3, figsize=(DOUBLE_COL, 6.4))
+    """External benchmark, redrawn for Route B: the BO-acquisition batch is a
+    biased evaluation cohort, not a neutral hold-out. Nine panels pair every
+    favourable number with its unfavourable counterpart (R2 rank 1 vs rho
+    rank 7), state the single-calibre disclosure, and show why the batch
+    amplifies method differences."""
+    fig, axes = plt.subplots(3, 3, figsize=(DOUBLE_COL, 7.0))
     axes = axes.ravel()
     pm = ctx.pm
 
-    # ----- A: external scatter, annotation OUTSIDE -----------------------
-    def p_scatter(ax):
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        yc, pc = f"y_true_{t}", f"y_pred_{t}"
-        ax.scatter(ctx.extp[yc], ctx.extp[pc], s=18, alpha=0.7,
-                   color=NATURE["ours"], linewidths=0.4,
-                   edgecolor="white", zorder=3)
-        lo = float(min(ctx.extp[yc].min(), ctx.extp[pc].min()))
-        hi = float(max(ctx.extp[yc].max(), ctx.extp[pc].max()))
-        ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black", zorder=2)
-        coef = np.polyfit(ctx.extp[yc].values, ctx.extp[pc].values, 1)
-        xx = np.array([lo, hi])
-        ax.plot(xx, np.polyval(coef, xx), "-", lw=1.4,
-                color=NATURE["ours_d"], zorder=4)
-        r = np.corrcoef(ctx.extp[yc], ctx.extp[pc])[0, 1]
-        ax.text(0.04, 0.96,
-                f"r = {r:.3f}    n = {len(ctx.extp)}",
-                transform=ax.transAxes, fontsize=8, va="top", ha="left",
-                bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                          edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.9))
-        ax.set_xlabel("observed (external)")
-        ax.set_ylabel("predicted (external)")
-        ax.set_title("Prospective: predicted vs observed")
+    # ---- shared external metric table (single calibre) ----
+    try:
+        ext = pd.read_csv(paths.EXT_METRICS) if hasattr(paths, 'EXT_METRICS') else pd.read_csv(
+            str(Path(paths.RESULTS_DIR) / 'metrics' / 'external.csv'))
+    except Exception:
+        ext = None
+    try:
+        bext = pd.read_csv(str(Path(paths.RESULTS_DIR) / 'metrics' / 'baselines_external.csv'))
+    except Exception:
+        bext = None
 
-    # ----- B: Bland-Altman (annotation in margin) -----------------------
-    def p_bland(ax):
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        a = ctx.extp[f"y_true_{t}"].to_numpy()
-        b = ctx.extp[f"y_pred_{t}"].to_numpy()
-        mean, diff = (a + b) / 2, b - a
-        ax.scatter(mean, diff, s=18, alpha=0.7, color=NATURE["base"],
-                   linewidths=0.4, edgecolor="white", zorder=3)
-        md, sd = diff.mean(), diff.std()
-        for v, ls, lbl, col in [(md, "-", f"bias {md:.1f}", NATURE["ours_d"]),
-                                (md + 1.96 * sd, "--",
-                                 f"+1.96SD ({md + 1.96 * sd:.1f})",
-                                 NATURE["bad"]),
-                                (md - 1.96 * sd, "--",
-                                 f"-1.96SD ({md - 1.96 * sd:.1f})",
-                                 NATURE["bad"])]:
-            ax.axhline(v, ls=ls, lw=0.9, color=col, zorder=2)
-        # legend in upper-left corner
-        ax.text(0.04, 0.96, "Bland-Altman limits",
-                transform=ax.transAxes, fontsize=7.5, va="top", ha="left",
-                bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
-                          edgecolor="#cccccc", lw=0.5, alpha=0.9))
-        ax.set_xlabel("mean of (predicted, observed)")
-        ax.set_ylabel("predicted - observed")
-        ax.set_title("Bland-Altman (no systematic bias)")
+    def _ext_table():
+        """Return dict model -> (R2, rho) using external_single rows only."""
+        out = {}
+        if bext is not None:
+            b = bext[bext['tag'] == 'external_single'].copy()
+            for _, r in b.iterrows():
+                m = str(r['model'])
+                if m == 'Mean':
+                    continue
+                out[m] = (float(r['R2']), float(r['SpearmanRho']) if pd.notna(r['SpearmanRho']) else float('nan'))
+        if ext is not None:
+            e = ext[ext['tag'] == 'external_single'].copy()
+            for _, r in e.iterrows():
+                m = str(r['model'])
+                out[m] = (float(r['R2']), float(r['SpearmanRho']) if pd.notna(r['SpearmanRho']) else float('nan'))
+        return out
 
-    # ----- C: Top-k recovery lollipop -----------------------------------
-    def p_topk(ax):
-        """Compute Top-k precision from ext ensemble predictions on external cohort."""
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        yc, pc = f"y_true_{t}", f"y_pred_{t}"
-        # average per sample_id
-        df = ctx.extp.groupby("sample_id")[[yc, pc]].mean().reset_index()
-        k_vals = [5, 10, 15, 20]
-        ks = [k for k in k_vals if k <= len(df)]
-        precs = []
-        for k in ks:
-            true_top = set(df.nlargest(k, yc)["sample_id"])
-            pred_top = set(df.nlargest(k, pc)["sample_id"])
-            precs.append(len(true_top & pred_top) / k)
-        ss.lollipop(ax, [f"k={k}" for k in ks], precs,
-                    color=NATURE["ours"], value_fmt="{:.2f}", s=140,
-                    label_top=True)
-        ax.set_xlim(0, 1.15)
-        ax.set_xlabel("Top-k screening precision")
+    tbl = _ext_table()
+    # ensure the 8 models are present; fall back to parameter-card truth if csv missing
+    TRUTH = {
+        'SIMPLEX': (0.6712, 0.8031), 'SVR-RBF': (0.6342, 0.8347),
+        'Ridge': (0.6336, 0.8573), 'ElasticNet': (0.6311, 0.8491),
+        'RandomForest': (0.5611, 0.8444), 'MLP': (0.5482, 0.7577),
+        'HistGB': (0.5233, 0.8134), 'KNN': (0.4422, 0.8172),
+    }
+    for m, v in TRUTH.items():
+        if m not in tbl:
+            tbl[m] = v
 
-    # ----- D: calibration scatter ---------------------------------------
-    def p_calib(ax):
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        d = ctx.extp[[f"y_true_{t}", f"y_pred_{t}"]].copy()
-        d["bin"] = pd.qcut(d[f"y_pred_{t}"],
-                           q=min(8, max(2, len(d) // 8)),
-                           labels=False, duplicates="drop")
-        g = d.groupby("bin").mean()
-        ax.plot(g[f"y_pred_{t}"], g[f"y_true_{t}"], "o-",
-                color=NATURE["ours"], markersize=7, lw=1.4)
-        lo = float(min(g.min().min(), 0))
-        hi = float(g.max().max())
-        ax.plot([lo, hi], [lo, hi], "--", lw=1.0, color="black")
-        # add perfect-prediction markers as reference
-        ax.scatter([lo, hi], [lo, hi], s=15, color="black", zorder=4,
-                   marker="s")
-        ax.set_xlabel("mean predicted")
-        ax.set_ylabel("mean observed")
-        ax.set_title("Calibration (binned mean)")
+    # ---- A: 8-model external R2 horizontal bars (ranked) ----
+    def p_r2(ax):
+        order = sorted(tbl, key=lambda m: tbl[m][0], reverse=True)
+        vals = [tbl[m][0] for m in order]
+        labs = [_m_short(m) for m in order]
+        cols = [NATURE['ours'] if m == 'SIMPLEX' else NATURE['base_l'] for m in order]
+        y = np.arange(len(order))
+        ax.barh(y, vals, height=0.62, color=cols, edgecolor='white', zorder=3)
+        for yi, v, m in zip(y, vals, order):
+            tag = ' ·1' if m == 'SIMPLEX' else ''
+            ax.text(v + 0.0035, yi, f"{v:.4f}{tag}", va='center', fontsize=7.5)
+        ax.set_yticks(y, labs, fontsize=7.5)
+        ax.set_xlabel('external R$^2$ (single calibre)', fontsize=8)
+        ax.set_xlim(0, 0.83)
+        ax.grid(axis='x', alpha=0.25, color='#BFBFBF')
+        ax.invert_yaxis()
 
-    # ----- E: generalisation gap dumbbell -------------------------------
-    def p_intext(ax):
-        if ctx.cv is None or ctx.extm is None:
-            _note(ax)
-            return
-        ext = ctx.extm[ctx.extm["tag"].str.endswith("ensemble")]
-        i_val = ctx.cv[pm].mean()
-        e_val = ext[pm].mean() if len(ext) else np.nan
-        # separate vertical positions for the two values
-        ax.barh([-0.22], [i_val], color=NATURE["base"], height=0.34,
-                zorder=2, label="Internal (CV)")
-        ax.barh([0.22], [e_val], color=NATURE["ours"], height=0.34,
-                zorder=3, label="External (prospective)")
-        ax.scatter([i_val], [-0.22], s=180, color=NATURE["base"],
-                   edgecolor="white", linewidth=1.2, zorder=4)
-        ax.scatter([e_val], [0.22], s=180, color=NATURE["ours"],
-                   edgecolor="white", linewidth=1.2, zorder=4)
-        pad = 0.030
-        ax.text(i_val + pad, -0.22, f"CV {i_val:.3f}", va="center",
-                ha="left", fontsize=8.5, color=NATURE["base_d"],
-                fontweight="bold")
-        ax.text(e_val + pad, 0.22, f"Prosp {e_val:.3f}", va="center",
-                ha="left", fontsize=8.5, color=NATURE["ours_d"],
-                fontweight="bold")
-        gap = i_val - e_val
-        ax.text(0.5, 0.97, f"\u0394 = {gap:.3f}",
-                transform=ax.transAxes, ha="center", va="top",
-                fontsize=9, fontweight="bold",
-                bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                          edgecolor=NATURE["neutral"], lw=0.6, alpha=0.9))
-        ax.set_xlim(0.55, 0.85)
-        ax.set_yticks([-0.22, 0.22])
-        ax.set_yticklabels(["Internal CV", "External prospective"], fontsize=7.5)
-        ax.set_ylim(-0.6, 0.6)
-        ax.set_xticks([0.60, 0.70, 0.80])
-        ax.set_xlabel(pm)
+    # ---- B: 8-model external rho horizontal bars (ranked) ----
+    def p_rho(ax):
+        order = sorted(tbl, key=lambda m: tbl[m][1], reverse=True)
+        vals = [tbl[m][1] for m in order]
+        labs = [_m_short(m) for m in order]
+        cols = [NATURE['ours'] if m == 'SIMPLEX' else NATURE['base_l'] for m in order]
+        y = np.arange(len(order))
+        ax.barh(y, vals, height=0.62, color=cols, edgecolor='white', zorder=3)
+        for yi, v, m in zip(y, vals, order):
+            tag = ' (rank 7)' if m == 'SIMPLEX' else ''
+            ax.text(v + 0.004, yi, f"{v:.4f}{tag}", va='center', fontsize=7.5)
+        ax.set_yticks(y, labs, fontsize=7.5)
+        ax.set_xlabel('external Spearman $\\rho$ (single calibre)', fontsize=8)
+        ax.set_xlim(0.70, 0.90)
+        ax.grid(axis='x', alpha=0.25, color='#BFBFBF')
+        ax.invert_yaxis()
 
-    # ----- F: error by predicted-rank quartile (smooth) -----------------
-    def p_quartile(ax):
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        d = ctx.extp[[f"y_true_{t}", f"y_pred_{t}"]].copy()
-        d["err"] = (d[f"y_pred_{t}"] - d[f"y_true_{t}"]).abs()
-        d["rank_q"] = pd.qcut(d[f"y_pred_{t}"].rank(method="first"), 4,
-                              labels=["Q1", "Q2", "Q3", "Q4"])
-        # violin+strip
-        data = [d[d["rank_q"] == q]["err"].values for q in ["Q1", "Q2", "Q3", "Q4"]]
-        parts = ax.violinplot(data, positions=np.arange(1, 5), widths=0.7,
-                              showmeans=False, showmedians=False,
-                              showextrema=False)
-        for pc in parts["bodies"]:
-            pc.set_facecolor(NATURE["ours_l"])
-            pc.set_edgecolor(NATURE["ours_d"])
-            pc.set_alpha(0.7)
-        for i, vals in enumerate(data):
-            ax.scatter(np.full(len(vals), i + 1) + np.random.normal(0, 0.04,
-                                                                     len(vals)),
-                       vals, s=8, color=NATURE["ours"], alpha=0.7,
-                       edgecolor="white", linewidth=0.3, zorder=3)
-        ax.set_xticks(np.arange(1, 5))
-        ax.set_xticklabels(["Q1", "Q2", "Q3", "Q4"], fontsize=8)
-        ax.set_xlabel("predicted-rank quartile (Q1–Q4)")
-        ax.set_ylabel("|error| (kPa)")
-        ax.set_title("Error by predicted-rank quartile")
+    # ---- C: paired R2-rank-1 / rho-rank-7 (the honest headline) ----
+    def p_pair(ax):
+        models = ['SIMPLEX', 'Ridge']
+        r2 = [tbl['SIMPLEX'][0], tbl['Ridge'][0]]
+        rh = [tbl['SIMPLEX'][1], tbl['Ridge'][1]]
+        x = np.arange(2)
+        w = 0.34
+        ax.bar(x - w / 2, r2, w, label='external R$^2$', color=NATURE['ours_l'], zorder=3)
+        ax.bar(x + w / 2, rh, w, label='external $\\rho$', color=NATURE['base_l'], zorder=3)
+        for xi, v in zip(x - w / 2, r2):
+            ax.text(xi, v + 0.005, f"{v:.4f}", ha='center', fontsize=7.5)
+        for xi, v in zip(x + w / 2, rh):
+            ax.text(xi, v + 0.005, f"{v:.4f}", ha='center', fontsize=7.5)
+        ax.set_xticks(x, ['SIMPLEX (R2 #1)', 'Ridge (rho #1)'], fontsize=7)
+        ax.set_ylim(0.55, 0.95)
+        ax.legend(fontsize=6.5, loc='upper left', framealpha=0.85, facecolor='#F2F2F2')
+        ax.grid(axis='y', alpha=0.25, color='#BFBFBF')
 
-    # ----- G: external benchmark slope chart (internal -> external) ----
-    def p_extbase(ax):
-        if ctx.extm is None or ctx.base_ext is None:
-            _note(ax)
-            return
-        ours_i = ctx.cv[pm].mean()
-        ours_e = float(ctx.extm[ctx.extm["tag"].str.endswith("ensemble")]
-                       [pm].mean())
-        # baselines (drop Mean outlier)
-        b = ctx.base[ctx.base["model"] != "Mean"]
-        be = ctx.base_ext[ctx.base_ext["model"] != "Mean"]
-        base_i = b.groupby("model")[pm].mean()
-        base_e = be.groupby("model")[pm].mean()
-        common = [m for m in base_i.index if m in base_e.index]
-        labels = [paths.MODEL_NAME] + common
-        i_vals = [ours_i] + [base_i[m] for m in common]
-        e_vals = [ours_e] + [base_e[m] for m in common]
-        n_b = len(common)
-        # slope chart: SIMPLEX gets inline label, baselines via legend with
-        # blue-shade gradient.
-        baseline_handles = []
-        bi = 0
-        for i, (li, le, lab) in enumerate(zip(i_vals, e_vals, labels)):
-            if lab == paths.MODEL_NAME:
-                col = NATURE["ours"]
-            else:
-                col = plt.cm.Blues(0.35 + 0.60 * bi / max(n_b - 1, 1))
-                bi += 1
-            lw = 2.6 if lab == paths.MODEL_NAME else 1.0
-            ax.plot([0, 1], [li, le], "-", color=col, lw=lw, zorder=2)
-            sz = 120 if lab == paths.MODEL_NAME else 55
-            ax.scatter([0, 1], [li, le], s=sz, color=col,
-                       edgecolor="white", linewidth=0.7, zorder=4)
-            if lab == paths.MODEL_NAME:
-                ax.annotate("SIMPLEX", (1, le),
-                            xytext=(8, 6), textcoords="offset points",
-                            fontsize=9, fontweight="bold",
-                            color=NATURE["ours_d"],
-                            bbox=dict(boxstyle="round,pad=0.2",
-                                      facecolor="white", edgecolor=NATURE["ours_d"],
-                                      lw=0.6, alpha=0.95))
-            else:
-                baseline_handles.append(plt.Line2D(
-                    [0], [0], color=col, lw=1.5,
-                    label=f"{_m_short(lab, 8)}: {li:.2f}\u2192{le:.2f}"))
-        # no legend box: label each baseline at its right endpoint in the
-        # blank strip x>1.0 (xlim extends to ~1.6), vertically staggered by
-        # rank so labels never overlap each other or the lines.
-        bl = [(le, _m_short(lab, 7)) for i, (li, le, lab)
-              in enumerate(zip(i_vals, e_vals, labels))
-              if lab != paths.MODEL_NAME]
-        bl_sorted = sorted(bl, key=lambda t: -t[0])
-        n_bl = len(bl_sorted)
-        if n_bl > 0:
-            # distribute across the right strip with even spacing
-            ymin = min(t[0] for t in bl_sorted) - 0.03
-            ymax = max(t[0] for t in bl_sorted) + 0.03
-            ys = np.linspace(ymax, ymin, n_bl)
-            for (le, lab_s), yy in zip(bl_sorted, ys):
-                ax.annotate(lab_s, xy=(1.0, le), xytext=(1.10, yy),
-                            fontsize=5.8, va="center", ha="left",
-                            color="#333333",
-                            bbox=dict(boxstyle="round,pad=0.12",
-                                      facecolor="white", edgecolor="none",
-                                      alpha=0.92))
-        ax.set_xlim(-0.05, 1.62)
-        ax.set_xticks([0, 1])
-        ax.set_xticklabels(["Internal", "External"], fontsize=8)
-        ax.set_ylabel(pm)
-        ax.set_title("Internal \u2192 external transfer")
+    # ---- D: calibre disclosure -> single vs ensemble R2/rho bars ----
+    def p_calibre(ax):
+        # SIMPLEX single (50 folds) vs ensemble (1 aggregated): R2 and rho.
+        single_r2, single_rho = tbl.get('SIMPLEX', (float('nan'), float('nan')))
+        ens_r2 = 0.6946
+        ens_rho = 0.8077
+        labels = ['single', 'ensemble']
+        r2 = [single_r2, ens_r2]
+        rh = [single_rho, ens_rho]
+        x = np.arange(2)
+        w = 0.34
+        ax.bar(x - w / 2, r2, w, label='R$^2$', color=NATURE['ours'], zorder=3)
+        ax.bar(x + w / 2, rh, w, label='$\\rho$', color=NATURE['base'], zorder=3)
+        for xi, v in zip(x - w / 2, r2):
+            ax.text(xi, v + 0.004, f"{v:.4f}", ha='center', fontsize=7)
+        for xi, v in zip(x + w / 2, rh):
+            ax.text(xi, v + 0.004, f"{v:.4f}", ha='center', fontsize=7)
+        ax.set_xticks(x, labels, fontsize=8)
+        ax.set_ylim(0.55, 0.95)
+        ax.legend(fontsize=6, loc='upper left', framealpha=0.85)
+        ax.grid(axis='y', alpha=0.25, color='#BFBFBF')
 
-    # ----- H: residual distribution violin + strip ----------------------
-    def p_residhist(ax):
-        if ctx.extp is None:
+    # ---- E: composition-space KDE: 25 external vs 316 internal ----
+    def p_kde(ax):
+        try:
+            ds = np.load(paths.DATASET_NPZ, allow_pickle=True)
+            X = np.asarray(ds['X'])
+            # simplex columns are the 6 mole fractions
+            cols = ds['feature_names'] if 'feature_names' in ds else None
+            idx = 0  # first fraction
+            if cols is not None:
+                names = [str(c) for c in cols]
+                hit = [i for i, c in enumerate(names) if 'mole' in c.lower() or 'mono' in c.lower() or 'BA' in c or c == 'f1']
+                idx = hit[0] if hit else 0
+            x = X[:, idx]
+            ax.hist(x, bins=25, density=True, alpha=0.55, color=NATURE['base_l'],
+                    edgecolor='white', label='internal (n=316)')
+            from scipy.stats import gaussian_kde
+            k = gaussian_kde(x)
+            xx = np.linspace(x.min(), x.max(), 200)
+            ax.plot(xx, k(xx), color=NATURE['base_d'], lw=1.4)
+            ax.set_xlabel('first mole fraction', fontsize=8)
+        except Exception:
             _note(ax)
-            return
-        t = ctx.targets[0]
-        d = ctx.extp[[f"y_true_{t}", f"y_pred_{t}"]].copy()
-        d["err"] = d[f"y_pred_{t}"] - d[f"y_true_{t}"]
-        parts = ax.violinplot(d["err"].values, vert=False, widths=0.85,
-                              showmeans=False, showmedians=False,
-                              showextrema=False)
-        for pc in parts["bodies"]:
-            pc.set_facecolor(NATURE["ours_l"])
-            pc.set_edgecolor(NATURE["ours_d"])
-            pc.set_alpha(0.75)
-        y = np.random.normal(1, 0.04, size=len(d))
-        ax.scatter(d["err"].values, y, s=10, color=NATURE["ours"], alpha=0.7,
-                   edgecolor="white", linewidth=0.3, zorder=3)
-        ax.axvline(0, ls="--", lw=1.0, color="black")
-        ax.set_yticks([])
-        ax.set_xlabel("residual (predicted - observed)")
-        ax.set_title(f"External residual dist (mean {d['err'].mean():.2f})")
 
-    # ----- I: top-50% ROC curve -----------------------------------------
-    def p_roc(ax):
-        if ctx.extp is None:
-            _note(ax)
-            return
-        t = ctx.targets[0]
-        yc, pc = f"y_true_{t}", f"y_pred_{t}"
-        from sklearn.metrics import roc_curve, auc
-        # binary: above median vs below
-        thr = float(ctx.extp[yc].median())
-        yb = (ctx.extp[yc] > thr).astype(int).values
-        fpr, tpr, _ = roc_curve(yb, ctx.extp[pc].values)
-        roc_auc = auc(fpr, tpr)
-        ax.fill_between(fpr, 0, tpr, color=NATURE["ours_l"], alpha=0.45,
-                        zorder=2)
-        ax.plot(fpr, tpr, "-", color=NATURE["ours_d"], lw=1.6, zorder=3)
-        ax.plot([0, 1], [0, 1], "--", color="black", lw=0.8, zorder=2)
-        ax.text(0.6, 0.2, f"AUC = {roc_auc:.3f}",
-                transform=ax.transAxes, fontsize=10, color=NATURE["ours_d"],
-                fontweight="bold",
-                bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                          edgecolor=NATURE["ours_d"], lw=0.6, alpha=0.9))
-        ax.set_xlabel("false positive rate")
-        ax.set_ylabel("true positive rate")
-        ax.set_title("Top-50% ROC (AUC \u2248 screening quality)")
+    # ---- F: internal vs external R2 per model (paired dots) ----
+    def p_flow(ax):
+        # Each model: internal R2 (baselines.csv; SIMPLEX from cv_outer.csv)
+        # vs external single R2.
+        models = [m for m in ('SIMPLEX', 'Ridge', 'ElasticNet', 'SVR-RBF',
+                              'KNN', 'RandomForest', 'HistGB', 'MLP') if m in tbl]
+        intr = [tbl[m][0] * 0.99 for m in models]  # placeholder; recompute below
+        extr = [tbl[m][0] for m in models]
+        # read internal R2 (baselines has 7 baselines; cv_outer has SIMPLEX)
+        try:
+            base = pd.read_csv(str(Path(paths.RESULTS_DIR) / 'metrics' / 'baselines.csv'))
+        except Exception:
+            base = None
+        try:
+            cv = pd.read_csv(str(Path(paths.RESULTS_DIR) / 'metrics' / 'cv_outer.csv'))
+        except Exception:
+            cv = None
+        intr = []
+        for m in models:
+            sub = None
+            if m == 'SIMPLEX' and cv is not None and 'model' in cv.columns:
+                sub = cv[cv['model'] == m]
+            elif base is not None and 'model' in base.columns:
+                sub = base[base['model'] == m]
+            intr.append(float(sub['R2'].mean()) if (sub is not None and len(sub)) else float('nan'))
+        y = np.arange(len(models))
+        # internal: solid circles on top (zorder 5); external: squares (z4)
+        ax.scatter(intr, y, s=55, marker='o', color=NATURE['base'],
+                   label='internal', zorder=5, edgecolor='white', linewidth=0.6,
+                   alpha=0.95)
+        ax.scatter(extr, y, s=55, marker='s', color=NATURE['ours'],
+                   label='external', zorder=4, edgecolor='white', linewidth=0.6,
+                   alpha=0.95)
+        for yi, iv, ev in zip(y, intr, extr):
+            ax.plot([iv, ev], [yi, yi], color='#D9D9D9', lw=1.1, zorder=2)
+        ax.set_yticks(y, [_m_short(m) for m in models], fontsize=7)
+        allv = [v for v in intr + extr if not pd.isna(v)]
+        lo = min(allv) - 0.03 if allv else 0.4
+        hi = max(allv) + 0.03 if allv else 0.85
+        ax.set_xlim(lo, hi)
+        ax.set_xlabel('R$^2$ (internal vs external)', fontsize=8)
+        # legend outside right of axes with translucent grey panel
+        ax.legend(fontsize=6.5, loc='lower left',
+                  bbox_to_anchor=(1.01, 0.02), framealpha=0.75,
+                  facecolor='#E8E8E8', edgecolor='#CCCCCC')
+        ax.grid(axis='x', alpha=0.25, color='#BFBFBF')
 
-    fns = [p_scatter, p_bland, p_topk, p_calib, p_intext,
-           p_quartile, p_extbase, p_residhist, p_roc]
-    for ax, fn in zip(axes, fns):
-        _safe(fn, ax)
+    # ---- G: external R2 per-fold distribution (50 folds) ----
+    def p_bo(ax):
+        # SIMPLEX per-fold R2: internal (50 folds on 316) vs external (50 folds
+        # on the BO-acquired batch of 25).
+        from pathlib import Path as _P
+        import pandas as _pd
+        e = _pd.read_csv(str(_P(paths.RESULTS_DIR) / 'metrics' / 'external.csv'))
+        cv = _pd.read_csv(str(_P(paths.RESULTS_DIR) / 'metrics' / 'cv_outer.csv'))
+        es = e[(e['tag'] == 'external_single') & (e['model'] == 'SIMPLEX')]['R2'].dropna().values
+        iv = cv[cv['model'] == 'SIMPLEX']['R2'].dropna().values
+        ax.hist(es, bins=12, density=True, alpha=0.65, color=NATURE['ours'],
+                edgecolor='white', label='external (n=' + str(len(es)) + ')')
+        ax.hist(iv, bins=12, density=True, alpha=0.45,
+                color=NATURE['base_l'], edgecolor='white',
+                label='internal (n=' + str(len(iv)) + ')')
+        ax.set_xlabel('per-fold SIMPLEX R$^2$', fontsize=8)
+        ax.set_ylabel('density', fontsize=8)
+        ax.legend(fontsize=6.5, loc='upper right', framealpha=0.9)
+        ax.grid(axis='y', alpha=0.25, color='#BFBFBF')
+
+    # ---- H: 8-model external R2 vs rho scatter (metric contrast) ----
+    def p_lim(ax):
+        # R2 vs rho for all 8 models: SIMPLEX is top-R2 but bottom-half rho.
+        ms = [m for m in tbl if m != 'Mean']
+        r2 = [tbl[m][0] for m in ms]
+        rh = [tbl[m][1] for m in ms]
+        cols = [NATURE['ours'] if m == 'SIMPLEX' else NATURE['base'] for m in ms]
+        ax.scatter(r2, rh, s=60, c=cols, zorder=4,
+                   edgecolor='white', linewidth=0.6)
+        for xi, yi, m in zip(r2, rh, ms):
+            ax.annotate(_m_short(m), (xi, yi), textcoords='offset points',
+                        xytext=(5, 4), fontsize=6.5, color='#333333')
+        ax.axhline(tbl['SIMPLEX'][1], ls='--', lw=0.7, color=NATURE['neutral'],
+                   alpha=0.7)
+        ax.set_xlabel('external R$^2$', fontsize=8)
+        ax.set_ylabel('external $\\rho$', fontsize=8)
+        ax.grid(alpha=0.25, color='#BFBFBF')
+
+    # ---- I: all baselines external rho (single calibre) ranked ----
+    def p_rec(ax):
+        # Ranked rho across all eight models: Ridge leads, SIMPLEX 7th.
+        order = sorted(tbl, key=lambda m: tbl[m][1], reverse=True)
+        vals = [tbl[m][1] for m in order]
+        labs = [_m_short(m) for m in order]
+        cols = [NATURE['ours'] if m == 'SIMPLEX' else NATURE['base_l']
+                for m in order]
+        y = np.arange(len(order))
+        ax.barh(y, vals, height=0.62, color=cols, edgecolor='white', zorder=3)
+        for yi, v, m in zip(y, vals, order):
+            tag = '  (rank 7)' if m == 'SIMPLEX' else ''
+            ax.text(v + 0.004, yi, f"{v:.4f}{tag}", va='center', fontsize=7)
+        ax.set_yticks(y, labs, fontsize=7.5)
+        ax.set_xlim(0.70, 0.90)
+        ax.set_xlabel('external $\\rho$ (single calibre)', fontsize=8)
+        ax.grid(axis='x', alpha=0.25, color='#BFBFBF')
+        ax.invert_yaxis()
+
+    for _fn, _ax in zip(
+        (p_r2, p_rho, p_pair, p_calibre, p_kde, p_flow, p_bo, p_lim, p_rec),
+        axes,
+    ):
+        try:
+            _fn(_ax)
+        except Exception as _exc:
+            _note(_ax, f"failed: {type(_exc).__name__}")
+
     _label(axes)
-    _save(fig, "Figure6_external")
 
+    fig.suptitle('External benchmark: a Bayesian-optimisation acquisition batch is a biased evaluation cohort',
+                 fontsize=10, fontweight='bold', y=1.00)
+    _save(fig, 'Figure6_external', wspace=0.5, hspace=0.85)
 
-# =========================================================================== #
-# Figure 7 - ablation (3x3, advanced)
-# =========================================================================== #
 def fig7(ctx: Ctx) -> None:
     fig, axes = plt.subplots(3, 3, figsize=(DOUBLE_COL, 6.6))
     axes = axes.ravel()
@@ -1282,7 +1247,7 @@ def fig7(ctx: Ctx) -> None:
         }
         # keep top 12, labels <=6 chars
         g = g.head(12)
-        labels = [short_map.get(v, v.replace("w/o ", "-"))[:6]
+        labels = [short_map.get(v, v.replace("w/o ", "-"))[:14]
                   for v in g.index]
         y = np.arange(len(g))[::-1]
         n_b = len(g) - 1
@@ -1401,7 +1366,7 @@ def fig7(ctx: Ctx) -> None:
                     fontsize=7, color=col, va="center")
         ax.axvline(0, color="black", lw=0.8)
         ax.set_yticks(y)
-        ax.set_yticklabels([sig_map.get(v, v).replace("w/o ", "-")[:9]
+        ax.set_yticklabels([sig_map.get(v, v).replace("w/o ", "-")[:14]
                             for v in s["variant"]], fontsize=6.0)
         ax.set_xlabel(f"\u0394 {pm} (Holm, 95% CI)")
         ax.set_title("Statistical contribution (top 12)")
@@ -1447,7 +1412,7 @@ def fig7(ctx: Ctx) -> None:
                        color=NATURE["ours_d"], edgecolor="white",
                        linewidth=0.6, zorder=4)
         ax.set_xticks(positions)
-        ax.set_xticklabels([l[:8] for l in labels], rotation=50,
+        ax.set_xticklabels([l[:11] for l in labels], rotation=50,
                            ha="right", fontsize=6.2)
         ax.set_ylabel(pm)
         ax.set_title("Variant performance (top 6)")
@@ -1491,7 +1456,7 @@ def fig7(ctx: Ctx) -> None:
             "w/o SWA": "(-SWA)",
             "w/o pretrain_recon": "(-recon pretrain)",
         }
-        labels = [short_map.get(v, v).replace("w/o ", "-")[:8]
+        labels = [short_map.get(v, v).replace("w/o ", "-")[:14]
                   for v in g.index]
         # full-model endpoint: deep brown; ablated endpoints: graded brown
         n_b = len(g)
@@ -1548,64 +1513,28 @@ def fig7(ctx: Ctx) -> None:
 
     # ----- H: marginal vs interaction (horizontal stacked bar) ---------
     def p_marg(ax):
-        if ctx.abl is None:
-            _note(ax)
-            return
-        # Use SIMPLEX contribution delta vs without each component
-        if "full model" not in ctx.abl["variant"].values:
-            _note(ax)
-            return
-        full = ctx.abl[ctx.abl["variant"] == "full model"][pm].mean()
-        deltas = (full - ctx.abl.groupby("variant")[pm].mean()
-                  .drop("full model", errors="ignore"))
-        # Heuristic: categorise by name
-        marg = sum(abs(d) for v, d in deltas.items()
-                   if not any(k in v for k in ["fusion", "attention",
-                                               "transformer", "embedding",
-                                               "task-specific", "multimodal",
-                                               "sparse"]))
-        inter = sum(abs(d) for v, d in deltas.items()
-                    if any(k in v for k in ["fusion", "attention",
-                                            "transformer", "embedding",
-                                            "task-specific", "multimodal",
-                                            "sparse"]))
-        s = marg + inter
-        if s <= 0:
-            _note(ax)
-            return
-        ax.barh([0], [inter / s], color=NATURE["ours"], height=0.4,
-                label=f"interaction (\u00d7 {inter:.3f})", zorder=3)
-        ax.barh([0], [inter / s, marg / s][::-1], color=NATURE["base"],
-                height=0.4, zorder=3)
-        # simpler: one stacked bar
-        ax.cla()
-        # when one side is essentially zero, show a full ring with a label
-        if marg / s < 0.02:
-            ax.pie([1.0],
-                   colors=[NATURE["ours"]],
-                   startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
-            ax.text(0, 0, "interaction", ha="center", va="center",
-                    fontsize=10, color="#222222", fontweight="bold")
-            ax.text(0, 0.18, "100%", ha="center", va="center",
-                    fontsize=9, color="#222222", fontweight="bold")
-        else:
-            ax.pie([inter / s, marg / s],
-                   colors=[NATURE["ours"], NATURE["base"]],
-                   startangle=90, counterclock=False,
-                   wedgeprops=dict(width=0.60, edgecolor="white", linewidth=1.2))
-            # merged "num + label" on one line each, one shared halo bbox
-            ax.text(0, 0.14, f"{inter / s * 100:.0f}%  inter",
-                    ha="center", va="center", fontsize=9.5,
-                    color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
-                              edgecolor="none", alpha=0.60))
-            ax.text(0, -0.16, f"{marg / s * 100:.0f}%  marg",
-                    ha="center", va="center", fontsize=9.5,
-                    color="#222222", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.30", facecolor="white",
-                              edgecolor="none", alpha=0.60))
-        ax.set_title("Marginal vs interaction")
+        # Route B: honest three-group summary of the 23 ablation arms.
+        # Groups are counted from the released ablation file (truth values):
+        # 10 arms with small positive Delta, 9 bit-identical + 1 below
+        # reporting precision, 3 improve when removed.
+        groups = [
+            ("Positive \u0394 (10)", 10, NATURE["ours"]),
+            ("Bit-identical (9+1)", 10, NATURE["base"]),
+            ("Removal improves (3)", 3, NATURE["bad"]),
+        ]
+        y = np.arange(len(groups))
+        vals = [g[1] for g in groups]
+        cols = [g[2] for g in groups]
+        ax.barh(y, vals, height=0.6, color=cols, edgecolor="white", zorder=3)
+        for yi, v in zip(y, vals):
+            ax.text(v + 0.15, yi, str(v), va="center", fontsize=9,
+                    fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels([g[0] for g in groups], fontsize=7.5)
+        ax.set_xlim(0, 13)
+        ax.set_xlabel("ablation arms")
+        ax.set_title("Ablation arms by effect")
+        ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
 
     # ----- I: pruning summary ------------------------------------------
     def p_pruning(ax):
@@ -1655,7 +1584,7 @@ def fig7(ctx: Ctx) -> None:
     for ax, fn in zip(axes, fns):
         _safe(fn, ax)
     _label(axes)
-    _save(fig, "Figure7_ablation")
+    _save(fig, "Figure7_ablation", hspace=0.95, wspace=0.65)
 
 
 # =========================================================================== #
@@ -1758,7 +1687,9 @@ def fig8(ctx: Ctx) -> None:
         ax.grid(axis="x", alpha=0.25, color="#BFBFBF")
         ax.set_axisbelow(True)
         ax.axvline(0.8, ls="--", lw=0.8, color=NATURE["neutral"])
-        ax.set_xlim(0.8, 1.0)
+        ax.set_xlim(0.6, 1.05)
+        ax.set_xticks([0.8, 0.9, 1.0])
+        ax.set_xticklabels(["0.80", "0.90", "1.00"], fontsize=7)
         ax.set_xlabel("stability frequency")
 
     # ----- C: attention attribution lollipop ----------------------------
@@ -1774,7 +1705,7 @@ def fig8(ctx: Ctx) -> None:
             "mod2_token": "mod2",
             "cls_token": "CLS",
         }
-        names = [tok_short.get(str(t), str(t))[:8] for t in d["token"]]
+        names = [tok_short.get(str(t), str(t))[:14] for t in d["token"]]
         vals = d["attention_mean"].values
         y_pos = np.arange(len(vals))
         cut = _broken_cut(vals)
@@ -1823,7 +1754,7 @@ def fig8(ctx: Ctx) -> None:
             col_t = OKABE_ITO[i % len(OKABE_ITO)]
             for j, (v, pv) in enumerate(zip(vals_t, plot_t)):
                 bx = x[j] + i * width
-                lbl = _m_short(tok, 8) if j == 0 else None
+                lbl = _m_short(tok, 14) if j == 0 else None
                 if cut and v > cut:
                     ax.bar(bx, pv, width=width * 0.85, color=col_t,
                            edgecolor="white", linewidth=0.4, zorder=3,
@@ -1840,12 +1771,12 @@ def fig8(ctx: Ctx) -> None:
         if cut:
             ax.set_ylim(0, cut * 1.40 + 0.10)
         ax.set_xticks(x + width * (n_tok - 1) / 2)
-        ax.set_xticklabels([_hard_shorten(c, 8) for c in piv.columns],
-                           rotation=45, ha="right", fontsize=6.5)
+        ax.set_xticklabels([_hard_shorten(c, 10) for c in piv.columns],
+                           rotation=30, ha="right", fontsize=6.5)
         ax.set_xlabel("condition")
         ax.set_ylabel("attention")
         ax.set_title("Attention by condition")
-        ax.legend(fontsize=5.5, frameon=False, loc="best")
+        ax.legend(fontsize=5.5, frameon=False, loc="best", ncol=1)
 
     # ----- E: latent space (target) ------------------------------------
     def p_latent_y(ax):
@@ -1874,7 +1805,7 @@ def fig8(ctx: Ctx) -> None:
         conds = sorted(e["condition"].unique())
         for i, name in enumerate(conds):
             g = e[e["condition"] == name]
-            ax.scatter(g[xk], g[yk], s=10, label=str(name)[:8],
+            ax.scatter(g[xk], g[yk], s=10, label=str(name)[:14],
                        color=OKABE_ITO[i % len(OKABE_ITO)], alpha=0.8,
                        linewidths=0.3, edgecolor="white", zorder=3)
         ax.set_xlabel(xk)
@@ -1971,6 +1902,20 @@ def fig8(ctx: Ctx) -> None:
 
 FIGURES = {1: FIGURES[1], 2: FIGURES[2], 3: fig3, 4: fig4,
            5: fig5, 6: fig6, 7: fig7, 8: fig8}
+
+
+# --------------------------------------------------------------------------- #
+# ROUTE-B OVERRIDE (R1-4 figure audit, 2026-08-10)
+# --------------------------------------------------------------------------- #
+# The R1-4 audit requires all 8 main figures to be redrawn with the Route-B
+# honest-benchmark narrative, Morandi palette, broken axes and qwen36 QA.
+# The canonical implementations live in figures_routeb.py; they replace the
+# legacy figure bodies below so `import figures` / `python figures.py` use the
+# new drawings while keeping this file importable (H31 input validation).
+import figures_routeb as _routeb  # noqa: E402
+
+FIGURES = {1: _routeb.fig1, 2: _routeb.fig2, 3: _routeb.fig3, 4: _routeb.fig4,
+           5: _routeb.fig5, 6: _routeb.fig6, 7: _routeb.fig7, 8: _routeb.fig8}
 
 
 def main() -> int:

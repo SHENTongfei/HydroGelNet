@@ -1,0 +1,203 @@
+{
+  "ref1_liao_nature": {
+    "oa_search_hydrogel": [
+      {
+        "__error__": "HTTP Error 400: Bad Request"
+      }
+    ],
+    "oa_search_liao": [
+      {
+        "__error__": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)>"
+      }
+    ],
+    "cr_query": [
+      {
+        "__error__": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "ref2_grinsztajn": {
+    "oa_search": [
+      {
+        "title": "Why Do Tree-Based Models Still Outperform Deep Learning on Typical Tabular Data?",
+        "year": 2022,
+        "date": "2022-01-01",
+        "doi": "https://doi.org/10.52202/068431-0037",
+        "venue": null,
+        "volume": null,
+        "issue": null,
+        "first_page": "507",
+        "last_page": "520",
+        "type": "conference-paper",
+        "authors": [
+          "Leo Grinsztajn",
+          "Edouard Oyallon",
+          "Gael Varoquaux"
+        ],
+        "cited_by": 403,
+        "id": "https://openalex.org/W7133186244"
+      },
+      {
+        "title": "Why do tree-based models still outperform deep learning on typical tabular data?",
+        "year": 2022,
+        "date": "2022-11-28",
+        "doi": null,
+        "venue": "INRIA a CCSD electronic archive server",
+        "volume": null,
+        "issue": null,
+        "first_page": null,
+        "last_page": null,
+        "type": "dataset",
+        "authors": [
+          "Grinsztajn, Léo",
+          "Oyallon, Edouard",
+          "Varoquaux, Gaël"
+        ],
+        "cited_by": 43,
+        "id": "https://openalex.org/W4290974394"
+      },
+      {
+        "title": "Accurate predictions on small data with a tabular foundation model",
+        "year": 2025,
+        "date": "2025-01-08",
+        "doi": "https://doi.org/10.1038/s41586-024-08328-6",
+        "venue": "Nature",
+        "volume": "637",
+        "issue": "8045",
+        "first_page": "319",
+        "last_page": "326",
+        "type": "article",
+        "authors": [
+          "Noah Hollmann",
+          "Samuel Müller",
+          "Lennart Purucker",
+          "Arjun Krishnakumar",
+          "Max Körfer",
+          "Shi Bin Hoo",
+          "Robin Tibor Schirrmeister",
+          "Frank Hutter"
+        ],
+        "cited_by": 776,
+        "id": "https://openalex.org/W4406170795"
+      },
+      {
+        "title": "ImageJ2: ImageJ for the next generation of scientific image data",
+        "year": 2017,
+        "date": "2017-11-29",
+        "doi": "https://doi.org/10.1186/s12859-017-1934-z",
+        "venue": "BMC Bioinformatics",
+        "volume": "18",
+        "issue": "1",
+        "first_page": "529",
+        "last_page": "529",
+        "type": "article",
+        "authors": [
+          "Curtis T. Rueden",
+          "Johannes Schindelin",
+          "Mark C. Hiner",
+          "Barry E. DeZonia",
+          "Alison E. Walter",
+          "Ellen T. Arena",
+          "Kevin W. Eliceiri"
+        ],
+        "cited_by": 6307,
+        "id": "https://openalex.org/W2580035316"
+      },
+      {
+        "title": "A survey on semi-supervised learning",
+        "year": 2019,
+        "date": "2019-11-15",
+        "doi": "https://doi.org/10.1007/s10994-019-05855-6",
+        "venue": "Machine Learning",
+        "volume": "109",
+        "issue": "2",
+        "first_page": "373",
+        "last_page": "440",
+        "type": "article",
+        "authors": [
+          "Jesper E. van Engelen",
+          "Holger H. Hoos"
+        ],
+        "cited_by": 2600,
+        "id": "https://openalex.org/W2984353870"
+      },
+      {
+        "title": "Multi-agent deep reinforcement learning: a survey",
+        "year": 2021,
+        "date": "2021-04-15",
+        "doi": "https://doi.org/10.1007/s10462-021-09996-w",
+        "venue": "Artificial Intelligence Review",
+        "volume": "55",
+        "issue": "2",
+        "first_page": "895",
+        "last_page": "943",
+        "type": "article",
+        "authors": [
+          "Sven Gronauer",
+          "Klaus Diepold"
+        ],
+        "cited_by": 869,
+        "id": "https://openalex.org/W3156295478"
+      }
+    ],
+    "cr_query": [
+      {
+        "__error__": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "ref3_shwartzziv": {
+    "oa_doi": {
+      "title": "Tabular data: Deep learning is not all you need",
+      "year": 2021,
+      "date": "2021-11-26",
+      "doi": "https://doi.org/10.1016/j.inffus.2021.11.011",
+      "venue": "Information Fusion",
+      "volume": "81",
+      "issue": null,
+      "first_page": "84",
+      "last_page": "90",
+      "type": "article",
+      "authors": [
+        "Ravid Shwartz-Ziv",
+        "Amitai Armon"
+      ],
+      "cited_by": 115,
+      "id": "https://openalex.org/W3172701880"
+    },
+    "cr_doi": {
+      "title": "Tabular data: Deep learning is not all you need",
+      "container": "Information Fusion",
+      "volume": "81",
+      "issue": null,
+      "page": "84-90",
+      "year": 2022,
+      "doi": "10.1016/j.inffus.2021.11.011",
+      "type": "journal-article",
+      "publisher": "Elsevier BV",
+      "authors": [
+        "Ravid Shwartz-Ziv",
+        "Amitai Armon"
+      ],
+      "isbn": null
+    }
+  },
+  "ref4_cornell": {
+    "cr_query": [
+      {
+        "__error__": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "oa_search": [
+      {
+        "__error__": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)>"
+      }
+    ],
+    "cr_doi_3rd": {
+      "__error__": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)>"
+    },
+    "cr_doi_alt": {
+      "__error__": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)>"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+[01:43:42] START outdir=../_r4_runA seeds=[20260731, 271828, 123456] device=cpu
+[01:44:05] seed 20260731: rho=0.8715 rf=0.7885 23.0s
+[01:44:28] START outdir=../_r4_runA seeds=[20260731, 271828, 123456] device=cpu
+[01:44:28] seed 20260731: already done, skip
+[01:44:49] seed 271828: rho=0.8838 rf=0.7869 21.2s
+[01:45:14] seed 123456: rho=0.7592 rf=0.7962 24.4s
+[01:45:14] ALL_DONE

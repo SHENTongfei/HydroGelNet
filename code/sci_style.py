@@ -25,30 +25,30 @@ import numpy as np
 # ---------------------------------------------------------------------------
 # Okabe-Ito retained as the colourblind-safe base.
 OKABE_ITO = [
-    "#0072B2",  # blue
-    "#D55E00",  # vermillion
-    "#009E73",  # bluish green
-    "#CC79A7",  # reddish purple
-    "#E69F00",  # orange
-    "#56B4E9",  # sky blue
-    "#F0E442",  # yellow
-    "#000000",  # black
+    "#4E659B",  # 1 078,101,155  deep blue (ours / primary)
+    "#8A8CBF",  # 2 138,140,191  periwinkle
+    "#B8A8CF",  # 3 184,168,207  lilac
+    "#E7BCC6",  # 4 231,188,198  blush pink
+    "#FDCF9E",  # 5 253,207,158  apricot
+    "#EFA484",  # 6 239,164,132  coral
+    "#B6766C",  # 7 182,118,108  terracotta
 ]
 
-# Nature-style three-colour system: ours (warm) + baseline (cool) + neutral.
+# Muted seven-colour system (user-specified palette, 2026-08-10):
+# ours (deep blue) + baseline (mid blues) + neutral (muted greys).
 NATURE = {
-    "ours":    "#D55E00",   # warm vermillion (Nature uses this for our-method emphasis)
-    "ours_d":  "#8C2D04",
-    "ours_l":  "#F2C9B5",
-    "base":    "#0072B2",   # cool blue (baselines)
-    "base_d":  "#003F66",
-    "base_l":  "#B4D2E6",
-    "neutral": "#6E6E6E",   # grey for context
+    "ours":    "#4E659B",   # deep blue  (078,101,155) primary method
+    "ours_d":  "#3A4D75",   # darkened deep blue
+    "ours_l":  "#8A8CBF",   # periwinkle (138,140,191) light accent
+    "base":    "#B8A8CF",   # lilac (184,168,207) baselines
+    "base_d":  "#8E7FAB",
+    "base_l":  "#E7BCC6",   # blush (231,188,198)
+    "neutral": "#8A8A8A",   # muted grey
     "neut_l":  "#D9D9D9",
-    "neut_d":  "#3F3F3F",
-    "accent":  "#E69F00",   # gold for highlights
-    "good":    "#2E7D32",   # positive (gain)
-    "bad":     "#B71C1C",   # negative (loss)
+    "neut_d":  "#4A4A4A",
+    "accent":  "#EFA484",   # coral (239,164,132) highlights
+    "good":    "#4E659B",   # positive (gain) - deep blue
+    "bad":     "#B6766C",   # negative (loss) - terracotta (182,118,108)
 }
 
 # Sequential / diverging colormaps (Nature-friendly, not rainbow).

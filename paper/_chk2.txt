@@ -1,0 +1,27 @@
+AUDIT_ROUND2_yan.md 29902
+CoverLetter.txt 3064
+SIMPLEX_manuscript.pdf 3580752
+SupplementaryMaterial.md 7774
+_c8.txt 3421
+_chk.txt 2093
+_scan.txt 4506
+_size.txt 97
+frontiers_SIMPLEX.tex 33931
+frontiers_SIMPLEX.tex.routeb.bak 33931
+frontiers_SupplementaryMaterial.tex 35942
+frontiers_SupplementaryMaterial.tex.routeb.bak 14847
+manuscript.md 53741
+paper_meta.json 4662
+reference_final.bib 71218
+reference_final.bib.routeb.bak 68542
+references.json 36402
+simplex.bib 26459
+simplex_cited.bib 5591
+simplex_frontiers.STALE-180-161.bak 45865
+simplex_supplementary.STALE-180-161.bak 8773
+
+CITE KEYS: aitchison1986, cornell2002, egozcue2003, grinsztajn2022, liao2025nature, scheffe1958
+
+reference_final.bib: present=['aitchison1986', 'cornell2002', 'egozcue2003', 'grinsztajn2022', 'liao2025nature', 'scheffe1958'] missing=[]
+simplex.bib: present=['aitchison1986', 'liao2025nature'] missing=['cornell2002', 'egozcue2003', 'grinsztajn2022', 'scheffe1958']
+simplex_cited.bib: present=['aitchison1986', 'liao2025nature'] missing=['cornell2002', 'egozcue2003', 'grinsztajn2022', 'scheffe1958']

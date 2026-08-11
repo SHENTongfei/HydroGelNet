@@ -1,0 +1,24 @@
+[first] 1 hits
+   L7: \firstpage{1}
+[best] 2 hits
+   L266: \caption{Automated quality-gate outcome as recorded in $perf\_gate.json$. Overall verdict: FAIL. Check names (e.g., \tex
+   L272: \texttt{G1\_beats\_best\_baseline} & pass & R2 0.7924 vs RandomForest 0.8067 (delta $-0.0143$, statistical tie) & Pass d
+[highest] 1 hits
+   L157: Two facts in the single-calibre columns point in opposite directions and are both stated. Under the single-run protocol,
+[hold-out] 2 hits
+   L28: \section{S2. External-batch provenance: the batch is a Bayesian-optimisation acquisition, not a random hold-out}
+   L30: The 25 external formulations are \textbf{not an i.i.d. hold-out}. They are the batch acquired in the \textbf{fourth roun
+[single-run] 1 hits
+   L157: Two facts in the single-calibre columns point in opposite directions and are both stated. Under the single-run protocol,
+
+placeholder count: 13
+byte size: 36451
+
+=== cite lines ===
+L18: The internal set comprises the \textbf{316 formulations} in $df\_316$, which correspond to the round-3 cohort 
+L30: The 25 external formulations are \textbf{not an i.i.d. hold-out}. They are the batch acquired in the \textbf{f
+L34: \textbf{Information gap.} The exact acquisition-function implementation (EI variant), the surrogate used at ro
+L38: The 21-dimensional feature vector is, in form, the \textbf{Scheff\'e second-degree canonical mixture polynomia
+L40: The centred log-ratio (CLR) transform, a standard compositional-data remedy \cite{aitchison1986}, does not by 
+L87: Consistent with the practice of releasing full search trajectories \cite{grinsztajn2022}, the complete search 
+L291: The upstream data and code originate from the public repository \texttt{sheng-hu/hydrogels} accompanying Liao 

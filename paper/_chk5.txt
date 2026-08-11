@@ -1,0 +1,11 @@
+table begin=0 end=6 MISMATCH
+tabular begin=0 end=6 MISMATCH
+itemize begin=0 end=2 MISMATCH
+document begin=0 end=1 MISMATCH
+centering begin=0 end=0 OK
+tabular def: llll
+tabular def: lccccc
+tabular def: lcccccc
+tabular def: llcc
+tabular def: clccc
+tabular def: p{4.2cm

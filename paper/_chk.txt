@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<string>", line 16, in <module>
+    for m in re.finditer(r'\cite\{([^}]*)\}', tex):
+             ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\__init__.py", line 285, in finditer
+    return _compile(pattern, flags).finditer(string)
+           ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\_compiler.py", line 748, in compile
+    p = _parser.parse(p, flags)
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\_parser.py", line 980, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\_parser.py", line 543, in _parse
+    code = _escape(source, this, state)
+  File "C:\Users\TS\.workbuddy\binaries\python\versions\3.13.12\Lib\re\_parser.py", line 442, in _escape
+    raise source.error("bad escape %s" % escape, len(escape))
+re.PatternError: bad escape \c at position 0
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\paper\references.json 36402
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\paper\reference_final.bib 71218
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\paper\simplex.bib 26459
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\paper\simplex_cited.bib 5591
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\_frontiers\reference_final.bib 19327
+BIB: C:/Users/TS/WorkBuddy/HydroGelNet\_local_compile\reference_final.bib 68542
+_frontiers: Figures
+_frontiers: frontiers.tex
+_frontiers: frontiers_SupplementaryMaterial.tex
+_frontiers: reference_final.bib

@@ -235,23 +235,23 @@ def fig1(ctx: Ctx) -> None:
     _parrow(ax, 36, 20, 41, 20)
     _parrow(ax, 49, 33.5, 49, 31.5)
 
-    # ---------- Stage 4: extrapolation ----------
-    _stage_label(ax, L, 70, "D · Prospective validation")
-    _pbox(ax, L, 62, 33.5, 16, 5.5, "Prospective cohort", "red", fs=7.5, bold=True,
-        sub="n = 25 · model-discovered")
-    _pbox(ax, L, 62, 25.0, 16, 6, "Held-out during\nall tuning", "red", fs=6.4)
+    # ---------- Stage 4: BO-acquired batch ----------
+    _stage_label(ax, L, 70, "D · BO-acquired batch")
+    _pbox(ax, L, 62, 33.5, 16, 5.5, "External batch", "red", fs=7.5, bold=True,
+        sub="n = 25 · optimiser-selected")
+    _pbox(ax, L, 62, 25.0, 16, 6, "Round-4 EI acquisition\nof the SMBO loop", "red", fs=6.4)
     _pbox(ax, L, 62, 17.0, 16, 6, "High-adhesion region\n(62–251 kPa)", "red", fs=6.2)
-    _pbox(ax, L, 62, 9.0, 16, 6, "Evaluated once,\nafter freezing", "red", fs=6.4)
+    _pbox(ax, L, 62, 9.0, 16, 6, "Not a random hold-out;\nbiased by construction", "red", fs=6.4)
     _parrow(ax, 57, 20, 62, 20)
     _parrow(ax, 70, 33.5, 70, 31.5)
 
-    # ---------- Stage 5: screening ----------
-    _stage_label(ax, L, 92.5, "E · Screening & insight")
-    _pbox(ax, L, 83, 33.5, 19, 5.5, "Ranking + insight", "purple", fs=7.5, bold=True)
-    _pbox(ax, L, 83, 25.5, 19, 6, "Spearman ρ = 0.87\n(prospective)", "purple", fs=6.4)
-    _pbox(ax, L, 83, 17.5, 19, 6, "Top-20 precision 0.90\n(prospective)", "purple", fs=6.4)
-    _pbox(ax, L, 83, 9.5, 19, 6, "Permutation importance\n→ composition synergy", "bp", fs=6.2)
-    _pbox(ax, L, 83, 2.5, 19, 5.5, "Accelerated screening", "purple", fs=6.6, bold=True)
+    # ---------- Stage 5: benchmark deliverable ----------
+    _stage_label(ax, L, 92.5, "E · Benchmark deliverable")
+    _pbox(ax, L, 83, 33.5, 19, 5.5, "Ranking + disclosure", "purple", fs=7.5, bold=True)
+    _pbox(ax, L, 83, 25.5, 19, 6, "ext R² = 0.6712 (single)\nρ = 0.8031", "purple", fs=6.4)
+    _pbox(ax, L, 83, 17.5, 19, 6, "Ridge ρ = 0.8573\n(rank 1 on ρ)", "purple", fs=6.4)
+    _pbox(ax, L, 83, 9.5, 19, 6, "Permutation importance\n→ pair_14 = 0.0631", "bp", fs=6.2)
+    _pbox(ax, L, 83, 2.5, 19, 5.5, "Reproducible benchmark", "purple", fs=6.6, bold=True)
     _parrow(ax, 78, 20, 83, 20)
     _parrow(ax, 92.5, 9.5, 92.5, 8.5)
 
@@ -282,17 +282,15 @@ def fig2(ctx: Ctx) -> None:
 
     # ---------- embedding ----------
     _pbox(ax, L, 41, 32, 13, 6.5, "Linear\nembedding", "blue", fs=6.8, bold=True,
-        sub="d = 64")
+        sub="d = 152")
     _parrow(ax, 36, 33.5, 41, 33.5)
     _parrow(ax, 36, 30, 41, 32.5, color="#2E8B57", lw=1.5)
 
-    # ---------- core: residual blocks + attention ----------
+    # ---------- core: residual block + attention ----------
     _pbox(ax, L, 59, 40, 15, 6, "ResBlock 1", "orange", fs=6.8, bold=True,
         sub="dropout · LayerNorm")
     _pbox(ax, L, 59, 32, 15, 6, "Interaction\nself-attention", "purple", fs=6.6, bold=True,
-        sub="4 heads")
-    _pbox(ax, L, 59, 24, 15, 6, "ResBlock 2", "orange", fs=6.8, bold=True,
-        sub="dropout · LayerNorm")
+        sub="8 heads")
     _parrow(ax, 54, 34, 59, 34)
     _parrow(ax, 66.5, 40, 66.5, 38.6)
     _parrow(ax, 66.5, 32, 66.5, 30.6)
@@ -313,18 +311,13 @@ def fig2(ctx: Ctx) -> None:
 
     # path labels
     ax.text(2, 37.5, "monomer path", fontsize=6.2, color="#2E6DA4", style="italic")
-    ax.text(2, 27.5, "synergy path", fontsize=6.2, color="#2E8B57", style="italic")
-
-    _psave(fig, "Figure2_architecture", L, outdir)
+    ax.text(2, 27.5, "interaction path", fontsize=6.2, color="#2E8B57", style="italic")
 
     outdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                           "figures")
     os.makedirs(outdir, exist_ok=True)
-    print("Drawing SIMPLEX pipeline (Figure 1, polished) ...")
-    fig_pipeline(outdir)
-    print("Drawing SIMPLEX architecture (Figure 2, polished) ...")
-    fig_model(outdir)
-    print(f"Done -> {outdir}")
+    _psave(fig, "Figure2_architecture", L, outdir)
+    print("Done -> " + outdir)
 
 
 def fig3(ctx: Ctx) -> None:

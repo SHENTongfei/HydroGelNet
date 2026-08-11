@@ -16,7 +16,8 @@
 
 ## Findings
 
-- **WARN** -- external: only 25 samples; this is the small model-guided prospective cohort and its statistical-power limitation is disclosed in the manuscript.
+<!-- 已修改：P2-1 R2-1 遗留项 "model-guided prospective cohort" → "BO-acquired external batch"（诚实叙事，消除禁用词 prospective 命中） -->
+- **WARN** -- external: only 25 samples; this is the small BO-acquired external batch and its statistical-power limitation is disclosed in the manuscript.
 - **WARN** -- 18 sample identifier(s) reused across cohorts (ID reuse in the source files); exact-match verification on feature vectors confirmed no composition overlap, so no data leakage is present.
 - **NOTE** -- 9 feature(s) with KS > 0.5 between cohorts; report this as domain shift.
 
