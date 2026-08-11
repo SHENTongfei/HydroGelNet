@@ -1,0 +1,305 @@
+\documentclass[utf8]{frontiers_suppmat}
+\usepackage{url,hyperref,lineno,microtype,amsmath,booktabs}
+\usepackage[onehalfspacing]{setspace}
+
+\begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[Supplementary Material]{{\helveticaitalic{Supplementary Material: Composition-to-Property Prediction of Underwater Hydrogel Adhesion: An Open Eight-Model Benchmark}}}
+\maketitle
+
+\section*{Preface}
+
+This supplement provides the complete experimental and analytical details behind the benchmark summarised in the main article: dataset construction and cohort definitions, the Scheff\'e compositional-data diagnostics, the exact model configuration, the full hyperparameter search record, the cross-validation protocol, the complete internal and external benchmark tables under both evaluation calibres, the full 23-arm ablation, LOCO tests of the Scheff\'e interaction terms, permutation importance, the pre-registered quality-gate verdict, reproduction notes and licence declarations. All code, processed data, per-formulation predictions and regeneration scripts are available at \url{https://github.com/SHENTongfei/HydroGelNet}.
+
+\section{S1. Data construction pipeline: the 316-formulation internal set and the deprecation of the $n = 161$ definition}
+
+The internal set comprises the \textbf{316 formulations} in $df\_316$, which correspond to the round-3 cohort of the source study's active-learning campaign \cite{liao2025nature}. Each formulation is described by \textbf{21 features} (six monomer molar fractions (HEA, BA, CBEA, ATAC, PEA, AAm) and their 15 pairwise products) and the target is underwater glass adhesion strength (kPa). Quality control of the assembled internal set ($results/metrics/qc\_report.md$) reports 316 samples, 21 features, one target, 316 groups, zero duplicate rows, zero missing values, zero constant features and zero infinite values; the target has mean 92.7589~kPa, standard deviation 73.8493~kPa, range $[1.18896,\;353.291]$~kPa and 296 unique values.
+
+The external evaluation set is the \textbf{25-formulation batch} obtained as the set difference $df\_341 \setminus df\_316$, constructed by the reference implementation in $build\_dataset.py{:}221{-}229$ (a row-level match on molar fractions rounded to four decimals). Quality control of this batch reports 25 samples, 21 features, one target, 25 groups, zero duplicates and zero missing values; the target has mean 158.161~kPa, standard deviation 62.5154~kPa, and range $[62.2222,\;250.984]$~kPa.
+
+An earlier internal document and an earlier version of Table~2 defined the external set as $df\_341 \setminus df\_180$, which yields \textbf{161} formulations. That definition is deprecated for a specific reason: the code that actually produces the train/evaluation split ($build\_dataset.py{:}221{-}229$) operates on the round-3 internal cohort $df\_316$, so the operative external set is $n = 25$; the $n = 161$ figure derives from the superseded 180-formulation internal definition and mixes rounds 2--4 formulations that are not in the round-1 cohort. The stale artefact $results/preds/external\_ens\_v3.npz$ ($n = 161$) is a product of the deprecated definition and is superseded by the $n = 25$ arrays. No sample of the 161 set is used anywhere in this work.
+
+Eighteen sample identifiers are reused across the internal and external source tables; exact-match verification on the feature vectors confirmed that no composition row overlaps between the two cohorts, so no data leakage is present ($results/metrics/qc\_report.md$).
+
+\textbf{Information gap.} A per-sample tally of \emph{why} each of the 161 formulations was excluded under the deprecated definition (category counts) is not recorded in any released artefact. The exclusion rule is documented (set difference against the superseded 180-cohort), but per-sample reason categories are {[}to be filled{]}. If a category-level audit is required, it must be reconstructed from the version history of $build\_dataset.py$; that reconstruction is outside the scope of the released files.
+
+\section{S2. External-batch provenance: the batch is a Bayesian-optimisation acquisition, not a random hold-out}
+
+The 25 external formulations are \textbf{not an i.i.d. hold-out}. They are the batch acquired in the \textbf{fourth round of the source study's sequential model-based optimisation (SMBO / Bayesian-optimisation) loop}, selected by expected-improvement (EI) maximisation \cite{liao2025nature}. An EI acquisition step deliberately concentrates sampling where the current surrogate predicts high performance, so the batch is systematically enriched for a high-adhesion sub-region of the composition simplex. Throughout this supplement we refer to it as the \textbf{BO-acquired batch}, and we treat it as a diagnostic cohort and as a case study of an evaluation pitfall, never as a neutral generalisation estimate.
+
+Composition-space position can be quantified from the released quality-control report ($results/metrics/qc\_report.md$). Relative to the internal cohort, the batch is shifted toward the aromatic monomer and the hydrophobic--aromatic combination, and away from the nucleophilic monomer: the mean of \textbf{Aromatic-PEA} rises from 0.117511 (internal) to 0.296232 (external), with Kolmogorov--Smirnov statistic KS = 0.677 and Cohen's $d = 1.646$; the mean of \textbf{Nucleophilic-HEA} falls from 0.235864 to 0.0167825 (KS = 0.664, $d = -1.436$); the \textbf{pair\_14 (BA $\times$ PEA)} term rises from 0.0474522 to 0.135147 (KS = 0.602, $d = 1.540$). Overall, \textbf{9 of 21 features} show KS $> 0.5$ between cohorts, which the QC report flags as domain shift; the batch target mean (158.161~kPa) is substantially above the internal mean (92.7589~kPa), consistent with enrichment in a high-performance region. These figures are the quantitative form of the provenance claim: the batch occupies a different, narrower region of composition space than the internal cohort.
+
+\textbf{Information gap.} The exact acquisition-function implementation (EI variant), the surrogate used at round 4, and the per-formulation acquisition scores are not part of the released artefacts of this benchmark (they belong to the source study's repository); we record them as {[}to be filled{]} and rely on the source study's published description \cite{liao2025nature} for the acquisition protocol.
+
+\section{S3. Scheff\'e design-matrix rank deficiency and the compositional-data control}
+
+The 21-dimensional feature vector is, in form, the \textbf{Scheff\'e second-degree canonical mixture polynomial} --- six linear terms plus fifteen cross-products, with the no-intercept structure implied by the sum-to-one constraint \cite{scheffe1958,cornell2002}. Because $\sum_i x_i = 1$ for every sample, a design matrix that also includes an intercept column is \textbf{exactly rank-deficient by one}. On this data the condition number of the feature matrix is \textbf{$5.44 \times 10^7$} and the six molar fractions each have a variance inflation factor of infinity (VIF = inf), the expected signature of the exact linear dependence introduced by the constraint. The pipeline's \texttt{StandardScaler} (centring and scaling each column independently) reintroduces an intercept-like offset and therefore breaks the no-intercept structure on which the canonical form's identifiability depends.
+
+The centred log-ratio (CLR) transform, a standard compositional-data remedy \cite{aitchison1986}, does not by itself remove the singularity: after CLR the transformed columns sum to zero, so the transformed matrix \textbf{remains singular}. Resolving the rank deficiency of compositional inputs requires an \textbf{isometric log-ratio (ILR) transform} onto an orthonormal basis of the simplex \cite{egozcue2003}. Accordingly, CLR is used here only as an interpretability control; ILR is the transform we identify as required for a rank-correct inferential treatment.
+
+The released CLR control ($results/tuning/clr\_compare.json$, from $code/exp\_clr.py$) compares three feature parameterisations under the internal cross-validation protocol, reporting internal $R^2 = $ \textbf{0.705} (A, raw fractions plus pairwise products; stored value 0.7047), \textbf{0.710} (B, CLR-transformed fractions replacing raw fractions, plus products; stored value 0.7099), and \textbf{0.688} (C, raw plus CLR plus products; stored value 0.6877). The three values span 0.688--0.710, so the log-ratio transform does not recover additional signal on this data; the CLR comparison is reported as a control, not as a corrected model. The same file also stores external and other metrics for these variants; they are not used for the comparison because they are dominated by the acquisition bias described in S2.
+
+\textbf{Information gap.} A fully ILR-corrected re-estimate of the benchmark is not among the released numbers (the released control applies CLR, which remains singular). Until an ILR-corrected pipeline is run, the rank-corrected effect of the compositional encoding is {[}to be filled{]}.
+
+\section{S4. Model configuration}
+
+All values in Table~\ref{tab:S4} are read from $results/tuning/config\_used.json$, the configuration that produced the reported metrics. The deep model has \textbf{370,327 trainable parameters}; against the internal sample size of 316 this is a parameter-to-sample ratio of \textbf{1,171.9 : 1}.
+
+\begin{table}[h]
+\centering
+\caption{SIMPLEX configuration used at run time ($results/tuning/config\_used.json$).}
+\label{tab:S4}
+\begin{tabular}{llll}
+\toprule
+Parameter & Value & Parameter & Value \\
+\midrule
+$d_{model}$ & 152 & $y_{transform}$ & standard \\
+$n_{blocks}$ & 1 & scaler & standard \\
+$n_{heads}$ & 8 & use\_mixup / mixup\_alpha & true / 0.362 \\
+dropout & 0.5 & use\_swa / swa\_start\_frac / swa\_lr\_frac & true / 0.565 / 0.25 \\
+fusion & gated & use\_contrastive / contrastive\_epochs / contrastive\_temp / contrastive\_bins & true / 3 / 0.431 / 4 \\
+proj\_dim & 16 & use\_pretrain\_recon / recon\_epochs / recon\_mask\_frac & true / 30 / 0.3 \\
+use\_attention & true & use\_uncertainty\_weighting & true \\
+use\_film & true & use\_domain\_constraint / constraint\_w & true / 0.0484 \\
+use\_task\_gate & true & use\_sam & false \\
+use\_residual & true & use\_ema / ema\_decay & true / 0.995 \\
+use\_modality2 & true & use\_rdrop / rdrop\_w & true / 0.320 \\
+use\_modality\_gate & true & feature\_noise & 0.0242 \\
+gate\_sparsity\_w & 0.0355 & label\_smoothing & 0.141 \\
+use\_transformer & false & use\_mfm & false \\
+attn\_entropy\_w & $2.93 \times 10^{-5}$ & use\_ortho\_reg / use\_ranking\_loss & false / false \\
+lr & $2.72 \times 10^{-4}$ & mc\_samples & 0 \\
+weight\_decay & $1.14 \times 10^{-3}$ & $y_{low}$ / $y_{high}$ & $-4.0$ / $4.0$ \\
+batch\_size & 16 & grad\_clip & 1.0 \\
+max\_epochs & 250 & patience / val\_frac & 30 / 0.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A previous draft of this supplement listed $d_{model} = 64$, two blocks and four heads. Those values do not describe the run that produced the reported metrics; they originate from a dead-code script ($decisive\_test.py$) whose output directory does not exist. The values in Table~\ref{tab:S4} are the operative ones.
+
+One implementation detail must be disclosed because it invalidates a nominal architecture sweep. In $model\_zoo.py{:}185{-}188$ the attention-head count is silently coerced (\texttt{while dim \% n\_heads != 0 and n\_heads > 1: n\_heads -= 1}). Because $d_{model} = 152 = 2^3 \times 19$, a request for 12 heads is reduced to 8, which is the configuration of the main run; the ablation arm $arch\_C\_heads$ (nominally 12 heads) and the main run produce bit-identical external metrics (MD5 \texttt{77375468bf0a07f5fd34eaa38dfcc7b4}). The intended head-count ablation therefore never occurred, and we report it as such.
+
+\section{S5. Hyperparameter search space and trajectory}
+
+Consistent with the practice of releasing full search trajectories \cite{grinsztajn2022}, the complete search record is released in $results/tuning/search\_log.csv$. The log contains \textbf{100 trials}: 60 in a coarse phase and 40 in a subsequent fine phase, each recording the full hyperparameter vector and the wall-clock seconds of the trial. The configuration recorded in $config\_used.json$ (S4) corresponds bit-for-bit to \textbf{fine trial 37} (validation score 0.800962): comparing every recorded field of that trial against $config\_used.json$ yields zero mismatches. An earlier draft of this supplement attributed the deployed configuration to coarse trial 36 (validation score 0.795957) and claimed an exact hyperparameter match; that attribution is \textbf{incorrect}. Coarse trial 36 differs from $config\_used.json$ on $d_{model}$ (192 vs 152), $n_{blocks}$ (2 vs 1), dropout (0.309 vs 0.5), learning rate ($5.57 \times 10^{-4}$ vs $2.72 \times 10^{-4}$), batch size (64 vs 16), weight decay ($5.84 \times 10^{-3}$ vs $1.14 \times 10^{-3}$), Mixup $\alpha$ (0.722 vs 0.362), contrastive epochs (20 vs 3), domain-constraint weight (0.0538 vs 0.0484) and attention-entropy weight ($2.52 \times 10^{-5}$ vs $2.93 \times 10^{-5}$); only the later-phase fields ($n_{heads}$, fusion, swa\_start\_frac, ema\_decay, rdrop\_w, feature\_noise, label\_smoothing) coincide. We therefore report fine trial 37 as the recorded source trial of the deployed configuration.
+
+Observed search ranges in the released coarse-phase log: $d_{model}$ 48--192; $n_{blocks}$ 1--4; $n_{heads}$ 2--8; dropout $\approx$0.0004--0.39; learning rate $\approx 3.2 \times 10^{-4}$ to $5.7 \times 10^{-3}$; batch size 16--512; max\_epochs 250 (fixed); patience 30 (fixed); val\_frac 0.2 (fixed); scaler $\in \{\text{standard, quantile}\}$; fusion $\in \{\text{gated, film, concat, cross}\}$; $y_{transform}$ = standard. We report the ranges as observed rather than as a formalised search-space definition, because the log is the operative record of the search.
+
+\textbf{Information gap.} The aggregate compute budget (sum of per-trial seconds) is not aggregated in any released file; the per-trial seconds are recorded in $search\_log.csv$, so the total is derivable with a one-line summation. In this draft the aggregate is {[}to be filled{]}. The search method (e.g., random search vs Bayesian optimisation) is not declared in the released artefacts; the phase labels in the log are {[}to be filled{]} for the formal algorithm name.
+
+\section{S6. Cross-validation protocol}
+
+Internal performance is estimated by grouped cross-validation repeated across seeds: \textbf{10 seeds $\times$ 5 folds = 50 evaluations}, with each of the 316 internal formulations treated as its own group. All preprocessing (imputation, scaling, feature transforms) is fitted inside each training fold only, and the outer test partition is never observed during fitting. The 10 fixed seeds, verified from the released per-fold files, are \textbf{[42, 2024, 7, 1337, 20260731, 11, 99, 555, 888, 31337]}.
+
+On the BO-acquired batch ($n = 25$) two protocols are distinguished. Under the \textbf{single} protocol, each of the 50 outer-fold models is applied to the batch independently, yielding 50 external evaluations directly comparable, model by model, to the internal protocol. Under the \textbf{ensemble} protocol, the fold-averaged prediction is evaluated a single time. The baseline external file $baselines\_external.csv$ contains no ensemble rows (the baselines were never ensembled) so only the single protocol is a like-for-like comparison (S8).
+
+One limitation of the grouping must be stated. The GroupKFold grouping key degenerates to a no-op (each sample is effectively its own group), so near-duplicate formulations are not guaranteed to be kept together and may appear across folds; the internal estimates should be read with this possibility of near-duplicate leakage in mind. Pairwise model differences on the internal CV are assessed with the \textbf{Nadeau--Bengio corrected resampled $t$-test}, adjusted for multiplicity by the \textbf{Holm procedure} ($results/stats/stats\_report.md$); the Holm-adjusted $p$-value for SIMPLEX (a dual-modality deep encoder for bio-inspired hydrogel adhesion) against the rank-1 baseline (random forest) is 1.0, and 1 of 8 comparisons remains significant after correction (SIMPLEX against the mean-predictor dummy, $p_{holm} = 0.0$).
+
+\textbf{Information gap.} The per-fold standard deviation of each metric (needed for mean $\pm$ sd reporting) is not stored in the released summary files; it is computable from the released per-seed-fold rows. In this draft the sd column of S7 is {[}to be filled{]}.
+
+\section{S7. Internal benchmark: eight models, five metrics}
+
+Table~\ref{tab:S7} reports the complete internal benchmark under the protocol of S6, ordered by mean $R^2$. All values are means over 50 seed--fold evaluations and are taken from $results/metrics/baselines.csv$ (baselines) and $results/metrics/cv\_outer.csv$ (SIMPLEX); they match the aggregated values in the project parameter card.
+
+\begin{table}[h]
+\centering
+\caption{Internal $10 \times 5$ grouped cross-validated benchmark on the 316-formulation dataset (means over 50 evaluations). RMSE and MAE are in kPa. Per-fold standard deviations are {[}to be filled{]} (computable from the released per-fold files; see S6).}
+\label{tab:S7}
+\begin{tabular}{lccccc}
+\toprule
+Model & $R^2$ & Spearman $\rho$ & Pearson $r$ & RMSE (kPa) & MAE (kPa) \\
+\midrule
+RandomForest & 0.8067 & 0.9056 & 0.9011 & 32.0533 & 22.2659 \\
+SVR-RBF & 0.8026 & 0.9065 & 0.9007 & 32.3873 & 23.1124 \\
+SIMPLEX (ours) & 0.7924 & 0.9004 & 0.8944 & 33.1450 & 23.7478 \\
+KNN & 0.7870 & 0.8986 & 0.8968 & 33.4101 & 23.2360 \\
+Ridge & 0.7688 & 0.8699 & 0.8818 & 35.1408 & 26.8095 \\
+ElasticNet & 0.7681 & 0.8683 & 0.8816 & 35.1945 & 26.8817 \\
+HistGB & 0.7624 & 0.8924 & 0.8785 & 35.5086 & 24.3531 \\
+MLP & 0.7010 & 0.8087 & 0.8476 & 39.7413 & 30.4021 \\
+Mean (dummy) & $-0.0034$ & 0.0000 & 0.0000 & 73.7304 & 58.5813 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+SIMPLEX attains $R^2 = 0.7924$ and ranks \textbf{3 of 8}; random forest attains the largest internal $R^2$ (0.8067, rank 1 of 8). The ordering is preserved under rank correlation (SIMPLEX $\rho = 0.9004$, rank 3 of 8; SVR-RBF 0.9065, rank 1 of 8) and under the other metrics. Pairwise Holm-adjusted comparisons do not reject the null of equal performance for any model pair involving SIMPLEX ($p_{holm} = 1.0$ against random forest), so the ranking in Table~\ref{tab:S7} is descriptive rather than evidence of separation; every model separates from the mean-predictor dummy ($p_{holm} = 0.0$), confirming substantial learnable signal. The bootstrap CIs in the released stats files ($results/stats/bootstrap\_ci.csv$) are computed on a pooled out-of-fold calibre (internal $R^2$ point 0.7497, 95\% CI $[0.6647, 0.8178]$); they are not on the per-fold-mean calibre of Table~\ref{tab:S7} and should not be attached to these cells without recomputation.
+
+\textbf{Information gap.} Per-fold standard deviations and per-model bootstrap intervals on the Table~\ref{tab:S7} calibre are {[}to be filled{]} (see S6).
+
+\section{S8. External benchmark: dual-calibre disclosure}
+
+Table~\ref{tab:S8} reports the external benchmark on the BO-acquired batch ($n = 25$) under \textbf{both} evaluation calibres. The \textbf{single} calibre (each of the 50 outer-fold models applied independently, then averaged) is the only like-for-like comparison between SIMPLEX and the baselines, because $baselines\_external.csv$ contains no ensemble rows: no ensemble was ever constructed for the baseline models. The SIMPLEX \textbf{ensemble} calibre (fold-averaged prediction evaluated a single time) exists in $external.csv$ ($R^2 = 0.6946$, $\rho = 0.8077$) but has \textbf{no comparable baseline counterpart}; it is disclosed here for completeness and labelled accordingly, and it is not used to support any comparative claim.
+
+\begin{table}[h]
+\centering
+\caption{External benchmark on the BO-acquired batch ($n = 25$). Ranks are computed over the eight models and exclude the dummy. The ensemble column for SIMPLEX is an uncontrolled reference with no baseline counterpart.}
+\label{tab:S8}
+\begin{tabular}{lcccccc}
+\toprule
+Model & ext $R^2$ (single) & $R^2$ rank & ext $\rho$ (single) & $\rho$ rank & ext $R^2$ (ensemble) & ext $\rho$ (ensemble) \\
+\midrule
+SIMPLEX (ours) & 0.6712 & 1 & 0.8031 & 7 & 0.6946 & 0.8077 \\
+SVR-RBF & 0.6342 & 2 & 0.8347 & 4 & (&) \\
+Ridge & 0.6336 & 3 & 0.8573 & 1 & (&) \\
+ElasticNet & 0.6311 & 4 & 0.8491 & 2 & (&) \\
+RandomForest & 0.5611 & 5 & 0.8444 & 3 & (&) \\
+MLP & 0.5482 & 6 & 0.7577 & 8 & (&) \\
+HistGB & 0.5233 & 7 & 0.8134 & 6 & (&) \\
+KNN & 0.4422 & 8 & 0.8172 & 5 & (&) \\
+Mean (dummy) & $-1.0947$ & (& 0.0000 &) & (&) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two facts in the single-calibre columns point in opposite directions and are both stated. Under the single-run protocol, SIMPLEX attains the highest $R^2$ (0.6712, rank 1 of 8); its Spearman $\rho = 0.8031$, however, ranks 7 of 8, with Ridge at 0.8573 (rank 1 of 8). The two top-ranked entries on $\rho$ are penalised linear models (Ridge and ElasticNet), with the random forest in third place ahead of every kernel and deep model; the ordering flips with the metric --- a signature of ranking instability on a 25-sample actively acquired batch (main text, Section 4.3).
+
+The calibre choice changes the reported margin and must therefore be disclosed. Comparing the SIMPLEX ensemble (0.6946) against baseline single values (SVR-RBF 0.6342) inflates the external $R^2$ margin to $+0.0604$, whereas the like-for-like single-calibre margin is $+0.0370$ (SIMPLEX 0.6712 against SVR-RBF 0.6342) --- an inflation of \textbf{63\%}. The earlier version of the manuscript used the inflated margin; this supplement corrects it, and the same calibre mismatch propagated into the automated quality gate (S12), whose external check compares the SIMPLEX ensemble $R^2$ (0.6946) against a baseline single $R^2$ (0.6342).
+
+\textbf{Information gap.} Per-fold standard deviations for the external single-calibre metrics are {[}to be filled{]} (computable from $results/metrics/baselines\_external.csv$ and $results/metrics/external.csv$).
+
+\section{S9. Complete 23-arm ablation}
+
+The architecture was ablated exhaustively: 23 arms (20 component removals and 3 alternative fusion strategies), each run over 3 seeds $\times$ 3 folds under the internal CV protocol ($results/ablation/ablation\_results.csv$). The reference full model attains $R^2 = $ \textbf{0.768460}. $\Delta$ is defined as $R^2(\text{full}) - R^2(\text{variant})$, so a positive $\Delta$ means the component contributes; all $\Delta$ values are taken verbatim from the released file (which stores the same $\Delta$ for every seed--fold row of an arm).
+
+\begin{table}[h]
+\centering
+\caption{Complete component-level ablation (23 arms). Reference full model $R^2 = 0.768460$. $\Delta = R^2(\text{full}) - R^2(\text{ablated})$; positive $\Delta$ indicates the component contributes; `= full' in the $R^2$ column means bit-identical to the reference run.}
+\label{tab:S9}
+\begin{tabular}{llcc}
+\toprule
+Group & Arm & $R^2$ after ablation & $\Delta R^2$ \\
+\midrule
+(A) Positive contribution & w/o multimodal fusion & 0.696103 & $+0.072358$ \\
+(A) & fusion = concat & 0.728123 & $+0.040337$ \\
+(A) & w/o sparse attention & 0.746055 & $+0.022405$ \\
+(A) & w/o Mixup & 0.756973 & $+0.011487$ \\
+(A) & fusion = cross & 0.757959 & $+0.010501$ \\
+(A) & w/o residual blocks & 0.759297 & $+0.009163$ \\
+(A) & w/o feature noise & 0.762064 & $+0.006397$ \\
+(A) & fusion = film & 0.763182 & $+0.005279$ \\
+(A) & w/o FiLM conditioning & 0.765073 & $+0.003387$ \\
+(A) & w/o contrastive pre-training & 0.765809 & $+0.002651$ \\
+\midrule
+(B) No effect (9 bit-identical, 1 below reporting precision) & w/o attention sparsity reg. & = full & $\approx 1 \times 10^{-6}$ \\
+(B) & w/o MFM pre-training & = full & 0.000000 \\
+(B) & w/o MC-Dropout & = full & 0.000000 \\
+(B) & w/o EMA & = full & 0.000000 \\
+(B) & w/o SAM & = full & 0.000000 \\
+(B) & w/o uncertainty weighting & = full & 0.000000 \\
+(B) & w/o domain constraint & = full & 0.000000 \\
+(B) & w/o SWA & = full & 0.000000 \\
+(B) & w/o pretrained transfer & = full & 0.000000 \\
+(B) & w/o transformer block & = full & 0.000000 \\
+\midrule
+(C) Removal improves $R^2$ & w/o modality gate & 0.776986 & $-0.008526$ \\
+(C) & w/o R-Drop & 0.776605 & $-0.008145$ \\
+(C) & w/o task-specific gating & 0.769277 & $-0.000817$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Only one component out of 23 contributes more than 0.05 (multimodal fusion, $+0.072358$); the two largest entries both concern how the two feature streams are combined (fusion gated vs concat). Nine arms (group B) return metrics bit-identical to the reference run ($\Delta = 0.000000$) and one further arm (\texttt{w/o attention sparsity reg.}) changes the metrics only below reporting precision ($\Delta \approx 1 \times 10^{-6}$) --- a stronger statement than ``no significant effect'': toggling them does not perturb the computation at all. Three root causes account for group B: (i) several switches are not wired into the forward or training path and are therefore inert (pre-training, averaging and inference-time arms); (ii) the domain constraint evaluates to identically zero on inputs that already satisfy the simplex constraint, so removing it cannot change the loss; (iii) homoscedastic uncertainty weighting is structurally unreachable in a single-task configuration, where there is no second task against which to reweight. Three arms (group C) improve $R^2$ when removed (modality gate $-0.008526$, R-Drop $-0.008145$, task-specific gating $-0.000817$). Each $\Delta$ is measured by an independent single-arm ablation and the values are not additive.
+
+Two corrections to the earlier version of this supplement follow: the reference full-model $R^2$ is 0.768460 (not 0.713), and the reported Mixup gain was $+0.067$ while the released value is $+0.011487$ (smaller by a factor of 5.8). In addition, no ``attention off'' arm exists among the 23; the necessity of self-attention is therefore untested (see S4 for the head-count fallback).
+
+\section{S10. LOCO tests of the Scheff\'e interaction terms}
+
+The contribution of the interaction block is tested by \textbf{leave-one-covariate-out (LOCO) refitting}: the model is refitted with a feature (or a group of features) removed, and the change in cross-validated performance is tested for significance (Methods, Section 2.5). Two outcomes are reported, both taken from the released analysis:
+
+\begin{itemize}
+\item Removing the individually most important interaction term, \textbf{pair\_14} (BA $\times$ PEA; permutation importance 0.0631, S11), leaves performance statistically unchanged, \textbf{$p = 0.874$}.
+\item Removing \textbf{all 15 pairwise interaction terms together}, so that the model sees only the six mole fractions, also leaves performance statistically unchanged, \textbf{$p = 0.805$}.
+\end{itemize}
+
+At $n = 316$ the quadratic Scheff\'e interaction terms make no measurable contribution to this task under this design. The $p$-values are as recorded in the analysis artefacts. Because the design matrix is exactly rank-deficient by one and strongly collinear (S3), the information carried by any single interaction term is recoverable from the remainder --- which is why the fitted model leans on pair\_14 (rank 1 in permutation importance) while refitting without it changes nothing.
+
+\textbf{Information gap.} The exact test statistic and degrees of freedom of the LOCO comparison are not recorded in the released summary artefacts (only the $p$-values are stored). The test family is the refit-based comparison under the internal CV protocol; the statistic and df are {[}to be filled{]} pending a re-run of the LOCO script with full diagnostics.
+
+\section{S11. Full permutation importance}
+
+Table~\ref{tab:S11} reports permutation importance for all 21 features, computed over 50 folds on the internal data ($results/interpret/importance.csv$). Importance is the mean decrease in $R^2$ under feature permutation; sd is the across-fold standard deviation and se $= \text{sd} / \sqrt{50}$.
+
+\begin{table}[h]
+\centering
+\caption{Permutation importance over 50 folds, all 21 features. Pair indices: 0 = HEA, 1 = BA, 2 = CBEA, 3 = ATAC, 4 = PEA, 5 = AAm.}
+\label{tab:S11}
+\begin{tabular}{clccc}
+\toprule
+Rank & Feature & Importance (mean) & sd & se \\
+\midrule
+1 & pair\_14 (BA $\times$ PEA) & 0.063113 & 0.036142 & 0.005111 \\
+2 & pair\_23 (CBEA $\times$ ATAC) & 0.048068 & 0.023646 & 0.003344 \\
+3 & pair\_03 (HEA $\times$ ATAC) & 0.041267 & 0.020987 & 0.002968 \\
+4 & pair\_13 (BA $\times$ ATAC) & 0.023787 & 0.014817 & 0.002095 \\
+5 & pair\_04 (HEA $\times$ PEA) & 0.023599 & 0.024796 & 0.003507 \\
+6 & pair\_34 (ATAC $\times$ PEA) & 0.018223 & 0.013039 & 0.001844 \\
+7 & pair\_12 (BA $\times$ CBEA) & 0.015773 & 0.014567 & 0.002060 \\
+8 & pair\_01 (HEA $\times$ BA) & 0.015751 & 0.014085 & 0.001992 \\
+9 & pair\_15 (BA $\times$ AAm) & 0.014929 & 0.014849 & 0.002100 \\
+10 & Hydrophobic-BA & 0.012444 & 0.012395 & 0.001753 \\
+11 & pair\_24 (CBEA $\times$ PEA) & 0.010724 & 0.014208 & 0.002009 \\
+12 & Cationic-ATAC & 0.005547 & 0.005976 & 0.000845 \\
+13 & pair\_02 (HEA $\times$ CBEA) & 0.005201 & 0.006499 & 0.000919 \\
+14 & Aromatic-PEA & 0.005008 & 0.006469 & 0.000915 \\
+15 & pair\_35 (ATAC $\times$ AAm) & 0.004885 & 0.011668 & 0.001650 \\
+16 & Nucleophilic-HEA & 0.003728 & 0.005851 & 0.000827 \\
+17 & pair\_25 (CBEA $\times$ AAm) & 0.003179 & 0.006056 & 0.000856 \\
+18 & pair\_05 (HEA $\times$ AAm) & 0.002899 & 0.005610 & 0.000793 \\
+19 & pair\_45 (PEA $\times$ AAm) & 0.001612 & 0.008246 & 0.001166 \\
+20 & Amide-AAm & 0.000385 & 0.005096 & 0.000721 \\
+21 & Acidic-CBEA & $-0.000335$ & 0.002869 & 0.000406 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two properties of the table bound its interpretation. The across-fold dispersion is large relative to the means: the top-ranked feature's sd (0.0361) is more than half its mean (0.0631), and for most features the sd is comparable to or larger than the mean (e.g., pair\_04 0.0236 $\pm$ 0.0248; pair\_15 0.0149 $\pm$ 0.0148; pair\_24 0.0107 $\pm$ 0.0142), so many importance intervals overlap zero. The ranking is therefore weakly determined. In addition, permutation importance measures how much a \emph{fitted} model relies on a feature, whereas LOCO measures whether a feature is \emph{needed}; the two diverge here (pair\_14 is rank 1 in importance yet its deletion leaves performance unchanged, $p = 0.874$, S10), which is expected under strong collinearity. The earlier version of this supplement reported the importance of pair\_14 as 0.143 $\pm$ 0.036 and attached FDR-corrected $p$-values of order $1 \times 10^{-53}$; the released value is 0.063113 $\pm$ 0.036142, and 50 fold-level observations cannot support significance statements at the $10^{-53}$ magnitude, so those $p$-values are removed and not replaced.
+
+\section{S12. Pre-registered quality gate: verdict FAIL, reported as recorded}
+
+The repository includes an automated pre-registered performance gate ($results/metrics/perf\_gate.json$). Its recorded verdict is \textbf{FAIL}, with \texttt{failed\_checks = ["G2\_significant"]}. Table~\ref{tab:S12} reports each check as stored, together with the audit status of the stored pass flag.
+
+\begin{table}[h]
+\centering
+\caption{Automated quality-gate outcome as recorded in $perf\_gate.json$. Overall verdict: FAIL. Check names (e.g., \texttt{G1\_beats\_best\_baseline}) are machine field names quoted verbatim from the JSON file; they are identifiers, not claims made by this paper.}
+\label{tab:S12}
+\begin{tabular}{p{4.2cm}cp{4.6cm}p{4.6cm}}
+\toprule
+Check & Stored flag & Stored detail & Audit note \\
+\midrule
+\texttt{G1\_beats\_best\_baseline} & pass & R2 0.7924 vs RandomForest 0.8067 (delta $-0.0143$, statistical tie) & Pass depends on a \texttt{tie\_tol = 0.02} clause absent from the pre-registered protocol; without it G1 fails (SIMPLEX is 0.01432 below random forest) \\
+\texttt{G2\_significant} & \textbf{fail} & p\_holm = 1 internal tie; external TopK30 P = nan & Determines the overall FAIL verdict \\
+\texttt{G3\_seed\_stability} & pass & 2/10 seeds positive (need >= 8, >= 3 seeds); internal tie -> direction not decisive & Stored detail states the threshold is not met (2 $<$ 8) while the flag is pass \\
+\texttt{G4\_external} & pass & R2 0.6946 vs SVR-RBF 0.6342 & Compares SIMPLEX ensemble against baseline single (S8); calibre mismatch \\
+\texttt{G5\_ablation\_informative} & pass & largest $|\text{delta}|$ in ablation = 0.0724 & Consistent with S9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The gate is reported as recorded: \textbf{FAIL}. The G2 check fails on its own terms (Holm-adjusted $p = 1.0$). G1 is stored as passing only because a tie-tolerance clause (\texttt{tie\_tol = 0.02}) was added after the protocol was fixed; the pre-registered criterion requires the primary metric to exceed the strongest baseline and contains no tie exemption. G3 is stored as passing while its own stored detail reads ``2/10 seeds positive (need >= 8, >= 3 seeds)''. G4 rests on the single-versus-ensemble calibre mismatch documented in S8. Any statement that the gate passed is withdrawn.
+
+\section{S13. Reproduction}
+
+The full pipeline is runnable end to end from the repository entry point \texttt{run\_all.py}, which executes the stages \texttt{download $\rightarrow$ build $\rightarrow$ qc $\rightarrow$ tune $\rightarrow$ train $\rightarrow$ baselines $\rightarrow$ stats $\rightarrow$ gate $\rightarrow$ interpret $\rightarrow$ figures $\rightarrow$ tables $\rightarrow$ paper}. Fixed seeds for data splitting, initialisation and batching are recorded and equal the 10 seeds listed in S6; per-fold predictions, configurations and metric files are written to disk so that the reported numbers can be recomputed from the released artefacts. The search trajectory and per-trial wall-clock seconds are released in $search\_log.csv$ (S5).
+
+\textbf{Information gap.} The exact interpreter and library versions (Python, PyTorch, scikit-learn, SciPy, statsmodels) are pinned in the repository environment file but are not recorded in the released metric artefacts; Python and library versions are {[}to be filled{]}. The expected total runtime and the hardware used for the reported runs are likewise {[}to be filled{]} (per-trial seconds are recorded in $search\_log.csv$; the aggregate and the machine specification are not in the released summary files).
+
+\section{S14. Data and code licence declarations}
+
+The upstream data and code originate from the public repository \texttt{sheng-hu/hydrogels} accompanying Liao et al., \textit{Nature} (2025) \cite{liao2025nature}. The repository is distributed under the \textbf{MIT licence}: the \texttt{LICENSE} file is present (1,064 bytes) with the copyright line \texttt{Copyright (c) 2024 setupup}, verified against the repository. The associated \textit{Nature} article is published under \textbf{CC BY-NC-ND 4.0}. These two instruments cover different objects (the article text versus the data and code repository) and therefore coexist without conflict: the MIT licence grants use, copy, modify, merge, publish, distribute, sublicense and sell rights over the data files and code, while the CC BY-NC-ND licence governs the article's text and figures, which this work does not reproduce or adapt. The numerical molar fractions and adhesion measurements are experimental facts and are used here under the MIT terms of the data repository.
+
+% [edit-mark] revised 2026-08-10 (final sync)
+For this work's own derived artefacts (processed features, train/evaluation partitions, per-formulation predictions, analysis code), the repository carries:
+\begin{itemize}
+\item a \texttt{LICENSE} file (MIT, \texttt{Copyright (c) 2026 Tongfei Shen}) covering the repository's own code and derived artefacts, and
+\item a \texttt{LICENSE-DATA} file reproducing the upstream copyright line \texttt{Copyright (c) 2024 setupup} verbatim.
+\end{itemize}
+
+The upstream data and code originate from \emph{sheng-hu/hydrogels} under the MIT licence; we claim no rights over the upstream data. The licence status of the upstream repository was verified on 2026-08-10 (\texttt{license.spdx\_id = "MIT"}).
+
+\bibliographystyle{Frontiers-Harvard}
+\bibliography{reference_final}
+
+\end{document}
